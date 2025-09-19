@@ -1,0 +1,73 @@
+[project]
+name = "eval"
+version = "0.1.0"
+description = "VNC env for deterministic benchmark evaluation"
+requires-python = "==3.12.*"
+dependencies = [
+    "fastapi>=0.116.1",
+    "frozendict>=2.4.6",
+    "numpy>=2.3.2",
+    "pillow>=11.3.0",
+    "requests>=2.32.5",
+    "typing-extensions>=4.15.0",
+    "uvicorn[standard]>=0.35.0",
+    "websockets>=15.0.1",
+    "playwright>=1.55.0",
+    "pydantic>=2.7.0",
+    "typer>=0.17.3",
+    "dask[distributed]>=2025.9.1",
+]
+
+[project.scripts]
+uitask-container = "uitask.container:app"
+eval-uipath-screenplay = "uitask.evaluate.byom.uipath.screenplay:app"
+score = "uitask.evaluate.score:app"
+
+[build-system]
+requires = ["uv_build>=0.7.19,<0.8.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "uitask"
+module-root = ""
+
+[dependency-groups]
+dev = [
+    "bokeh>=3.8.0",
+    "ipython>=9.4.0",
+    "pyright>=1.1.405",
+    "ruff>=0.12.11",
+]
+
+uipath_screenplay = [
+    "portalocker>=3.2.0",
+    "uipath>=2.1.31",
+]
+
+[tool.ruff]
+line-length = 100  # Default is 88.
+
+[tool.ruff.format]
+line-ending = "lf"  # Default is "auto".
+
+[tool.ruff.lint]
+extend-select = ["W", "I"]  # Adds warnings & imports.
+
+[tool.pyright]
+deprecateTypingAliases = true
+reportDuplicateImport = true
+reportFunctionMemberAccess = "error"
+reportImportCycles = "error"
+reportIncompatibleMethodOverride = "error"
+reportInvalidStringEscapeSequence = "error"
+reportMatchNotExhaustive = "error"
+reportMissingImports = "error"
+reportPropertyTypeMismatch = "error"
+reportUnknownMemberType = false
+reportUnknownVariableType = false
+reportUntypedBaseClass = "error"
+strictDictionaryInference = true
+strictListInference = true
+strictSetInference = true
+reportMissingParameterType = true
+ignore = ["./results"]

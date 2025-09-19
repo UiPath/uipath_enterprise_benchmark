@@ -1,0 +1,1423 @@
+[
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--1",
+    "ques": "Replace all emails with just \"all-hands@company.com\", hit enter to save.",
+    "ux_hint": "Click × to remove emails, type and press Enter to add",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/1?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--2",
+    "ques": "Change username to \"alexandra_s\"",
+    "ux_hint": "Triple-click to select all, wait for validation to complete",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/2?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--3",
+    "ques": "Change to United States → New York",
+    "ux_hint": "Changing country automatically clears city",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/3?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--4",
+    "ques": "Change status to \"Completed\"",
+    "ux_hint": "Click text to reveal dropdown, no × button",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/4?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--5",
+    "ques": "Click \"Clear all\", then check Engineering and Design",
+    "ux_hint": "Use Clear all button, then select specific items",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/5?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--6",
+    "ques": "Execute \"Settings: Toggle Dark Mode\"",
+    "ux_hint": "Escape clears selection but keeps modal open",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/6?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--7",
+    "ques": "Set custom range: Jan 1-15, 2024",
+    "ux_hint": "Select \"Custom Range\" to reveal date pickers",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/7?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--8",
+    "ques": "Navigate to Electronics → Computers → Laptops",
+    "ux_hint": "Click breadcrumb segments to go back",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/8?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--9",
+    "ques": "Keep Python, remove JavaScript, add Ruby and Rust",
+    "ux_hint": "Can't edit tags directly, only remove with × and add new ones",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/9?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--10",
+    "ques": "Change to \"Custom Report Template\"",
+    "ux_hint": "Click pencil icon to enable dropdown",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/10?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--11",
+    "ques": "Confirm \"Delete: Production Database\" exactly",
+    "ux_hint": "Type to filter, use arrow keys to select, Enter to confirm",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/11?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--12",
+    "ques": "Change status to \"Archived\"",
+    "ux_hint": "Click to edit inline, Escape cancels without saving",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/12?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--13",
+    "ques": "Keep only \"Marketing\" selected",
+    "ux_hint": "Click to expand, uncheck items individually",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/13?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--14",
+    "ques": "Change to \"npm run build\"",
+    "ux_hint": "Ctrl+C clears line, Tab accepts suggestion",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/14?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--15",
+    "ques": "Select \"Analytics\" from the main list",
+    "ux_hint": "Recent section at top, then alphabetical list",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/15?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--16",
+    "ques": "Select \"Project Alpha Redesign 2024\"",
+    "ux_hint": "Wait for search, typing cancels current search",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/16?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--17",
+    "ques": "Select \"Standard\" from the dropdown",
+    "ux_hint": "Clear invalid entry and select from allowed options",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/17?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--18",
+    "ques": "Change size to \"Small\"",
+    "ux_hint": "Open modal, select, then tap Done to confirm",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/18?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--19",
+    "ques": "Remove all tags, then add only \"React\"",
+    "ux_hint": "Most used tags appear first in suggestions",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/19?mode=test"
+  },
+  {
+    "web_name": "combo-box-tasks",
+    "id": "combo-box-tasks--20",
+    "ques": "Change to JST (UTC+9)",
+    "ux_hint": "Type city or timezone to filter",
+    "web": "http://74.234.189.120:3001/combo-box-tasks/20?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--1",
+    "ques": "Select June 15, 2024",
+    "ux_hint": "Click input to open calendar, navigate with arrows, click date to select",
+    "web": "http://74.234.189.120:3001/date-pickers/1?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--2",
+    "ques": "Select March 10-15, 2024 as a date range",
+    "ux_hint": "Click first date, then second date. Range highlights in between.",
+    "web": "http://74.234.189.120:3001/date-pickers/2?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--3",
+    "ques": "Select \"Yesterday\" using quick selection",
+    "ux_hint": "Use preset buttons for common dates, or open calendar for custom dates",
+    "web": "http://74.234.189.120:3001/date-pickers/3?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--4",
+    "ques": "Select December 25, 2024",
+    "ux_hint": "Use calendar to select date, typing field available but not required",
+    "web": "http://74.234.189.120:3001/date-pickers/4?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--5",
+    "ques": "Book April 20-23, 2024 (3 nights)",
+    "ux_hint": "Minimum 2 nights, blocked dates shown, business rules enforced",
+    "web": "http://74.234.189.120:3001/date-pickers/5?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--6",
+    "ques": "Select August 15, 2024",
+    "ux_hint": "Always-visible calendar, no popup interaction, direct selection",
+    "web": "http://74.234.189.120:3001/date-pickers/6?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--7",
+    "ques": "Select September 5, 12, and 19, 2024",
+    "ux_hint": "Click multiple non-consecutive dates, checkbox-style selection",
+    "web": "http://74.234.189.120:3001/date-pickers/7?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--8",
+    "ques": "Select October 31, 2024 (Halloween)",
+    "ux_hint": "Full-screen modal overlay, escape to close, focus management",
+    "web": "http://74.234.189.120:3001/date-pickers/8?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--9",
+    "ques": "Select December 31, 2024 (New Year's Eve)",
+    "ux_hint": "Compact dropdowns for month, year, and day selection",
+    "web": "http://74.234.189.120:3001/date-pickers/9?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--10",
+    "ques": "Select June 21, 2024 (Summer Solstice)",
+    "ux_hint": "Horizontal timeline, click to zoom in, navigate by scale",
+    "web": "http://74.234.189.120:3001/date-pickers/10?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--11",
+    "ques": "Set weekly recurring meetings starting January 8, 2024",
+    "ux_hint": "Pattern-based selection with repetition rules",
+    "web": "http://74.234.189.120:3001/date-pickers/11?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--12",
+    "ques": "Schedule March 10, 2024 at 3:00 PM London time",
+    "ux_hint": "Date, time, and timezone coordination with conversion",
+    "web": "http://74.234.189.120:3001/date-pickers/12?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--13",
+    "ques": "Select April 22, 2024",
+    "ux_hint": "Touch-friendly, swipe navigation, large touch targets",
+    "web": "http://74.234.189.120:3001/date-pickers/13?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--14",
+    "ques": "Select May 25, 2024 using keyboard only",
+    "ux_hint": "Keyboard-only date selection, mouse navigation for months, screen reader optimized",
+    "web": "http://74.234.189.120:3001/date-pickers/14?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--15",
+    "ques": "Select December 25, 2024",
+    "ux_hint": "Large date range (2015-2034), lazy loading, virtual scrolling",
+    "web": "http://74.234.189.120:3001/date-pickers/15?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--16",
+    "ques": "Select June 6, 2024 (suggested meeting day)",
+    "ux_hint": "Context-aware suggestions based on usage patterns",
+    "web": "http://74.234.189.120:3001/date-pickers/16?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--17",
+    "ques": "Create \"Conference\" event July 15-17, 2024 in Seattle",
+    "ux_hint": "Form integration with validation and cross-field dependencies",
+    "web": "http://74.234.189.120:3001/date-pickers/17?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--18",
+    "ques": "Select December 1, 2024",
+    "ux_hint": "Compact interface with quick selections and minimal space usage",
+    "web": "http://74.234.189.120:3001/date-pickers/18?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--19",
+    "ques": "Type \"quarterly presentation\" and select AI suggestion",
+    "ux_hint": "Context-aware AI suggestions with confidence scores",
+    "web": "http://74.234.189.120:3001/date-pickers/19?mode=test"
+  },
+  {
+    "web_name": "date-pickers",
+    "id": "date-pickers--20",
+    "ques": "Book 5-night stay starting November 20, 2024",
+    "ux_hint": "Duration-based selection with automatic end date calculation",
+    "web": "http://74.234.189.120:3001/date-pickers/20?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--1",
+    "ques": "Set time to 2:30 PM",
+    "ux_hint": "Click hour segments, then minute segments, toggle AM/PM",
+    "web": "http://74.234.189.120:3001/time-pickers/1?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--2",
+    "ques": "Enter 9:15 AM",
+    "ux_hint": "Type time directly, toggle between 12/24-hour formats",
+    "web": "http://74.234.189.120:3001/time-pickers/2?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--3",
+    "ques": "Set time to 6:05 PM",
+    "ux_hint": "Use up/down arrows to adjust hours and minutes",
+    "web": "http://74.234.189.120:3001/time-pickers/3?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--4",
+    "ques": "Select 11:30 AM",
+    "ux_hint": "Use dropdown menus for hour, minute, and AM/PM",
+    "web": "http://74.234.189.120:3001/time-pickers/4?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--5",
+    "ques": "Set time to 2:20 PM",
+    "ux_hint": "Use slider to select time continuously",
+    "web": "http://74.234.189.120:3001/time-pickers/5?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--6",
+    "ques": "Select 9:00 AM to 5:30 PM",
+    "ux_hint": "Click to select start time, then end time",
+    "web": "http://74.234.189.120:3001/time-pickers/6?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--7",
+    "ques": "Set duration to 2 hours 30 minutes",
+    "ux_hint": "Adjust duration, see automatic end time calculation",
+    "web": "http://74.234.189.120:3001/time-pickers/7?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--8",
+    "ques": "Select 9:00 AM, 9:30 AM, 10:00 AM, and 10:30 AM",
+    "ux_hint": "Click time slots to select/deselect, see availability",
+    "web": "http://74.234.189.120:3001/time-pickers/8?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--9",
+    "ques": "Select \"Lunch Time\" (12:00 PM)",
+    "ux_hint": "Use preset time buttons for quick selection",
+    "web": "http://74.234.189.120:3001/time-pickers/9?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--10",
+    "ques": "Set 3:00 PM in London timezone",
+    "ux_hint": "Adjust time and select timezone, see conversions",
+    "web": "http://74.234.189.120:3001/time-pickers/10?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--11",
+    "ques": "Set work hours 8:30 AM to 6:00 PM",
+    "ux_hint": "Configure business hours with lunch break",
+    "web": "http://74.234.189.120:3001/time-pickers/11?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--12",
+    "ques": "Click the time field and select 4:45 PM, at the end click Done.",
+    "ux_hint": "Touch-optimized interface with large buttons",
+    "web": "http://74.234.189.120:3001/time-pickers/12?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--13",
+    "ques": "Set time to 10:05 AM",
+    "ux_hint": "Full keyboard navigation, screen reader friendly",
+    "web": "http://74.234.189.120:3001/time-pickers/13?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--14",
+    "ques": "Select 7:15 AM",
+    "ux_hint": "Always-visible time picker, no popups",
+    "web": "http://74.234.189.120:3001/time-pickers/14?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--15",
+    "ques": "Select 8:45 PM",
+    "ux_hint": "Modal overlay with confirm/cancel actions",
+    "web": "http://74.234.189.120:3001/time-pickers/15?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--16",
+    "ques": "Set daily recurring time at 2:30 PM",
+    "ux_hint": "Configure recurring time patterns",
+    "web": "http://74.234.189.120:3001/time-pickers/16?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--17",
+    "ques": "Schedule meeting at 10:00 AM",
+    "ux_hint": "See participant availability and conflicts",
+    "web": "http://74.234.189.120:3001/time-pickers/17?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--18",
+    "ques": "Set timer for 5 minutes",
+    "ux_hint": "Duration picker with countdown functionality",
+    "web": "http://74.234.189.120:3001/time-pickers/18?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--19",
+    "ques": "Set 9:30 AM in Tokyo timezone",
+    "ux_hint": "Multi-timezone time coordination",
+    "web": "http://74.234.189.120:3001/time-pickers/19?mode=test"
+  },
+  {
+    "web_name": "time-pickers",
+    "id": "time-pickers--20",
+    "ques": "Select \"Afternoon collaboration\" suggestion (3:00 PM)",
+    "ux_hint": "AI-powered time suggestions based on context",
+    "web": "http://74.234.189.120:3001/time-pickers/20?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--1",
+    "ques": "Complete all 3 steps with exact values: email: john@company.com, password: secure123, first name: John, last name: Smith, company: Tech Corp, role: Developer",
+    "ux_hint": "Each step unlocks after validation, progress shows completion",
+    "web": "http://74.234.189.120:3001/input-boxes/1?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--2",
+    "ques": "Calculate 15 + 25, store result in memory (MS), then recall (MR) and add 10 to get 50",
+    "ux_hint": "Calculator with memory functions, clear display, operation chaining",
+    "web": "http://74.234.189.120:3001/input-boxes/2?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--3",
+    "ques": "Arrange images in alphabetical order by filename: city.jpg, forest.jpg, mountain.jpg, ocean.jpg, sunset.jpg",
+    "ux_hint": "Drag and drop to reorder, visual feedback during drag",
+    "web": "http://74.234.189.120:3001/input-boxes/3?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--4",
+    "ques": "Enter valid card: 4532015112830366, expiry: 12/25, CVV: 123, name: John Smith",
+    "ux_hint": "Real-time formatting and validation, visual feedback",
+    "web": "http://74.234.189.120:3001/input-boxes/4?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--5",
+    "ques": "Enter password \"SecurePass123!\" and confirm it matches (meets all 5 strength requirements)",
+    "ux_hint": "Real-time strength indicator, requirement checklist, show/hide toggle",
+    "web": "http://74.234.189.120:3001/input-boxes/5?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--6",
+    "ques": "Enter exact address: 123 Main St, New York, NY 10001",
+    "ux_hint": "Real-time validation, state abbreviation format, ZIP code format",
+    "web": "http://74.234.189.120:3001/input-boxes/6?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--7",
+    "ques": "Select exact color #FF6B35 (orange) in the color picker and copy its RGB value to clipboard from the boxes below",
+    "ux_hint": "Color picker, multiple format display, copy buttons",
+    "web": "http://74.234.189.120:3001/input-boxes/7?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--8",
+    "ques": "Set range between 10-20",
+    "ux_hint": "Dual sliders with collision detection, visual range display",
+    "web": "http://74.234.189.120:3001/input-boxes/8?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--9",
+    "ques": "Add exactly 5 valid tags: react, javascript, web, development, frontend",
+    "ux_hint": "Validation rules, forbidden words, character limits, duplicate prevention",
+    "web": "http://74.234.189.120:3001/input-boxes/9?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--10",
+    "ques": "Select UK and enter phone number: 20 78 12 34 56",
+    "ux_hint": "Country selection, automatic formatting, validation per country",
+    "web": "http://74.234.189.120:3001/input-boxes/10?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--11",
+    "ques": "Enter correct PIN: 123456",
+    "ux_hint": "Masked input, attempt limits, auto-focus, lockout behavior",
+    "web": "http://74.234.189.120:3001/input-boxes/11?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--12",
+    "ques": "Answer \"Satisfied\", then \"Yes\" to recommend, and select \"UI/Design\"",
+    "ux_hint": "Conditional questions appear based on previous answers",
+    "web": "http://74.234.189.120:3001/input-boxes/12?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--13",
+    "ques": "Select quantity of 12 to get bulk discount",
+    "ux_hint": "Stock limits, bulk pricing, stepper controls, price calculation",
+    "web": "http://74.234.189.120:3001/input-boxes/13?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--14",
+    "ques": "Filter to show only Apple Electronics (should show exactly 2 products: iPhone 14 and MacBook Pro)",
+    "ux_hint": "Multiple filter categories, result counting, clear functionality",
+    "web": "http://74.234.189.120:3001/input-boxes/14?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--15",
+    "ques": "Fix the JSON syntax errors to make it valid",
+    "ux_hint": "Real-time syntax checking, error positioning, monospace font",
+    "web": "http://74.234.189.120:3001/input-boxes/15?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--16",
+    "ques": "Rate 4 stars and copy the first sample review",
+    "ux_hint": "Star rating, copy functionality, text selection and paste",
+    "web": "http://74.234.189.120:3001/input-boxes/16?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--17",
+    "ques": "Enable only \"Browser Notifications\", disable all others",
+    "ux_hint": "Toggle switches, dependency rules, grouped settings",
+    "web": "http://74.234.189.120:3001/input-boxes/17?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--18",
+    "ques": "Set budget to exactly $750 using only keyboard navigation",
+    "ux_hint": "Keyboard-only controls, focus management, step increments",
+    "web": "http://74.234.189.120:3001/input-boxes/18?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--19",
+    "ques": "Complete all 3 steps with exact values: name: John, email: john@company.com, preference: email, accept terms",
+    "ux_hint": "Sequential unlocking, validation gates, progress indicators",
+    "web": "http://74.234.189.120:3001/input-boxes/19?mode=test"
+  },
+  {
+    "web_name": "input-boxes",
+    "id": "input-boxes--20",
+    "ques": "Fix all email and phone formats: john.smith@company.com, jane@example.com, bob@company.com, and phones: 555-0123, 555-0456, 555-0789",
+    "ux_hint": "Click to edit cells, Enter to save, Escape to cancel, inline validation",
+    "web": "http://74.234.189.120:3001/input-boxes/20?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--1",
+    "ques": "Navigate to page 5",
+    "ux_hint": "Click page numbers with ellipsis truncation",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/1?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--2",
+    "ques": "Navigate to the last page using Next/Previous",
+    "ux_hint": "Buttons disabled at boundaries",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/2?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--3",
+    "ques": "Load at least 12 items total",
+    "ux_hint": "\"Load more\" button adds items with loading state",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/3?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--4",
+    "ques": "Scroll to trigger loading of 30+ items",
+    "ux_hint": "Automatic loading when sentinel enters viewport",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/4?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--5",
+    "ques": "Select \"Large Dataset Item 19\"",
+    "ux_hint": "Efficient rendering of 25 items with virtualization",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/5?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--6",
+    "ques": "Load older messages 3 times (to get exactly 12 total messages)",
+    "ux_hint": "Reverse chronological order, load upward",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/6?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--7",
+    "ques": "Select \"Item 26\"",
+    "ux_hint": "Variable height items",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/7?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--8",
+    "ques": "Load until each section has 4+ items",
+    "ux_hint": "Sticky headers with per-section loading",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/8?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--9",
+    "ques": "Sort by Age (descending)",
+    "ux_hint": "Click headers to sort, click again to reverse",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/9?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--10",
+    "ques": "Filter to show only \"Fruit\" category",
+    "ux_hint": "Inline filter inputs in table headers",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/10?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--11",
+    "ques": "Select \"Product 15\"",
+    "ux_hint": "Fixed header while scrolling table body",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/11?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--12",
+    "ques": "Select \"Backend Developer\"",
+    "ux_hint": "Expandable group headers with roll-up views",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/12?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--13",
+    "ques": "Scroll to and click the \"M\" group header",
+    "ux_hint": "Sticky group headers while scrolling",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/13?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--14",
+    "ques": "Check \"Task 2.2\"",
+    "ux_hint": "Expandable sections with checkable items",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/14?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--15",
+    "ques": "Select exactly Apple, Cherry, and Date",
+    "ux_hint": "Multi-selection state preservation",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/15?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--16",
+    "ques": "Like \"Review quarterly budget\"",
+    "ux_hint": "Click to reveal actions, then click heart",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/16?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--17",
+    "ques": "Switch to list view and select Card 4",
+    "ux_hint": "Responsive breakpoint-driven layout changes",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/17?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--18",
+    "ques": "Select the \"Tall Card\"",
+    "ux_hint": "Variable height tiling in masonry layout",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/18?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--19",
+    "ques": "Hover over Product 2 and click the heart",
+    "ux_hint": "Actions revealed on hover with inline buttons",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/19?mode=test"
+  },
+  {
+    "web_name": "navigation-lists-tables",
+    "id": "navigation-lists-tables--20",
+    "ques": "Scroll to load 20+ tiles",
+    "ux_hint": "Batch loading triggered near viewport bottom",
+    "web": "http://74.234.189.120:3001/navigation-lists-tables/20?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--1",
+    "ques": "Expand Projects folder and select \"App.js\"",
+    "ux_hint": "Tree view with tri-state checkboxes",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/1?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--2",
+    "ques": "Switch to multi-mode, open Notifications, select \"Push\"",
+    "ux_hint": "Single mode closes others, multi-mode allows multiple open",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/2?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--3",
+    "ques": "Switch to branched mode, select Business plan, complete wizard",
+    "ux_hint": "Linear flows sequentially, branched allows different paths",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/3?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--4",
+    "ques": "Click Products, then select \"React Components\"",
+    "ux_hint": "Mega menu with layered sub-panels",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/4?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--5",
+    "ques": "File → Save As",
+    "ux_hint": "Classic menubar with dropdowns",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/5?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--6",
+    "ques": "Right-click text area and select \"Copy\"",
+    "ux_hint": "Context menu anchored to pointer",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/6?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--7",
+    "ques": "Open hamburger menu and select \"Profile\"",
+    "ux_hint": "Slide-in side drawer navigation",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/7?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--8",
+    "ques": "Click \"...\" and select \"Archive\"",
+    "ux_hint": "Toolbar with overflow menu",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/8?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--9",
+    "ques": "Click \"Documents\" in breadcrumb trail",
+    "ux_hint": "Static location breadcrumbs (folder paths)",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/9?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--10",
+    "ques": "Remove first two filter chips, keep only \"Brand: Apple\"",
+    "ux_hint": "Filter-chip breadcrumbs (removable tokens)",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/10?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--11",
+    "ques": "Click \"Products\" to go back to that page",
+    "ux_hint": "Shows navigation history, click any segment to go back",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/11?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--12",
+    "ques": "Select a path containing \"Images\"",
+    "ux_hint": "Dropdown crumbs for sibling selection",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/12?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--13",
+    "ques": "Switch to \"analytics\" tab",
+    "ux_hint": "Fixed-width top tab strips",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/13?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--14",
+    "ques": "Scroll and select \"Tab 9\"",
+    "ux_hint": "Momentum-scrollable tab rows",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/14?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--15",
+    "ques": "Select \"security\" tab",
+    "ux_hint": "Vertical side tabs",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/15?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--16",
+    "ques": "Switch to \"code\" then select \"javascript\"",
+    "ux_hint": "Nested tabsets swapping child bars",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/16?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--17",
+    "ques": "Navigate the carousel to show \"Item 4\" first on the left.",
+    "ux_hint": "Horizontal carousels with snap points",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/17?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--18",
+    "ques": "Pause slideshow when \"Slide 3\" is visible",
+    "ux_hint": "Autoplay slideshows that pause on focus",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/18?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--19",
+    "ques": "Scrub timeline to \"Aug\"",
+    "ux_hint": "Scrubbable timelines for date/event ranges",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/19?mode=test"
+  },
+  {
+    "web_name": "navigation-hierarchical-spatial",
+    "id": "navigation-hierarchical-spatial--20",
+    "ques": "Focus on \"Album 5\"",
+    "ux_hint": "Cover-flow lanes centering the focused item",
+    "web": "http://74.234.189.120:3001/navigation-hierarchical-spatial/20?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--1",
+    "ques": "Drag the map to move it significantly",
+    "ux_hint": "Click-drag pan with smooth movement",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/1?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--2",
+    "ques": "Zoom in using mouse wheel until 2x or higher",
+    "ux_hint": "Mouse-wheel zoom controls",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/2?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--3",
+    "ques": "Zoom in to expand clusters using the zoom buttons, then click a marker from the largest cluster (5 markers)",
+    "ux_hint": "Clustering that expands on zoom",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/3?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--4",
+    "ques": "Rotate the view clockwise more than 45 degrees (pitch is locked)",
+    "ux_hint": "2.5D view with rotation but locked pitch",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/4?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--5",
+    "ques": "Search for \"react\" and select \"React Components\"",
+    "ux_hint": "Global search with type-ahead results",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/5?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--6",
+    "ques": "Filter by \"Electronics\" category and select \"Laptop\"",
+    "ux_hint": "Faceted sidebar with live filtering",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/6?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--7",
+    "ques": "Search for \"jack\" and select \"Jack Davis\"",
+    "ux_hint": "In-list incremental search",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/7?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--8",
+    "ques": "Open command palette (Ctrl+K) and select \"Create New File\"",
+    "ux_hint": "Fuzzy search command palette",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/8?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--9",
+    "ques": "Focus the area and use J/K keys to scroll down until you reveal \"Content item 9\"",
+    "ux_hint": "Single-key scroll accelerators (J/K)",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/9?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--10",
+    "ques": "Press \"Show Hints\" then click hint \"45\" to select About",
+    "ux_hint": "Link-hint overlays for keyboard navigation",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/10?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--11",
+    "ques": "Focus grid and use arrow keys to navigate to cell (3,4)",
+    "ux_hint": "Arrow-key grid navigation with roving focus",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/11?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--12",
+    "ques": "Open modal and press Escape to close, then open edit mode and press Escape to cancel",
+    "ux_hint": "Escape-to-cancel shortcuts",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/12?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--13",
+    "ques": "Click \"Section 2\" anchor link to jump to that section",
+    "ux_hint": "In-page anchor links with smooth scrolling",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/13?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--14",
+    "ques": "Scroll until \"Methodology\" is active in the table of contents",
+    "ux_hint": "Scroll-spy TOC that tracks reading position",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/14?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--15",
+    "ques": "Scroll down, then use \"Back to Top\" button to return",
+    "ux_hint": "Back to top button appears after scrolling",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/15?mode=test"
+  },
+  {
+    "web_name": "navigation-search-interaction",
+    "id": "navigation-search-interaction--16",
+    "ques": "Click footnote [2], then click \"Return to text\"",
+    "ux_hint": "Footnote ↔ reference bidirectional hops",
+    "web": "http://74.234.189.120:3001/navigation-search-interaction/16?mode=test"
+  },
+  {
+    "web_name": "kanban-board",
+    "id": "kanban-board--1",
+    "ques": "Create a new issue with title 'Add dark mode to the UI' for Anna Petrov priority Low",
+    "ux_hint": "Interact with the Kanban to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/kanban-board/1?mode=test"
+  },
+  {
+    "web_name": "kanban-board",
+    "id": "kanban-board--2",
+    "ques": "Set ML-2445 status to Done",
+    "ux_hint": "Interact with the Kanban to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/kanban-board/2?mode=test"
+  },
+  {
+    "web_name": "kanban-board",
+    "id": "kanban-board--3",
+    "ques": "Drag issues from To Do and In Progress columns into the Done column",
+    "ux_hint": "Interact with the Kanban to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/kanban-board/3?mode=test"
+  },
+  {
+    "web_name": "kanban-board",
+    "id": "kanban-board--4",
+    "ques": "What is the task least recently updated? Format response as {\"key\": str, \"summary\": str, \"assignee\": str, \"updated\": str}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/kanban-board/4?mode=test"
+  },
+  {
+    "web_name": "kanban-board",
+    "id": "kanban-board--5",
+    "ques": "Delete all issues from To Do and In Progress columns",
+    "ux_hint": "Interact with the Kanban to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/kanban-board/5?mode=test"
+  },
+  {
+    "web_name": "kanban-board",
+    "id": "kanban-board--6",
+    "ques": "Go into List view, filter by status: To Do, select all issues and make them done",
+    "ux_hint": "Interact with the Kanban to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/kanban-board/6?mode=test"
+  },
+  {
+    "web_name": "kanban-board",
+    "id": "kanban-board--7",
+    "ques": "Go into List view and report the IDs of the first created task and last created task. You can sort by clicking the \"Created\" column header. Respond in JSON with this format {\"first_created_task\": \"yyyy-mm-dd\", \"last_created_task\": \"yyyy-mm-dd\"}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/kanban-board/7?mode=test"
+  },
+  {
+    "web_name": "kanban-board",
+    "id": "kanban-board--8",
+    "ques": "Count issues by priority, respond with JSON formatted as {\"high_priority_count\": int, \"medium_priority_count\": int, \"low_priority_count\": int}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/kanban-board/8?mode=test"
+  },
+  {
+    "web_name": "workday",
+    "id": "workday--1",
+    "ques": "Add a PTO absence for August 2025 from the 4th to the 8th",
+    "ux_hint": "Complete the Workday interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/workday/1?mode=test"
+  },
+  {
+    "web_name": "workday",
+    "id": "workday--2",
+    "ques": "Add a Phone number (555) 123-7654 to the Home Contact Information and set visibility to Public",
+    "ux_hint": "Complete the Workday interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/workday/2?mode=test"
+  },
+  {
+    "web_name": "workday",
+    "id": "workday--3",
+    "ques": "Remove the request for '27 July 2025 - 31 July 2025'",
+    "ux_hint": "Complete the Workday interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/workday/3?mode=test"
+  },
+  {
+    "web_name": "workday",
+    "id": "workday--4",
+    "ques": "Find out how many PTO days I used in 2025. Respond with JSON formatted as {\"pto_days_count\": int}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/workday/4?mode=test"
+  },
+  {
+    "web_name": "workday",
+    "id": "workday--5",
+    "ques": "Set the personal information to Gender: Female, Date of Birth: 01/02/1975, Marital Status: Married, Marital Status Date: 01/17/2025, Citizenship Status: Citizen (Romania), Primary Nationality: Romania",
+    "ux_hint": "Complete the Workday interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/workday/5?mode=test"
+  },
+  {
+    "web_name": "workday",
+    "id": "workday--6",
+    "ques": "Navigate to Personal Information > Legal Name > Country > By Country Alphabetically > M and return the fourth country in the list. Respond with JSON formatted {\"country\": str}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/workday/6?mode=test"
+  },
+  {
+    "web_name": "workday",
+    "id": "workday--7",
+    "ques": "Change the legal name to: Given Name: John, Family Name: Jhonson, Effective Date: 03/02/2025, Country: United States",
+    "ux_hint": "Complete the Workday interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/workday/7?mode=test"
+  },
+  {
+    "web_name": "workday",
+    "id": "workday--8",
+    "ques": "Open 'Absence' > 'Request Absence' and look up in the calendar November and December, and report all holidays or special days. Holidays are marked on the calendar. Output format {\"<holiday-name>\": \"mm/dd\"}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/workday/8?mode=test"
+  },
+  {
+    "web_name": "sap-stock",
+    "id": "sap-stock--1",
+    "ques": "What is the company that has material 1287 in vendor consignment, and the quantity. Submit the result in this format: {\"company\": str, \"quantity\": float}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/sap-stock/1?mode=test"
+  },
+  {
+    "web_name": "sap-stock",
+    "id": "sap-stock--2",
+    "ques": "What are the names of the plants that have material 100-210 in stock. Respond with JSON formatted as {\"plants\": list[str]}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/sap-stock/2?mode=test"
+  },
+  {
+    "web_name": "sap-stock",
+    "id": "sap-stock--3",
+    "ques": "For each material on this list [\"1287\",\"100-210\",\"200000054\",\"300-400\"] report the number of companies that have it in stock. Format response as {\"<material-id>\": <count:int>}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/sap-stock/3?mode=test"
+  },
+  {
+    "web_name": "sap-stock",
+    "id": "sap-stock--4",
+    "ques": "Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find out how many materials contain the string \"fan\". Submit the result as {\"count\": <count:int>}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/sap-stock/4?mode=test"
+  },
+  {
+    "web_name": "sap-stock",
+    "id": "sap-stock--5",
+    "ques": "Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find materials where the material description is between B and G (alphabetically) AND the material code contains \"FG\". Submit the result as {\"materials\": [list of material codes]}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/sap-stock/5?mode=test"
+  },
+  {
+    "web_name": "sap-stock",
+    "id": "sap-stock--6",
+    "ques": "Use MMBE (Inventory Stock Overview) form to find out which plant has the highest reserved stock of SG011. Submit the result as {\"plant\": \"plant_name\"}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/sap-stock/6?mode=test"
+  },
+  {
+    "web_name": "sap-stock",
+    "id": "sap-stock--7",
+    "ques": "Look up material FG1_CP to see its full description and plants where this material is in stock. Format response as {\"description\": str, \"plants\": list[str]}. You need to use both the stock search and the Search for Materials view.",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/sap-stock/7?mode=test"
+  },
+  {
+    "web_name": "sap-stock",
+    "id": "sap-stock--8",
+    "ques": "Find the list of storage locations for material FG1_CP and plant PLANT JAMSHEDPUR. Submit the result as {\"storage_locations\": [list of storage location names]}",
+    "ux_hint": "Submit the requested JSON via the Submit Results button",
+    "web": "http://74.234.189.120:3001/sap-stock/8?mode=test"
+  },
+  {
+    "web_name": "concur",
+    "id": "concur--1",
+    "ques": "Create a report \"Work Expenses\" with business purpose \"materials and repair costs\", not travel related. Add expenses from the Target and East Repair. Attach their images and submit the report.",
+    "ux_hint": "Go to Create > Start a report > fill the fields > click Create Report > click Add Expense > add all expenses > click Attach Receipt for each expense > find the correct receipt and assign it > then Submit Report",
+    "web": "http://74.234.189.120:3001/concur/1?mode=test"
+  },
+  {
+    "web_name": "concur",
+    "id": "concur--2",
+    "ques": "What is the vendor zip code for the Target expense? Format as { \"vendor_zip\": number}",
+    "ux_hint": "In \"Available Expenses\" click \"See All\" and read from the \"Vendor Details\" column on the specific row",
+    "web": "http://74.234.189.120:3001/concur/2?mode=test"
+  },
+  {
+    "web_name": "concur",
+    "id": "concur--3",
+    "ques": "What is the largest available expense? Format as {\"vendor_name\": str, \"date\": str, \"total\": number}",
+    "ux_hint": "In \"Available Expenses\" click \"See All\" and read from the \"Vendor Details\" table the task result",
+    "web": "http://74.234.189.120:3001/concur/3?mode=test"
+  },
+  {
+    "web_name": "concur",
+    "id": "concur--4",
+    "ques": "Create an expense report that includes all the AI related expenses, call it \"AI expenses\"",
+    "ux_hint": "Go to Create > Start a report > fill the fields > click Create Report > click Add Expense > add AI expenses > click Attach Receipt for each expense > find the correct receipt and assign it > then Submit Report",
+    "web": "http://74.234.189.120:3001/concur/4?mode=test"
+  },
+  {
+    "web_name": "concur",
+    "id": "concur--5",
+    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, filter by carrier Delta, and return the duration of the flight. Format JSON as {\"flight_duration_hours\": int, \"flight_duration_minutes\": int}",
+    "ux_hint": "In the flight search form, select From: and pick the SEA option, in To: select LHR after scrolling down, in Dates: click the calendar icon, then click on start and end days. Search, and then apply filter on Carriers to Delta, and you have the result. Paste it into the Submit Results box in JSON with the requested format.",
+    "web": "http://74.234.189.120:3001/concur/5?mode=test"
+  },
+  {
+    "web_name": "concur",
+    "id": "concur--6",
+    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, filter by carrier Air France, and return how many nonstop, 1 stop and 2 stop flights you have in results. Format JSON as {\"nonstop\": int, \"one_stop\": int, \"two_stop\": int}",
+    "ux_hint": "In the flight search form, select From and pick the SEA option, in To: select LHR after scrolling down, in Dates: click the calendar icon, then click on start and end days. On flight results page, use All Filters to apply stops filters and count the results for each category",
+    "web": "http://74.234.189.120:3001/concur/6?mode=test"
+  },
+  {
+    "web_name": "concur",
+    "id": "concur--7",
+    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, departing time range 12:00 PM - 4:00 PM. Report the list of airlines in results. Response is JSON with format {\"airlines\": list[str]}",
+    "ux_hint": "In the flight search form, select From: SEA, To: LHR, set dates Sep 8-12, set departure time range 12:00 PM - 4:00 PM, search, then list all unique airlines from the results",
+    "web": "http://74.234.189.120:3001/concur/7?mode=test"
+  },
+  {
+    "web_name": "concur",
+    "id": "concur--8",
+    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025. In search results filter by 0 stops and use Show Details and report on the aircraft manufacturer and model for the first flight. Format JSON as {\"manufacturer\": str, \"model\": str}",
+    "ux_hint": "In the flight search form, select SEA to LHR, pick any date in 8..12 Sep range. Search flights, then filter by \"Nonstop\" in the stops filter, check the \"Show Details\" checkbox to see flight details including aircraft information for the first flight listed. Submit the manufacturer and model as JSON.",
+    "web": "http://74.234.189.120:3001/concur/8?mode=test"
+  },
+  {
+    "web_name": "salesforce",
+    "id": "salesforce--1",
+    "ques": "Add a new lead with the following details: First Name: \"John\", Last Name: \"Smith\", Company: \"TechCorp Solutions\", Title: \"VP of Operations\", Phone: \"(555) 123-4567\", Email: \"john.smith@techcorp.com\"",
+    "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/salesforce/1?mode=test"
+  },
+  {
+    "web_name": "salesforce",
+    "id": "salesforce--2",
+    "ques": "Several leads are missing mobile phone numbers. Please assign the following mobile phone numbers to these specific leads: Andy Young: (620) 555-9001, David Martinez: (512) 555-9002, James Thompson: (212) 555-9003, Michael Brown: (858) 555-9004, Parvathi Sreenivasan: (886) 555-9005, Robert Wilson: (503) 555-9006. After editing each lead, make sure to navigate away from the edit view (e.g., go to the home page or leads list) to trigger saving the changes.",
+    "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/salesforce/2?mode=test"
+  },
+  {
+    "web_name": "salesforce",
+    "id": "salesforce--3",
+    "ques": "Create an \"Initial outreach\" call for each lead who currently has no call activities associated with them. For each such lead, create a call with the subject \"Initial outreach\" and comments \"First contact, getting to know each other\". Make sure to set the Name field to the lead and assign the call to an appropriate user.",
+    "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/salesforce/3?mode=test"
+  },
+  {
+    "web_name": "salesforce",
+    "id": "salesforce--4",
+    "ques": "Move all activities (tasks, calls, events, emails) that are currently associated with lead \"Parvathi Sreenivasan\" to lead \"Andy Young\". For all activity types: change the \"Name\" field from \"Parvathi Sreenivasan\" to \"Andy Young\". This will move the activities to Andy's activity feed.",
+    "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/salesforce/4?mode=test"
+  },
+  {
+    "web_name": "salesforce",
+    "id": "salesforce--5",
+    "ques": "Find the task \"Send RPA implementation proposal\" assigned to Parvathi Sreenivasan and modify it by: 1) Adding \"today\" to the Subject and 2) Changing the Status from \"Not Started\" to \"In Progress\".",
+    "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/salesforce/5?mode=test"
+  },
+  {
+    "web_name": "salesforce",
+    "id": "salesforce--6",
+    "ques": "Update the \"Number of Employees\" field for the following companies to these specific values: RetailMax Corporation → 1000-5000, EduTech Solutions → 200-500, HealthTech Innovations → 500-1000, BioResearch Labs → 500-1000. Find each lead by their company name and change their numberOfEmployees field to the exact value specified.",
+    "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/salesforce/6?mode=test"
+  },
+  {
+    "web_name": "salesforce",
+    "id": "salesforce--7",
+    "ques": "Use the bulk status change feature to update multiple leads at once. First, select all leads with \"Open - Not Contacted\" status by checking their checkboxes. Then use the \"Change Status\" button to change all selected leads to \"Working - Contacted\" status.",
+    "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/salesforce/7?mode=test"
+  },
+  {
+    "web_name": "salesforce",
+    "id": "salesforce--8",
+    "ques": "Use the search and sorting tools to find the lead that is first in alphabetical order among leads that have \"555\" in their phone number. First, search for \"555\" to filter the leads. Then sort by Name column to find the alphabetically first lead. Finally, navigate to that lead's detail page and create an event with subject \"Say hello\" for that lead.",
+    "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
+    "web": "http://74.234.189.120:3001/salesforce/8?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--1",
+    "ques": "Copy contact details from rows 30, 40, and 50 of the customer table to individual contact forms. Click on table cells to select and copy, then manually enter or paste data into the corresponding form fields. Complete and submit all 3 contact forms with Name, Email, Phone, and Company information.",
+    "ux_hint": "Click table cells in rows 30, 40, and 50 to select and copy data, then paste into the 3 form fields using the Paste buttons",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/1?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--2",
+    "ques": "Expand project folders, find all PDF files, copy their paths, and add them to the summary table using the form above the table. Navigate through the 3-level folder structure, select PDF files, use \"Copy Path\" button, then paste (Ctrl+V) into the path input field, and click \"Add\". Find all 10 PDF files scattered across the 2 project folders.",
+    "ux_hint": "Expand folders by clicking on them, select PDF files, and use \"Add to Table\" to build the summary",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/2?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--3",
+    "ques": "Browse through the 2-page product catalog and add qualifying items to your shopping cart. Navigate through all pages using pagination controls and identify products over $50. After adding items to cart, manually adjust quantities in the shopping cart: set quantity to 2 for items between $50-$100, and quantity to 1 for items over $100. Skip items $50 or below. Avoid adding duplicates and ensure items are sourced from both pages.",
+    "ux_hint": "Navigate through product catalog pages, add items >$50 to cart, then manually adjust quantities: $50-$100 = qty 2, >$100 = qty 1",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/3?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--4",
+    "ques": "Collect quarterly sales data from 4 separate tables and aggregate for North region. Switch between Q1, Q2, Q3, Q4 tabs to view sales data, then manually calculate and enter North region totals in the Summary tab. For each quarter, scan through the table to find all North region entries, sum their sales amounts, and enter the totals in the Q1, Q2, Q3, Q4 columns. The total sales will be calculated automatically.",
+    "ux_hint": "Switch between Q1-Q4 tabs to view quarterly data sorted by Product, scan for North region entries, manually calculate totals, and enter them in Summary tab",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/4?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--5",
+    "ques": "Review the employee table and update salaries for employees hired before 2020. Scroll through all 80 employee records, identify employees with hire dates before 01/01/2020, and increase their salaries by $1000. Double-click salary cells to edit, add $1000 to the current salary (you can use arrow keys to increment by $1000), press Enter to save the value. Make sure to review all employees as the records are not sorted by hire date.",
+    "ux_hint": "Scroll through employee table, identify employees hired before 2020, double-click salary cells to edit and increase salaries by $1000",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/5?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--6",
+    "ques": "Search for \"urgent\" tasks in the task system and compile a list of all urgent task IDs into an email to management. Send email to: manager@company.com with subject: \"Urgent Tasks Report\". Search for tasks containing \"urgent\" in their title or description, then create a numbered list of task IDs in the email body. Format as: \"1. TSK-2024-001\\n2. TSK-2024-002\" etc. Include all urgent task IDs found in the search results.",
+    "ux_hint": "Search for \"urgent\" tasks, find all matching results, create numbered list of task IDs in email to manager@company.com",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/6?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--7",
+    "ques": "Expand the management hierarchy and identify all Director-level employees. Navigate through the organization chart by clicking expand arrows to reveal subordinates. Find all employees with \"Director\" in their title across the organization. Submit your findings as JSON in the format: {\"directors\": [\"Full Name 1\", \"Full Name 2\", ...]} with all director names.",
+    "ux_hint": "Expand org chart nodes to navigate hierarchy, identify all Director-level employees, and submit JSON via Submit Results button",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/7?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--8",
+    "ques": "Expand invoice details to view line items and identify the top 3 overdue invoices by total value. Click the expand button (+) next to each invoice to see detailed line items and amounts. Find all invoices with \"Overdue\" status (red background), compare their total amounts, and add the 3 highest value invoices to the table on the right. Enter invoice numbers in order from highest to lowest value.",
+    "ux_hint": "Expand invoice rows to view amounts, identify overdue invoices by red background, find top 3 by value, add to table from highest to lowest",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/8?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--9",
+    "ques": "Browse through the electronics catalog and identify all products that have no screen. Look through all the products and submit the names of products without screens as JSON in the format: {\"products\": [\"Product Name 1\", \"Product Name 2\", ...]}. Submit your answer using the Submit Results button.",
+    "ux_hint": "Browse electronics products, identify those with no screen, submit JSON list of product names via Submit Results button",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/9?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--10",
+    "ques": "Navigate through 3 months of calendar data, find all \"Meeting\" events with 5 or more attendees, and copy their details to the planning form. Use month navigation arrows to browse through current month and next 2 months. Click on meeting events (blue colored blocks) in calendar cells to view details, then add meetings with minimum 5 participants to the Event Planning Form. Include Date, Meeting Title, Attendees, and Duration for all qualifying meetings found.",
+    "ux_hint": "Navigate through 3 months using arrows, click on blue meeting events to view details, add meetings with 5+ attendees to planning form",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/10?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--11",
+    "ques": "Expand comment threads to find replies containing spam keywords, then flag them for review. Navigate through the nested comment tree by clicking expand arrows to reveal reply threads. Look for comments containing spam keywords such as promotional language, urgent calls to action, or suspicious marketing phrases. Click the flag button next to comments that appear to be spam to add them to the moderation queue. You must achieve 90% spam detection accuracy with no false positives (flagging non-spam comments).",
+    "ux_hint": "Expand comment threads, identify spam comments by keywords, click flag buttons to add to moderation queue",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/11?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--12",
+    "ques": "Analyze the inventory data to extract the count of Electronics items that need reordering by supplier. Filter the inventory to review items, identify Electronics products with current stock below their reorder point, and count how many low-stock Electronics items each supplier has. Include ALL suppliers in your submission, even those with 0 Electronics items needing reorder. Submit your findings as JSON in the format: {\"supplier_name\": count, \"supplier_name\": count, ...} via the Submit Results button.",
+    "ux_hint": "Filter and analyze inventory to count Electronics items needing reorder by supplier, submit JSON via Submit Results button",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/12?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--13",
+    "ques": "Navigate through 3 pages of survey responses and count the \"Yes\" answers for Question 3: \"Are you satisfied with our service?\". Use the pagination to browse all pages sequentially and manually count responses using the dashboard counter. Update the dashboard with the correct total count of \"Yes\" responses across all 30 survey responses.",
+    "ux_hint": "Navigate through paginated survey results, manually count Q3 \"Yes\" responses, update analytics dashboard counter",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/13?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--14",
+    "ques": "Find tickets older than 30 days in the \"Open\" column and move only the high priority ones to the \"Review\" column. Drag tickets between columns to change their status. Look for tickets with creation dates more than 30 days ago and \"High\" priority badge (red). Only high priority tickets that are older than 30 days should be moved to Review - leave medium and low priority old tickets in Open.",
+    "ux_hint": "Drag high priority tickets older than 30 days from Open column to Review column using drag and drop",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/14?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--15",
+    "ques": "Analyze project timeline to identify resource conflicts by manually comparing task dates and resource assignments. Expand project phases to view all tasks with their start/end dates and assigned resources. Find pairs of tasks where the same resource is assigned to overlapping time periods. Select these conflicting task pairs and add them to the Resource Allocation Table. There are exactly 4 scheduling conflicts to find across the 6 project phases.",
+    "ux_hint": "Expand phases, analyze task dates and resources manually, select overlapping task pairs, add conflicts to allocation table",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/15?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--16",
+    "ques": "Browse through the 25 social media posts and identify all high-performing content (posts with more than 100 likes). Each high-performing post has a designated target date shown as \"Schedule: Xth\". Drag these posts to schedule them on their correct target dates in the calendar grid. Look for posts with golden borders and blue schedule badges. Schedule all 5 high-performing posts by dragging them to their specific assigned dates to complete the content calendar.",
+    "ux_hint": "Scroll through social media feed, identify posts with >100 likes (golden border) and blue schedule badges, drag each to its designated target date on calendar",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/16?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--17",
+    "ques": "Search for \"science fiction\" books in the library catalog, navigate through the paginated results, and add books published after 2020 (excluding 2020) to your reading list. Use the search interface to find science fiction books, then browse through the results across multiple pages using pagination controls. Select and add books with publication years 2021 or later to build your reading list table.",
+    "ux_hint": "Search for \"science fiction\", navigate through paginated results, identify books published 2021 or later, add them to reading list table",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/17?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--18",
+    "ques": "Filter contacts by \"VIP\" status, scroll through results, and update phone numbers using the external phone list. Click the filter checkbox for VIP status, then edit phone fields by clicking on them and entering the new numbers from the external phone list popup. Only VIP contacts should have updated phone numbers that match the external list.",
+    "ux_hint": "Filter by VIP status using checkbox, click \"Show External Phone List\" button to view updates, click phone fields to edit and enter new numbers",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/18?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--19",
+    "ques": "Expand menu categories to find the single 4-level deep item in the hierarchical structure and submit its complete path as JSON. Click expand arrows to reveal the full menu hierarchy and navigate through all levels to locate the one item at depth 4. Submit the complete path from root to the 4th level item as JSON in the format: {\"path\": \"Category/Subcategory/Page/Subpage\"}.",
+    "ux_hint": "Expand menu tree by clicking arrows to find 4-level deep item, then submit path as JSON via Submit Results button",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/19?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--20",
+    "ques": "Review document changes using the diff viewer to ensure compliance with style guide rules. Compare Draft 1 (original) with Draft 2 (revised) by examining the highlighted differences. Accept changes that follow the rules: acronyms must be explained on first use, dates must be in yyyy-mm-dd format, and no PII (personal names/information). Reject changes that violate these rules. Click on each diff to review and use Accept/Reject buttons to make decisions.",
+    "ux_hint": "Compare document drafts side-by-side, click on highlighted diffs to review, accept good changes and reject bad changes based on style guide rules (acronyms, dates, no PII)",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/20?mode=test"
+  },
+  {
+    "web_name": "business-process-tasks",
+    "id": "business-process-tasks--1",
+    "ques": "Process 25 customer records in batches, handle connection timeouts by reconnecting and resuming from last successful position. Monitor progress indicators, detect timeout errors, click reconnect, verify resume position, and continue processing. All 25 records must be processed successfully with correct resume after timeout simulation.",
+    "ux_hint": "Monitor progress indicators, detect timeout errors, click reconnect, verify resume position, continue processing",
+    "web": "http://74.234.189.120:3001/business-process-tasks/1?mode=test"
+  },
+  {
+    "web_name": "business-process-tasks",
+    "id": "business-process-tasks--2",
+    "ques": "Process 12 invoices with mixed currency formats, normalize all amounts to consistent \"1,234.56\" decimal format. Parse different currency formats, apply normalization rules, validate converted amounts, and flag conversion errors. All 12 invoices must be normalized correctly with exact decimal formatting and no data loss in conversion.",
+    "ux_hint": "Parse different currency formats, apply normalization rules, validate converted amounts, flag conversion errors",
+    "web": "http://74.234.189.120:3001/business-process-tasks/2?mode=test"
+  },
+  {
+    "web_name": "business-process-tasks",
+    "id": "business-process-tasks--3",
+    "ques": "Navigate folder hierarchy to access 5 protected files, use error message hints to find alternative access paths. Click folders, encounter access denied errors, read error messages for retry hints, find alternative paths, and access target files. Successfully access all 5 target files using error message guidance.",
+    "ux_hint": "Click folders, encounter access denied errors, read error messages for retry hints, find alternative paths, access target files",
+    "web": "http://74.234.189.120:3001/business-process-tasks/3?mode=test"
+  },
+  {
+    "web_name": "business-process-tasks",
+    "id": "business-process-tasks--4",
+    "ques": "Make judgment calls on consolidation decisions. Compare customer names, addresses, phone numbers, score similarity matches, select primary record, and merge duplicate data. Correctly identify all duplicate pairs with 100% accuracy and merge records preserving most complete data.",
+    "ux_hint": "Compare customer names, addresses, phone numbers, score similarity matches, select primary record, merge duplicate data",
+    "web": "http://74.234.189.120:3001/business-process-tasks/4?mode=test"
+  },
+  {
+    "web_name": "business-process-tasks",
+    "id": "business-process-tasks--5",
+    "ques": "Review 30 customer records, identify and redact all PII (SSN, phone, email, addresses) before data export. Scan records for PII patterns, select sensitive fields, apply redaction (XXX-XX-1234), and validate anonymization completeness. All PII must be correctly identified and redacted, export table must contain no sensitive information while preserving business data.",
+    "ux_hint": "Scan records for PII patterns, select sensitive fields, apply redaction (XXX-XX-1234), validate anonymization completeness",
+    "web": "http://74.234.189.120:3001/business-process-tasks/5?mode=test"
+  },
+  {
+    "web_name": "business-process-tasks",
+    "id": "business-process-tasks--6",
+    "ques": "Review 5 graduate school applications by tagging criteria demonstrated in academic records, interview notes, and faculty recommendations. For each student: 1) Academic Performance: Tag which prerequisites are met (CS101 ≥B+, MATH201 ≥C+, CS201 ≥B) and if GPA ≥3.0, 2) Interview Assessment: Identify demonstrated soft skills (Leadership, Communication, Problem-solving, Teamwork, Professionalism, Preparation, Enthusiasm), 3) Faculty Recommendation: Identify faculty endorsements (Exceptional Student, Strong Analytical Skills, Creative Thinking, Natural Leader, Top Performer, Reliable, Innovative). Read carefully and select only criteria with clear evidence in the text.",
+    "ux_hint": "Tag criteria from dropdowns based on evidence found in academic records, interview notes, and recommendation letters",
+    "web": "http://74.234.189.120:3001/business-process-tasks/6?mode=test"
+  },
+  {
+    "web_name": "business-process-tasks",
+    "id": "business-process-tasks--7",
+    "ques": "Navigate A-Z company listings in TransportHub directory, focus on companies from letters A-C only. Count buses (excluding shuttles) for each company in their fleet galleries. Only report companies with at least one bus in JSON format. Navigate through alphabet letters A-C, browse company lists, click company names, navigate to fleet galleries, count bus photos, and record details for companies with buses.",
+    "ux_hint": "Click alphabet letters A-C, browse company lists, click company names, navigate to fleet galleries, count buses only (not shuttles), record only companies with buses",
+    "web": "http://74.234.189.120:3001/business-process-tasks/7?mode=test"
+  }
+]

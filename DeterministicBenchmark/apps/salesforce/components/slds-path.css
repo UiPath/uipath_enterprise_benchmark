@@ -1,0 +1,178 @@
+/* SLDS Path Component CSS - extracted from Salesforce Lightning Design System */
+
+.slds-path {
+  display: flex;
+  align-items: center;
+}
+
+.slds-path__nav {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex: 1;
+}
+
+.slds-path__item {
+  position: relative;
+  flex: 1;
+}
+
+.slds-path__link {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 2.5rem;
+  padding: 0 1rem;
+  background: #e5e5e5;
+  color: #444;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 0;
+}
+
+.slds-path__link:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -0.74rem;
+  width: 0;
+  height: 0;
+  border-top: 1.25rem solid transparent;
+  border-bottom: 1.25rem solid transparent;
+  border-left: 0.75rem solid #e5e5e5;
+  z-index: 2;
+  transition: all 0.2s;
+}
+
+.slds-path__link:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 1.25rem solid transparent;
+  border-bottom: 1.25rem solid transparent;
+  border-left: 0.75rem solid white;
+  z-index: 1;
+  transition: all 0.2s;
+}
+
+.slds-path__item:first-child .slds-path__link:after {
+  display: none;
+}
+
+.slds-path__stage {
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.slds-path__title {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Complete state */
+.slds-is-complete .slds-path__link {
+  background: #4bca81;
+  color: white;
+}
+
+.slds-is-complete .slds-path__link:before {
+  border-left-color: #4bca81;
+}
+
+/* Hide title text for completed stages by default */
+.slds-is-complete .slds-path__title {
+  display: none;
+}
+
+/* Show title text on hover for completed stages */
+.slds-is-complete:hover .slds-path__title {
+  display: block;
+}
+
+/* Hide checkmark on hover for completed stages */
+.slds-is-complete:hover .slds-path__stage {
+  display: none;
+}
+
+/* Ensure smooth transitions and proper cursor */
+.slds-is-complete .slds-path__link {
+  cursor: pointer;
+}
+
+/* Center content for all stages */
+.slds-path__link {
+  justify-content: center;
+}
+
+/* Adjust padding for completed stages to center checkmark */
+.slds-is-complete .slds-path__link {
+  justify-content: center;
+}
+
+/* Keep text centered on hover for completed stages */
+.slds-is-complete:hover .slds-path__link {
+  justify-content: center;
+}
+
+/* Current/Active state */
+.slds-is-current .slds-path__link {
+  background: #1b96ff;
+  color: white;
+}
+
+.slds-is-current .slds-path__link:before {
+  border-left-color: #1b96ff;
+}
+
+/* Incomplete state */
+.slds-is-incomplete .slds-path__link {
+  background: #e5e5e5;
+  color: #444;
+}
+
+.slds-is-incomplete .slds-path__link:before {
+  border-left-color: #e5e5e5;
+}
+
+/* Action button */
+.slds-path__action {
+  margin-left: 1rem;
+}
+
+.slds-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.slds-button_brand {
+  background: #1b96ff;
+  color: white;
+  border-color: #1b96ff;
+}
+
+.slds-button_brand:hover {
+  background: #0176d3;
+  border-color: #0176d3;
+}
+
+.slds-icon {
+  fill: currentColor;
+}
+
+.slds-icon_xx-small {
+  width: 1rem;
+  height: 1rem;
+}
