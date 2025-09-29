@@ -7,6 +7,9 @@ import Task4 from './business-process-tasks/task-4';
 import Task5 from './business-process-tasks/task-5';
 import Task6 from './business-process-tasks/task-6';
 import Task7 from './business-process-tasks/task-7';
+import Task8 from './business-process-tasks/task-8';
+import Task9 from './business-process-tasks/task-9';
+import Task10 from './business-process-tasks/task-10';
 
 type UiBenchTask = {
   id: string;
@@ -22,7 +25,7 @@ function createTaskComponent(TaskComponent: React.ComponentType): React.FC {
 }
 
 function createTaskComponentForIndex(index: number): React.FC {
-  const components = [Task1, Task2, Task3, Task4, Task5, Task6, Task7];
+  const components = [Task1, Task2, Task3, Task4, Task5, Task6, Task7, Task8, Task9, Task10];
   const TaskComponent = components[index];
   if (!TaskComponent) {
     throw new Error(`Task component not found for index ${index}`);
@@ -577,7 +580,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'transport-hub-directory',
-    instructions: 'Navigate A-Z company listings in TransportHub directory, focus on companies from letters A-C only. Count buses (excluding shuttles) for each company in their fleet galleries. Only report companies with at least one bus in JSON format. Navigate through alphabet letters A-C, browse company lists, click company names, navigate to fleet galleries, count bus photos, and record details for companies with buses.',
+    instructions: 'Navigate A-Z company listings in TransportHub directory, focus on companies from letters A-C only. Count buses (excluding shuttles) for each company in their fleet galleries. Only report companies with at least one bus. Navigate through alphabet letters A-C, browse company lists, click company names, navigate to fleet galleries, count bus photos, and record details for companies with buses. Format JSON response as {"company_name": bus_count, "company_name": bus_count, ...}, and use the Submit Results button to send it.',
     ux: 'Click alphabet letters A-C, browse company lists, click company names, navigate to fleet galleries, count buses only (not shuttles), record only companies with buses',
     require_result_submission: true,
     test: () => {
@@ -680,6 +683,381 @@ const uiBenchTasks: UiBenchTask[] = [
       return { 
         success: true, 
         message: `Successfully found ${submissionCompanies.length} A-C companies with buses. JSON submission ready with company names and bus counts.` 
+      };
+    },
+  },
+  {
+    id: 'accordion-form-management',
+    instructions: 'Fill the form for "Primary delivery contact" with the following data: Name: "James Alpha", Email: "james.alpha@epic.com", Phone: "+1-565-3990", Extension: "900", Country: "USA", City: "Roslyn", BillingAddressLine1: "17 Main St", BillingAddressLine2: "Apt 4B", BillingCity: "New York", BillingState: "NY", BillingZipCode: "12001", ShippingAddressLine1: "456 Resurection St", ShippingAddressLine2: "Suite 12", ShippingCity: "Los Angeles", ShippingState: "CA", ShippingZipCode: "98579". After the form has been correctly completed press the "Save" button.',
+    ux: 'Navigate accordion sections, expand/collapse panels, fill form fields with exact specified data, save primary form',
+    test: () => {
+      const appState = (window as any).app_state;
+      if (!appState) {
+        return { success: false, message: 'App state not found.' };
+      }
+      
+      const { primaryFormSaved, primaryFormData } = appState;
+      
+      // Expected data from the instructions
+      const expectedData = {
+        name: 'James Alpha',
+        email: 'james.alpha@epic.com',
+        phone: '+1-565-3990',
+        extension: '900',
+        country: 'USA',
+        cityProvince: 'Roslyn',
+        billingAddress1: '17 Main St',
+        billingAddress2: 'Apt 4B',
+        billingCity: 'New York',
+        billingState: 'NY',
+        billingZipCode: '12001',
+        shippingAddress1: '456 Resurection St',
+        shippingAddress2: 'Suite 12',
+        shippingCity: 'Los Angeles',
+        shippingState: 'CA',
+        shippingZipCode: '98579'
+      };
+      
+      // Check if primary form is saved
+      if (!primaryFormSaved) {
+        // [Cheat] console log for human testers - show progress and next steps
+        if (primaryFormData) {
+          const filledFields = Object.entries(primaryFormData).filter(([_, value]) => value && typeof value === 'string' && value.trim() !== '');
+          const emptyFields = Object.entries(expectedData).filter(([key, _]) => !primaryFormData[key] || primaryFormData[key].trim() === '');
+          const incorrectFields = Object.entries(expectedData).filter(([key, expected]) => primaryFormData[key] && primaryFormData[key] !== expected);
+          
+          const allIssues = [...emptyFields.map(([key, expected]) => ({ key, expected, actual: '', type: 'missing' })), 
+                            ...incorrectFields.map(([key, expected]) => ({ key, expected, actual: primaryFormData[key], type: 'incorrect' }))];
+          
+          if (allIssues.length > 0) {
+            const issueIds = allIssues.map(issue => `${issue.key}_${issue.type}`).sort().join(',');
+            const lastLoggedKey = 'task8_issues_' + issueIds;
+            
+            if (!(window as any)[lastLoggedKey]) {
+              console.log(`[Cheat] Form progress: ${filledFields.length}/${Object.keys(expectedData).length} fields filled`);
+              console.log(`[Cheat] Next 3 issues to fix:`);
+              allIssues.slice(0, 3).forEach((issue, index) => {
+                if (issue.type === 'missing') {
+                  console.log(`[Cheat] ${index + 1}. ${issue.key}: empty → needs "${issue.expected}"`);
+                } else {
+                  console.log(`[Cheat] ${index + 1}. ${issue.key}: "${issue.actual}" → should be "${issue.expected}"`);
+                }
+              });
+              if (allIssues.length > 3) {
+                console.log(`[Cheat] ... and ${allIssues.length - 3} more issues`);
+              }
+              console.log(`[Cheat] Remember to click Save button after filling all fields correctly`);
+              (window as any)[lastLoggedKey] = true;
+            }
+          }
+        } else {
+          // No form data yet - show initial guidance
+          const lastLoggedKey = 'task8_start_guidance';
+          if (!(window as any)[lastLoggedKey]) {
+            console.log(`[Cheat] Start by filling the Personal Information section:`);
+            console.log(`[Cheat] Name: "James Alpha"`);
+            console.log(`[Cheat] Email: "james.alpha@epic.com"`);
+            console.log(`[Cheat] Then expand Billing Address and Shipping Address sections`);
+            (window as any)[lastLoggedKey] = true;
+          }
+        }
+        
+        return { 
+          success: false, 
+          message: 'Primary delivery contact form not saved. Complete the form and click Save button.' 
+        };
+      }
+      
+      // Validate primary form data exists
+      if (!primaryFormData) {
+        return { 
+          success: false, 
+          message: 'Primary form data not found. Fill out the form completely before saving.' 
+        };
+      }
+      
+      // Check all fields match expected values exactly
+      const allFields = Object.keys(expectedData);
+      const incorrectFields = [];
+      
+      for (const field of allFields) {
+        const expected = expectedData[field as keyof typeof expectedData];
+        const actual = primaryFormData[field];
+        if (actual !== expected) {
+          incorrectFields.push({ field, expected, actual });
+        }
+      }
+      
+      // If there are errors, show them in console for human testers
+      if (incorrectFields.length > 0) {
+        const errorIds = incorrectFields.map(err => err.field).sort().join(',');
+        const lastLoggedKey = 'task8_errors_' + errorIds;
+        
+        if (!(window as any)[lastLoggedKey]) {
+          console.log(`[Cheat] 🔴 Form saved but has ${incorrectFields.length} incorrect values:`);
+          incorrectFields.slice(0, 3).forEach((error, index) => {
+            console.log(`[Cheat] ${index + 1}. ${error.field}: "${error.actual}" → should be "${error.expected}"`);
+          });
+          if (incorrectFields.length > 3) {
+            console.log(`[Cheat] ... and ${incorrectFields.length - 3} more errors`);
+          }
+          console.log(`[Cheat] Fix the values and save again`);
+          (window as any)[lastLoggedKey] = true;
+        }
+        
+        const firstError = incorrectFields[0];
+        return { 
+          success: false, 
+          message: `Incorrect value for ${firstError.field}. Expected: "${firstError.expected}", Got: "${firstError.actual}". Please use the exact values specified in the instructions.` 
+        };
+      }
+      
+      // Success! Log completion for human testers
+      const successKey = 'task8_success_logged';
+      if (!(window as any)[successKey]) {
+        console.log(`[Cheat] ✅ SUCCESS: All fields correctly filled and form saved!`);
+        console.log(`[Cheat] Personal: ${primaryFormData.name} (${primaryFormData.email})`);
+        console.log(`[Cheat] Billing: ${primaryFormData.billingAddress1}, ${primaryFormData.billingCity}, ${primaryFormData.billingState}`);
+        console.log(`[Cheat] Shipping: ${primaryFormData.shippingAddress1}, ${primaryFormData.shippingCity}, ${primaryFormData.shippingState}`);
+        (window as any)[successKey] = true;
+      }
+      
+      return { 
+        success: true, 
+        message: `Successfully completed Primary delivery contact form with exact specified data: ${primaryFormData.name} (${primaryFormData.email}) with all address details correctly filled.` 
+      };
+    },
+  },
+  {
+    id: 'multi-step-transport-form',
+    instructions: 'Fill the Request Transport Offer form step by step with the following data: Full Name: "Greg Barkley", Email: "gregory.barkley.1976@example.com", Phone: "+1 555-163-6543", Company: "Greg\'s Bakery", Country: "USA", Origin: "New York", Destination: "Sacramento", Weight: "10", Length: "50", Width: "40", Height: "30", Service Type: "express", Comments: "Handle with care.". Click Next after completing each step, and Submit at the final step. After submitting wait for the confirmation popup to appear and close it.',
+    ux: 'Navigate through multi-step form, fill required fields, validate each step, proceed with Next buttons, submit form, handle confirmation popup',
+    test: () => {
+      const appState = (window as any).app_state;
+      if (!appState) {
+        return { success: false, message: 'App state not found.' };
+      }
+      
+      const { currentStep, completedSteps, isSubmitted, showConfirmation, formData } = appState;
+      
+      // Expected data from the instructions
+      const expectedData = {
+        fullName: 'Greg Barkley',
+        email: 'gregory.barkley.1976@example.com',
+        phone: '+1 555-163-6543',
+        company: "Greg's Bakery",
+        country: 'USA',
+        origin: 'New York',
+        destination: 'Sacramento',
+        weight: '10',
+        length: '50',
+        width: '40',
+        height: '30',
+        serviceType: 'express',
+        comments: 'Handle with care.'
+      };
+      
+      // Check if all steps are completed
+      if (completedSteps.length < 3) {
+        // [Cheat] console log for human testers - show progress and next steps
+        if (formData) {
+          const step1Fields = ['fullName', 'email', 'phone', 'country'];
+          const step2Fields = ['origin', 'destination', 'weight', 'length', 'width', 'height'];
+          const step3Fields = ['serviceType'];
+          
+          const getStepProgress = (fields: string[]) => {
+            const filled = fields.filter(field => formData[field] && formData[field].trim() !== '');
+            const incorrect = fields.filter(field => formData[field] && formData[field] !== expectedData[field as keyof typeof expectedData]);
+            return { filled: filled.length, total: fields.length, incorrect };
+          };
+          
+          const step1Progress = getStepProgress(step1Fields);
+          const step2Progress = getStepProgress(step2Fields);
+          const step3Progress = getStepProgress(step3Fields);
+          
+          const progressKey = `task9_progress_${currentStep}_${completedSteps.length}`;
+          if (!(window as any)[progressKey]) {
+            console.log(`[Cheat] Multi-step form progress: Step ${currentStep}/3`);
+            console.log(`[Cheat] Step 1 (Contact): ${step1Progress.filled}/${step1Progress.total} fields filled ${completedSteps.includes(1) ? '✅' : '⏳'}`);
+            console.log(`[Cheat] Step 2 (Package): ${step2Progress.filled}/${step2Progress.total} fields filled ${completedSteps.includes(2) ? '✅' : '⏳'}`);
+            console.log(`[Cheat] Step 3 (Review): ${step3Progress.filled}/${step3Progress.total} fields filled ${completedSteps.includes(3) ? '✅' : '⏳'}`);
+            
+            if (currentStep === 1 && step1Progress.filled < step1Progress.total) {
+              const missing = step1Fields.filter(field => !formData[field] || formData[field].trim() === '');
+              console.log(`[Cheat] Next required fields: ${missing.slice(0, 3).join(', ')}`);
+            } else if (currentStep === 2 && step2Progress.filled < step2Progress.total) {
+              const missing = step2Fields.filter(field => !formData[field] || formData[field].trim() === '');
+              console.log(`[Cheat] Next required fields: ${missing.slice(0, 3).join(', ')}`);
+            } else if (currentStep === 3 && !formData.serviceType) {
+              console.log(`[Cheat] Select service type: "express"`);
+            }
+            
+            (window as any)[progressKey] = true;
+          }
+        }
+        
+        return { 
+          success: false, 
+          message: `Only ${completedSteps.length} of 3 steps completed. Complete all steps: Contact Information, Package Details, and Review & Submit.` 
+        };
+      }
+      
+      // Check if form is submitted
+      if (!isSubmitted) {
+        return { 
+          success: false, 
+          message: 'Form not submitted. Click Submit at the final step after completing all required fields.' 
+        };
+      }
+      
+      // Check if confirmation popup appeared and was closed
+      if (showConfirmation) {
+        return { 
+          success: false, 
+          message: 'Confirmation popup is still open. Close the confirmation popup to complete the task.' 
+        };
+      }
+      
+      // Validate the specific data was entered correctly
+      const criticalFields = ['fullName', 'email', 'phone', 'company', 'country', 'origin', 'destination', 'weight', 'length', 'width', 'height', 'serviceType'];
+      const incorrectFields = [];
+      
+      for (const field of criticalFields) {
+        const expected = expectedData[field as keyof typeof expectedData];
+        const actual = formData[field];
+        if (actual !== expected) {
+          incorrectFields.push({ field, expected, actual });
+        }
+      }
+      
+      // If there are errors, show them in console for human testers
+      if (incorrectFields.length > 0) {
+        const errorIds = incorrectFields.map(err => err.field).sort().join(',');
+        const lastLoggedKey = 'task9_errors_' + errorIds;
+        
+        if (!(window as any)[lastLoggedKey]) {
+          console.log(`[Cheat] 🔴 Form submitted but has ${incorrectFields.length} incorrect values:`);
+          incorrectFields.slice(0, 3).forEach((error, index) => {
+            console.log(`[Cheat] ${index + 1}. ${error.field}: "${error.actual}" → should be "${error.expected}"`);
+          });
+          if (incorrectFields.length > 3) {
+            console.log(`[Cheat] ... and ${incorrectFields.length - 3} more errors`);
+          }
+          (window as any)[lastLoggedKey] = true;
+        }
+        
+        const firstError = incorrectFields[0];
+        return { 
+          success: false, 
+          message: `Incorrect value for ${firstError.field}. Expected: "${firstError.expected}", Got: "${firstError.actual}". Please use the exact values specified in the instructions.` 
+        };
+      }
+      
+      // Success! Log completion for human testers
+      const successKey = 'task9_success_logged';
+      if (!(window as any)[successKey]) {
+        console.log(`[Cheat] ✅ SUCCESS: Transport form completed and submitted!`);
+        console.log(`[Cheat] Contact: ${formData.fullName} (${formData.email})`);
+        console.log(`[Cheat] Transport: ${formData.origin} → ${formData.destination}`);
+        console.log(`[Cheat] Package: ${formData.weight}kg, ${formData.length}x${formData.width}x${formData.height}cm`);
+        console.log(`[Cheat] Service: ${formData.serviceType}`);
+        (window as any)[successKey] = true;
+      }
+      
+      return { 
+        success: true, 
+        message: `Successfully completed transport offer request form with correct data. Form submitted and confirmation popup closed.` 
+      };
+    },
+  },
+  {
+    id: 'paginated-table-extraction',
+    instructions: 'Extract all the data from the "Multipage table". Navigate through all pages using the "Next page" button, extract data from each page, then output the result in the following JSON format: [{"VIN": str, "Make": str, "Model": str, "Year": str}], and use the Submit Results button to send it.',
+    ux: 'Navigate through paginated table, extract data from each page, compile complete dataset, submit JSON results',
+    require_result_submission: true,
+    test: () => {
+      const submission = (window as any).app_state?.submission;
+      
+      // ========================
+      // CHEAT SYSTEM - Full JSON answer (single-run logging)
+      // ========================
+      const expectedData = [
+        {"VIN": "2F2DE48C8N4309374", "Make": "Ford", "Model": "F150", "Year": "2019"},
+        {"VIN": "2L3ED45V3D4030403", "Make": "Lexus", "Model": "ES350", "Year": "2019"},
+        {"VIN": "7G90G567894589047", "Make": "VW", "Model": "Corrado", "Year": "2015"},
+        {"VIN": "3F4F587F84DJ73847", "Make": "Toyota", "Model": "Highlander", "Year": "2019"},
+        {"VIN": "34FG678956T435678", "Make": "Ford", "Model": "Focus", "Year": "2015"},
+        {"VIN": "1F34GH4V83D345698", "Make": "Toyota", "Model": "Highlander", "Year": "2020"},
+        {"VIN": "7Y569K09856785657", "Make": "Honda", "Model": "Pilot", "Year": "2020"},
+        {"VIN": "45R6789456787658I", "Make": "Lexus", "Model": "ES350", "Year": "2020"},
+        {"VIN": "2T2XS93J9S3829399", "Make": "Toyota", "Model": "Prius", "Year": "2018"},
+        {"VIN": "7Y569K09856785658", "Make": "Ford", "Model": "Pilot", "Year": "2022"},
+        {"VIN": "45R6789436787658I", "Make": "VW", "Model": "ES350", "Year": "2021"},
+        {"VIN": "2T2XS93J9S3829399", "Make": "VW", "Model": "Prius", "Year": "2013"},
+        {"VIN": "7Y569K09853785657", "Make": "Honda", "Model": "F150", "Year": "2024"},
+        {"VIN": "45R6789426787658I", "Make": "Lexus", "Model": "Highlander", "Year": "2025"},
+        {"VIN": "2T2XS93J9S3129399", "Make": "Toyota", "Model": "Corrado", "Year": "2026"}
+      ];
+      
+      const cheatKey = 'task10_cheat_logged';
+      if (!(window as any)[cheatKey]) {
+        console.log(`[Cheat] Expected: ${JSON.stringify(expectedData)}`);
+        (window as any)[cheatKey] = true;
+      }
+      
+      if (!submission) {
+        return { success: false, message: 'No submission found. Navigate through all pages, extract data, then use Submit Results button.' };
+      }
+      
+      if (!Array.isArray(submission)) {
+        return { success: false, message: `Submission is not an array. Got: ${typeof submission}` };
+      }
+      
+      if (submission.length !== expectedData.length) {
+        return { 
+          success: false, 
+          message: `Expected ${expectedData.length} vehicle records, got ${submission.length}. Navigate through all 5 pages and extract all data.` 
+        };
+      }
+      
+      // Validate required properties for each record
+      const requiredProperties = ['VIN', 'Make', 'Model', 'Year'];
+      for (let i = 0; i < submission.length; i++) {
+        const record = submission[i];
+        for (const prop of requiredProperties) {
+          if (!(prop in record)) {
+            return { 
+              success: false, 
+              message: `Record ${i + 1} is missing property '${prop}'. Each record must have: ${requiredProperties.join(', ')}` 
+            };
+          }
+          if (typeof record[prop] !== 'string') {
+            return { 
+              success: false, 
+              message: `Record ${i + 1} property '${prop}' should be a string. Got: ${typeof record[prop]}` 
+            };
+          }
+        }
+      }
+      
+      // Check data accuracy (sample key records)
+      const keyRecords = [0, 7, 14]; // First, middle, last records
+      for (const index of keyRecords) {
+        const expected = expectedData[index];
+        const actual = submission[index];
+        
+        if (actual.VIN !== expected.VIN || actual.Make !== expected.Make || 
+            actual.Model !== expected.Model || actual.Year !== expected.Year) {
+          return { 
+            success: false, 
+            message: `Data accuracy error in record ${index + 1}. Expected VIN: ${expected.VIN}, Got: ${actual.VIN}. Ensure all data is extracted correctly from each page.` 
+          };
+        }
+      }
+      
+      return { 
+        success: true, 
+        message: `Successfully extracted all ${expectedData.length} vehicle records from the multipage table and submitted in correct JSON format.` 
       };
     },
   },

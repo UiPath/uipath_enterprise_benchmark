@@ -94,7 +94,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'workday-count-pto-days-2025',
-    instructions: "Find out how many PTO days I used in 2025. Respond with JSON formatted as {\"pto_days_count\": int}",
+    instructions: "Find out how many PTO days I used in 2025. Format JSON response as {\"pto_days_count\": int}, and use the Submit Results button to send it.",
     ux: 'Submit the requested JSON via the Submit Results button',
     require_result_submission: true,
     test: () => {
@@ -195,7 +195,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'workday-find-fourth-m-country',
-    instructions: 'Navigate to Personal Information > Legal Name > Country > By Country Alphabetically > M and return the fourth country in the list. Respond with JSON formatted {"country": str}',
+    instructions: 'Navigate to Personal Information > Legal Name > Country > By Country Alphabetically > M and return the fourth country in the list. Format JSON response as {"country": str}, and use the Submit Results button to send it.',
     ux: 'Use the country dropdown in Legal Name section, select "By Country Alphabetically", find section M, count to the fourth country, then submit the result',
     require_result_submission: true,
     test: () => {
@@ -286,7 +286,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'workday-lookup-holidays-nov-dec',
-    instructions: "Open 'Absence' > 'Request Absence' and look up in the calendar November and December, and report all holidays or special days. Holidays are marked on the calendar. Output format {\"<holiday-name>\": \"mm/dd\"}",
+    instructions: "Open 'Absence' > 'Request Absence' and look up in the calendar November and December, and report all holidays or special days. Holidays are marked on the calendar. Format JSON response as {\"<holiday-name>\": \"mm/dd\"}, and use the Submit Results button to send it.",
     require_result_submission: true,
     ux: 'Navigate to Absence > Request Absence, then navigate to November and December months to identify holidays marked on the calendar',
     test: () => {

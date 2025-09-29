@@ -545,7 +545,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'copy-paste-org-chart-directors',
-    instructions: 'Expand the management hierarchy and identify all Director-level employees. Navigate through the organization chart by clicking expand arrows to reveal subordinates. Find all employees with "Director" in their title across the organization. Submit your findings as JSON in the format: {"directors": ["Full Name 1", "Full Name 2", ...]} with all director names.',
+    instructions: 'Expand the management hierarchy and identify all Director-level employees. Navigate through the organization chart by clicking expand arrows to reveal subordinates. Find all employees with "Director" in their title across the organization. Format JSON response as {"directors": ["Full Name 1", "Full Name 2", ...]}, and use the Submit Results button to send it.',
     ux: 'Expand org chart nodes to navigate hierarchy, identify all Director-level employees, and submit JSON via Submit Results button',
     require_result_submission: true,
     test: () => {
@@ -730,7 +730,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'copy-paste-electronics-no-screen',
-    instructions: 'Browse through the electronics catalog and identify all products that have no screen. Look through all the products and submit the names of products without screens as JSON in the format: {"products": ["Product Name 1", "Product Name 2", ...]}. Submit your answer using the Submit Results button.',
+    instructions: 'Browse through the electronics catalog and identify all products that have no screen. Look through all the products and identify products without screens. Format JSON response as {"products": ["Product Name 1", "Product Name 2", ...]}, and use the Submit Results button to send it.',
     ux: 'Browse electronics products, identify those with no screen, submit JSON list of product names via Submit Results button',
     require_result_submission: true,
     test: () => {
@@ -1088,7 +1088,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'copy-paste-inventory-supplier-analysis',
-    instructions: 'Analyze the inventory data to extract the count of Electronics items that need reordering by supplier. Filter the inventory to review items, identify Electronics products with current stock below their reorder point, and count how many low-stock Electronics items each supplier has. Include ALL suppliers in your submission, even those with 0 Electronics items needing reorder. Submit your findings as JSON in the format: {"supplier_name": count, "supplier_name": count, ...} via the Submit Results button.',
+    instructions: 'Analyze the inventory data to extract the count of Electronics items that need reordering by supplier. Filter the inventory to review items, identify Electronics products with current stock below their reorder point, and count how many low-stock Electronics items each supplier has. Include ALL suppliers in your submission, even those with 0 Electronics items needing reorder. Format JSON response as {"supplier_name": count, "supplier_name": count, ...}, and use the Submit Results button to send it.',
     ux: 'Filter and analyze inventory to count Electronics items needing reorder by supplier, submit JSON via Submit Results button',
     require_result_submission: true,
     test: () => {
@@ -1848,7 +1848,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'hierarchical-menu-navigation',
-    instructions: 'Expand menu categories to find the single 4-level deep item in the hierarchical structure and submit its complete path as JSON. Click expand arrows to reveal the full menu hierarchy and navigate through all levels to locate the one item at depth 4. Submit the complete path from root to the 4th level item as JSON in the format: {"path": "Category/Subcategory/Page/Subpage"}.',
+    instructions: 'Expand menu categories to find the single 4-level deep item in the hierarchical structure. Click expand arrows to reveal the full menu hierarchy and navigate through all levels to locate the one item at depth 4. Format JSON response as {"path": "Category/Subcategory/Page/Subpage"}, and use the Submit Results button to send it.',
     ux: 'Expand menu tree by clicking arrows to find 4-level deep item, then submit path as JSON via Submit Results button',
     require_result_submission: true,
     test: () => {

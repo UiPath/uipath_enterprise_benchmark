@@ -430,7 +430,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'concur-find-target-zip-code',
-    instructions: 'What is the vendor zip code for the Target expense? Format as { "vendor_zip": number}',
+    instructions: 'What is the vendor zip code for the Target expense? Format JSON response as { "vendor_zip": number}, and use the Submit Results button to send it.',
     ux: 'In "Available Expenses" click "See All" and read from the "Vendor Details" column on the specific row',
     require_result_submission: true,
     test: () => {
@@ -533,7 +533,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'concur-find-largest-expense',
-    instructions: 'What is the largest available expense? Format as {"vendor_name": str, "date": str, "total": number}',
+    instructions: 'What is the largest available expense? Format JSON response as {"vendor_name": str, "date": str, "total": number}, and use the Submit Results button to send it.',
     ux: 'In "Available Expenses" click "See All" and read from the "Vendor Details" table the task result',
     require_result_submission: true,
     test: () => {
@@ -765,7 +765,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'concur-flight-duration-delta',
-    instructions: 'Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, filter by carrier Delta, and return the duration of the flight. Format JSON as {"flight_duration_hours": int, "flight_duration_minutes": int}',
+    instructions: 'Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, filter by carrier Delta, and return the duration of the flight. Format JSON response as {"flight_duration_hours": int, "flight_duration_minutes": int}, and use the Submit Results button to send it.',
     ux: 'In the flight search form, select From: and pick the SEA option, in To: select LHR after scrolling down, in Dates: click the calendar icon, then click on start and end days. Search, and then apply filter on Carriers to Delta, and you have the result. Paste it into the Submit Results box in JSON with the requested format.',
     require_result_submission: true,
     test: () => {
@@ -823,7 +823,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'concur-flight-stops-analysis',
-    instructions: 'Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, filter by carrier Air France, and return how many nonstop, 1 stop and 2 stop flights you have in results. Format JSON as {"nonstop": int, "one_stop": int, "two_stop": int}',
+    instructions: 'Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, filter by carrier Air France, and return how many nonstop, 1 stop and 2 stop flights you have in results. Format JSON response as {"nonstop": int, "one_stop": int, "two_stop": int}, and use the Submit Results button to send it.',
     ux: 'In the flight search form, select From and pick the SEA option, in To: select LHR after scrolling down, in Dates: click the calendar icon, then click on start and end days. On flight results page, use All Filters to apply stops filters and count the results for each category',
     require_result_submission: true,
     test: () => {
@@ -883,7 +883,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'concur-flight-airlines-time-filtered',
-    instructions: 'Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, departing time range 12:00 PM - 4:00 PM. Report the list of airlines in results. Response is JSON with format {"airlines": list[str]}',
+    instructions: 'Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, departing time range 12:00 PM - 4:00 PM. Report the list of airlines in results. Format JSON response as {"airlines": list[str]}, and use the Submit Results button to send it.',
     ux: 'In the flight search form, select From: SEA, To: LHR, set dates Sep 8-12, set departure time range 12:00 PM - 4:00 PM, search, then list all unique airlines from the results',
     require_result_submission: true,
     test: () => {
@@ -951,7 +951,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'concur-flight-aircraft-details',
-    instructions: 'Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025. In search results filter by 0 stops and use Show Details and report on the aircraft manufacturer and model for the first flight. Format JSON as {"manufacturer": str, "model": str}',
+    instructions: 'Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025. In search results filter by 0 stops and use Show Details and report on the aircraft manufacturer and model for the first flight. Format JSON response as {"manufacturer": str, "model": str}, and use the Submit Results button to send it.',
     ux: 'In the flight search form, select SEA to LHR, pick any date in 8..12 Sep range. Search flights, then filter by "Nonstop" in the stops filter, check the "Show Details" checkbox to see flight details including aircraft information for the first flight listed. Submit the manufacturer and model as JSON.',
     require_result_submission: true,
     test: () => {

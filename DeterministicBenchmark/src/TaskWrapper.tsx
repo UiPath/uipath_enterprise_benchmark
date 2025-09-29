@@ -151,7 +151,7 @@ const TaskWrapper: React.FC<TaskWrapperProps> = ({ tasks, appName, appPath }) =>
         <div className={outerContainerClass}>
           <div className="mb-2 flex items-center justify-between">
             {currentTask.test && (
-              <div className="font-mono text-sm text-gray-600">{testResult?.success ? 'code#1' : 'code#0'}</div>
+              <div className="font-mono text-sm text-gray-600 hidden">{testResult?.success ? 'code#1' : 'code#0'}</div>
             )}
             {currentTask?.requireResultSubmission && (
               <button

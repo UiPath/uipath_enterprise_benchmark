@@ -114,7 +114,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'kanban-find-least-recently-updated',
-    instructions: 'What is the task least recently updated? Format response as {"key": str, "summary": str, "assignee": str, "updated": str}',
+    instructions: 'What is the task least recently updated? Format JSON response as {"key": str, "summary": str, "assignee": str, "updated": str}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -228,7 +228,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'kanban-list-view-sort-created-report-ids',
-    instructions: 'Go into List view and report the IDs of the first created task and last created task. You can sort by clicking the "Created" column header. Respond in JSON with this format {"first_created_task": "yyyy-mm-dd", "last_created_task": "yyyy-mm-dd"}',
+    instructions: 'Go into List view and report the IDs of the first created task and last created task. You can sort by clicking the "Created" column header. Format JSON response as {"first_created_task": "yyyy-mm-dd", "last_created_task": "yyyy-mm-dd"}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -286,7 +286,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'kanban-count-issues-by-priority',
-    instructions: 'Count issues by priority, respond with JSON formatted as {"high_priority_count": int, "medium_priority_count": int, "low_priority_count": int}',
+    instructions: 'Count issues by priority. Format JSON response as {"high_priority_count": int, "medium_priority_count": int, "low_priority_count": int}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;

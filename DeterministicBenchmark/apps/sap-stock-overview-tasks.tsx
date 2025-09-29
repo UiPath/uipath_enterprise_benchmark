@@ -22,7 +22,7 @@ type UiBenchTask = {
 const uiBenchTasks: UiBenchTask[] = [
   {
     id: 'sap-find-material-1287-company',
-    instructions: 'What is the company that has material 1287 in vendor consignment, and the quantity. Submit the result in this format: {"company": str, "quantity": float}',
+    instructions: 'What is the company that has material 1287 in vendor consignment, and the quantity. Format JSON response as {"company": str, "quantity": float}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -48,7 +48,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-find-plants-material-100-210',
-    instructions: 'What are the names of the plants that have material 100-210 in stock. Respond with JSON formatted as {"plants": list[str]}',
+    instructions: 'What are the names of the plants that have material 100-210 in stock. Format JSON response as {"plants": list[str]}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -72,7 +72,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-count-materials-per-company',
-    instructions: 'For each material on this list ["1287","100-210","200000054","300-400"] report the number of companies that have it in stock. Format response as {"<material-id>": <count:int>}',
+    instructions: 'For each material on this list ["1287","100-210","200000054","300-400"] report the number of companies that have it in stock. Format JSON response as {"<material-id>": <count:int>}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -124,7 +124,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-filter-materials-containing-fan',
-    instructions: 'Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find out how many materials contain the string "fan". Submit the result as {"count": <count:int>}',
+    instructions: 'Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find out how many materials contain the string "fan". Format JSON response as {"count": <count:int>}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -149,7 +149,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-filter-materials-b-to-g-with-fg',
-    instructions: 'Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find materials where the material description is between B and G (alphabetically) AND the material code contains "FG". Submit the result as {"materials": [list of material codes]}',
+    instructions: 'Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find materials where the material description is between B and G (alphabetically) AND the material code contains "FG". Format JSON response as {"materials": [list of material codes]}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -179,7 +179,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-find-highest-reserved-stock-sg011',
-    instructions: 'Use MMBE (Inventory Stock Overview) form to find out which plant has the highest reserved stock of SG011. Submit the result as {"plant": "plant_name"}',
+    instructions: 'Use MMBE (Inventory Stock Overview) form to find out which plant has the highest reserved stock of SG011. Format JSON response as {"plant": "plant_name"}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -204,7 +204,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-lookup-material-fg1-cp-description-plants',
-    instructions: 'Look up material FG1_CP to see its full description and plants where this material is in stock. Format response as {"description": str, "plants": list[str]}. You need to use both the stock search and the Search for Materials view.',
+    instructions: 'Look up material FG1_CP to see its full description and plants where this material is in stock. Format JSON response as {"description": str, "plants": list[str]}, and use the Submit Results button to send it. You need to use both the stock search and the Search for Materials view.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -236,7 +236,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-find-storage-locations-fg1-cp-jamshedpur',
-    instructions: 'Find the list of storage locations for material FG1_CP and plant PLANT JAMSHEDPUR. Submit the result as {"storage_locations": [list of storage location names]}',
+    instructions: 'Find the list of storage locations for material FG1_CP and plant PLANT JAMSHEDPUR. Format JSON response as {"storage_locations": [list of storage location names]}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;

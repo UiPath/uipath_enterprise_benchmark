@@ -19,7 +19,7 @@ const TaskClassifier: React.FC<TaskClassifierProps> = ({ taskIdNum, appPath }) =
   ];
   
   const actionTypes = [
-    'Cancel', 'Classify', 'Clear', 'Compare', 'Compute', 'Create', 'Delete', 'Drag', 'Expand', 'Extract', 'Filter', 'Focus', 'Hover', 'Hotkey', 'Keyboard Navigation', 'Navigate', 'Open', 'Right Click', 'Scroll', 'Select', 'Sort', 'Toggle', 'Type', 'Update', 'Visual Search', 'Wait'
+    'Cancel', 'Classify', 'Clear', 'Compare', 'Compute', 'Create', 'Delete', 'Double Click', 'Drag', 'Expand', 'Extract', 'Filter', 'Focus', 'Hover', 'Hotkey', 'Keyboard Navigation', 'Navigate', 'Open', 'Right Click', 'Scroll', 'Select', 'Sort', 'Toggle', 'Type', 'Update', 'Visual Search', 'Wait'
   ];
   
   const structureTypes = [

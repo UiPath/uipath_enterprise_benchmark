@@ -268,7 +268,7 @@
   {
     "web_name": "date-pickers",
     "id": "date-pickers--19",
-    "ques": "Type \"quarterly presentation\" and select AI suggestion",
+    "ques": "Type \"quarterly presentation\" and select the TOP AI recommendation",
     "ux_hint": "Context-aware AI suggestions with confidence scores",
     "web": "http://74.234.189.120:3001/date-pickers/19?mode=test"
   },
@@ -975,7 +975,7 @@
   {
     "web_name": "kanban-board",
     "id": "kanban-board--4",
-    "ques": "What is the task least recently updated? Format response as {\"key\": str, \"summary\": str, \"assignee\": str, \"updated\": str}",
+    "ques": "What is the task least recently updated? Format JSON response as {\"key\": str, \"summary\": str, \"assignee\": str, \"updated\": str}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/kanban-board/4?mode=test"
   },
@@ -996,14 +996,14 @@
   {
     "web_name": "kanban-board",
     "id": "kanban-board--7",
-    "ques": "Go into List view and report the IDs of the first created task and last created task. You can sort by clicking the \"Created\" column header. Respond in JSON with this format {\"first_created_task\": \"yyyy-mm-dd\", \"last_created_task\": \"yyyy-mm-dd\"}",
+    "ques": "Go into List view and report the IDs of the first created task and last created task. You can sort by clicking the \"Created\" column header. Format JSON response as {\"first_created_task\": \"yyyy-mm-dd\", \"last_created_task\": \"yyyy-mm-dd\"}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/kanban-board/7?mode=test"
   },
   {
     "web_name": "kanban-board",
     "id": "kanban-board--8",
-    "ques": "Count issues by priority, respond with JSON formatted as {\"high_priority_count\": int, \"medium_priority_count\": int, \"low_priority_count\": int}",
+    "ques": "Count issues by priority. Format JSON response as {\"high_priority_count\": int, \"medium_priority_count\": int, \"low_priority_count\": int}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/kanban-board/8?mode=test"
   },
@@ -1031,7 +1031,7 @@
   {
     "web_name": "workday",
     "id": "workday--4",
-    "ques": "Find out how many PTO days I used in 2025. Respond with JSON formatted as {\"pto_days_count\": int}",
+    "ques": "Find out how many PTO days I used in 2025. Format JSON response as {\"pto_days_count\": int}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/workday/4?mode=test"
   },
@@ -1045,7 +1045,7 @@
   {
     "web_name": "workday",
     "id": "workday--6",
-    "ques": "Navigate to Personal Information > Legal Name > Country > By Country Alphabetically > M and return the fourth country in the list. Respond with JSON formatted {\"country\": str}",
+    "ques": "Navigate to Personal Information > Legal Name > Country > By Country Alphabetically > M and return the fourth country in the list. Format JSON response as {\"country\": str}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/workday/6?mode=test"
   },
@@ -1059,63 +1059,63 @@
   {
     "web_name": "workday",
     "id": "workday--8",
-    "ques": "Open 'Absence' > 'Request Absence' and look up in the calendar November and December, and report all holidays or special days. Holidays are marked on the calendar. Output format {\"<holiday-name>\": \"mm/dd\"}",
+    "ques": "Open 'Absence' > 'Request Absence' and look up in the calendar November and December, and report all holidays or special days. Holidays are marked on the calendar. Format JSON response as {\"<holiday-name>\": \"mm/dd\"}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/workday/8?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--1",
-    "ques": "What is the company that has material 1287 in vendor consignment, and the quantity. Submit the result in this format: {\"company\": str, \"quantity\": float}",
+    "ques": "What is the company that has material 1287 in vendor consignment, and the quantity. Format JSON response as {\"company\": str, \"quantity\": float}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/1?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--2",
-    "ques": "What are the names of the plants that have material 100-210 in stock. Respond with JSON formatted as {\"plants\": list[str]}",
+    "ques": "What are the names of the plants that have material 100-210 in stock. Format JSON response as {\"plants\": list[str]}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/2?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--3",
-    "ques": "For each material on this list [\"1287\",\"100-210\",\"200000054\",\"300-400\"] report the number of companies that have it in stock. Format response as {\"<material-id>\": <count:int>}",
+    "ques": "For each material on this list [\"1287\",\"100-210\",\"200000054\",\"300-400\"] report the number of companies that have it in stock. Format JSON response as {\"<material-id>\": <count:int>}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/3?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--4",
-    "ques": "Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find out how many materials contain the string \"fan\". Submit the result as {\"count\": <count:int>}",
+    "ques": "Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find out how many materials contain the string \"fan\". Format JSON response as {\"count\": <count:int>}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/4?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--5",
-    "ques": "Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find materials where the material description is between B and G (alphabetically) AND the material code contains \"FG\". Submit the result as {\"materials\": [list of material codes]}",
+    "ques": "Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find materials where the material description is between B and G (alphabetically) AND the material code contains \"FG\". Format JSON response as {\"materials\": [list of material codes]}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/5?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--6",
-    "ques": "Use MMBE (Inventory Stock Overview) form to find out which plant has the highest reserved stock of SG011. Submit the result as {\"plant\": \"plant_name\"}",
+    "ques": "Use MMBE (Inventory Stock Overview) form to find out which plant has the highest reserved stock of SG011. Format JSON response as {\"plant\": \"plant_name\"}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/6?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--7",
-    "ques": "Look up material FG1_CP to see its full description and plants where this material is in stock. Format response as {\"description\": str, \"plants\": list[str]}. You need to use both the stock search and the Search for Materials view.",
+    "ques": "Look up material FG1_CP to see its full description and plants where this material is in stock. Format JSON response as {\"description\": str, \"plants\": list[str]}, and use the Submit Results button to send it. You need to use both the stock search and the Search for Materials view.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/7?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--8",
-    "ques": "Find the list of storage locations for material FG1_CP and plant PLANT JAMSHEDPUR. Submit the result as {\"storage_locations\": [list of storage location names]}",
+    "ques": "Find the list of storage locations for material FG1_CP and plant PLANT JAMSHEDPUR. Format JSON response as {\"storage_locations\": [list of storage location names]}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/8?mode=test"
   },
@@ -1129,14 +1129,14 @@
   {
     "web_name": "concur",
     "id": "concur--2",
-    "ques": "What is the vendor zip code for the Target expense? Format as { \"vendor_zip\": number}",
+    "ques": "What is the vendor zip code for the Target expense? Format JSON response as { \"vendor_zip\": number}, and use the Submit Results button to send it.",
     "ux_hint": "In \"Available Expenses\" click \"See All\" and read from the \"Vendor Details\" column on the specific row",
     "web": "http://74.234.189.120:3001/concur/2?mode=test"
   },
   {
     "web_name": "concur",
     "id": "concur--3",
-    "ques": "What is the largest available expense? Format as {\"vendor_name\": str, \"date\": str, \"total\": number}",
+    "ques": "What is the largest available expense? Format JSON response as {\"vendor_name\": str, \"date\": str, \"total\": number}, and use the Submit Results button to send it.",
     "ux_hint": "In \"Available Expenses\" click \"See All\" and read from the \"Vendor Details\" table the task result",
     "web": "http://74.234.189.120:3001/concur/3?mode=test"
   },
@@ -1150,28 +1150,28 @@
   {
     "web_name": "concur",
     "id": "concur--5",
-    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, filter by carrier Delta, and return the duration of the flight. Format JSON as {\"flight_duration_hours\": int, \"flight_duration_minutes\": int}",
+    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, filter by carrier Delta, and return the duration of the flight. Format JSON response as {\"flight_duration_hours\": int, \"flight_duration_minutes\": int}, and use the Submit Results button to send it.",
     "ux_hint": "In the flight search form, select From: and pick the SEA option, in To: select LHR after scrolling down, in Dates: click the calendar icon, then click on start and end days. Search, and then apply filter on Carriers to Delta, and you have the result. Paste it into the Submit Results box in JSON with the requested format.",
     "web": "http://74.234.189.120:3001/concur/5?mode=test"
   },
   {
     "web_name": "concur",
     "id": "concur--6",
-    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, filter by carrier Air France, and return how many nonstop, 1 stop and 2 stop flights you have in results. Format JSON as {\"nonstop\": int, \"one_stop\": int, \"two_stop\": int}",
+    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, filter by carrier Air France, and return how many nonstop, 1 stop and 2 stop flights you have in results. Format JSON response as {\"nonstop\": int, \"one_stop\": int, \"two_stop\": int}, and use the Submit Results button to send it.",
     "ux_hint": "In the flight search form, select From and pick the SEA option, in To: select LHR after scrolling down, in Dates: click the calendar icon, then click on start and end days. On flight results page, use All Filters to apply stops filters and count the results for each category",
     "web": "http://74.234.189.120:3001/concur/6?mode=test"
   },
   {
     "web_name": "concur",
     "id": "concur--7",
-    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, departing time range 12:00 PM - 4:00 PM. Report the list of airlines in results. Response is JSON with format {\"airlines\": list[str]}",
+    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025, departing time range 12:00 PM - 4:00 PM. Report the list of airlines in results. Format JSON response as {\"airlines\": list[str]}, and use the Submit Results button to send it.",
     "ux_hint": "In the flight search form, select From: SEA, To: LHR, set dates Sep 8-12, set departure time range 12:00 PM - 4:00 PM, search, then list all unique airlines from the results",
     "web": "http://74.234.189.120:3001/concur/7?mode=test"
   },
   {
     "web_name": "concur",
     "id": "concur--8",
-    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025. In search results filter by 0 stops and use Show Details and report on the aircraft manufacturer and model for the first flight. Format JSON as {\"manufacturer\": str, \"model\": str}",
+    "ques": "Use the plane booking form, select Seattle (SEA) to London (LHR), on 8..12 Sep 2025. In search results filter by 0 stops and use Show Details and report on the aircraft manufacturer and model for the first flight. Format JSON response as {\"manufacturer\": str, \"model\": str}, and use the Submit Results button to send it.",
     "ux_hint": "In the flight search form, select SEA to LHR, pick any date in 8..12 Sep range. Search flights, then filter by \"Nonstop\" in the stops filter, check the \"Show Details\" checkbox to see flight details including aircraft information for the first flight listed. Submit the manufacturer and model as JSON.",
     "web": "http://74.234.189.120:3001/concur/8?mode=test"
   },
@@ -1276,7 +1276,7 @@
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--7",
-    "ques": "Expand the management hierarchy and identify all Director-level employees. Navigate through the organization chart by clicking expand arrows to reveal subordinates. Find all employees with \"Director\" in their title across the organization. Submit your findings as JSON in the format: {\"directors\": [\"Full Name 1\", \"Full Name 2\", ...]} with all director names.",
+    "ques": "Expand the management hierarchy and identify all Director-level employees. Navigate through the organization chart by clicking expand arrows to reveal subordinates. Find all employees with \"Director\" in their title across the organization. Format JSON response as {\"directors\": [\"Full Name 1\", \"Full Name 2\", ...]}, and use the Submit Results button to send it.",
     "ux_hint": "Expand org chart nodes to navigate hierarchy, identify all Director-level employees, and submit JSON via Submit Results button",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/7?mode=test"
   },
@@ -1290,7 +1290,7 @@
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--9",
-    "ques": "Browse through the electronics catalog and identify all products that have no screen. Look through all the products and submit the names of products without screens as JSON in the format: {\"products\": [\"Product Name 1\", \"Product Name 2\", ...]}. Submit your answer using the Submit Results button.",
+    "ques": "Browse through the electronics catalog and identify all products that have no screen. Look through all the products and identify products without screens. Format JSON response as {\"products\": [\"Product Name 1\", \"Product Name 2\", ...]}, and use the Submit Results button to send it.",
     "ux_hint": "Browse electronics products, identify those with no screen, submit JSON list of product names via Submit Results button",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/9?mode=test"
   },
@@ -1311,7 +1311,7 @@
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--12",
-    "ques": "Analyze the inventory data to extract the count of Electronics items that need reordering by supplier. Filter the inventory to review items, identify Electronics products with current stock below their reorder point, and count how many low-stock Electronics items each supplier has. Include ALL suppliers in your submission, even those with 0 Electronics items needing reorder. Submit your findings as JSON in the format: {\"supplier_name\": count, \"supplier_name\": count, ...} via the Submit Results button.",
+    "ques": "Analyze the inventory data to extract the count of Electronics items that need reordering by supplier. Filter the inventory to review items, identify Electronics products with current stock below their reorder point, and count how many low-stock Electronics items each supplier has. Include ALL suppliers in your submission, even those with 0 Electronics items needing reorder. Format JSON response as {\"supplier_name\": count, \"supplier_name\": count, ...}, and use the Submit Results button to send it.",
     "ux_hint": "Filter and analyze inventory to count Electronics items needing reorder by supplier, submit JSON via Submit Results button",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/12?mode=test"
   },
@@ -1360,7 +1360,7 @@
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--19",
-    "ques": "Expand menu categories to find the single 4-level deep item in the hierarchical structure and submit its complete path as JSON. Click expand arrows to reveal the full menu hierarchy and navigate through all levels to locate the one item at depth 4. Submit the complete path from root to the 4th level item as JSON in the format: {\"path\": \"Category/Subcategory/Page/Subpage\"}.",
+    "ques": "Expand menu categories to find the single 4-level deep item in the hierarchical structure. Click expand arrows to reveal the full menu hierarchy and navigate through all levels to locate the one item at depth 4. Format JSON response as {\"path\": \"Category/Subcategory/Page/Subpage\"}, and use the Submit Results button to send it.",
     "ux_hint": "Expand menu tree by clicking arrows to find 4-level deep item, then submit path as JSON via Submit Results button",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/19?mode=test"
   },
@@ -1416,8 +1416,29 @@
   {
     "web_name": "business-process-tasks",
     "id": "business-process-tasks--7",
-    "ques": "Navigate A-Z company listings in TransportHub directory, focus on companies from letters A-C only. Count buses (excluding shuttles) for each company in their fleet galleries. Only report companies with at least one bus in JSON format. Navigate through alphabet letters A-C, browse company lists, click company names, navigate to fleet galleries, count bus photos, and record details for companies with buses.",
+    "ques": "Navigate A-Z company listings in TransportHub directory, focus on companies from letters A-C only. Count buses (excluding shuttles) for each company in their fleet galleries. Only report companies with at least one bus. Navigate through alphabet letters A-C, browse company lists, click company names, navigate to fleet galleries, count bus photos, and record details for companies with buses. Format JSON response as {\"company_name\": bus_count, \"company_name\": bus_count, ...}, and use the Submit Results button to send it.",
     "ux_hint": "Click alphabet letters A-C, browse company lists, click company names, navigate to fleet galleries, count buses only (not shuttles), record only companies with buses",
     "web": "http://74.234.189.120:3001/business-process-tasks/7?mode=test"
+  },
+  {
+    "web_name": "business-process-tasks",
+    "id": "business-process-tasks--8",
+    "ques": "Fill the form for \"Primary delivery contact\" with the following data: Name: \"James Alpha\", Email: \"james.alpha@epic.com\", Phone: \"+1-565-3990\", Extension: \"900\", Country: \"USA\", City: \"Roslyn\", BillingAddressLine1: \"17 Main St\", BillingAddressLine2: \"Apt 4B\", BillingCity: \"New York\", BillingState: \"NY\", BillingZipCode: \"12001\", ShippingAddressLine1: \"456 Resurection St\", ShippingAddressLine2: \"Suite 12\", ShippingCity: \"Los Angeles\", ShippingState: \"CA\", ShippingZipCode: \"98579\". After the form has been correctly completed press the \"Save\" button.",
+    "ux_hint": "Navigate accordion sections, expand/collapse panels, fill form fields with exact specified data, save primary form",
+    "web": "http://74.234.189.120:3001/business-process-tasks/8?mode=test"
+  },
+  {
+    "web_name": "business-process-tasks",
+    "id": "business-process-tasks--9",
+    "ques": "Fill the Request Transport Offer form step by step with the following data: Full Name: \"Greg Barkley\", Email: \"gregory.barkley.1976@example.com\", Phone: \"+1 555-163-6543\", Company: \"Greg's Bakery\", Country: \"USA\", Origin: \"New York\", Destination: \"Sacramento\", Weight: \"10\", Length: \"50\", Width: \"40\", Height: \"30\", Service Type: \"express\", Comments: \"Handle with care.\". Click Next after completing each step, and Submit at the final step. After submitting wait for the confirmation popup to appear and close it.",
+    "ux_hint": "Navigate through multi-step form, fill required fields, validate each step, proceed with Next buttons, submit form, handle confirmation popup",
+    "web": "http://74.234.189.120:3001/business-process-tasks/9?mode=test"
+  },
+  {
+    "web_name": "business-process-tasks",
+    "id": "business-process-tasks--10",
+    "ques": "Extract all the data from the \"Multipage table\". Navigate through all pages using the \"Next page\" button, extract data from each page, then output the result in the following JSON format: [{\"VIN\": str, \"Make\": str, \"Model\": str, \"Year\": str}], and use the Submit Results button to send it.",
+    "ux_hint": "Navigate through paginated table, extract data from each page, compile complete dataset, submit JSON results",
+    "web": "http://74.234.189.120:3001/business-process-tasks/10?mode=test"
   }
 ]
