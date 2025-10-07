@@ -151,14 +151,14 @@ const Task1: React.FC = () => {
   return (
     <div className="h-screen flex bg-gray-100 relative">
       {/* Left Panel - Excel-style Grid */}
-      <div className="w-1/2 bg-white border-r flex flex-col">
+      <div className="w-2/3 bg-white border-r flex flex-col">
         <div className="p-4 pb-2">
           <h2 className="text-lg font-semibold">Customer Table</h2>
         </div>
         
         <div className="flex-1 px-4 overflow-auto">
           <div className="border border-gray-300 rounded overflow-auto relative">
-            <table className="w-full text-sm">
+            <table className="w-full text-[9px]">
               <thead className="bg-gray-50">
                 <tr>
                   <th className="border border-gray-300 px-2 py-1 text-center w-12">#</th>
@@ -236,7 +236,7 @@ const Task1: React.FC = () => {
       </div>
 
       {/* Right Panel - Contact Forms */}
-      <div className="w-1/2 p-4 bg-gray-50 overflow-auto">
+      <div className="w-1/3 p-4 bg-gray-50 overflow-auto">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Contact Forms</h2>
         </div>

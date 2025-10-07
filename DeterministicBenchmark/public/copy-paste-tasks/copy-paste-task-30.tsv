@@ -1,0 +1,4 @@
+contract_reference	party1_company	party2_company	contract_type	start_date	end_date	contract_value	renewal_terms	key_clauses
+CNT-2024-387	Meridian Technologies	Beta Industries LLC	Software Licensing Agreement	2024-01-01	2025-12-31	125000	Auto-renew annually with 60-day notice	IP Rights, Termination
+CNT-2024-388	Cascade Manufacturing	Delta Logistics Corp	Supply Chain Services	2024-02-01	2027-01-31	850000	Manual renewal required	SLA Terms, Payment Schedule
+CNT-2024-389	Pinnacle Consulting Group	Epsilon Healthcare	Professional Services Agreement	2024-03-01	2024-12-31	75000	90-day notice for non-renewal	Confidentiality, Deliverables

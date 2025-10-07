@@ -1,14 +1,11 @@
 import json
 import logging
 import math
-from collections.abc import Iterable, Sequence
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from enum import IntEnum
-from itertools import chain
 from pathlib import Path
-from typing import Any, Final, assert_never
-
-from PIL.Image import Image
+from typing import Any, Final
 
 from uitask.models.display import Position, ScrollActionDirection
 from uitask.models.pointer import MouseClickType
@@ -29,7 +26,10 @@ from .actions import (
 )
 from .replay import RfbReplayParser, RfbReplayStep, RfbReplayStreams
 
-WEBP_FILENAME: Final[str] = "video.webp"
+# Minimum delay to pick the "after" screenshot to allow UI to render (in ns)
+_MIN_AFTER_DELAY_NS: Final[int] = 1_000_000_000  # 1000 ms
+# Additional buffer specifically for waits (in ns)
+_WAIT_AFTER_BUFFER_NS: Final[int] = 1_000_000_000  # 1000 ms
 
 # Multi-click detection: immediate back-to-back clicks, minimal movement
 # Used for double-click, triple-click, and any future multi-click detection
@@ -1072,105 +1072,454 @@ class RfbTraceToRawActionsProcessor:
         return f"{hours:02d}:{minutes:02d}:{seconds:02d}.{millis:03d}"
 
 
-def _get_replay_with_raw_actions(
-    replay_with_rfb: Iterable[RfbReplayStep],
-) -> list[dict[str, Any]]:
-    return [step.to_dict() for step in RfbTraceToRawActionsProcessor(replay_with_rfb).run()]
+def _format_relative_timestamp_from_base(base_ns: int, timestamp_ns: int) -> str:
+    delta_ns = max(0, timestamp_ns - base_ns)
+    delta_ms = delta_ns // 1_000_000
+    hours = (delta_ms // 3_600_000) % 100
+    minutes = (delta_ms // 60_000) % 60
+    seconds = (delta_ms // 1_000) % 60
+    millis = delta_ms % 1_000
+    return f"{hours:02d}:{minutes:02d}:{seconds:02d}.{millis:03d}"
 
 
-def _save_replay_webp(
-    path: Path,
-    frame_duration: int | None,
-    timestamps: Sequence[int],
-    images: Sequence[Image],
-) -> None:
-    if len(images) == 0:
-        _log.warning("Trying to export an empty replay with no images")
-        return
-
-    assert len(timestamps) == len(images)
-
-    frame_durations: int | tuple[int, ...]
-
-    if frame_duration is None:
-        action_time_diffs = (
-            (end - start) // 1_000_000  # Convert nanoseconds to milliseconds
-            for start, end in zip(timestamps[:-1], timestamps[1:])
-        )
-
-        # We'll display the last frame for 1 second
-        frame_durations = tuple(chain(action_time_diffs, (1000,)))
-
-    else:
-        frame_durations = frame_duration
-
-    # Export the images as an animated webp
-    images[0].save(
-        path,
-        save_all=True,
-        append_images=images[1:],
-        duration=frame_durations,
-        loop=0,
-    )
-
-
-def export_replay_as_webp(
+def export_action_screenshots(
     streams: RfbReplayStreams,
-    output_prefix: Path,
-    frame_duration: int | None = None,
-    continuous: bool = True,
+    output_dir: Path,
+    *,
+    max_output_width: int | None = 1600,
+    image_format: str = "JPEG",
+    image_quality: int = 80,
+    inline_json: bool = True,
 ) -> None:
     """
-    Exports the RFB replay as an animated WebP and a JSON file of events.
+    Generate a mapping from each agent action in execution.json (except finish)
+    to before/after screenshots with timestamps. Stops producing video.webp and
+    rfb/events jsons.
 
-    Args:
-        streams: The RFB replay streams.
-        output_prefix: The prefix for the output files.
-        frame_duration: The display duration of each frame in the WebP file, in milliseconds.
-                        Pass a single integer for a constant duration for each frame, or None to
-                        display each frame for the real amount of time it took in the recording.
-        continuous: If True, save all frames including those without actions (i.e. save a movie).
-                    If False, only save frames when a key or mouse event was observed.
+    Artifacts:
+      - action_screenshots.json
+      - action_screenshots/<index>_before.png, <index>_after.png
     """
-    timestamps: list[int] = []
-    images: list[Image] = []
-    events: list[PointerEvent | KeyEvent | None] = []
-    steps: list[RfbReplayStep] = []
-
-    replay_parser = RfbReplayParser(streams)
-    for step in replay_parser.iter_steps(continuous):
-        timestamps.append(step.timestamp)
-        images.append(step.screen)
-        events.append(step.event)
-        steps.append(step)
-
-    assert len(timestamps) == len(images) == len(events), (timestamps, images, events)
-
-    if len(images) == 0:
-        _log.warning("Trying to export an empty replay with no images or events")
+    # Load reenact_execution.json if present, else execution.json
+    reenact_trace = output_dir / "reenact_execution.json"
+    execution_trace = output_dir / "execution.json"
+    if reenact_trace.exists():
+        execution_path = reenact_trace
+        is_reenact = True
+    elif execution_trace.exists():
+        execution_path = execution_trace
+        is_reenact = False
+    else:
+        _log.warning(
+            "No execution trace found (expected reenact_execution.json or execution.json) under %s",
+            output_dir,
+        )
         return
 
-    _save_replay_webp(output_prefix / WEBP_FILENAME, frame_duration, timestamps, images)
+    try:
+        with open(execution_path, "rt", encoding="utf-8") as f:
+            execution_actions: list[dict[str, Any]] = json.load(f)
+    except Exception as e:
+        _log.error("Failed to read execution.json: %s", e)
+        return
 
-    # Export the raw RFB events (pointer/key/noop)
-    with open(output_prefix / "rfb_events.json", "wt") as actions_out:
-        events_json = []
-        for event in events:
-            match event:
-                case PointerEvent():
-                    events_json.append({"kind": "pointer", **event.to_dict()})
-                case KeyEvent():
-                    events_json.append({"kind": "key", **event.to_dict()})
-                case None:
-                    events_json.append({"kind": "noop"})
-                case _ as unreachable:
-                    assert_never(unreachable)
+    execution_actions = [a for a in execution_actions if a.get("action") != "finish"]
 
-        json.dump({"events": events_json}, actions_out)
+    # First pass: scan steps to establish base timestamp and collect lightweight index timeline
+    replay_parser = RfbReplayParser(streams)
+    base_ts_ns: int | None = None
+    step_timestamps: list[int] = []
+    step_kinds: list[int] = []  # 0 = fb update, 1 = event
+    # Do not store images; just build a compact timeline
+    for step in replay_parser.iter_steps(continuous=True):
+        if base_ts_ns is None:
+            base_ts_ns = step.timestamp
+        step_timestamps.append(step.timestamp)
+        step_kinds.append(0 if step.event is None else 1)
+    if base_ts_ns is None:
+        _log.warning("No replay steps; skipping action screenshot export")
+        return
 
-    # Export processed high-level actions too (relative to first frame time)
-    with open(output_prefix / "events.json", "wt", encoding="utf-8") as processed_out:
-        json.dump(_get_replay_with_raw_actions(steps), processed_out, ensure_ascii=False)
+    # Build indices for the most recent framebuffer image before an index
+    # A step with event=None corresponds to a FramebufferUpdate
+    framebuffer_indices: list[int] = [i for i, kind in enumerate(step_kinds) if kind == 0]
+    if not framebuffer_indices:
+        framebuffer_indices = list(range(len(step_timestamps)))
+
+    # Process raw actions to get approximate timestamps for agent operations
+    # Re-run a lightweight iterator to derive processed action timestamps without keeping images
+    replay_parser_actions = RfbReplayParser(streams)
+    processed_actions = RfbTraceToRawActionsProcessor(
+        replay_parser_actions.iter_steps(continuous=True)
+    ).run()
+    processed_ts_ns: list[int] = []
+    for pa in processed_actions:
+        # Convert relative timestamp string back to absolute ns using base
+        try:
+            hh, mm, rest = pa.timestamp.split(":")
+            ss, mmm = rest.split(".")
+            rel_ns = (int(hh) * 3600 + int(mm) * 60 + int(ss)) * 1_000_000_000 + int(
+                mmm
+            ) * 1_000_000
+            processed_ts_ns.append(base_ts_ns + rel_ns)
+        except Exception:
+            # Fallback: use base
+            processed_ts_ns.append(base_ts_ns)
+
+    # Helper to find the latest framebuffer index at or before a timestamp
+    def find_before_index(ts_ns: int) -> int:
+        idx = 0
+        # binary search over framebuffer_indices
+        lo, hi = 0, len(framebuffer_indices) - 1
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            if step_timestamps[framebuffer_indices[mid]] <= ts_ns:
+                idx = mid
+                lo = mid + 1
+            else:
+                hi = mid - 1
+        return framebuffer_indices[idx]
+
+    # Helper to find the first framebuffer index strictly after a timestamp
+    def find_after_index(ts_ns: int) -> int:
+        lo, hi = 0, len(framebuffer_indices) - 1
+        ans = framebuffer_indices[-1]
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            if step_timestamps[framebuffer_indices[mid]] > ts_ns:
+                ans = framebuffer_indices[mid]
+                hi = mid - 1
+            else:
+                lo = mid + 1
+        return ans
+
+    # Prepare output dir for images
+    images_dir = output_dir / "action_screenshots"
+    images_dir.mkdir(parents=True, exist_ok=True)
+    # Streaming JSON writer
+    json_filename = "reenact_action_screenshots.json" if is_reenact else "action_screenshots.json"
+    html_filename = "reenact_action_screenshots.html" if is_reenact else "action_screenshots.html"
+    mapping_path = output_dir / json_filename
+    out_json = open(mapping_path, "wt", encoding="utf-8")
+    out_json.write("[\n")
+    first_record = True
+    processed_idx = 0
+    last_ts_for_wait = base_ts_ns
+
+    for i, action in enumerate(execution_actions, start=1):
+        action_name = str(action.get("action", "")).strip()
+
+        # Determine an approximate timestamp anchor for this action
+        if action_name == "wait":
+            duration_s = 0.0
+            try:
+                duration_s = float(action.get("params", {}).get("duration", 0.0))
+            except Exception:
+                duration_s = 0.0
+            start_ts_ns = last_ts_for_wait
+            end_ts_ns = start_ts_ns + int(duration_s * 1_000_000_000)
+            before_idx = find_before_index(start_ts_ns)
+            # For waits, still ensure we go a bit past the end to capture UI settle
+            after_idx = find_after_index(end_ts_ns + _MIN_AFTER_DELAY_NS + _WAIT_AFTER_BUFFER_NS)
+            last_ts_for_wait = step_timestamps[after_idx]
+        else:
+            if processed_idx >= len(processed_ts_ns):
+                # Fallback to latest known
+                start_ts_ns = last_ts_for_wait
+            else:
+                start_ts_ns = processed_ts_ns[processed_idx]
+                processed_idx += 1
+            before_idx = find_before_index(start_ts_ns)
+            # pick an after index at least _MIN_AFTER_DELAY_NS after start
+            after_idx = find_after_index(start_ts_ns + _MIN_AFTER_DELAY_NS)
+            last_ts_for_wait = step_timestamps[after_idx]
+
+        # Second pass: open a new parser and advance to the needed indices to grab images only
+        # Grab before image
+        before_ts_ns = step_timestamps[before_idx]
+        after_ts_ns = step_timestamps[after_idx]
+
+        # Extract and save only the two frames we need
+        def save_frame_at(index: int, out_path: Path) -> None:
+            rp = RfbReplayParser(streams)
+            for i, st in enumerate(rp.iter_steps(continuous=True)):
+                if i == index:
+                    img = st.screen
+                    if max_output_width is not None and img.width > max_output_width:
+                        ratio = max_output_width / img.width
+                        img = img.resize((max_output_width, max(1, int(img.height * ratio))))
+                    img.save(out_path, format=image_format, quality=image_quality)
+                    break
+
+        before_name = (
+            f"{i:04d}_before.jpg"
+            if image_format.upper() == "JPEG"
+            else f"{i:04d}_before.{image_format.lower()}"
+        )
+        after_name = (
+            f"{i:04d}_after.jpg"
+            if image_format.upper() == "JPEG"
+            else f"{i:04d}_after.{image_format.lower()}"
+        )
+        before_path = images_dir / before_name
+        after_path = images_dir / after_name
+
+        save_frame_at(before_idx, before_path)
+        save_frame_at(after_idx, after_path)
+
+        record = {
+            "index": i,
+            "action": action.get("action"),
+            "params": action.get("params", {}),
+            "task_marked_complete": bool(action.get("task_marked_complete")),
+            "before": {
+                "path": str(before_path.relative_to(output_dir)),
+                "timestamp_ns": before_ts_ns,
+                "relative": _format_relative_timestamp_from_base(base_ts_ns, before_ts_ns),
+            },
+            "after": {
+                "path": str(after_path.relative_to(output_dir)),
+                "timestamp_ns": after_ts_ns,
+                "relative": _format_relative_timestamp_from_base(base_ts_ns, after_ts_ns),
+            },
+        }
+        if not first_record:
+            out_json.write(",\n")
+        out_json.write(json.dumps(record, ensure_ascii=False))
+        first_record = False
+
+    out_json.write("\n]\n")
+    out_json.close()
+
+    # Also write an HTML viewer by loading a template and injecting JSON
+    try:
+        if inline_json:
+            # Load JSON we just wrote to embed it
+            with open(mapping_path, "rt", encoding="utf-8") as f:
+                mapping_results = json.load(f)
+            _write_action_screenshots_html(
+                output_dir=output_dir, mapping=mapping_results, output_html_filename=html_filename
+            )
+        else:
+            # If not inlining, embed an empty array (or change template to fetch externally)
+            _write_action_screenshots_html(
+                output_dir=output_dir, mapping=[], output_html_filename=html_filename
+            )
+    except Exception as e:
+        _log.error("Failed to write action_screenshots.html: %s", e)
+
+
+def postprocess_output_dir(output_dir: Path) -> None:
+    """
+    Given an output directory containing `execution.json` and a `recording/` folder
+    with client/server capture, generate `action_screenshots.json`, the
+    per-action before/after images, and `action_screenshots.html`.
+    """
+    recording_path = output_dir / "recording"
+    if not recording_path.exists():
+        _log.error("Recording directory not found at %s", recording_path)
+        return
+
+    export_action_screenshots_from_path(recording_path, output_dir)
+
+
+def export_action_screenshots_from_path(recording_path: Path, output_dir: Path) -> None:
+    # Defaults for image export (memory-efficient settings)
+    max_output_width = 1600
+    image_format = "JPEG"
+    image_quality = 80
+
+    # First pass: build compact timeline (timestamps and kinds)
+    step_timestamps: list[int] = []
+    step_kinds: list[int] = []  # 0 = framebuffer update, 1 = event
+    base_ts_ns: int | None = None
+    with RfbReplayStreams.from_files(recording_path) as streams_a:
+        rp_a = RfbReplayParser(streams_a)
+        for st in rp_a.iter_steps(continuous=True):
+            if base_ts_ns is None:
+                base_ts_ns = st.timestamp
+            step_timestamps.append(st.timestamp)
+            step_kinds.append(0 if st.event is None else 1)
+    if base_ts_ns is None:
+        _log.warning("No replay steps; skipping action screenshot export")
+        return
+
+    framebuffer_indices: list[int] = [i for i, k in enumerate(step_kinds) if k == 0]
+    if not framebuffer_indices:
+        framebuffer_indices = list(range(len(step_timestamps)))
+
+    # Second pass: compute processed actions to align with execution
+    with RfbReplayStreams.from_files(recording_path) as streams_b:
+        rp_b = RfbReplayParser(streams_b)
+        processed_actions = RfbTraceToRawActionsProcessor(rp_b.iter_steps(continuous=True)).run()
+    processed_ts_ns: list[int] = []
+    for pa in processed_actions:
+        try:
+            hh, mm, rest = pa.timestamp.split(":")
+            ss, mmm = rest.split(".")
+            rel_ns = (int(hh) * 3600 + int(mm) * 60 + int(ss)) * 1_000_000_000 + int(
+                mmm
+            ) * 1_000_000
+            processed_ts_ns.append(base_ts_ns + rel_ns)
+        except Exception:
+            processed_ts_ns.append(base_ts_ns)
+
+    def find_before_index(ts_ns: int) -> int:
+        idx = 0
+        lo, hi = 0, len(framebuffer_indices) - 1
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            if step_timestamps[framebuffer_indices[mid]] <= ts_ns:
+                idx = mid
+                lo = mid + 1
+            else:
+                hi = mid - 1
+        return framebuffer_indices[idx]
+
+    def find_after_index(ts_ns: int) -> int:
+        lo, hi = 0, len(framebuffer_indices) - 1
+        ans = framebuffer_indices[-1]
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            if step_timestamps[framebuffer_indices[mid]] > ts_ns:
+                ans = framebuffer_indices[mid]
+                hi = mid - 1
+            else:
+                lo = mid + 1
+        return ans
+
+    # Load reenact_execution.json if present, else execution.json
+    reenact_trace = output_dir / "reenact_execution.json"
+    execution_trace = output_dir / "execution.json"
+    if reenact_trace.exists():
+        execution_path = reenact_trace
+        is_reenact = True
+    elif execution_trace.exists():
+        execution_path = execution_trace
+        is_reenact = False
+    else:
+        _log.warning(
+            "No execution trace found (expected reenact_execution.json or execution.json) under %s",
+            output_dir,
+        )
+        return
+    with open(execution_path, "rt", encoding="utf-8") as f:
+        execution_actions: list[dict[str, Any]] = json.load(f)
+
+    images_dir = output_dir / "action_screenshots"
+    images_dir.mkdir(parents=True, exist_ok=True)
+
+    json_filename = "reenact_action_screenshots.json" if is_reenact else "action_screenshots.json"
+    html_filename = "reenact_action_screenshots.html" if is_reenact else "action_screenshots.html"
+    mapping_path = output_dir / json_filename
+
+    # Plan frames and JSON records
+    index_to_paths: dict[int, list[Path]] = {}
+    records: list[dict[str, Any]] = []
+
+    processed_idx = 0
+    last_ts_for_wait = base_ts_ns
+
+    for i, action in enumerate(execution_actions, start=1):
+        action_name = str(action.get("action", "")).strip()
+
+        if action_name == "wait":
+            try:
+                duration_s = float(action.get("params", {}).get("duration", 0.0))
+            except Exception:
+                duration_s = 0.0
+            start_ts_ns = last_ts_for_wait
+            end_ts_ns = start_ts_ns + int(duration_s * 1_000_000_000)
+            before_idx = find_before_index(start_ts_ns)
+            after_idx = find_after_index(end_ts_ns + _MIN_AFTER_DELAY_NS + _WAIT_AFTER_BUFFER_NS)
+            last_ts_for_wait = step_timestamps[after_idx]
+        elif action_name == "finish":
+            # Only capture a before frame for finish, no after
+            start_ts_ns = last_ts_for_wait
+            before_idx = find_before_index(start_ts_ns)
+            after_idx = None
+        else:
+            if processed_idx >= len(processed_ts_ns):
+                start_ts_ns = last_ts_for_wait
+            else:
+                start_ts_ns = processed_ts_ns[processed_idx]
+                processed_idx += 1
+            before_idx = find_before_index(start_ts_ns)
+            after_idx = find_after_index(start_ts_ns + _MIN_AFTER_DELAY_NS)
+            last_ts_for_wait = step_timestamps[after_idx]
+
+        before_ts_ns = step_timestamps[before_idx]
+        after_ts_ns = step_timestamps[after_idx] if after_idx is not None else None
+
+        ext = "jpg" if image_format.upper() == "JPEG" else image_format.lower()
+        before_name = f"{i:04d}_before.{ext}"
+        before_path = images_dir / before_name
+        index_to_paths.setdefault(before_idx, []).append(before_path)
+        after_path: Path | None = None
+        if after_idx is not None:
+            after_name = f"{i:04d}_after.{ext}"
+            after_path = images_dir / after_name
+            index_to_paths.setdefault(after_idx, []).append(after_path)
+
+        record: dict[str, Any] = {
+            "index": i,
+            "action": action.get("action"),
+            "params": action.get("params", {}),
+            "task_marked_complete": bool(action.get("task_marked_complete")),
+            "timestamp_ns": before_ts_ns,
+            "relative": _format_relative_timestamp_from_base(base_ts_ns, before_ts_ns),
+            "before": {
+                "path": str(before_path.relative_to(output_dir)),
+            },
+        }
+        if after_path is not None and after_ts_ns is not None:
+            record["after"] = {
+                "path": str(after_path.relative_to(output_dir)),
+            }
+        records.append(record)
+
+    # Single pass to save all planned frames
+    with RfbReplayStreams.from_files(recording_path) as streams_c:
+        rp_c = RfbReplayParser(streams_c)
+        for i, st in enumerate(rp_c.iter_steps(continuous=True)):
+            targets = index_to_paths.get(i)
+            if not targets:
+                continue
+            img = st.screen
+            if max_output_width is not None and img.width > max_output_width:
+                ratio = max_output_width / img.width
+                img = img.resize((max_output_width, max(1, int(img.height * ratio))))
+            for out_path in targets:
+                img.save(
+                    out_path,
+                    format=None if image_format.upper() == "PNG" else image_format,
+                    quality=image_quality,
+                )
+
+    with open(mapping_path, "wt", encoding="utf-8") as out_json:
+        json.dump(records, out_json, ensure_ascii=False, indent=2)
+
+    try:
+        _write_action_screenshots_html(
+            output_dir=output_dir, mapping=records, output_html_filename=html_filename
+        )
+    except Exception as e:
+        _log.error("Failed to write action_screenshots.html: %s", e)
+
+
+def _write_action_screenshots_html(
+    output_dir: Path,
+    mapping: list[dict[str, Any]],
+    output_html_filename: str = "action_screenshots.html",
+) -> None:
+    html_path = output_dir / output_html_filename
+    template_path = Path(__file__).parent / "action_screenshots_template.html"
+    with open(template_path, "rt", encoding="utf-8") as tpl:
+        template = tpl.read()
+    data_json = json.dumps(mapping, ensure_ascii=False)
+    html = template.replace("__DATA_JSON__", data_json)
+    with open(html_path, "wt", encoding="utf-8") as out:
+        out.write(html)
 
 
 _log = logging.getLogger(__name__)

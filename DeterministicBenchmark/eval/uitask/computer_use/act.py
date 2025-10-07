@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import inspect
 import json
+import time
 import traceback
 from abc import abstractmethod
 from base64 import b64encode
@@ -16,6 +17,7 @@ from PIL.Image import Image
 from playwright.sync_api import sync_playwright
 
 from uitask.models.display import Position
+from uitask.models.pointer import MouseButton, MouseClickType, ScrollDirection
 from uitask.tools import (
     MouseClickAction,
     MouseClickTool,
@@ -82,6 +84,7 @@ class Agent:
     _recording_started: bool = field(default=False, init=False, repr=False)
     _vnc_client: VncClient = field(init=False, repr=False)
     _record: bool = field(init=False, repr=False)
+    _reenact: bool = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -180,17 +183,16 @@ class Agent:
         """Handle a single action. Should return True if the agent is done performing the task."""
         ...
 
-    def run(self, max_steps: int, record: bool) -> None:
+    def run(self, max_steps: int) -> None:
         """
-        1. Starts recording if enabled
+        1. Starts recording
         2. Iterates over `act` for a number of steps
         3. Determines if the task succeeded and if the agent stopped after completing the task
-        4. Stops recording if enabled
+        4. Stops recording
         """
-        if record:
-            self.start_recording()
+        self.start_recording()
         try:
-            for iteration in range(max_steps):
+            for _ in range(max_steps):
                 task_complete = self.act()
                 if task_complete:
                     break
@@ -209,6 +211,112 @@ class Agent:
             print(f"\n{err_msg}")
 
             # Write full traceback to file for debugging
+            full_trace = traceback.format_exc()
+            self._stop_vnc_client()
+            with open(self.output_dir / ERROR_FILE, "w") as f:
+                f.write(err_msg + "\n\n" + full_trace)
+        finally:
+            self.stop_recording()
+
+    def reenact(self, trace_path: Path, step_wait_time: float = 5.0) -> None:
+        """Re-enact actions from an execution.json/partial_execution.json and record.
+
+        Args:
+            trace_path: Path to execution.json or partial_execution.json
+            step_wait_time: Seconds to sleep between steps (in addition to explicit waits)
+        """
+        if step_wait_time <= 0:
+            step_wait_time = 0.0
+
+        is_partial = trace_path.name == PARTIAL_EXECUTION_FILE
+        self._reenact = True
+        self.start_recording()
+        try:
+            with open(trace_path, "rt", encoding="utf-8") as f:
+                actions: list[dict[str, Any]] = json.load(f)
+
+            for entry in actions:
+                name = str(entry.get("action", "")).strip()
+                params = entry.get("params", {}) or {}
+
+                match name:
+                    case "mouse_move":
+                        pos = params.get("position") or {}
+                        self.mouse_move(Position(x=int(pos.get("x", 0)), y=int(pos.get("y", 0))))
+
+                    case "mouse_click":
+                        a = params.get("action", {}) or params
+                        pos = a.get("position") or {}
+                        self.mouse_click(
+                            MouseClickAction(
+                                button=MouseButton(a.get("button", "left")),
+                                position=Position(x=int(pos.get("x", 0)), y=int(pos.get("y", 0))),
+                                click_type=MouseClickType(a.get("click_type", "single")),
+                            )
+                        )
+
+                    case "mouse_drag":
+                        a = params.get("action", {}) or params
+                        start = a.get("start") or {}
+                        end = a.get("end") or {}
+                        self.mouse_drag(
+                            MouseDragAction(
+                                button=MouseButton(a.get("button", "left")),
+                                start=Position(x=int(start.get("x", 0)), y=int(start.get("y", 0))),
+                                end=Position(x=int(end.get("x", 0)), y=int(end.get("y", 0))),
+                            )
+                        )
+
+                    case "mouse_scroll":
+                        a = params.get("action", {}) or params
+                        pos = a.get("position") or {}
+                        self.mouse_scroll(
+                            ScrollAction(
+                                position=Position(x=int(pos.get("x", 0)), y=int(pos.get("y", 0))),
+                                direction=ScrollDirection(a.get("direction", "down")),
+                                repeat=int(a.get("num_repeats", a.get("repeat", 1))),
+                            )
+                        )
+
+                    case "press_keys":
+                        keys = params.get("keys", [])
+                        self.press_keys(list(keys))
+
+                    case "type_text":
+                        self.type_text(str(params.get("text", "")))
+
+                    case "page_navigation":
+                        direction = str(params.get("direction", "back"))
+                        if direction != "back" and direction != "forward":
+                            direction = "back"
+
+                        self.page_navigation(direction)
+
+                    case "wait":
+                        duration = float(params.get("duration", params.get("seconds", 0.0)))
+                        self.wait(duration)
+
+                    case "finish":
+                        self.finish(params if isinstance(params, dict) else None)
+                        break
+
+                    case _:
+                        continue
+
+                time.sleep(step_wait_time)
+
+            output_file = (
+                self.output_dir
+                / f"reenact_{PARTIAL_EXECUTION_FILE if is_partial else EXECUTION_FILE}"
+            )
+            with open(output_file, "w") as f:
+                json.dump(self._action_history, f)
+        except (Exception, KeyboardInterrupt) as e:
+            err_msg = f"Error during agent reenact ({type(e).__name__})"
+            exception_msg = str(e).strip()
+            if exception_msg:
+                err_msg += f": {exception_msg}"
+            print(f"\n{err_msg}")
             full_trace = traceback.format_exc()
             self._stop_vnc_client()
             with open(self.output_dir / ERROR_FILE, "w") as f:
@@ -249,8 +357,9 @@ class Agent:
         record: dict[str, Any] = {"action": action, "params": params}
         record["task_marked_complete"] = self.check_task_success()
         self._action_history.append(record)
-        with open(self.output_dir / PARTIAL_EXECUTION_FILE, "w") as f:
-            json.dump(self._action_history, f)
+        if not self._reenact:
+            with open(self.output_dir / PARTIAL_EXECUTION_FILE, "w") as f:
+                json.dump(self._action_history, f)
 
     @staticmethod
     def image_to_b64(img: Image) -> str:

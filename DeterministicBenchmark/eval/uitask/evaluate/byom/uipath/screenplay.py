@@ -18,7 +18,6 @@ def evaluate(
     resolution: list[str] = typer.Option(
         default=["1920_1080"], help="Resolutions to run in format WIDTH_HEIGHT"
     ),
-    record: bool = typer.Option(default=False, help="Record the actions and persist webp"),
     rerun: bool = typer.Option(
         default=False, help="Rerun the task even if it has been already executed"
     ),
@@ -37,6 +36,8 @@ def evaluate(
         default=[],
         help="Filter the tasks to run",
     ),
+    reenact: bool = typer.Option(False, help="Run reenactment instead of acting live"),
+    step_wait_time: float = typer.Option(5.0, help="Seconds to wait between reenact steps"),
 ) -> None:
     output_dir = output_dir / model
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -62,7 +63,6 @@ def evaluate(
         tasks_file=task_file,
         output_dir=output_dir,
         resolutions=resolutions,
-        record=record,
         rerun=rerun,
         max_steps=max_steps,
         num_workers=num_workers,
@@ -71,6 +71,8 @@ def evaluate(
         job_id=model,
         build_image=build_image,
         task_filters=set(task_filter) if task_filter else None,
+        reenact=reenact,
+        step_wait_time=step_wait_time,
     )
 
 

@@ -1,0 +1,4 @@
+patient_id	full_name	test_category	test_name	result_value	units	normal_range	collection_date	lab_tech	patient_phone
+P12345	Sarah Johnson	Hematology	Complete Blood Count	4.5	10^6/μL	4.0-11.0	2024-01-15	MT-001	2065551234
+P67890	Michael Chen	Chemistry	Lipid Panel	185	mg/dL	<200	2024-01-16	MT-002	4155559876
+P24681	Elena Rodriguez	Immunology	C-Reactive Protein	2.1	mg/L	<3.0	2024-01-17	MT-003	7135552468

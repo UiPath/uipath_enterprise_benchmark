@@ -13,7 +13,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
 from struct import Struct
-from typing import IO, Any, ClassVar, Final, Literal, Self, TypeVar
+from typing import IO, Any, ClassVar, Literal, Self, TypeVar
 
 from PIL.Image import Image
 
@@ -30,8 +30,6 @@ from ..rfb_messages import (
     _unpack_stream,
     parse_client_message,
 )
-
-WEBP_FILENAME: Final[str] = "video.webp"
 
 
 @dataclass(frozen=True)

@@ -1,0 +1,4 @@
+ticket_ref	customer_id	issue_summary	priority_level	reported_by	report_date	category	estimated_hours	affected_systems
+TKT-4729	CORP-8851	Authentication server timeout errors	Critical	Jennifer Martinez	2024-01-20	Network Infrastructure	6	Login System, VPN
+TKT-4730	CORP-2194	Database query performance degradation	High	Michael Rodriguez	2024-01-21	Database Systems	12	Customer DB, Reporting
+TKT-4731	CORP-5573	Mobile app push notifications failing	Medium	Sarah Thompson	2024-01-22	Mobile Applications	8	iOS App, Notification Service

@@ -7,11 +7,8 @@ from typing import Any
 
 import uvicorn
 from fastapi import APIRouter, FastAPI, WebSocket
-from fastapi.concurrency import run_in_threadpool
 
 from ..ws import VncRecorder
-from .process_rfb import export_replay_as_webp
-from .replay import RfbReplayStreams
 
 
 @dataclass(frozen=True)
@@ -33,11 +30,7 @@ class VncService:
             recording_path=recording_path,
         )
 
-        await run_in_threadpool(self._process_recording, recording_path)
-
-    def _process_recording(self, recording_path: Path) -> None:
-        with RfbReplayStreams.from_files(recording_path) as streams:
-            export_replay_as_webp(streams, recording_path)
+        return
 
 
 @dataclass(frozen=True)

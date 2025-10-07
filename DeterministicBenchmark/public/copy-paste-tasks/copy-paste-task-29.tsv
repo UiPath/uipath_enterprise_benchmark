@@ -1,0 +1,4 @@
+po_number	supplier_name	item_description	quantity_ordered	unit_price	delivery_date	inspector_name	condition_notes	item_weight
+PO-2024-157	Global Supply Solutions	Steel Brackets 5mm thickness	750	3.25	2024-01-25	Michael Johnson	Good condition, minor scratches	0.5 kg
+PO-2024-158	TechFlow Components	USB-C Cables 2m length	1200	4.75	2024-01-26	Sarah Wilson	Excellent quality, all tested	0.3 kg
+PO-2024-159	Precision Industrial	Safety Helmets Class E rated	85	67.50	2024-01-27	Carlos Rodriguez	One unit damaged in shipping	1.2 kg

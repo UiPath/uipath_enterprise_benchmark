@@ -1,0 +1,4 @@
+patient_number	patient_name	doctor_name	appointment_datetime	visit_reason	insurance_type	phone	duration_minutes
+98765	Emma Williams	Dr. Rebecca Martinez	2024-02-10 14:30	Annual Physical	BlueCross PPO	5553214567	45
+54321	David Thompson	Dr. James Patterson	2024-02-11 09:30	Follow-up	Medicare Advantage	4255558901	30
+76543	Carlos Mendoza	Dr. Priya Sharma	2024-02-12 16:30	Specialist Consultation	United Healthcare	7135551234	60

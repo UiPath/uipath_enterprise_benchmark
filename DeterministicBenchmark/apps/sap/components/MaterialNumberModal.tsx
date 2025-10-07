@@ -192,7 +192,7 @@ const MaterialNumberModal: React.FC<MaterialNumberModalProps> = ({
             <div>Material Description:</div>
             <div>Plant:</div>
             <div>BOM Usage:</div>
-            <div>Material:</div>
+            <div>Material Number:</div>
             <div>Alternative BOM:</div>
             <div>Language:</div>
           </div>
@@ -231,7 +231,7 @@ const MaterialNumberModal: React.FC<MaterialNumberModalProps> = ({
               className="border border-gray-400 px-2 py-1 text-sm bg-white" 
             />
             <FilterInput
-              fieldName="Material"
+              fieldName="Material Number"
               value={materialFilter && 
                 materialFilter.length === 1 && 
                 materialFilter[0].operator === 'equal to' ? 
@@ -315,7 +315,7 @@ const MaterialNumberModal: React.FC<MaterialNumberModalProps> = ({
                 <Menu className="w-3 h-3" />
               </div>
               <div>BOM Usage</div>
-              <div>Material</div>
+              <div>Material Number</div>
               <div>Alternative BOM</div>
               <div>Language</div>
             </div>

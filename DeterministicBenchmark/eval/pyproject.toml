@@ -16,12 +16,14 @@ dependencies = [
     "pydantic>=2.7.0",
     "typer>=0.17.3",
     "dask[distributed]>=2025.9.1",
+    "tqdm>=4.67.1",
 ]
 
 [project.scripts]
-uitask-container = "uitask.container:app"
+uitask-container = "uitask.environment.container:app"
 eval-uipath-screenplay = "uitask.evaluate.byom.uipath.screenplay:app"
 score = "uitask.evaluate.score:app"
+process-recording = "uitask.evaluate.process_recording:app"
 
 [build-system]
 requires = ["uv_build>=0.7.19,<0.8.0"]

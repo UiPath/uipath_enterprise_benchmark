@@ -1094,7 +1094,7 @@
   {
     "web_name": "sap-stock",
     "id": "sap-stock--5",
-    "ques": "Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find materials where the material description is between B and G (alphabetically) AND the material code contains \"FG\". Format JSON response as {\"materials\": [list of material codes]}, and use the Submit Results button to send it.",
+    "ques": "Open the Stock Overview (MMBE) form (Logistics -> Materials Management -> Inventory Management). Use the \"Search for material\" button (the icon next to the material input) to open the Material Number modal. In the modal, use the filters to find materials where the material description is between B and G (alphabetically) AND the Material Number contains \"FG\". Format JSON response as {\"materials\": [list of material codes]}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/5?mode=test"
   },
@@ -1370,6 +1370,76 @@
     "ques": "Review document changes using the diff viewer to ensure compliance with style guide rules. Compare Draft 1 (original) with Draft 2 (revised) by examining the highlighted differences. Accept changes that follow the rules: acronyms must be explained on first use, dates must be in yyyy-mm-dd format, and no PII (personal names/information). Reject changes that violate these rules. Click on each diff to review and use Accept/Reject buttons to make decisions.",
     "ux_hint": "Compare document drafts side-by-side, click on highlighted diffs to review, accept good changes and reject bad changes based on style guide rules (acronyms, dates, no PII)",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/20?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--21",
+    "ques": "Transfer medical lab test results from the TSV file located in Documents/copy-paste-task-21.tsv into the clinical data management system. WORKFLOW: Open the file Documents/copy-paste-task-21.tsv using LibreOffice Calc. For each TSV row, look at the test_category column to determine which tab to use (Hematology/Chemistry/Immunology), then click that tab and add a table row. The test_name column corresponds to the \"Test Name\" dropdown in the selected tab. Navigate between test category tabs based on each row's test_category. Add table rows for each result, use popup name picker to select patients, and popup calculator for range validation. Transfer 3 lab results total across the appropriate category tabs. Use the dropdown menus for test names, number inputs for results, and validation indicators for ranges.",
+    "ux_hint": "Navigate tabs, add table rows, use name picker popup, range calculator popup, dropdown menus, number spinners, validation indicators",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/21?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--22",
+    "ques": "Use the TSV file located in Documents/copy-paste-task-22.tsv to fill in patient details. Open the file Documents/copy-paste-task-22.tsv using LibreOffice Calc and transfer the data for each patient. Select a provider, then click an available time slot on the calendar to schedule the appointment. Schedule all three appointments.",
+    "ux_hint": "The user will manually enter data into a form, select a provider from a dropdown, and then click on a calendar grid to place the appointment. No drag-and-drop is involved.",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/22?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--23",
+    "ques": "Open the TSV file Documents/copy-paste-task-23.tsv using LibreOffice Calc and transfer business information through a multi-step wizard with progress indicators. Process all 3 companies from the TSV file through the complete wizard flow: Step 1 - Company info with auto-complete, Step 2 - Contact details with validation, Step 3 - Address via popup lookup, Step 4 - Industry via image card selection, Step 5 - Revenue/size via sliders. Navigate using Tab/Shift+Tab for efficient field entry.",
+    "ux_hint": "Multi-step wizard with progress bar, breadcrumb navigation, auto-complete fields, validation badges, address lookup popup, industry image cards, revenue/employee sliders",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/23?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--24",
+    "ques": "Open the TSV file Documents/copy-paste-task-24.tsv using LibreOffice Calc and transfer IT service ticket information into the Kanban-style ticket system. Create tickets by entering all required fields from the TSV file: ticket reference, customer ID, issue summary, reported by, report date, estimated hours. Use the priority color buttons to select priority level (Critical/High/Medium/Low). Select the category from tag cloud. Select affected systems by clicking multiple system tags (Ctrl+click for multi-select). Use the \"Trigger Auto-Assignment\" button to automatically assign tickets based on priority. Use \"Calculate SLA\" to set SLA timer. After creating each ticket, it will appear in the \"Open\" column of the Kanban board. Create all 3 tickets with exact data matching the TSV source.",
+    "ux_hint": "Fill ticket form fields from TSV data, click priority color buttons, click category tags, multi-select system tags, trigger auto-assignment workflow, calculate SLA timer, create tickets",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/24?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--25",
+    "ques": "Open the TSV file Documents/copy-paste-task-25.tsv using LibreOffice Calc and transfer book information into the library cataloging system. For each book: 1) Scan or enter the ISBN barcode number in the scanner field, 2) Navigate the Dewey decimal classification tree on the left to find and select the appropriate subject classification (click arrows to expand, click labels to select, or double-click labels to expand), 3) Fill in book details from TSV: Title, Author, Publication Year, Publisher, Price, 4) Manually enter the Location Code from TSV (e.g., PSY-150.1), 5) Select book condition from dropdown, 6) Click \"Add to Catalog\" to complete cataloging. The Subject field auto-fills when you click a classification in the Dewey tree. The visual shelf picker on the right is a reference tool showing physical shelf locations. Catalog all 3 books with exact data matching the TSV source.",
+    "ux_hint": "Navigate Dewey tree by clicking arrows/labels (or double-click to expand), scan/enter ISBN, fill form fields manually from TSV including location code, select condition dropdown, click Add to Catalog button",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/25?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--26",
+    "ques": "Open the TSV file Documents/copy-paste-task-26.tsv using LibreOffice Calc and enroll 3 students into the education system. For each student: enter student name, date of birth, parent/guardian name, contact email, and home address from the TSV file. Drag a program card from the available programs into the program selection drop zone. Select grade level from dropdown, enter start date, and select special accommodations from checkbox group. Click \"Calculate Age\" button to verify date of birth. Double-click program cards to view curriculum details. Complete enrollment by clicking \"Enroll Student\" button for all 3 students.",
+    "ux_hint": "Fill student information fields, drag program cards to selection zone, use age calculator, select grade and date, check special accommodations boxes, enroll students",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/26?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--27",
+    "ques": "Open the TSV file Documents/copy-paste-task-27.tsv using LibreOffice Calc and submit 3 tenant applications. For each applicant: enter applicant name, phone contact, current address, select employment status from dropdown, enter monthly income from the TSV file, and use the income calculator to verify income. Enter rental history, desired move date, and reference contact information. Click the reference verification button to verify references. Upload required documents by clicking document type buttons in the upload center (Pay Stub, Bank Statement, Tax Return, Business License, Contract Agreement, or References). The credit score visualization will update automatically based on income and rental history. After completing all fields, document uploads, and verifications, click \"Submit Application\" to submit each tenant application.",
+    "ux_hint": "Fill applicant information fields, use income calculator widget, verify references with popup, upload documents to designated zones, view credit score visualization, submit applications",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/27?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--28",
+    "ques": "Open the TSV file Documents/copy-paste-task-28.tsv using LibreOffice Calc and transfer all loan data into the financial system. For each of the 3 applicants, enter their personal information (full name, SSN, annual income, employment type, monthly obligations, credit score) from the TSV file, set the loan amount using the slider or numeric input, select loan purpose from dropdown, and enter collateral description. Complete all four loan calculations (monthly payment, DTI ratio, risk assessment, and payment schedule) before submitting the application. Process all 3 loan applications from the TSV file.",
+    "ux_hint": "Single-column form layout with personal info fields at top, loan amount controls (slider + numeric input side-by-side), loan purpose dropdown, collateral description field, followed by four calculator widget sections (Loan Calculator, DTI Calculator, Risk Assessment, Payment Schedule) with individual calculate buttons. Each calculator displays results after button click. Submit button at bottom. Submitted applications shown below with all details.",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/28?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--29",
+    "ques": "Open the TSV file Documents/copy-paste-task-29.tsv using LibreOffice Calc and transfer inventory data into the warehouse receiving terminal system. Use the barcode scanner to enter PO numbers, fill all required fields including item details, quantities, inspector information, and condition assessments from the TSV file. Capture condition photos for documentation. Process all 3 inventory items from the TSV file.",
+    "ux_hint": "Scan/enter barcode for PO number, fill form fields with TSV data, use spinner controls for quantities and prices, select condition status with radio buttons, capture photos, add items to receiving table",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/29?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--30",
+    "ques": "Open the TSV file Documents/copy-paste-task-30.tsv using LibreOffice Calc and transfer all contract information into the contract management system. For each contract, enter the contract reference, parties, type, dates, value, and renewal terms from the TSV file. Select the appropriate key clauses from the clause library. Build the timeline visualization for the contract period and set a renewal reminder. Complete all 3 contracts.",
+    "ux_hint": "Enter contract data manually from TSV file, select clauses from the library, build timeline, and set reminders for each contract",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/30?mode=test"
   },
   {
     "web_name": "business-process-tasks",

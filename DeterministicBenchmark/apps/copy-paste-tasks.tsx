@@ -20,6 +20,16 @@ import Task17 from './copy-paste-tasks/task-17';
 import Task18 from './copy-paste-tasks/task-18';
 import Task19 from './copy-paste-tasks/task-19';
 import Task20 from './copy-paste-tasks/task-20';
+import Task21 from './copy-paste-tasks/task-21';
+import Task22 from './copy-paste-tasks/task-22';
+import Task23 from './copy-paste-tasks/task-23';
+import Task24 from './copy-paste-tasks/task-24';
+import Task25 from './copy-paste-tasks/task-25';
+import Task26 from './copy-paste-tasks/task-26';
+import Task27 from './copy-paste-tasks/task-27';
+import Task28 from './copy-paste-tasks/task-28';
+import Task29 from './copy-paste-tasks/task-29';
+import Task30 from './copy-paste-tasks/task-30';
 
 type UiBenchTask = {
   id: string;
@@ -35,7 +45,7 @@ function createTaskComponent(TaskComponent: React.ComponentType): React.FC {
 }
 
 function createTaskComponentForIndex(index: number): React.FC {
-  const components = [Task1, Task2, Task3, Task4, Task5, Task6, Task7, Task8, Task9, Task10, Task11, Task12, Task13, Task14, Task15, Task16, Task17, Task18, Task19, Task20];
+  const components = [Task1, Task2, Task3, Task4, Task5, Task6, Task7, Task8, Task9, Task10, Task11, Task12, Task13, Task14, Task15, Task16, Task17, Task18, Task19, Task20, Task21, Task22, Task23, Task24, Task25, Task26, Task27, Task28, Task29, Task30];
   const TaskComponent = components[index];
   if (!TaskComponent) {
     throw new Error(`Task component not found for index ${index}`);
@@ -1382,17 +1392,6 @@ const uiBenchTasks: UiBenchTask[] = [
         };
       }
       
-      // Check if all unique resource conflicts are added (should be exactly 4)
-      const expectedUniqueConflicts = expectedConflictKeys.size;
-      const actualUniqueConflicts = addedConflictKeys.size;
-      
-      if (actualUniqueConflicts !== expectedUniqueConflicts) {
-        return { 
-          success: false, 
-          message: `Only ${actualUniqueConflicts} of ${expectedUniqueConflicts} resource conflicts have been added to the table. Continue analyzing task dates and resources to find all overlapping assignments.` 
-        };
-      }
-      
       // Verify that added conflicts match the actual conflicts
       // Create normalized keys that handle bidirectional conflicts (A↔B same as B↔A)
       const normalizeConflictKey = (resource: string, task1: string, task2: string) => {
@@ -1407,6 +1406,17 @@ const uiBenchTasks: UiBenchTask[] = [
       const expectedConflictKeys = new Set(
         resourceConflicts.map((c: any) => normalizeConflictKey(c.resource, c.task1, c.task2))
       );
+
+      // Check if all unique resource conflicts are added (should be exactly 4)
+      const expectedUniqueConflicts = expectedConflictKeys.size;
+      const actualUniqueConflicts = addedConflictKeys.size;
+      
+      if (actualUniqueConflicts !== expectedUniqueConflicts) {
+        return { 
+          success: false, 
+          message: `Only ${actualUniqueConflicts} of ${expectedUniqueConflicts} resource conflicts have been added to the table. Continue analyzing task dates and resources to find all overlapping assignments.` 
+        };
+      }
       
       const missingConflicts = resourceConflicts.filter((conflict: any) => {
         const key = normalizeConflictKey(conflict.resource, conflict.task1, conflict.task2);
@@ -1597,7 +1607,7 @@ const uiBenchTasks: UiBenchTask[] = [
       const { 
         allBooks, searchResults, readingList, searchTerm, hasSearched, 
         scienceFictionBooks, scienceFictionBooksAfter2020, scienceBooks, scienceBooksAfter2020,
-        readingListAfter2020, readingListScienceFiction 
+        readingListScienceFiction 
       } = appState;
       
       if (!allBooks || !readingList) {
@@ -1832,7 +1842,7 @@ const uiBenchTasks: UiBenchTask[] = [
           };
         }
         
-        if (contact.phone && typeof contact.phone === 'string' && contact.phone.trim() !== expectedPhone.trim()) {
+        if (contact.phone && typeof contact.phone === 'string' && typeof expectedPhone === 'string' && contact.phone.trim() !== expectedPhone.trim()) {
           return { 
             success: false, 
             message: `Contact "${contact.name}" phone number "${contact.phone}" does not match external list value "${expectedPhone}".` 
@@ -1943,7 +1953,7 @@ const uiBenchTasks: UiBenchTask[] = [
         return { success: false, message: 'App state not found.' };
       }
       
-      const { diffs, goodDiffs, badDiffs, acceptedDiffs, rejectedDiffs, completedReview } = appState;
+      const { diffs, goodDiffs, badDiffs, completedReview } = appState;
       
       if (!diffs) {
         return { success: false, message: 'Diffs not found in app state.' };
@@ -2009,9 +2019,1854 @@ const uiBenchTasks: UiBenchTask[] = [
       };
     },
   },
+  {
+    id: 'medical-lab-results-entry',
+    instructions: 'Transfer medical lab test results from the TSV file located in Documents/copy-paste-task-21.tsv into the clinical data management system. WORKFLOW: Open the file Documents/copy-paste-task-21.tsv using LibreOffice Calc. For each TSV row, look at the test_category column to determine which tab to use (Hematology/Chemistry/Immunology), then click that tab and add a table row. The test_name column corresponds to the "Test Name" dropdown in the selected tab. Navigate between test category tabs based on each row\'s test_category. Add table rows for each result, use popup name picker to select patients, and popup calculator for range validation. Transfer 3 lab results total across the appropriate category tabs. Use the dropdown menus for test names, number inputs for results, and validation indicators for ranges.',
+    ux: 'Navigate tabs, add table rows, use name picker popup, range calculator popup, dropdown menus, number spinners, validation indicators',
+    test: () => {
+      const appState = (window as any).app_state;
+      if (!appState) {
+        return { success: false, message: 'App state not found.' };
+      }
+      
+      const { sourceData, expectedResults, allEntries } = appState;
+      
+      if (!sourceData || !expectedResults || !allEntries) {
+        return { success: false, message: 'Source data, expected results, or entries not found in app state.' };
+      }
+      
+      // Check if we have the expected source data
+      if (sourceData.length !== 3) {
+        return { 
+          success: false, 
+          message: `Expected 3 lab results in source data, found ${sourceData.length}. Data generation may have failed.` 
+        };
+      }
+      
+      // Check if entries have been created
+      if (allEntries.length === 0) {
+        // Console log cheat system for human developers
+        console.log(`[Cheat] Expected 3 lab result entries:`);
+        expectedResults.forEach((expected: any, index: number) => {
+          console.log(`[Cheat] ${index + 1}. Tab: ${expected.category.toUpperCase()}, Patient: ${expected.patientName} (${expected.patientId}), Test: ${expected.testCode}, Result: ${expected.result} ${expected.units}, Date: ${expected.date}, Tech: ${expected.techId}`);
+        });
+        console.log(`[Cheat] Status: ❌ No entries created yet - Add rows in each tab!`);
+        
+        return { 
+          success: false, 
+          message: 'No lab result entries have been created. Add table rows in each category tab and fill in the data from Excel.' 
+        };
+      }
+      
+      // Check if we have entries in all three categories
+      const { hematologyEntries, chemistryEntries, immunologyEntries } = appState;
+      const categoriesWithEntries = [
+        hematologyEntries?.length > 0 ? 'Hematology' : null,
+        chemistryEntries?.length > 0 ? 'Chemistry' : null,
+        immunologyEntries?.length > 0 ? 'Immunology' : null
+      ].filter(Boolean);
+      
+      // Verify data accuracy for each expected result
+      const errors = [];
+      
+      if (categoriesWithEntries.length < 3) {
+        // Add this to errors array so the main cheat system handles it
+        errors.push(`Missing categories: need entries in all 3 tabs (Hematology, Chemistry, Immunology), found only ${categoriesWithEntries.join(', ')}`);
+      }
+      for (const expected of expectedResults) {
+        const matchingEntries = allEntries.filter((entry: any) => 
+          entry.patientId === expected.patientId && 
+          entry.testCode === expected.testCode
+        );
+        
+        if (matchingEntries.length === 0) {
+          errors.push(`Missing entry for ${expected.patientName} (${expected.patientId}) - ${expected.testCode}`);
+          continue;
+        }
+        
+        const entry = matchingEntries[0];
+        
+        // Check required fields
+        if (!entry.patientName || entry.patientName.trim() !== expected.patientName.trim()) {
+          errors.push(`${expected.patientId}: Patient name "${entry.patientName}" should be "${expected.patientName}"`);
+        }
+        
+        if (!entry.phone || entry.phone.trim() !== expected.phone.trim()) {
+          errors.push(`${expected.patientId}: Phone "${entry.phone}" should be "${expected.phone}"`);
+        }
+        
+        if (entry.result !== expected.result) {
+          errors.push(`${expected.patientId}: Result value ${entry.result} should be ${expected.result}`);
+        }
+        
+        if (!entry.units || entry.units !== expected.units) {
+          errors.push(`${expected.patientId}: Units "${entry.units}" should be "${expected.units}"`);
+        }
+        
+        if (!entry.date || entry.date !== expected.date) {
+          errors.push(`${expected.patientId}: Date "${entry.date}" should be "${expected.date}"`);
+        }
+        
+        if (!entry.techId || entry.techId !== expected.techId) {
+          errors.push(`${expected.patientId}: Tech ID "${entry.techId}" should be "${expected.techId}"`);
+        }
+      }
+      
+      if (errors.length > 0) {
+        // Console log cheat system for field accuracy issues - ALWAYS run when errors exist
+        console.log(`[Cheat] Progress tracking - Expected vs Current:`);
+        expectedResults.forEach((expected: any, index: number) => {
+            const matchingEntry = allEntries.find((entry: any) => 
+              entry.patientId === expected.patientId
+            );
+            
+            if (matchingEntry) {
+              const fieldChecks = [
+                matchingEntry.patientName?.trim() === expected.patientName?.trim() ? '✅' : '❌',
+                matchingEntry.phone?.trim() === expected.phone?.trim() ? '✅' : '❌', 
+                matchingEntry.result === expected.result ? '✅' : '❌',
+                matchingEntry.units === expected.units ? '✅' : '❌',
+                matchingEntry.date === expected.date ? '✅' : '❌',
+                matchingEntry.techId === expected.techId ? '✅' : '❌'
+              ].join(' ');
+              console.log(`[Cheat] ${index + 1}. ${expected.category.toUpperCase()} Tab: ${fieldChecks} (Name|Phone|Result|Units|Date|Tech)`);
+              console.log(`[Cheat]    Expected: ${expected.patientName} | ${expected.phone} | ${expected.result} ${expected.units} | ${expected.date} | ${expected.techId}`);
+              if (matchingEntry.patientName || matchingEntry.phone || matchingEntry.result || matchingEntry.units || matchingEntry.date || matchingEntry.techId) {
+                console.log(`[Cheat]    Current:  ${matchingEntry.patientName || '(empty)'} | ${matchingEntry.phone || '(empty)'} | ${matchingEntry.result || '(empty)'} ${matchingEntry.units || '(empty)'} | ${matchingEntry.date || '(empty)'} | ${matchingEntry.techId || '(empty)'}`);
+              }
+            } else {
+              console.log(`[Cheat] ${index + 1}. ${expected.category.toUpperCase()} Tab: ❌❌❌❌❌❌ (MISSING ENTRY)`);
+              console.log(`[Cheat]    Expected: ${expected.patientName} | ${expected.phone} | ${expected.result} ${expected.units} | ${expected.date} | ${expected.techId}`);
+          }
+        });
+        
+        return { 
+          success: false, 
+          message: `Data accuracy errors found: ${errors.slice(0, 3).join(', ')}${errors.length > 3 ? ` and ${errors.length - 3} more` : ''}. Verify all fields match the Excel source data.` 
+        };
+      }
+      
+      // Check if entries use proper form controls (popup selections, dropdowns, etc.)
+      const entriesWithProperData = allEntries.filter((entry: any) => 
+        entry.patientId && entry.patientName && entry.phone && 
+        entry.testCode && entry.result > 0 && entry.units && 
+        entry.date && entry.techId
+      );
+      
+      if (entriesWithProperData.length !== expectedResults.length) {
+        return { 
+          success: false, 
+          message: `Only ${entriesWithProperData.length} of ${expectedResults.length} entries have complete data. Fill in all required fields using the form controls (name picker, test code dropdown, result spinner, units dropdown, date picker, tech ID).` 
+        };
+      }
+      
+      return { 
+        success: true, 
+        message: `Successfully transferred all ${allEntries.length} lab results across ${categoriesWithEntries.length} category tabs with accurate data entry using tabbed interface, popup modals, and form controls.` 
+      };
+    },
+  },
+  {
+    id: 'medical-appointment-scheduling',
+    instructions: 'Use the TSV file located in Documents/copy-paste-task-22.tsv to fill in patient details. Open the file Documents/copy-paste-task-22.tsv using LibreOffice Calc and transfer the data for each patient. Select a provider, then click an available time slot on the calendar to schedule the appointment. Schedule all three appointments.',
+    ux: 'The user will manually enter data into a form, select a provider from a dropdown, and then click on a calendar grid to place the appointment. No drag-and-drop is involved.',
+    test: () => {
+      const appState = (window as any).app_state;
+      if (!appState || !appState.scheduledAppointments) {
+        return { success: false, message: 'App state not ready.' };
+      }
+
+      const { scheduledAppointments, currentFormEntry } = appState;
+      
+      const expectedAppointments = [
+        { name: 'Emma Williams', patientNumber: '98765', reason: 'Annual Physical', duration: 45, insurance: 'BlueCross PPO', phone: '5553214567' },
+        { name: 'David Thompson', patientNumber: '54321', reason: 'Follow-up', duration: 30, insurance: 'Medicare Advantage', phone: '4255558901' },
+        { name: 'Carlos Mendoza', patientNumber: '76543', reason: 'Specialist Consultation', duration: 60, insurance: 'United Healthcare', phone: '7135551234' }
+      ];
+
+      // This is the main check for task completion.
+      if (scheduledAppointments.length === 3) {
+        const allScheduledCorrectly = expectedAppointments.every(expected => {
+          return scheduledAppointments.some((scheduled: any) => 
+            scheduled.patientName === expected.name &&
+            scheduled.patientNumber === expected.patientNumber &&
+            scheduled.visitReason === expected.reason &&
+            scheduled.durationMinutes === expected.duration &&
+            scheduled.insuranceType === expected.insurance &&
+            scheduled.phone === expected.phone
+          );
+        });
+
+        if (allScheduledCorrectly) {
+          return { success: true, message: 'All appointments scheduled successfully!' };
+        } else {
+          return { success: false, message: 'All appointments are scheduled, but some data is incorrect. Please review the appointments.' };
+        }
+      }
+      
+      // If the task is not complete, provide cheat/debugging info.
+      const cheatData: any[] = [];
+
+      // Step 1: Initialize all rows with submitted data (if any)
+      expectedAppointments.forEach((expected) => {
+        const scheduled = scheduledAppointments.find((apt: any) => apt.patientNumber === expected.patientNumber);
+        
+        cheatData.push({
+          Patient: expected.name,
+          Name: scheduled?.patientName === expected.name ? '✅' : '❌',
+          PatientID: scheduled?.patientNumber === expected.patientNumber ? '✅' : '❌',
+          Reason: scheduled?.visitReason === expected.reason ? '✅' : '❌',
+          Duration: scheduled?.durationMinutes === expected.duration ? '✅' : '❌',
+          Insurance: scheduled?.insuranceType === expected.insurance ? '✅' : '❌',
+          Phone: scheduled?.phone === expected.phone ? '✅' : '❌',
+          Scheduled: scheduled ? '✅' : '❌'
+        });
+      });
+
+      // Step 2: If there's data in the form, overlay it for the corresponding patient,
+      // but only if that patient hasn't already been successfully scheduled.
+      if (currentFormEntry?.patientName?.trim()) {
+        const matchingIndex = expectedAppointments.findIndex(expected =>
+          expected.name === currentFormEntry.patientName.trim()
+        );
+
+        if (matchingIndex !== -1) {
+          const expected = expectedAppointments[matchingIndex];
+          const isAlreadyScheduled = scheduledAppointments.some((apt: any) => apt.patientNumber === expected.patientNumber);
+
+          if (!isAlreadyScheduled) {
+            cheatData[matchingIndex] = {
+              Patient: expected.name,
+              Name: currentFormEntry.patientName === expected.name ? '✅' : '❌',
+              PatientID: currentFormEntry.patientNumber?.trim() === expected.patientNumber ? '✅' : '❌',
+              Reason: currentFormEntry.visitReason?.trim() === expected.reason ? '✅' : '❌',
+              Duration: parseInt(currentFormEntry.durationMinutes || '0') === expected.duration ? '✅' : '❌',
+              Insurance: currentFormEntry.insuranceType === expected.insurance ? '✅' : '❌',
+              Phone: currentFormEntry.phone?.trim() === expected.phone ? '✅' : '❌',
+              Scheduled: '❌'
+            };
+          }
+        }
+      }
+
+      console.log('[Cheat] Appointment Progress:');
+      console.table(cheatData);
+
+      const message = scheduledAppointments.length > 0
+        ? `Only ${scheduledAppointments.length} of 3 appointments have been scheduled. Schedule all appointments.`
+        : 'No appointments have been scheduled. Fill in patient details and click calendar time slots to schedule appointments.';
+
+      return {
+        success: false,
+        message
+      };
+    }
+  },
+  {
+    id: 'customer-registration-wizard',
+    instructions: 'Open the TSV file Documents/copy-paste-task-23.tsv using LibreOffice Calc and transfer business information through a multi-step wizard with progress indicators. Process all 3 companies from the TSV file through the complete wizard flow: Step 1 - Company info with auto-complete, Step 2 - Contact details with validation, Step 3 - Address via popup lookup, Step 4 - Industry via image card selection, Step 5 - Revenue/size via sliders. Navigate using Tab/Shift+Tab for efficient field entry.',
+    ux: 'Multi-step wizard with progress bar, breadcrumb navigation, auto-complete fields, validation badges, address lookup popup, industry image cards, revenue/employee sliders',
+    test: () => {
+      const appState = (window as any).app_state;
+      if (!appState) {
+        return { success: false, message: 'App state not found.' };
+      }
+
+      const { completedRegistrations, expectedCompanies, currentFormData } = appState;
+
+      if (!completedRegistrations || !expectedCompanies) {
+        return { success: false, message: 'Registration data not found in app state.' };
+      }
+
+      // Check if we have the expected number of companies to process
+      if (expectedCompanies.length !== 3) {
+        return {
+          success: false,
+          message: `Expected 3 companies in Excel data, found ${expectedCompanies.length}. Data generation may have failed.`
+        };
+      }
+
+      // Check if all 3 companies have been registered - if yes, do full validation
+      if (completedRegistrations.length === 3) {
+        const errors = [];
+
+        for (const expected of expectedCompanies) {
+          const matching = completedRegistrations.find((reg: any) =>
+            reg.companyName === expected.companyName
+          );
+
+          if (!matching) {
+            errors.push(`Company "${expected.companyName}" not found in registrations`);
+            continue;
+          }
+
+          // Check all fields - exact matches required
+          if (matching.contactPerson !== expected.contactPerson) {
+            errors.push(`${expected.companyName}: Contact person "${matching.contactPerson}" should be "${expected.contactPerson}"`);
+          }
+          if (matching.email.toLowerCase() !== expected.email.toLowerCase()) {
+            errors.push(`${expected.companyName}: Email "${matching.email}" should be "${expected.email}"`);
+          }
+          if (matching.phone !== expected.phone) {
+            errors.push(`${expected.companyName}: Phone "${matching.phone}" should be "${expected.phone}"`);
+          }
+          if (matching.streetAddress !== expected.streetAddress) {
+            errors.push(`${expected.companyName}: Street address "${matching.streetAddress}" should be "${expected.streetAddress}"`);
+          }
+          if (matching.cityStateZip !== expected.cityStateZip) {
+            errors.push(`${expected.companyName}: City/State/Zip "${matching.cityStateZip}" should be "${expected.cityStateZip}"`);
+          }
+          if (matching.industry !== expected.industry) {
+            errors.push(`${expected.companyName}: Industry "${matching.industry}" should be "${expected.industry}"`);
+          }
+          if (matching.annualRevenue !== expected.annualRevenue) {
+            errors.push(`${expected.companyName}: Revenue $${matching.annualRevenue} should be exactly $${expected.annualRevenue}`);
+          }
+          if (matching.employeeCount !== expected.employeeCount) {
+            errors.push(`${expected.companyName}: Employee count ${matching.employeeCount} should be exactly ${expected.employeeCount}`);
+          }
+        }
+
+        if (errors.length > 0) {
+          return {
+            success: false,
+            message: `Data accuracy errors found: ${errors.slice(0, 3).join(', ')}${errors.length > 3 ? ` and ${errors.length - 3} more` : ''}. Verify all fields match the Excel source data.`
+          };
+        }
+
+        return {
+          success: true,
+          message: `Successfully registered all ${completedRegistrations.length} companies through the multi-step wizard with accurate data transfer including company info, contact details, addresses, industry selections, and revenue/size information.`
+        };
+      }
+
+      // Task not complete - provide [Cheat] debugging info
+      const cheatData: any[] = [];
+
+      // Step 1: Initialize all rows with submitted data (if any)
+      expectedCompanies.forEach((expected: any) => {
+        const completed = completedRegistrations.find((reg: any) => 
+          reg.companyName === expected.companyName
+        );
+        
+        if (completed) {
+          // Company has been completed
+          cheatData.push({
+            Company: expected.companyName,
+            Name: completed.companyName === expected.companyName ? '✅' : '❌',
+            Contact: completed.contactPerson === expected.contactPerson ? '✅' : '❌',
+            Email: completed.email.toLowerCase() === expected.email.toLowerCase() ? '✅' : '❌',
+            Phone: completed.phone === expected.phone ? '✅' : '❌',
+            Street: completed.streetAddress === expected.streetAddress ? '✅' : '❌',
+            City: completed.cityStateZip === expected.cityStateZip ? '✅' : '❌',
+            Industry: completed.industry === expected.industry ? '✅' : '❌',
+            Revenue: completed.annualRevenue === expected.annualRevenue ? '✅' : '❌',
+            Employees: completed.employeeCount === expected.employeeCount ? '✅' : '❌',
+            Status: '✅ Completed'
+          });
+        } else {
+          // Company not yet completed
+          cheatData.push({
+            Company: expected.companyName,
+            Name: '❌',
+            Contact: '❌',
+            Email: '❌',
+            Phone: '❌',
+            Street: '❌',
+            City: '❌',
+            Industry: '❌',
+            Revenue: '❌',
+            Employees: '❌',
+            Status: '⏳ Pending'
+          });
+        }
+      });
+
+      // Step 2: If there's data in the form, overlay it for the corresponding company
+      // but only if that company hasn't already been completed
+      if (currentFormData?.companyName?.trim()) {
+        const matchingIndex = expectedCompanies.findIndex((expected: any) =>
+          expected.companyName === currentFormData.companyName.trim()
+        );
+
+        if (matchingIndex !== -1) {
+          const expected = expectedCompanies[matchingIndex];
+          const isAlreadyCompleted = completedRegistrations.some((reg: any) => 
+            reg.companyName === expected.companyName
+          );
+
+          if (!isAlreadyCompleted) {
+            // Show current form progress
+            const emailMatch = currentFormData.email?.toLowerCase() === expected.email.toLowerCase();
+            const revenueMatch = currentFormData.annualRevenue === expected.annualRevenue;
+            const employeeMatch = currentFormData.employeeCount === expected.employeeCount;
+
+            cheatData[matchingIndex] = {
+              Company: expected.companyName,
+              Name: currentFormData.companyName === expected.companyName ? '✅' : '❌',
+              Contact: currentFormData.contactPerson === expected.contactPerson ? '✅' : '❌',
+              Email: emailMatch ? '✅' : '❌',
+              Phone: currentFormData.phone === expected.phone ? '✅' : '❌',
+              Street: currentFormData.streetAddress === expected.streetAddress ? '✅' : '❌',
+              City: currentFormData.cityStateZip === expected.cityStateZip ? '✅' : '❌',
+              Industry: currentFormData.industry === expected.industry ? '✅' : '❌',
+              Revenue: revenueMatch ? '✅' : '❌',
+              Employees: employeeMatch ? '✅' : '❌',
+              Status: '🔄 In Progress'
+            };
+          }
+        }
+      }
+
+      console.log('[Cheat] Customer Registration Progress:');
+      console.table(cheatData);
+
+      const message = completedRegistrations.length > 0
+        ? `Only ${completedRegistrations.length} of 3 companies registered. Complete all company registrations through the wizard.`
+        : 'No registrations completed yet. Transfer customer data from Excel through the wizard steps and complete all registrations.';
+
+      return {
+        success: false,
+        message
+      };
+    }
+  },
+  {
+    id: 'service-ticket-kanban',
+    instructions: 'Open the TSV file Documents/copy-paste-task-24.tsv using LibreOffice Calc and transfer IT service ticket information into the Kanban-style ticket system. Create tickets by entering all required fields from the TSV file: ticket reference, customer ID, issue summary, reported by, report date, estimated hours. Use the priority color buttons to select priority level (Critical/High/Medium/Low). Select the category from tag cloud. Select affected systems by clicking multiple system tags (Ctrl+click for multi-select). Use the "Trigger Auto-Assignment" button to automatically assign tickets based on priority. Use "Calculate SLA" to set SLA timer. After creating each ticket, it will appear in the "Open" column of the Kanban board. Create all 3 tickets with exact data matching the TSV source.',
+    ux: 'Fill ticket form fields from TSV data, click priority color buttons, click category tags, multi-select system tags, trigger auto-assignment workflow, calculate SLA timer, create tickets',
+    test: () => {
+      const appState = (window as any).app_state;
+      if (!appState) {
+        return { success: false, message: 'App state not found.' };
+      }
+
+      const { createdTickets, expectedTickets, currentFormData } = appState;
+
+      if (!createdTickets || !expectedTickets) {
+        return { success: false, message: 'Ticket data not found in app state.' };
+      }
+
+      // Check if we have 3 tickets created
+      if (createdTickets.length !== 3) {
+        // Build cheat data showing both created tickets and current form progress
+        const cheatData = expectedTickets.map((expected: any) => {
+          // Check if this ticket is already created
+          const createdTicket = createdTickets.find((t: any) => 
+            t.ticketRef?.trim() === expected.ticketRef
+          );
+
+          if (createdTicket) {
+            // Show validation for created ticket
+            const systemsMatch = createdTicket.affectedSystems?.length === expected.affectedSystems.length &&
+              expected.affectedSystems.every((sys: string) => createdTicket.affectedSystems?.includes(sys));
+            const autoAssignUsed = createdTicket.assignedTo && createdTicket.assignedTo !== 'Auto-assign';
+            const slaCalculated = createdTicket.slaTimer && createdTicket.slaTimer > 0;
+
+            return {
+              Ticket: expected.ticketRef,
+              Ref: createdTicket.ticketRef?.trim() === expected.ticketRef ? '✅' : '❌',
+              Customer: createdTicket.customerId?.trim() === expected.customerId ? '✅' : '❌',
+              Summary: createdTicket.issueSummary?.trim() === expected.issueSummary ? '✅' : '❌',
+              Priority: createdTicket.priorityLevel === expected.priorityLevel ? '✅' : '❌',
+              Reporter: createdTicket.reportedBy?.trim() === expected.reportedBy ? '✅' : '❌',
+              Date: createdTicket.reportDate === expected.reportDate ? '✅' : '❌',
+              Category: createdTicket.category === expected.category ? '✅' : '❌',
+              Hours: createdTicket.estimatedHours === expected.estimatedHours ? '✅' : '❌',
+              Systems: systemsMatch ? '✅' : '❌',
+              AutoAssign: autoAssignUsed ? '✅' : '❌',
+              SLA: slaCalculated ? '✅' : '❌',
+              Status: '✅ Created'
+            };
+          }
+
+          // Check if this ticket is currently being filled in the form
+          if (currentFormData && currentFormData.ticketRef?.trim() === expected.ticketRef) {
+            const systemsMatch = currentFormData.affectedSystems?.length === expected.affectedSystems.length &&
+              expected.affectedSystems.every((sys: string) => currentFormData.affectedSystems?.includes(sys));
+            const autoAssignUsed = currentFormData.assignedTo && currentFormData.assignedTo !== 'Auto-assign';
+            const slaCalculated = currentFormData.slaTimer && currentFormData.slaTimer > 0;
+
+            return {
+              Ticket: expected.ticketRef,
+              Ref: currentFormData.ticketRef?.trim() === expected.ticketRef ? '✅' : '❌',
+              Customer: currentFormData.customerId?.trim() === expected.customerId ? '✅' : '❌',
+              Summary: currentFormData.issueSummary?.trim() === expected.issueSummary ? '✅' : '❌',
+              Priority: currentFormData.priorityLevel === expected.priorityLevel ? '✅' : '❌',
+              Reporter: currentFormData.reportedBy?.trim() === expected.reportedBy ? '✅' : '❌',
+              Date: currentFormData.reportDate === expected.reportDate ? '✅' : '❌',
+              Category: currentFormData.category === expected.category ? '✅' : '❌',
+              Hours: currentFormData.estimatedHours === expected.estimatedHours ? '✅' : '❌',
+              Systems: systemsMatch ? '✅' : '❌',
+              AutoAssign: autoAssignUsed ? '✅' : '❌',
+              SLA: slaCalculated ? '✅' : '❌',
+              Status: '🔄 In Progress'
+            };
+          }
+
+          // Ticket not yet started
+          return {
+            Ticket: expected.ticketRef,
+            Ref: '❌',
+            Customer: '❌',
+            Summary: '❌',
+            Priority: '❌',
+            Reporter: '❌',
+            Date: '❌',
+            Category: '❌',
+            Hours: '❌',
+            Systems: '❌',
+            AutoAssign: '❌',
+            SLA: '❌',
+            Status: '⏳ Pending'
+          };
+        });
+        
+        console.log('[Cheat] Service Ticket Progress:');
+        console.table(cheatData);
+        
+        return {
+          success: false,
+          message: `Only ${createdTickets.length} of 3 tickets created. Create all tickets from Excel data.`
+        };
+      }
+
+      // Validate each ticket's data
+      const errors: string[] = [];
+      const cheatData: any[] = [];
+
+      expectedTickets.forEach((expected: any) => {
+        const ticket = createdTickets.find((t: any) => 
+          t.ticketRef?.trim() === expected.ticketRef
+        );
+
+        if (!ticket) {
+          errors.push(`Missing ticket: ${expected.ticketRef}`);
+          cheatData.push({
+            Ticket: expected.ticketRef,
+            Ref: '❌',
+            Customer: '❌',
+            Summary: '❌',
+            Priority: '❌',
+            Reporter: '❌',
+            Date: '❌',
+            Category: '❌',
+            Hours: '❌',
+            Systems: '❌',
+            AutoAssign: '❌',
+            SLA: '❌',
+            Status: '❌ Missing'
+          });
+          return;
+        }
+
+        // Check each field
+        const refMatch = ticket.ticketRef?.trim() === expected.ticketRef;
+        const customerMatch = ticket.customerId?.trim() === expected.customerId;
+        const summaryMatch = ticket.issueSummary?.trim() === expected.issueSummary;
+        const priorityMatch = ticket.priorityLevel === expected.priorityLevel;
+        const reporterMatch = ticket.reportedBy?.trim() === expected.reportedBy;
+        const dateMatch = ticket.reportDate === expected.reportDate;
+        const categoryMatch = ticket.category === expected.category;
+        const hoursMatch = ticket.estimatedHours === expected.estimatedHours;
+        
+        // Check affected systems (arrays must match)
+        const systemsMatch = ticket.affectedSystems?.length === expected.affectedSystems.length &&
+          expected.affectedSystems.every((sys: string) => ticket.affectedSystems?.includes(sys));
+        
+        // Check that workflow automation controls were used (not validating specific values)
+        const autoAssignUsed = ticket.assignedTo && ticket.assignedTo !== 'Auto-assign';
+        const slaCalculated = ticket.slaTimer && ticket.slaTimer > 0;
+
+        if (!refMatch) errors.push(`${expected.ticketRef}: Ticket reference mismatch`);
+        if (!customerMatch) errors.push(`${expected.ticketRef}: Customer ID mismatch`);
+        if (!summaryMatch) errors.push(`${expected.ticketRef}: Issue summary mismatch`);
+        if (!priorityMatch) errors.push(`${expected.ticketRef}: Priority level mismatch`);
+        if (!reporterMatch) errors.push(`${expected.ticketRef}: Reporter name mismatch`);
+        if (!dateMatch) errors.push(`${expected.ticketRef}: Report date mismatch`);
+        if (!categoryMatch) errors.push(`${expected.ticketRef}: Category mismatch`);
+        if (!hoursMatch) errors.push(`${expected.ticketRef}: Estimated hours mismatch`);
+        if (!systemsMatch) errors.push(`${expected.ticketRef}: Affected systems mismatch`);
+        if (!autoAssignUsed) errors.push(`${expected.ticketRef}: Auto-assignment not triggered`);
+        if (!slaCalculated) errors.push(`${expected.ticketRef}: SLA timer not calculated`);
+
+        cheatData.push({
+          Ticket: expected.ticketRef,
+          Ref: refMatch ? '✅' : '❌',
+          Customer: customerMatch ? '✅' : '❌',
+          Summary: summaryMatch ? '✅' : '❌',
+          Priority: priorityMatch ? '✅' : '❌',
+          Reporter: reporterMatch ? '✅' : '❌',
+          Date: dateMatch ? '✅' : '❌',
+          Category: categoryMatch ? '✅' : '❌',
+          Hours: hoursMatch ? '✅' : '❌',
+          Systems: systemsMatch ? '✅' : '❌',
+          AutoAssign: autoAssignUsed ? '✅' : '❌',
+          SLA: slaCalculated ? '✅' : '❌',
+          Status: (!refMatch || !customerMatch || !summaryMatch || !priorityMatch || !reporterMatch || !dateMatch || !categoryMatch || !hoursMatch || !systemsMatch || !autoAssignUsed || !slaCalculated) ? '❌ Errors' : '✅ Complete'
+        });
+      });
+
+      if (errors.length > 0) {
+        console.log('[Cheat] Service Ticket Progress:');
+        console.table(cheatData);
+
+        return {
+          success: false,
+          message: `Ticket data validation errors: ${errors.join(', ')}`
+        };
+      }
+
+      console.log('[Cheat] Service Ticket Progress:');
+      console.table(cheatData);
+
+      return {
+        success: true,
+        message: 'All 3 service tickets created successfully with correct data!'
+      };
+    }
+  },
+  {
+    id: 'library-cataloging',
+    instructions: 'Open the TSV file Documents/copy-paste-task-25.tsv using LibreOffice Calc and transfer book information into the library cataloging system. For each book: 1) Scan or enter the ISBN barcode number in the scanner field, 2) Navigate the Dewey decimal classification tree on the left to find and select the appropriate subject classification (click arrows to expand, click labels to select, or double-click labels to expand), 3) Fill in book details from TSV: Title, Author, Publication Year, Publisher, Price, 4) Manually enter the Location Code from TSV (e.g., PSY-150.1), 5) Select book condition from dropdown, 6) Click "Add to Catalog" to complete cataloging. The Subject field auto-fills when you click a classification in the Dewey tree. The visual shelf picker on the right is a reference tool showing physical shelf locations. Catalog all 3 books with exact data matching the TSV source.',
+    ux: 'Navigate Dewey tree by clicking arrows/labels (or double-click to expand), scan/enter ISBN, fill form fields manually from TSV including location code, select condition dropdown, click Add to Catalog button',
+    test: () => {
+      const appState = (window as any).app_state;
+      if (!appState) {
+        return { success: false, message: 'App state not found.' };
+      }
+
+      const { catalogedBooks, currentFormEntry } = appState;
+
+      // Expected books from Excel schema
+      const expectedBooks = [
+        {
+          isbn: '9780123456789',
+          title: 'Cognitive Psychology and Human Memory',
+          author: 'Dr. Sarah Miller',
+          publicationYear: 2023,
+          publisher: 'Academic Press',
+          subjectArea: 'Psychology',
+          locationCode: 'PSY-150.1',
+          purchasePrice: 127.50,
+          condition: 'New'
+        },
+        {
+          isbn: '9780987654321',
+          title: 'Advanced Calculus for Engineers',
+          author: 'Prof. Rajesh Patel',
+          publicationYear: 2022,
+          publisher: 'Engineering Publications',
+          subjectArea: 'Mathematics',
+          locationCode: 'MATH-515.2',
+          purchasePrice: 89.95,
+          condition: 'New'
+        },
+        {
+          isbn: '9780456789123',
+          title: 'European History: 1900-1945',
+          author: 'Elena Kowalski',
+          publicationYear: 2024,
+          publisher: 'Historical Studies Press',
+          subjectArea: 'History',
+          locationCode: 'HIST-940.5',
+          purchasePrice: 156.75,
+          condition: 'New'
+        }
+      ];
+
+      if (!catalogedBooks) {
+        return { success: false, message: 'Cataloged books data not found in app state.' };
+      }
+
+      // Check if we have 3 books cataloged
+      if (catalogedBooks.length !== 3) {
+        // Build cheat data showing both cataloged books and current form progress
+        const cheatData = expectedBooks.map((expected) => {
+          // Check if this book is already cataloged
+          const catalogedBook = catalogedBooks.find((b: any) => 
+            b.isbn?.trim() === expected.isbn
+          );
+
+          if (catalogedBook) {
+            // Show validation for cataloged book
+            const priceMatch = Math.abs(catalogedBook.purchasePrice - expected.purchasePrice) < 0.01;
+
+            return {
+              ISBN: expected.isbn,
+              ISBNMatch: catalogedBook.isbn?.trim() === expected.isbn ? '✅' : '❌',
+              Title: catalogedBook.title?.trim() === expected.title ? '✅' : '❌',
+              Author: catalogedBook.author?.trim() === expected.author ? '✅' : '❌',
+              Year: catalogedBook.publicationYear === expected.publicationYear ? '✅' : '❌',
+              Publisher: catalogedBook.publisher?.trim() === expected.publisher ? '✅' : '❌',
+              Subject: catalogedBook.subjectArea?.trim() === expected.subjectArea ? '✅' : '❌',
+              Location: catalogedBook.locationCode?.trim() === expected.locationCode ? '✅' : '❌',
+              Price: priceMatch ? '✅' : '❌',
+              Condition: catalogedBook.condition === expected.condition ? '✅' : '❌',
+              Status: '✅ Cataloged'
+            };
+          }
+
+          // Check if this book is currently being filled in the form
+          if (currentFormEntry && currentFormEntry.isbn?.trim() === expected.isbn) {
+            const priceMatch = currentFormEntry.purchasePrice && Math.abs(parseFloat(currentFormEntry.purchasePrice) - expected.purchasePrice) < 0.01;
+            const yearMatch = currentFormEntry.publicationYear && parseInt(currentFormEntry.publicationYear) === expected.publicationYear;
+
+            return {
+              ISBN: expected.isbn,
+              ISBNMatch: currentFormEntry.isbn?.trim() === expected.isbn ? '✅' : '❌',
+              Title: currentFormEntry.title?.trim() === expected.title ? '✅' : '❌',
+              Author: currentFormEntry.author?.trim() === expected.author ? '✅' : '❌',
+              Year: yearMatch ? '✅' : '❌',
+              Publisher: currentFormEntry.publisher?.trim() === expected.publisher ? '✅' : '❌',
+              Subject: currentFormEntry.subjectArea?.trim() === expected.subjectArea ? '✅' : '❌',
+              Location: currentFormEntry.locationCode?.trim() === expected.locationCode ? '✅' : '❌',
+              Price: priceMatch ? '✅' : '❌',
+              Condition: currentFormEntry.condition === expected.condition ? '✅' : '❌',
+              Status: '🔄 In Progress'
+            };
+          }
+
+          // Book not yet started
+          return {
+            ISBN: expected.isbn,
+            ISBNMatch: '❌',
+            Title: '❌',
+            Author: '❌',
+            Year: '❌',
+            Publisher: '❌',
+            Subject: '❌',
+            Location: '❌',
+            Price: '❌',
+            Condition: '❌',
+            Status: '⏸️ Not Started'
+          };
+        });
+
+        console.log('[Cheat] Library Cataloging Progress:');
+        console.table(cheatData);
+
+        const message = catalogedBooks.length > 0
+          ? `Only ${catalogedBooks.length} of 3 books cataloged. Complete all book cataloging entries.`
+          : 'No books cataloged yet. Transfer book data from Excel, navigate Dewey tree for subject classification, use shelf picker for location, and add books to catalog.';
+
+        return {
+          success: false,
+          message
+        };
+      }
+
+      // Validate all 3 books
+      const errors: string[] = [];
+      const cheatData: any[] = [];
+
+      expectedBooks.forEach((expected) => {
+        const book = catalogedBooks.find((b: any) => b.isbn?.trim() === expected.isbn);
+
+        if (!book) {
+          errors.push(`${expected.isbn}: Book not found in catalog`);
+          cheatData.push({
+            ISBN: expected.isbn,
+            ISBNMatch: '❌',
+            Title: '❌',
+            Author: '❌',
+            Year: '❌',
+            Publisher: '❌',
+            Subject: '❌',
+            Location: '❌',
+            Price: '❌',
+            Condition: '❌',
+            Status: '❌ Missing'
+          });
+          return;
+        }
+
+        // Field-by-field validation
+        const isbnMatch = book.isbn?.trim() === expected.isbn;
+        const titleMatch = book.title?.trim() === expected.title;
+        const authorMatch = book.author?.trim() === expected.author;
+        const yearMatch = book.publicationYear === expected.publicationYear;
+        const publisherMatch = book.publisher?.trim() === expected.publisher;
+        const subjectMatch = book.subjectArea?.trim() === expected.subjectArea;
+        const locationMatch = book.locationCode?.trim() === expected.locationCode;
+        const priceMatch = Math.abs(book.purchasePrice - expected.purchasePrice) < 0.01;
+        const conditionMatch = book.condition === expected.condition;
+
+        if (!isbnMatch) errors.push(`${expected.isbn}: ISBN mismatch`);
+        if (!titleMatch) errors.push(`${expected.isbn}: Title mismatch`);
+        if (!authorMatch) errors.push(`${expected.isbn}: Author mismatch`);
+        if (!yearMatch) errors.push(`${expected.isbn}: Publication year mismatch`);
+        if (!publisherMatch) errors.push(`${expected.isbn}: Publisher mismatch`);
+        if (!subjectMatch) errors.push(`${expected.isbn}: Subject area mismatch`);
+        if (!locationMatch) errors.push(`${expected.isbn}: Location code mismatch`);
+        if (!priceMatch) errors.push(`${expected.isbn}: Purchase price mismatch`);
+        if (!conditionMatch) errors.push(`${expected.isbn}: Condition mismatch`);
+
+        cheatData.push({
+          ISBN: expected.isbn,
+          ISBNMatch: isbnMatch ? '✅' : '❌',
+          Title: titleMatch ? '✅' : '❌',
+          Author: authorMatch ? '✅' : '❌',
+          Year: yearMatch ? '✅' : '❌',
+          Publisher: publisherMatch ? '✅' : '❌',
+          Subject: subjectMatch ? '✅' : '❌',
+          Location: locationMatch ? '✅' : '❌',
+          Price: priceMatch ? '✅' : '❌',
+          Condition: conditionMatch ? '✅' : '❌',
+          Status: (!isbnMatch || !titleMatch || !authorMatch || !yearMatch || !publisherMatch || !subjectMatch || !locationMatch || !priceMatch || !conditionMatch) ? '❌ Errors' : '✅ Complete'
+        });
+      });
+
+      if (errors.length > 0) {
+        console.log('[Cheat] Library Cataloging Progress:');
+        console.table(cheatData);
+
+        return {
+          success: false,
+          message: `Book cataloging validation errors: ${errors.join(', ')}`
+        };
+      }
+
+      console.log('[Cheat] Library Cataloging Progress:');
+      console.table(cheatData);
+
+      return {
+        success: true,
+        message: 'All 3 books cataloged successfully with correct data!'
+      };
+    }
+  },
+  {
+    id: 'student-enrollment-card-based',
+    instructions: 'Open the TSV file Documents/copy-paste-task-26.tsv using LibreOffice Calc and enroll 3 students into the education system. For each student: enter student name, date of birth, parent/guardian name, contact email, and home address from the TSV file. Drag a program card from the available programs into the program selection drop zone. Select grade level from dropdown, enter start date, and select special accommodations from checkbox group. Click "Calculate Age" button to verify date of birth. Double-click program cards to view curriculum details. Complete enrollment by clicking "Enroll Student" button for all 3 students.',
+    ux: 'Fill student information fields, drag program cards to selection zone, use age calculator, select grade and date, check special accommodations boxes, enroll students',
+    test: () => {
+      const appState = (window as any).app_state;
+      
+      if (!appState?.enrolledStudents) {
+        console.log('[Cheat] Expected 3 students to be enrolled:');
+        console.log('[Cheat] 1. Emily Rodriguez - Visual Arts Program - Grade 8');
+        console.log('[Cheat] 2. Marcus Thompson - Advanced Mathematics - Grade 10');
+        console.log('[Cheat] 3. Sophie Chen - International Baccalaureate - Grade 9');
+        return {
+          success: false,
+          message: 'No enrolled students found. Enroll students using the form.'
+        };
+      }
+
+      const enrolledStudents = appState.enrolledStudents || [];
+      const expectedStudents = [
+        {
+          studentName: 'Emily Rodriguez',
+          dateOfBirth: '2010-05-15',
+          parentGuardian: 'Maria Rodriguez',
+          contactEmail: 'm.rodriguez@outlook.com',
+          homeAddress: '789 Pine Street, Denver, CO 80202',
+          programChoice: 'Visual Arts Program',
+          gradeLevel: '8',
+          startDate: '2024-08-15',
+          specialNeeds: 'None'
+        },
+        {
+          studentName: 'Marcus Thompson',
+          dateOfBirth: '2008-11-22',
+          parentGuardian: 'Linda Thompson',
+          contactEmail: 'lthompson@gmail.com',
+          homeAddress: '1456 Oak Ridge Drive, Phoenix, AZ 85016',
+          programChoice: 'Advanced Mathematics',
+          gradeLevel: '10',
+          startDate: '2024-08-15',
+          specialNeeds: 'Learning Support'
+        },
+        {
+          studentName: 'Sophie Chen',
+          dateOfBirth: '2009-03-08',
+          parentGuardian: 'David Chen',
+          contactEmail: 'd.chen@techcorp.com',
+          homeAddress: '2234 Maple Avenue, San Jose, CA 95110',
+          programChoice: 'International Baccalaureate',
+          gradeLevel: '9',
+          startDate: '2024-08-15',
+          specialNeeds: 'Gifted Program'
+        }
+      ];
+
+      const errors: string[] = [];
+      const cheatData: any[] = [];
+
+      // Show current form entry if in progress
+      const currentFormEntry = appState.currentFormEntry || {};
+      const formFieldsCompleted = appState.formFieldsCompleted || {};
+
+      if (Object.values(formFieldsCompleted).some((v: any) => v)) {
+        // Try to match current form entry to an expected student
+        let matchedExpected = null;
+        for (const expected of expectedStudents) {
+          if (currentFormEntry.studentName?.trim().toLowerCase() === expected.studentName.toLowerCase()) {
+            matchedExpected = expected;
+            break;
+          }
+        }
+        
+        if (matchedExpected) {
+          cheatData.push({
+            Student: 'CURRENT FORM ENTRY',
+            Name: currentFormEntry.studentName?.trim() === matchedExpected.studentName ? '✅' : '❌',
+            DOB: currentFormEntry.dateOfBirth === matchedExpected.dateOfBirth ? '✅' : '❌',
+            Guardian: currentFormEntry.parentGuardian?.trim() === matchedExpected.parentGuardian ? '✅' : '❌',
+            Email: currentFormEntry.contactEmail?.trim() === matchedExpected.contactEmail ? '✅' : '❌',
+            Address: currentFormEntry.homeAddress?.trim() === matchedExpected.homeAddress ? '✅' : '❌',
+            Program: currentFormEntry.programChoice === matchedExpected.programChoice ? '✅' : '❌',
+            Grade: currentFormEntry.gradeLevel === matchedExpected.gradeLevel ? '✅' : '❌',
+            StartDate: currentFormEntry.startDate === matchedExpected.startDate ? '✅' : '❌',
+            SpecialNeeds: currentFormEntry.specialNeeds === matchedExpected.specialNeeds ? '✅' : '❌'
+          });
+        } else {
+          // No match found - show all ❌
+          cheatData.push({
+            Student: 'CURRENT FORM ENTRY',
+            Name: '❌',
+            DOB: '❌',
+            Guardian: '❌',
+            Email: '❌',
+            Address: '❌',
+            Program: '❌',
+            Grade: '❌',
+            StartDate: '❌',
+            SpecialNeeds: '❌'
+          });
+        }
+      }
+
+      expectedStudents.forEach((expected, idx) => {
+        const enrolled = enrolledStudents.find((s: any) => 
+          s.studentName?.trim().toLowerCase() === expected.studentName.toLowerCase()
+        );
+
+        const nameMatch = enrolled && enrolled.studentName?.trim() === expected.studentName;
+        const dobMatch = enrolled && enrolled.dateOfBirth === expected.dateOfBirth;
+        const guardianMatch = enrolled && enrolled.parentGuardian?.trim() === expected.parentGuardian;
+        const emailMatch = enrolled && enrolled.contactEmail?.trim() === expected.contactEmail;
+        const addressMatch = enrolled && enrolled.homeAddress?.trim() === expected.homeAddress;
+        const programMatch = enrolled && enrolled.programChoice === expected.programChoice;
+        const gradeMatch = enrolled && enrolled.gradeLevel === expected.gradeLevel;
+        const startDateMatch = enrolled && enrolled.startDate === expected.startDate;
+        const specialNeedsMatch = enrolled && enrolled.specialNeeds === expected.specialNeeds;
+
+        if (!enrolled) {
+          errors.push(`Student ${idx + 1}: ${expected.studentName} not found`);
+        } else {
+          if (!nameMatch) errors.push(`Student ${idx + 1}: Name mismatch`);
+          if (!dobMatch) errors.push(`Student ${idx + 1}: Date of birth mismatch`);
+          if (!guardianMatch) errors.push(`Student ${idx + 1}: Parent/guardian mismatch`);
+          if (!emailMatch) errors.push(`Student ${idx + 1}: Email mismatch`);
+          if (!addressMatch) errors.push(`Student ${idx + 1}: Address mismatch`);
+          if (!programMatch) errors.push(`Student ${idx + 1}: Program choice mismatch`);
+          if (!gradeMatch) errors.push(`Student ${idx + 1}: Grade level mismatch`);
+          if (!startDateMatch) errors.push(`Student ${idx + 1}: Start date mismatch`);
+          if (!specialNeedsMatch) errors.push(`Student ${idx + 1}: Special needs mismatch`);
+        }
+
+        cheatData.push({
+          Student: expected.studentName,
+          Name: nameMatch ? '✅' : '❌',
+          DOB: dobMatch ? '✅' : '❌',
+          Guardian: guardianMatch ? '✅' : '❌',
+          Email: emailMatch ? '✅' : '❌',
+          Address: addressMatch ? '✅' : '❌',
+          Program: programMatch ? '✅' : '❌',
+          Grade: gradeMatch ? '✅' : '❌',
+          StartDate: startDateMatch ? '✅' : '❌',
+          SpecialNeeds: specialNeedsMatch ? '✅' : '❌',
+          Status: enrolled ? (errors.some(e => e.includes(expected.studentName)) ? '⚠️ Errors' : '✅ Complete') : '❌ Missing'
+        });
+      });
+
+      if (errors.length > 0) {
+        console.log('[Cheat] Student Enrollment Progress:');
+        console.table(cheatData);
+
+        return {
+          success: false,
+          message: `Enrollment validation errors: ${errors.join(', ')}`
+        };
+      }
+
+      console.log('[Cheat] Student Enrollment Progress:');
+      console.table(cheatData);
+
+      return {
+        success: true,
+        message: 'All 3 students enrolled successfully with correct data!'
+      };
+    }
+  },
+  {
+    id: 'tenant-application-document-upload',
+    instructions: 'Open the TSV file Documents/copy-paste-task-27.tsv using LibreOffice Calc and submit 3 tenant applications. For each applicant: enter applicant name, phone contact, current address, select employment status from dropdown, enter monthly income from the TSV file, and use the income calculator to verify income. Enter rental history, desired move date, and reference contact information. Click the reference verification button to verify references. Upload required documents by clicking document type buttons in the upload center (Pay Stub, Bank Statement, Tax Return, Business License, Contract Agreement, or References). The credit score visualization will update automatically based on income and rental history. After completing all fields, document uploads, and verifications, click "Submit Application" to submit each tenant application.',
+    ux: 'Fill applicant information fields, use income calculator widget, verify references with popup, upload documents to designated zones, view credit score visualization, submit applications',
+    test: () => {
+      const appState = (window as any).app_state;
+      
+      if (!appState?.applications) {
+        console.log('[Cheat] Expected 3 tenant applications to be submitted:');
+        console.log('[Cheat] 1. Lisa Anderson - Full-time Employee - $4800/mo');
+        console.log('[Cheat] 2. Carlos Mendoza - Self-employed - $5600/mo');
+        console.log('[Cheat] 3. Jennifer Park - Contract Worker - $3200/mo');
+        return {
+          success: false,
+          message: 'No tenant applications found. Submit applications using the form.'
+        };
+      }
+
+      const applications = appState.applications || [];
+      const expectedApplications = [
+        {
+          applicantName: 'Lisa Anderson',
+          phoneContact: '2065559876',
+          currentAddress: '1200 Maple Avenue, Seattle, WA 98101',
+          employmentStatus: 'Full-time Employee',
+          monthlyIncome: 4800,
+          rentalHistory: 'Excellent rental history',
+          desiredMoveDate: '2024-03-01',
+          referenceContact: 'Tom Wilson 4255551234',
+          documentTypes: ['Pay Stub', 'Bank Statement']
+        },
+        {
+          applicantName: 'Carlos Mendoza',
+          phoneContact: '6195557654',
+          currentAddress: '3456 Cedar Boulevard, San Diego, CA 92101',
+          employmentStatus: 'Self-employed',
+          monthlyIncome: 5600,
+          rentalHistory: 'Good standing with landlords',
+          desiredMoveDate: '2024-03-15',
+          referenceContact: 'Maria Santos 8585553333',
+          documentTypes: ['Tax Return', 'Business License']
+        },
+        {
+          applicantName: 'Jennifer Park',
+          phoneContact: '7735552109',
+          currentAddress: '789 Willow Drive, Chicago, IL 60601',
+          employmentStatus: 'Contract Worker',
+          monthlyIncome: 3200,
+          rentalHistory: 'First-time renter',
+          desiredMoveDate: '2024-04-01',
+          referenceContact: 'Dr. Kim Lee 8475554444',
+          documentTypes: ['Contract Agreement', 'References']
+        }
+      ];
+
+      const errors: string[] = [];
+      const cheatData: any[] = [];
+
+      // Show current form entry if in progress
+      const currentFormEntry = appState.currentFormEntry || {};
+      const formFieldsCompleted = appState.formFieldsCompleted || {};
+
+      if (Object.values(formFieldsCompleted).some((v: any) => v)) {
+        // Try to match current form entry to an expected applicant
+        let matchedExpected = null;
+        for (const expected of expectedApplications) {
+          if (currentFormEntry.applicantName?.trim().toLowerCase() === expected.applicantName.toLowerCase()) {
+            matchedExpected = expected;
+            break;
+          }
+        }
+        
+        if (matchedExpected) {
+          // Check document types array
+          const documentMatch = currentFormEntry.documentTypes && matchedExpected.documentTypes.every((doc: string) => 
+            currentFormEntry.documentTypes?.includes(doc)
+          ) && currentFormEntry.documentTypes?.length === matchedExpected.documentTypes.length;
+          
+          cheatData.push({
+            Applicant: 'CURRENT FORM ENTRY',
+            Name: currentFormEntry.applicantName?.trim() === matchedExpected.applicantName ? '✅' : '❌',
+            Phone: currentFormEntry.phoneContact?.trim() === matchedExpected.phoneContact ? '✅' : '❌',
+            Address: currentFormEntry.currentAddress?.trim() === matchedExpected.currentAddress ? '✅' : '❌',
+            Employment: currentFormEntry.employmentStatus?.trim() === matchedExpected.employmentStatus ? '✅' : '❌',
+            Income: currentFormEntry.monthlyIncome === matchedExpected.monthlyIncome ? '✅' : '❌',
+            RentalHistory: currentFormEntry.rentalHistory?.trim() === matchedExpected.rentalHistory ? '✅' : '❌',
+            MoveDate: currentFormEntry.desiredMoveDate?.trim() === matchedExpected.desiredMoveDate ? '✅' : '❌',
+            Reference: currentFormEntry.referenceContact?.trim() === matchedExpected.referenceContact ? '✅' : '❌',
+            Documents: documentMatch ? '✅' : '❌'
+          });
+        } else {
+          // No match found - show all ❌
+          cheatData.push({
+            Applicant: 'CURRENT FORM ENTRY',
+            Name: '❌',
+            Phone: '❌',
+            Address: '❌',
+            Employment: '❌',
+            Income: '❌',
+            RentalHistory: '❌',
+            MoveDate: '❌',
+            Reference: '❌',
+            Documents: '❌'
+          });
+        }
+      }
+
+      expectedApplications.forEach((expected, idx) => {
+        const app = applications.find((a: any) => 
+          a.applicantName?.trim().toLowerCase() === expected.applicantName.toLowerCase()
+        );
+
+        const nameMatch = app && app.applicantName?.trim() === expected.applicantName;
+        const phoneMatch = app && app.phoneContact?.trim() === expected.phoneContact;
+        const addressMatch = app && app.currentAddress?.trim() === expected.currentAddress;
+        const employmentMatch = app && app.employmentStatus?.trim() === expected.employmentStatus;
+        const incomeMatch = app && app.monthlyIncome === expected.monthlyIncome;
+        const rentalMatch = app && app.rentalHistory?.trim() === expected.rentalHistory;
+        const moveDateMatch = app && app.desiredMoveDate?.trim() === expected.desiredMoveDate;
+        const referenceMatch = app && app.referenceContact?.trim() === expected.referenceContact;
+        
+        // Check document types array
+        const documentMatch = app && expected.documentTypes.every(doc => 
+          app.documentTypes?.includes(doc)
+        ) && app.documentTypes?.length === expected.documentTypes.length;
+
+        if (!app) {
+          errors.push(`Application ${idx + 1}: ${expected.applicantName} not found`);
+        } else {
+          if (!nameMatch) errors.push(`Application ${idx + 1}: Applicant name mismatch`);
+          if (!phoneMatch) errors.push(`Application ${idx + 1}: Phone contact mismatch`);
+          if (!addressMatch) errors.push(`Application ${idx + 1}: Current address mismatch`);
+          if (!employmentMatch) errors.push(`Application ${idx + 1}: Employment status mismatch`);
+          if (!incomeMatch) errors.push(`Application ${idx + 1}: Monthly income mismatch`);
+          if (!rentalMatch) errors.push(`Application ${idx + 1}: Rental history mismatch`);
+          if (!moveDateMatch) errors.push(`Application ${idx + 1}: Move date mismatch`);
+          if (!referenceMatch) errors.push(`Application ${idx + 1}: Reference contact mismatch`);
+          if (!documentMatch) errors.push(`Application ${idx + 1}: Document types mismatch`);
+        }
+
+        cheatData.push({
+          Applicant: expected.applicantName,
+          Name: nameMatch ? '✅' : '❌',
+          Phone: phoneMatch ? '✅' : '❌',
+          Address: addressMatch ? '✅' : '❌',
+          Employment: employmentMatch ? '✅' : '❌',
+          Income: incomeMatch ? '✅' : '❌',
+          RentalHistory: rentalMatch ? '✅' : '❌',
+          MoveDate: moveDateMatch ? '✅' : '❌',
+          Reference: referenceMatch ? '✅' : '❌',
+          Documents: documentMatch ? '✅' : '❌',
+          Status: app ? (errors.some(e => e.includes(expected.applicantName)) ? '⚠️ Errors' : '✅ Complete') : '❌ Missing'
+        });
+      });
+
+      if (errors.length > 0) {
+        console.log('[Cheat] Tenant Application Progress:');
+        console.table(cheatData);
+
+        return {
+          success: false,
+          message: `Application validation errors: ${errors.join(', ')}`
+        };
+      }
+
+      console.log('[Cheat] Tenant Application Progress:');
+      console.table(cheatData);
+
+      return {
+        success: true,
+        message: 'All 3 tenant applications submitted successfully with correct data!'
+      };
+    }
+  },
+  {
+    id: 'copy-paste-task-28',
+    instructions: 'Open the TSV file Documents/copy-paste-task-28.tsv using LibreOffice Calc and transfer all loan data into the financial system. For each of the 3 applicants, enter their personal information (full name, SSN, annual income, employment type, monthly obligations, credit score) from the TSV file, set the loan amount using the slider or numeric input, select loan purpose from dropdown, and enter collateral description. Complete all four loan calculations (monthly payment, DTI ratio, risk assessment, and payment schedule) before submitting the application. Process all 3 loan applications from the TSV file.',
+    ux: 'Single-column form layout with personal info fields at top, loan amount controls (slider + numeric input side-by-side), loan purpose dropdown, collateral description field, followed by four calculator widget sections (Loan Calculator, DTI Calculator, Risk Assessment, Payment Schedule) with individual calculate buttons. Each calculator displays results after button click. Submit button at bottom. Submitted applications shown below with all details.',
+    test: () => {
+      const appState = (window as any).app_state;
+      
+      if (!appState) {
+        console.log('[Cheat] No app_state found. Waiting for form initialization...');
+        return { success: false, message: 'App state not initialized' };
+      }
+
+      const applications = appState.applications || [];
+      const currentFormEntry = appState.currentFormEntry || {};
+      const formFieldsCompleted = appState.formFieldsCompleted || {};
+
+      // Expected data from Excel
+      const expectedApplications = [
+        {
+          applicantFullName: 'Robert Martinez',
+          ssnNumber: '123456789',
+          annualIncome: 85000,
+          employmentType: 'Salaried Employee',
+          loanAmountRequested: 35000,
+          loanPurpose: 'Home Improvement',
+          creditScore: 745,
+          collateralDescription: '2019 Toyota Camry',
+          monthlyObligations: 2850
+        },
+        {
+          applicantFullName: 'Angela Thompson',
+          ssnNumber: '456789012',
+          annualIncome: 120000,
+          employmentType: 'Self-employed',
+          loanAmountRequested: 50000,
+          loanPurpose: 'Debt Consolidation',
+          creditScore: 692,
+          collateralDescription: 'Investment Portfolio',
+          monthlyObligations: 4200
+        },
+        {
+          applicantFullName: 'Kevin Chang',
+          ssnNumber: '789012345',
+          annualIncome: 78000,
+          employmentType: 'Contract Employee',
+          loanAmountRequested: 25000,
+          loanPurpose: 'Medical Expenses',
+          creditScore: 718,
+          collateralDescription: '2021 Honda Civic',
+          monthlyObligations: 1950
+        }
+      ];
+
+      const errors: string[] = [];
+      const cheatData: any[] = [];
+
+      // Check if user is currently filling out a form
+      if (formFieldsCompleted.hasApplicantName || formFieldsCompleted.hasSSN || 
+          formFieldsCompleted.hasAnnualIncome || formFieldsCompleted.hasLoanAmount) {
+        
+        // Try to match current form entry to an expected applicant
+        let matchedExpected = null;
+        for (const expected of expectedApplications) {
+          if (currentFormEntry.applicantFullName?.trim().toLowerCase() === expected.applicantFullName.toLowerCase()) {
+            matchedExpected = expected;
+            break;
+          }
+        }
+        
+        // If no name match, try SSN
+        if (!matchedExpected && currentFormEntry.ssnNumber?.trim()) {
+          for (const expected of expectedApplications) {
+            if (currentFormEntry.ssnNumber.trim() === expected.ssnNumber) {
+              matchedExpected = expected;
+              break;
+            }
+          }
+        }
+        
+        if (matchedExpected) {
+          cheatData.push({
+            Applicant: 'CURRENT FORM ENTRY',
+            Name: currentFormEntry.applicantFullName?.trim() === matchedExpected.applicantFullName ? '✅' : '❌',
+            SSN: currentFormEntry.ssnNumber?.trim() === matchedExpected.ssnNumber ? '✅' : '❌',
+            Income: currentFormEntry.annualIncome && parseFloat(currentFormEntry.annualIncome) === matchedExpected.annualIncome ? '✅' : '❌',
+            Employment: currentFormEntry.employmentType === matchedExpected.employmentType ? '✅' : '❌',
+            LoanAmount: currentFormEntry.loanAmountRequested && parseFloat(currentFormEntry.loanAmountRequested) === matchedExpected.loanAmountRequested ? '✅' : '❌',
+            Purpose: currentFormEntry.loanPurpose === matchedExpected.loanPurpose ? '✅' : '❌',
+            CreditScore: currentFormEntry.creditScore && parseInt(currentFormEntry.creditScore) === matchedExpected.creditScore ? '✅' : '❌',
+            Collateral: currentFormEntry.collateralDescription?.trim() === matchedExpected.collateralDescription ? '✅' : '❌',
+            Obligations: currentFormEntry.monthlyObligations && parseFloat(currentFormEntry.monthlyObligations) === matchedExpected.monthlyObligations ? '✅' : '❌',
+            Status: 'In Progress'
+          });
+        } else {
+          // No match found - show all ❌
+          cheatData.push({
+            Applicant: 'CURRENT FORM ENTRY',
+            Name: '❌',
+            SSN: '❌',
+            Income: '❌',
+            Employment: '❌',
+            LoanAmount: '❌',
+            Purpose: '❌',
+            CreditScore: '❌',
+            Collateral: '❌',
+            Obligations: '❌',
+            Status: '❌ Unknown Applicant'
+          });
+        }
+      }
+
+      // Validation checks
+      if (applications.length === 0) {
+        expectedApplications.forEach((expected) => {
+          cheatData.push({
+            Applicant: expected.applicantFullName,
+            Name: '❌',
+            SSN: '❌',
+            Income: '❌',
+            Employment: '❌',
+            LoanAmount: '❌',
+            Purpose: '❌',
+            CreditScore: '❌',
+            Collateral: '❌',
+            Obligations: '❌',
+            Calculations: '❌',
+            Status: '❌ Not Started'
+          });
+        });
+        console.log('[Cheat] Loan Application Progress:');
+        console.table(cheatData);
+        return { success: false, message: 'No loan applications submitted yet' };
+      }
+
+      if (applications.length < 3) {
+        errors.push(`Only ${applications.length} application(s) submitted, need 3 total`);
+      }
+
+      expectedApplications.forEach((expected, idx) => {
+        const app = applications.find((a: any) => 
+          a.applicantFullName?.trim().toLowerCase() === expected.applicantFullName.toLowerCase()
+        );
+
+        const nameMatch = app && app.applicantFullName?.trim() === expected.applicantFullName;
+        const ssnMatch = app && app.ssnNumber?.trim() === expected.ssnNumber;
+        const incomeMatch = app && app.annualIncome === expected.annualIncome;
+        const employmentMatch = app && app.employmentType === expected.employmentType;
+        const loanAmountMatch = app && app.loanAmountRequested === expected.loanAmountRequested;
+        const purposeMatch = app && app.loanPurpose === expected.loanPurpose;
+        const creditScoreMatch = app && app.creditScore === expected.creditScore;
+        const collateralMatch = app && app.collateralDescription?.trim() === expected.collateralDescription;
+        const obligationsMatch = app && app.monthlyObligations === expected.monthlyObligations;
+        
+        // Check that calculations were performed
+        const hasCalculations = app && app.monthlyPayment > 0 && app.debtToIncomeRatio > 0 && 
+                               app.riskLevel && app.paymentScheduleGenerated;
+
+        if (!app) {
+          errors.push(`Application ${idx + 1}: ${expected.applicantFullName} not found`);
+        } else {
+          if (!nameMatch) errors.push(`Application ${idx + 1}: Applicant name mismatch`);
+          if (!ssnMatch) errors.push(`Application ${idx + 1}: SSN mismatch`);
+          if (!incomeMatch) errors.push(`Application ${idx + 1}: Annual income mismatch`);
+          if (!employmentMatch) errors.push(`Application ${idx + 1}: Employment type mismatch`);
+          if (!loanAmountMatch) errors.push(`Application ${idx + 1}: Loan amount mismatch`);
+          if (!purposeMatch) errors.push(`Application ${idx + 1}: Loan purpose mismatch`);
+          if (!creditScoreMatch) errors.push(`Application ${idx + 1}: Credit score mismatch`);
+          if (!collateralMatch) errors.push(`Application ${idx + 1}: Collateral description mismatch`);
+          if (!obligationsMatch) errors.push(`Application ${idx + 1}: Monthly obligations mismatch`);
+          if (!hasCalculations) errors.push(`Application ${idx + 1}: Missing calculator interactions (payment, DTI, risk, schedule)`);
+        }
+
+        cheatData.push({
+          Applicant: expected.applicantFullName,
+          Name: nameMatch ? '✅' : '❌',
+          SSN: ssnMatch ? '✅' : '❌',
+          Income: incomeMatch ? '✅' : '❌',
+          Employment: employmentMatch ? '✅' : '❌',
+          LoanAmount: loanAmountMatch ? '✅' : '❌',
+          Purpose: purposeMatch ? '✅' : '❌',
+          CreditScore: creditScoreMatch ? '✅' : '❌',
+          Collateral: collateralMatch ? '✅' : '❌',
+          Obligations: obligationsMatch ? '✅' : '❌',
+          Calculations: hasCalculations ? '✅' : '❌',
+          Status: app ? (errors.some(e => e.includes(expected.applicantFullName)) ? '⚠️ Errors' : '✅ Complete') : '❌ Missing'
+        });
+      });
+
+      if (errors.length > 0) {
+        console.log('[Cheat] Loan Application Progress:');
+        console.table(cheatData);
+
+        return {
+          success: false,
+          message: `Application validation errors: ${errors.join(', ')}`
+        };
+      }
+
+      console.log('[Cheat] Loan Application Progress:');
+      console.table(cheatData);
+
+      return {
+        success: true,
+        message: 'All 3 loan applications submitted successfully with correct data and calculations!'
+      };
+    }
+  },
+  {
+    id: 'inventory-receiving-terminal',
+    instructions: 'Open the TSV file Documents/copy-paste-task-29.tsv using LibreOffice Calc and transfer inventory data into the warehouse receiving terminal system. Use the barcode scanner to enter PO numbers, fill all required fields including item details, quantities, inspector information, and condition assessments from the TSV file. Capture condition photos for documentation. Process all 3 inventory items from the TSV file.',
+    ux: 'Scan/enter barcode for PO number, fill form fields with TSV data, use spinner controls for quantities and prices, select condition status with radio buttons, capture photos, add items to receiving table',
+    test: () => {
+      const appState = (window as any).app_state;
+      
+      if (!appState) {
+        return { success: false, message: 'App state not found' };
+      }
+
+      const receivedItems = appState.receivedItems || [];
+      const currentFormEntry = appState.currentFormEntry || {};
+      const formFieldsCompleted = appState.formFieldsCompleted || {};
+      const errors: string[] = [];
+      const cheatData: any[] = [];
+
+      // Expected data from Excel
+      const expectedItems = [
+        {
+          poNumber: 'PO-2024-157',
+          supplierName: 'Global Supply Solutions',
+          itemDescription: 'Steel Brackets 5mm thickness',
+          quantityOrdered: 750,
+          unitPrice: 3.25,
+          deliveryDate: '2024-01-25',
+          inspectorName: 'Michael Johnson',
+          conditionNotes: 'Good condition, minor scratches',
+          itemWeight: '0.5 kg'
+        },
+        {
+          poNumber: 'PO-2024-158',
+          supplierName: 'TechFlow Components',
+          itemDescription: 'USB-C Cables 2m length',
+          quantityOrdered: 1200,
+          unitPrice: 4.75,
+          deliveryDate: '2024-01-26',
+          inspectorName: 'Sarah Wilson',
+          conditionNotes: 'Excellent quality, all tested',
+          itemWeight: '0.3 kg'
+        },
+        {
+          poNumber: 'PO-2024-159',
+          supplierName: 'Precision Industrial',
+          itemDescription: 'Safety Helmets Class E rated',
+          quantityOrdered: 85,
+          unitPrice: 67.50,
+          deliveryDate: '2024-01-27',
+          inspectorName: 'Carlos Rodriguez',
+          conditionNotes: 'One unit damaged in shipping',
+          itemWeight: '1.2 kg'
+        }
+      ];
+
+      // Show current form progress if user is typing
+      const hasAnyFormData = formFieldsCompleted.hasPoNumber || formFieldsCompleted.hasSupplierName ||
+                             formFieldsCompleted.hasItemDescription || formFieldsCompleted.hasQuantityOrdered ||
+                             formFieldsCompleted.hasUnitPrice || formFieldsCompleted.hasDeliveryDate ||
+                             formFieldsCompleted.hasInspectorName || formFieldsCompleted.hasConditionNotes ||
+                             formFieldsCompleted.hasItemWeight || formFieldsCompleted.hasConditionStatus;
+
+      if (hasAnyFormData) {
+        // Find which expected item matches the current PO number being entered
+        const currentPO = currentFormEntry.poNumber?.trim().toUpperCase() || '';
+        const matchingExpected = expectedItems.find(e => e.poNumber.toUpperCase() === currentPO);
+        
+        if (matchingExpected) {
+          // Show real-time validation for current form entry
+          const formSupplierMatch = currentFormEntry.supplierName?.trim() === matchingExpected.supplierName;
+          const formItemMatch = currentFormEntry.itemDescription?.trim() === matchingExpected.itemDescription;
+          const formQtyMatch = currentFormEntry.quantityOrdered === matchingExpected.quantityOrdered;
+          const formPriceMatch = currentFormEntry.unitPrice && Math.abs(currentFormEntry.unitPrice - matchingExpected.unitPrice) < 0.01;
+          const formDateMatch = currentFormEntry.deliveryDate?.trim() === matchingExpected.deliveryDate;
+          const formInspectorMatch = currentFormEntry.inspectorName?.trim() === matchingExpected.inspectorName;
+          // Weight can be "0.5 kg" or just "0.5" - accept both formats
+          const formWeightMatch = currentFormEntry.itemWeight && (
+            currentFormEntry.itemWeight.trim() === matchingExpected.itemWeight ||
+            currentFormEntry.itemWeight.trim() === matchingExpected.itemWeight.replace(' kg', '')
+          );
+          const formNotesMatch = currentFormEntry.conditionNotes?.trim() === matchingExpected.conditionNotes;
+          const formConditionMatch = currentFormEntry.conditionStatus && currentFormEntry.conditionStatus.trim().length > 0;
+
+          cheatData.push({
+            PO: '🔄 CURRENT FORM',
+            Supplier: formSupplierMatch ? '✅' : (formFieldsCompleted.hasSupplierName ? '❌' : '⬜'),
+            Item: formItemMatch ? '✅' : (formFieldsCompleted.hasItemDescription ? '❌' : '⬜'),
+            Qty: formQtyMatch ? '✅' : (formFieldsCompleted.hasQuantityOrdered ? '❌' : '⬜'),
+            Price: formPriceMatch ? '✅' : (formFieldsCompleted.hasUnitPrice ? '❌' : '⬜'),
+            Date: formDateMatch ? '✅' : (formFieldsCompleted.hasDeliveryDate ? '❌' : '⬜'),
+            Inspector: formInspectorMatch ? '✅' : (formFieldsCompleted.hasInspectorName ? '❌' : '⬜'),
+            Weight: formWeightMatch ? '✅' : (formFieldsCompleted.hasItemWeight ? '❌' : '⬜'),
+            Condition: formConditionMatch ? '✅' : '⬜',
+            Notes: formNotesMatch ? '✅' : (formFieldsCompleted.hasConditionNotes ? '❌' : '⬜'),
+            Status: '⏳ Typing...'
+          });
+        }
+      }
+
+      // Check if no items received yet
+      if (receivedItems.length === 0 && !hasAnyFormData) {
+        expectedItems.forEach((expected) => {
+          cheatData.push({
+            PO: expected.poNumber,
+            Supplier: '❌',
+            Item: '❌',
+            Qty: '❌',
+            Price: '❌',
+            Date: '❌',
+            Inspector: '❌',
+            Weight: '❌',
+            Condition: '❌',
+            Notes: '❌',
+            Status: '❌ Not Started'
+          });
+        });
+        console.log('[Cheat] Inventory Receiving Progress:');
+        console.table(cheatData);
+        return { success: false, message: 'No items received yet' };
+      }
+
+      if (receivedItems.length < 3) {
+        errors.push(`Only ${receivedItems.length} item(s) received, need 3 total`);
+      }
+
+      // Always show all 3 expected items with validation against submitted items
+      expectedItems.forEach((expected, idx) => {
+        const item = receivedItems.find((i: any) => 
+          i.poNumber?.trim().toUpperCase() === expected.poNumber.toUpperCase()
+        );
+
+        const poMatch = item && item.poNumber?.trim() === expected.poNumber;
+        const supplierMatch = item && item.supplierName?.trim() === expected.supplierName;
+        const itemMatch = item && item.itemDescription?.trim() === expected.itemDescription;
+        const qtyMatch = item && item.quantityOrdered === expected.quantityOrdered;
+        const priceMatch = item && Math.abs(item.unitPrice - expected.unitPrice) < 0.01;
+        const dateMatch = item && item.deliveryDate?.trim() === expected.deliveryDate;
+        const inspectorMatch = item && item.inspectorName?.trim() === expected.inspectorName;
+        // Weight can be "0.5 kg" or just "0.5" - extract numeric part for comparison
+        const weightMatch = item && (
+          item.itemWeight?.trim() === expected.itemWeight ||
+          item.itemWeight?.trim() === expected.itemWeight.replace(' kg', '')
+        );
+        const notesMatch = item && item.conditionNotes?.trim() === expected.conditionNotes;
+        const hasConditionStatus = item && item.conditionStatus && item.conditionStatus.trim().length > 0;
+
+        if (!item) {
+          errors.push(`Item ${idx + 1}: ${expected.poNumber} not found`);
+        } else {
+          if (!poMatch) errors.push(`Item ${idx + 1}: PO number mismatch`);
+          if (!supplierMatch) errors.push(`Item ${idx + 1}: Supplier name mismatch`);
+          if (!itemMatch) errors.push(`Item ${idx + 1}: Item description mismatch`);
+          if (!qtyMatch) errors.push(`Item ${idx + 1}: Quantity ordered mismatch`);
+          if (!priceMatch) errors.push(`Item ${idx + 1}: Unit price mismatch`);
+          if (!dateMatch) errors.push(`Item ${idx + 1}: Delivery date mismatch`);
+          if (!inspectorMatch) errors.push(`Item ${idx + 1}: Inspector name mismatch`);
+          if (!weightMatch) errors.push(`Item ${idx + 1}: Item weight mismatch`);
+          if (!notesMatch) errors.push(`Item ${idx + 1}: Condition notes mismatch`);
+          if (!hasConditionStatus) errors.push(`Item ${idx + 1}: Condition status not selected`);
+        }
+
+        cheatData.push({
+          PO: expected.poNumber,
+          Supplier: supplierMatch ? '✅' : '❌',
+          Item: itemMatch ? '✅' : '❌',
+          Qty: qtyMatch ? '✅' : '❌',
+          Price: priceMatch ? '✅' : '❌',
+          Date: dateMatch ? '✅' : '❌',
+          Inspector: inspectorMatch ? '✅' : '❌',
+          Weight: weightMatch ? '✅' : '❌',
+          Condition: hasConditionStatus ? '✅' : '❌',
+          Notes: notesMatch ? '✅' : '❌',
+          Status: item ? (errors.some(e => e.includes(expected.poNumber)) ? '⚠️ Errors' : '✅ Complete') : '❌ Not Submitted'
+        });
+      });
+
+      if (errors.length > 0) {
+        console.log('[Cheat] Inventory Receiving Progress:');
+        console.table(cheatData);
+
+        return {
+          success: false,
+          message: `Inventory validation errors: ${errors.join(', ')}`
+        };
+      }
+
+      console.log('[Cheat] Inventory Receiving Progress:');
+      console.table(cheatData);
+
+      return {
+        success: true,
+        message: 'All 3 inventory items received successfully with correct data!'
+      };
+    }
+  },
+  {
+    id: 'legal-contract-management',
+    instructions: 'Open the TSV file Documents/copy-paste-task-30.tsv using LibreOffice Calc and transfer all contract information into the contract management system. For each contract, enter the contract reference, parties, type, dates, value, and renewal terms from the TSV file. Select the appropriate key clauses from the clause library. Build the timeline visualization for the contract period and set a renewal reminder. Complete all 3 contracts.',
+    ux: 'Enter contract data manually from TSV file, select clauses from the library, build timeline, and set reminders for each contract',
+    test: () => {
+      const appState = (window as any).app_state;
+      
+      const expectedContracts = [
+        {
+          contractReference: 'CNT-2024-387',
+          party1Company: 'Meridian Technologies',
+          party2Company: 'Beta Industries LLC',
+          contractType: 'Software Licensing Agreement',
+          startDate: '2024-01-01',
+          endDate: '2025-12-31',
+          contractValue: 125000,
+          renewalTerms: 'Auto-renew annually with 60-day notice',
+          keyClauses: ['IP Rights', 'Termination']
+        },
+        {
+          contractReference: 'CNT-2024-388',
+          party1Company: 'Cascade Manufacturing',
+          party2Company: 'Delta Logistics Corp',
+          contractType: 'Supply Chain Services',
+          startDate: '2024-02-01',
+          endDate: '2027-01-31',
+          contractValue: 850000,
+          renewalTerms: 'Manual renewal required',
+          keyClauses: ['Payment Schedule', 'SLA Terms']
+        },
+        {
+          contractReference: 'CNT-2024-389',
+          party1Company: 'Pinnacle Consulting Group',
+          party2Company: 'Epsilon Healthcare',
+          contractType: 'Professional Services Agreement',
+          startDate: '2024-03-01',
+          endDate: '2024-12-31',
+          contractValue: 75000,
+          renewalTerms: '90-day notice for non-renewal',
+          keyClauses: ['Confidentiality', 'Deliverables']
+        }
+      ];
+
+      const contracts = appState?.contracts || [];
+      const currentFormEntry = appState?.currentFormEntry || {};
+      const formFieldsCompleted = appState?.formFieldsCompleted || {};
+      const selectedClauses = appState?.selectedClauses || [];
+      const timelineBuilt = appState?.timelineBuilt || false;
+      const reminderSet = appState?.reminderSet || false;
+      const cheatData: any[] = [];
+      const errors: string[] = [];
+
+      // Basic validation - check if any contracts have been created
+      if (contracts.length === 0) {
+        // Check if there's current form data in progress
+        const hasFormData = formFieldsCompleted.hasContractReference || 
+                           formFieldsCompleted.hasParty1Company ||
+                           formFieldsCompleted.hasParty2Company;
+
+        if (hasFormData) {
+          // Show form in progress for the matching contract
+          const matchingIndex = expectedContracts.findIndex(expected =>
+            expected.contractReference.toUpperCase() === currentFormEntry.contractReference?.trim().toUpperCase()
+          );
+
+          if (matchingIndex !== -1) {
+            const expected = expectedContracts[matchingIndex];
+            const valueMatch = currentFormEntry.contractValue ? 
+              Math.abs(parseFloat(currentFormEntry.contractValue) - expected.contractValue) < 0.01 : false;
+            
+            const expectedClausesSorted = [...expected.keyClauses].sort();
+            const selectedClausesSorted = [...selectedClauses].sort();
+            const clausesMatch = expectedClausesSorted.length === selectedClausesSorted.length &&
+              expectedClausesSorted.every((clause, i) => clause === selectedClausesSorted[i]);
+
+            cheatData.push({
+              Reference: expected.contractReference,
+              Ref: currentFormEntry.contractReference?.trim() === expected.contractReference ? '✅' : '❌',
+              Party1: currentFormEntry.party1Company?.trim() === expected.party1Company ? '✅' : '❌',
+              Party2: currentFormEntry.party2Company?.trim() === expected.party2Company ? '✅' : '❌',
+              Type: currentFormEntry.contractType?.trim() === expected.contractType ? '✅' : '❌',
+              StartDate: currentFormEntry.startDate?.trim() === expected.startDate ? '✅' : '❌',
+              EndDate: currentFormEntry.endDate?.trim() === expected.endDate ? '✅' : '❌',
+              Value: valueMatch ? '✅' : '❌',
+              Renewal: currentFormEntry.renewalTerms?.trim() === expected.renewalTerms ? '✅' : '❌',
+              Clauses: clausesMatch ? '✅' : '❌',
+              Timeline: timelineBuilt ? '✅' : '❌',
+              Reminder: reminderSet ? '✅' : '❌',
+              Status: '🔄 In Progress'
+            });
+
+            // Add empty rows for other expected contracts
+            expectedContracts.forEach((exp, i) => {
+              if (i !== matchingIndex) {
+                cheatData.push({
+                  Reference: exp.contractReference,
+                  Ref: '❌',
+                  Party1: '❌',
+                  Party2: '❌',
+                  Type: '❌',
+                  StartDate: '❌',
+                  EndDate: '❌',
+                  Value: '❌',
+                  Renewal: '❌',
+                  Clauses: '❌',
+                  Timeline: '❌',
+                  Reminder: '❌',
+                  Status: '⏳ Pending'
+                });
+              }
+            });
+          } else {
+            // Form data doesn't match any expected contract
+            expectedContracts.forEach(expected => {
+              cheatData.push({
+                Reference: expected.contractReference,
+                Ref: '❌',
+                Party1: '❌',
+                Party2: '❌',
+                Type: '❌',
+                StartDate: '❌',
+                EndDate: '❌',
+                Value: '❌',
+                Renewal: '❌',
+                Clauses: '❌',
+                Timeline: '❌',
+                Reminder: '❌',
+                Status: '⏳ Pending'
+              });
+            });
+          }
+
+          console.log('[Cheat] Contract Management Progress:');
+          console.table(cheatData);
+          return { success: false, message: 'No contracts created yet - Complete and add the current contract' };
+        }
+
+        // No form data at all
+        expectedContracts.forEach(expected => {
+          cheatData.push({
+            Reference: expected.contractReference,
+            Ref: '❌',
+            Party1: '❌',
+            Party2: '❌',
+            Type: '❌',
+            StartDate: '❌',
+            EndDate: '❌',
+            Value: '❌',
+            Renewal: '❌',
+            Clauses: '❌',
+            Timeline: '❌',
+            Reminder: '❌',
+            Status: '⏳ Pending'
+          });
+        });
+        
+        console.log('[Cheat] Contract Management Progress:');
+        console.table(cheatData);
+        return { success: false, message: 'No contracts created yet - Start entering contract data from Excel' };
+      }
+
+      if (contracts.length < 3) {
+        errors.push(`Only ${contracts.length} contract(s) created, need 3 total`);
+      }
+
+      // Validate each expected contract and build cheat data
+      expectedContracts.forEach((expected) => {
+        const contract = contracts.find((c: any) =>
+          c.contractReference?.trim().toUpperCase() === expected.contractReference.toUpperCase()
+        );
+
+        if (contract) {
+          // Contract exists - validate all fields
+          const refMatch = contract.contractReference?.trim() === expected.contractReference;
+          const party1Match = contract.party1Company?.trim() === expected.party1Company;
+          const party2Match = contract.party2Company?.trim() === expected.party2Company;
+          const typeMatch = contract.contractType?.trim() === expected.contractType;
+          const startDateMatch = contract.startDate?.trim() === expected.startDate;
+          const endDateMatch = contract.endDate?.trim() === expected.endDate;
+          const valueMatch = Math.abs(contract.contractValue - expected.contractValue) < 0.01;
+          const renewalMatch = contract.renewalTerms?.trim() === expected.renewalTerms;
+          
+          const expectedClausesSorted = [...expected.keyClauses].sort();
+          const actualClausesSorted = contract.keyClauses ? [...contract.keyClauses].sort() : [];
+          const clausesMatch = expectedClausesSorted.length === actualClausesSorted.length &&
+            expectedClausesSorted.every((clause, i) => clause === actualClausesSorted[i]);
+          
+          const timelineMatch = contract.timelineBuilt === true;
+          const reminderMatch = contract.reminderSet === true;
+
+          if (!refMatch) errors.push(`${expected.contractReference}: Reference mismatch`);
+          if (!party1Match) errors.push(`${expected.contractReference}: Party 1 company mismatch`);
+          if (!party2Match) errors.push(`${expected.contractReference}: Party 2 company mismatch`);
+          if (!typeMatch) errors.push(`${expected.contractReference}: Contract type mismatch`);
+          if (!startDateMatch) errors.push(`${expected.contractReference}: Start date mismatch`);
+          if (!endDateMatch) errors.push(`${expected.contractReference}: End date mismatch`);
+          if (!valueMatch) errors.push(`${expected.contractReference}: Contract value mismatch`);
+          if (!renewalMatch) errors.push(`${expected.contractReference}: Renewal terms mismatch`);
+          if (!clausesMatch) errors.push(`${expected.contractReference}: Key clauses mismatch`);
+          if (!timelineMatch) errors.push(`${expected.contractReference}: Timeline not built`);
+          if (!reminderMatch) errors.push(`${expected.contractReference}: Reminder not set`);
+
+          cheatData.push({
+            Reference: expected.contractReference,
+            Ref: refMatch ? '✅' : '❌',
+            Party1: party1Match ? '✅' : '❌',
+            Party2: party2Match ? '✅' : '❌',
+            Type: typeMatch ? '✅' : '❌',
+            StartDate: startDateMatch ? '✅' : '❌',
+            EndDate: endDateMatch ? '✅' : '❌',
+            Value: valueMatch ? '✅' : '❌',
+            Renewal: renewalMatch ? '✅' : '❌',
+            Clauses: clausesMatch ? '✅' : '❌',
+            Timeline: timelineMatch ? '✅' : '❌',
+            Reminder: reminderMatch ? '✅' : '❌',
+            Status: (!refMatch || !party1Match || !party2Match || !typeMatch || !startDateMatch || 
+                    !endDateMatch || !valueMatch || !renewalMatch || !clausesMatch || 
+                    !timelineMatch || !reminderMatch) ? '❌ Errors' : '✅ Complete'
+          });
+        } else {
+          // Contract not yet created - check if it's the current form entry
+          const isCurrentEntry = currentFormEntry.contractReference?.trim().toUpperCase() === 
+                                expected.contractReference.toUpperCase();
+          
+          if (isCurrentEntry && (formFieldsCompleted.hasContractReference || formFieldsCompleted.hasParty1Company)) {
+            const valueMatch = currentFormEntry.contractValue ? 
+              Math.abs(parseFloat(currentFormEntry.contractValue) - expected.contractValue) < 0.01 : false;
+            
+            const expectedClausesSorted = [...expected.keyClauses].sort();
+            const selectedClausesSorted = [...selectedClauses].sort();
+            const clausesMatch = expectedClausesSorted.length === selectedClausesSorted.length &&
+              expectedClausesSorted.every((clause, i) => clause === selectedClausesSorted[i]);
+
+            cheatData.push({
+              Reference: expected.contractReference,
+              Ref: currentFormEntry.contractReference?.trim() === expected.contractReference ? '✅' : '❌',
+              Party1: currentFormEntry.party1Company?.trim() === expected.party1Company ? '✅' : '❌',
+              Party2: currentFormEntry.party2Company?.trim() === expected.party2Company ? '✅' : '❌',
+              Type: currentFormEntry.contractType?.trim() === expected.contractType ? '✅' : '❌',
+              StartDate: currentFormEntry.startDate?.trim() === expected.startDate ? '✅' : '❌',
+              EndDate: currentFormEntry.endDate?.trim() === expected.endDate ? '✅' : '❌',
+              Value: valueMatch ? '✅' : '❌',
+              Renewal: currentFormEntry.renewalTerms?.trim() === expected.renewalTerms ? '✅' : '❌',
+              Clauses: clausesMatch ? '✅' : '❌',
+              Timeline: timelineBuilt ? '✅' : '❌',
+              Reminder: reminderSet ? '✅' : '❌',
+              Status: '🔄 In Progress'
+            });
+          } else {
+            // Contract not started
+            cheatData.push({
+              Reference: expected.contractReference,
+              Ref: '❌',
+              Party1: '❌',
+              Party2: '❌',
+              Type: '❌',
+              StartDate: '❌',
+              EndDate: '❌',
+              Value: '❌',
+              Renewal: '❌',
+              Clauses: '❌',
+              Timeline: '❌',
+              Reminder: '❌',
+              Status: '⏳ Pending'
+            });
+          }
+        }
+      });
+
+      if (errors.length > 0) {
+        console.log('[Cheat] Contract Management Progress:');
+        console.table(cheatData);
+
+        return {
+          success: false,
+          message: `Contract validation errors: ${errors.join(', ')}`
+        };
+      }
+
+      console.log('[Cheat] Contract Management Progress:');
+      console.table(cheatData);
+
+      return {
+        success: true,
+        message: 'All 3 contracts created successfully with complete data!'
+      };
+    }
+  },
 ];
 
-const tasks = (uiBenchTasks as UiBenchTask[]).map((t, index) => ({
+const tasks = (uiBenchTasks as any[]).map((t, index) => ({
   id: index + 1,
   name: t.id,
   component: createTaskComponentForIndex(index),

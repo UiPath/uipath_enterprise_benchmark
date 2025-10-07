@@ -2154,7 +2154,7 @@ const WorkdayApp = () => {
     const frequentlyUsedCountries = [
       "Canada",
       "United Kingdom", 
-      "United States of America"
+      "United States"
     ];
 
     const countries = [

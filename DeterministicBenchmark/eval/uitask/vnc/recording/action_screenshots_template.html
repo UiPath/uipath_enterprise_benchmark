@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Action Screenshots</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #111823;
+      --text: #e6eef8;
+      --muted: #9bb0c6;
+      --accent: #2f81f7;
+      --border: #1f2a37;
+    }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif; }
+    .container { max-width: 1600px; margin: 0 auto; padding: 24px; }
+    h1 { margin: 0 0 12px 0; font-size: 22px; }
+    .subtitle { color: var(--muted); margin-bottom: 24px; font-size: 13px; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .step { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .step-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    .step-title { font-weight: 600; font-size: 14px; }
+    .step-meta { color: var(--muted); font-size: 12px; }
+    .images { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; }
+    .images .img-card { min-height: 420px; }
+    .img-wrap { min-height: 420px; }
+    .img-card { position: relative; border-left: 1px solid var(--border); }
+    .img-card:first-child { border-left: none; }
+    .img-label { position: absolute; top: 8px; left: 12px; background: rgba(0,0,0,.55); color: #fff; padding: 2px 8px; border-radius: 999px; font-size: 12px; z-index: 2; }
+    .img-wrap { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+    .img-wrap img { display: block; width: 100%; height: auto; user-select: none; }
+    .meta-row { display: flex; gap: 12px; padding: 8px 12px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); align-items: center; flex-wrap: wrap; }
+    .badge { padding: 2px 8px; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); }
+    .kbd { background: #0f1720; border: 1px solid var(--border); border-bottom-color: #0c121a; padding: 1px 6px; border-radius: 6px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; }
+    .footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 20px; }
+    .ok { color: #22c55e; font-weight: 600; }
+    .fail { color: #ef4444; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Action Screenshots</h1>
+    <div class="subtitle" id="summary"></div>
+    <div id="grid" class="grid"></div>
+  </div>
+  <script>
+    const data = __DATA_JSON__;
+    const grid = document.getElementById('grid');
+    const summary = document.getElementById('summary');
+    summary.textContent = `${data.length} steps`;
+
+    function createImgCard(label, src, tsRel) {
+      const card = document.createElement('div');
+      card.className = 'img-card';
+
+      const lbl = document.createElement('div');
+      lbl.className = 'img-label';
+      lbl.textContent = `${label}`;
+
+      const wrap = document.createElement('div');
+      wrap.className = 'img-wrap';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = label;
+
+      wrap.appendChild(img);
+      card.appendChild(lbl);
+      card.appendChild(wrap);
+      return card;
+    }
+
+    function renderStep(step) {
+      const card = document.createElement('div');
+      card.className = 'step';
+
+      const header = document.createElement('div');
+      header.className = 'step-header';
+      const title = document.createElement('div');
+      title.className = 'step-title';
+      const actionName = step.action ?? 'unknown';
+      title.textContent = `#${String(step.index).padStart(2, '0')} · ${actionName}`;
+      const meta = document.createElement('div');
+      meta.className = 'step-meta';
+      meta.textContent = step.relative ?? '';
+      header.appendChild(title);
+      header.appendChild(meta);
+
+      const metaRow = document.createElement('div');
+      metaRow.className = 'meta-row';
+      const actionBadge = document.createElement('span');
+      actionBadge.className = 'badge';
+      actionBadge.textContent = `action: ${actionName}`;
+      metaRow.appendChild(actionBadge);
+
+      // Show execution.json raw parameters when available
+      if (step.params) {
+        const p = document.createElement('span');
+        p.className = 'kbd';
+        p.textContent = JSON.stringify(step.params);
+        metaRow.appendChild(p);
+      }
+
+      // No extra processed params; raw params are displayed above if present
+
+      // Add row for task_marked_complete
+      const completeRow = document.createElement('div');
+      completeRow.className = 'meta-row';
+      const completeBadge = document.createElement('span');
+      completeBadge.className = 'badge';
+      completeBadge.textContent = 'Task Marked Complete:';
+      const icon = document.createElement('span');
+      const isComplete = Boolean(step.task_marked_complete);
+      icon.textContent = isComplete ? ' ✓' : ' ✗';
+      icon.className = isComplete ? 'ok' : 'fail';
+      completeRow.appendChild(completeBadge);
+      completeRow.appendChild(icon);
+
+      const images = document.createElement('div');
+      images.className = 'images';
+      images.appendChild(createImgCard('Before', step.before.path, step.relative ?? ''));
+      if (step.after) {
+        images.appendChild(createImgCard('After', step.after.path, ''));
+      }
+
+      card.appendChild(header);
+      card.appendChild(metaRow);
+      card.appendChild(completeRow);
+      card.appendChild(images);
+      return card;
+    }
+
+    for (const step of data) {
+      grid.appendChild(renderStep(step));
+    }
+  </script>
+</body>
+</html>
+
+

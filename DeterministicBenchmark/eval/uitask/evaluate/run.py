@@ -9,8 +9,8 @@ from typing import Protocol, runtime_checkable
 
 from dask.distributed import Client, LocalCluster
 
-from uitask.computer_use import EXECUTION_FILE, Agent
-from uitask.container import TaskType, build, delete, inspect_container, launch
+from uitask.computer_use import EXECUTION_FILE, PARTIAL_EXECUTION_FILE, Agent
+from uitask.environment.container import TaskType, build, delete, inspect_container, launch
 
 
 @runtime_checkable
@@ -33,7 +33,6 @@ class Task:
     task_type: TaskType
     task_id: int
     max_steps: int
-    record: bool
     unique_id: str | None = None
 
     @property
@@ -51,7 +50,6 @@ class Task:
         screen_width: int,
         screen_height: int,
         max_steps: int,
-        record: bool,
         unique_id: str | None = None,
     ) -> Task:
         assert "id" in data, "Missing required field `id`"
@@ -72,7 +70,6 @@ class Task:
             task_id=task_id,
             task=data["ques"],
             max_steps=max_steps,
-            record=record,
             unique_id=unique_id,
         )
 
@@ -82,12 +79,14 @@ def run_task(
     agent_builder: AgentBuilder,
     output_dir: Path,
     rerun: bool = False,
+    reenact: bool = False,
+    step_wait_time: float = 5.0,
 ) -> None:
     task_output_dir = output_dir / f"{task.screen_width}_{task.screen_height}" / task.task_key
     task_output_dir.mkdir(parents=True, exist_ok=True)
 
     # Skip completed task
-    if (task_output_dir / EXECUTION_FILE).exists() and not rerun:
+    if (task_output_dir / EXECUTION_FILE).exists() and not (rerun or reenact):
         print(f"Skipping task {task.task_key}")
         return
 
@@ -108,17 +107,26 @@ def run_task(
             cdp_port=None,
         )
 
-        print("Sleeping for 3s to wait for container to be ready")
-        time.sleep(3)
-
         agent = agent_builder(
             task=task,
             output_dir=task_output_dir,
             vnc_port=vnc_port,
             cdp_port=cdp_port,
         )
+        if reenact:
+            # Prefer partial if present, otherwise execution
+            trace_path = (
+                task_output_dir / PARTIAL_EXECUTION_FILE
+                if (task_output_dir / PARTIAL_EXECUTION_FILE).exists()
+                else task_output_dir / EXECUTION_FILE
+            )
+            if not trace_path.exists():
+                print(f"No execution trace found in {task_output_dir}")
+                return
 
-        agent.run(max_steps=task.max_steps, record=task.record)
+            agent.reenact(trace_path=trace_path, step_wait_time=step_wait_time)
+        else:
+            agent.run(max_steps=task.max_steps)
     except Exception:
         print(traceback.format_exc())
     finally:
@@ -130,7 +138,6 @@ def run_tasks(
     tasks_file: Path,
     output_dir: Path,
     resolutions: list[ScreenResolution],
-    record: bool,
     max_steps: int,
     num_workers: int,
     threads_per_worker: int,
@@ -139,6 +146,8 @@ def run_tasks(
     task_filters: set[str] | None = None,
     job_id: str | None = None,
     build_image: bool = False,
+    reenact: bool = False,
+    step_wait_time: float = 0.0,
 ) -> None:
     if build_image:
         build()
@@ -158,7 +167,6 @@ def run_tasks(
                             resolution.width,
                             resolution.height,
                             max_steps,
-                            record,
                             job_id,
                         )
                     )
@@ -177,6 +185,8 @@ def run_tasks(
             agent_builder=agent_builder,
             output_dir=output_dir,
             rerun=rerun,
+            reenact=reenact,
+            step_wait_time=step_wait_time,
         ),
         benchmark_tasks,
         retries=retries,

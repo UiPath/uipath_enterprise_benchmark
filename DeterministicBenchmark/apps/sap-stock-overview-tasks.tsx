@@ -149,7 +149,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-filter-materials-b-to-g-with-fg',
-    instructions: 'Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find materials where the material description is between B and G (alphabetically) AND the material code contains "FG". Format JSON response as {"materials": [list of material codes]}, and use the Submit Results button to send it.',
+    instructions: 'Open the Stock Overview (MMBE) form (Logistics -> Materials Management -> Inventory Management). Use the "Search for material" button (the icon next to the material input) to open the Material Number modal. In the modal, use the filters to find materials where the material description is between B and G (alphabetically) AND the Material Number contains "FG". Format JSON response as {"materials": [list of material codes]}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;

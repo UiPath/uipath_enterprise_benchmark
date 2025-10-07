@@ -38,6 +38,7 @@ class TaskType(StrEnum):
 CONTAINER_NAME: Final[str] = "uitask-benchmark"
 IMAGE_NAME: Final[str] = "xfce:latest"
 DOCKERFILE: Final[str] = "docker/xfce.dockerfile"
+ROOT_DIR: Final[Path] = Path(__file__).parent.parent.parent.parent
 
 app = typer.Typer()
 
@@ -297,9 +298,6 @@ def launch(
 
     Returns the actual VNC and CDP ports used (may differ from requested if ports were in use).
     """
-    # Identify DeterministicBenchmark as the project root
-    project_root = Path(__file__).parent.parent.parent
-
     # If no ports specified, find free ones automatically with randomization
     if vnc_port is None:
         import random
@@ -315,7 +313,7 @@ def launch(
         print(f"No CDP port specified, automatically assigned: {cdp_port}")
 
     code, actual_vnc_port, actual_cdp_port = _docker_compose_up(
-        project_root=project_root,
+        project_root=ROOT_DIR,
         screen_width=screen_width,
         screen_height=screen_height,
         task_type=task_type,
@@ -477,8 +475,7 @@ def build(
 ) -> None:
     """Build Docker image from Dockerfile in DeterministicBenchmark directory."""
     # Identify DeterministicBenchmark as the project root
-    project_root = Path(__file__).parent.parent.parent
-    dockerfile_path = project_root / dockerfile
+    dockerfile_path = ROOT_DIR / dockerfile
 
     # Verify dockerfile exists
     if not dockerfile_path.exists():
@@ -493,7 +490,7 @@ def build(
         image_name,
         "-f",
         dockerfile_path.as_posix(),  # Use forward slashes for Docker compatibility
-        project_root.as_posix(),  # Use forward slashes for Docker compatibility
+        ROOT_DIR.as_posix(),  # Use forward slashes for Docker compatibility
     ]
 
     typer.echo(f"Building Docker image '{image_name}' from {dockerfile}")
