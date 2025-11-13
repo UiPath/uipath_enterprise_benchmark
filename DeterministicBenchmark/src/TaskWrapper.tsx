@@ -10,7 +10,8 @@ interface TaskData {
   component: React.ComponentType;
   task: string;
   ux: string;
-  test?: () => { success: boolean; message?: string };
+  test?: () => { success: boolean; message?: string }; // Legacy: inline test function
+  testFn?: string; // New: reference to test function in tests.ts
   fullWidth?: boolean;
   requireResultSubmission?: boolean;
 }
@@ -27,7 +28,7 @@ function useTaskExecutionStatus(appPath: string, taskId: number) {
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   
   // Only enable when explicitly enabled via environment variable
-  const enableHumanEval = (import.meta as any).env?.VITE_ENABLE_HUMAN_EVAL === 'true';
+  const enableHumanEval = (import.meta as any).env?.UI_CUBE_ENABLE_HUMAN_EVAL === 'true';
   
   const updateStatus = useCallback(() => {
     if (!enableHumanEval) {
@@ -135,6 +136,12 @@ const TaskWrapper: React.FC<TaskWrapperProps> = ({ tasks, appName, appPath }) =>
   const [searchParams] = useSearchParams();
   const mode = searchParams.get('mode');
   
+  // Helper to preserve search params in navigation
+  const preserveSearchParams = (url: string) => {
+    const params = searchParams.toString();
+    return params ? `${url}?${params}` : url;
+  };
+  
   // Compute current task id and selection for both list and detail views
   const taskIdNum = taskId ? parseInt(taskId, 10) : null;
   const currentTask = useMemo(
@@ -153,10 +160,36 @@ const TaskWrapper: React.FC<TaskWrapperProps> = ({ tasks, appName, appPath }) =>
   const [isSubmitOpen, setIsSubmitOpen] = useState(false);
   const [submissionInput, setSubmissionInput] = useState('');
   
+  // Cache for dynamically loaded test functions
+  const testFnCacheRef = useRef<Map<string, () => { success: boolean; message?: string }>>(new Map());
   
+  // Load test function dynamically if needed
+  const loadTestFunction = async (testFnName: string) => {
+    if (testFnCacheRef.current.has(testFnName)) {
+      return testFnCacheRef.current.get(testFnName)!;
+    }
+    
+    try {
+      // Dynamically import test functions based on app path
+      if (appPath.includes('copy-paste-tasks')) {
+        const testsModule = await import('../apps/copy-paste-tasks/tests');
+        const testFn = (testsModule as any)[testFnName];
+        if (testFn) {
+          testFnCacheRef.current.set(testFnName, testFn);
+          return testFn;
+        }
+      }
+      // Add other app paths here as needed
+      return null;
+    } catch (err) {
+      console.error(`Failed to load test function ${testFnName}:`, err);
+      return null;
+    }
+  };
   
   const runTest = useMemo(() => (forceRun = false) => {
-    if (!currentTask?.test) return;
+    const hasTest = currentTask?.test || currentTask?.testFn;
+    if (!hasTest) return;
     
     try {
       // Check if app_state changed (only run test if state changed or forced)
@@ -169,24 +202,47 @@ const TaskWrapper: React.FC<TaskWrapperProps> = ({ tasks, appName, appPath }) =>
       
       lastAppStateRef.current = currentStateString;
       
-      const result = currentTask.test();
-      if (result && typeof result.success === 'boolean') {
-        const currentMessage = result.message || null;
-        // Update state and log when success flag OR message changes
-        if (lastSuccessRef.current !== result.success || lastMessageRef.current !== currentMessage) {
-          lastSuccessRef.current = result.success;
-          lastMessageRef.current = currentMessage;
-          setTestResult(result);
-          // Log test result message to console when result changes
-          if (result.message) {
-            console.log(`[Test] ${currentTask.name}: ${result.message}`);
-          }
-          
-          // Notify HumanEval system of test result change
-          if (typeof window !== 'undefined' && (window as any).humanEvalTracker) {
-            (window as any).humanEvalTracker.recordTestResult(result.success, result.message || '');
+      // Handle legacy inline test function
+      if (currentTask.test) {
+        const result = currentTask.test();
+        if (result && typeof result.success === 'boolean') {
+          const currentMessage = result.message || null;
+          if (lastSuccessRef.current !== result.success || lastMessageRef.current !== currentMessage) {
+            lastSuccessRef.current = result.success;
+            lastMessageRef.current = currentMessage;
+            setTestResult(result);
+            if (result.message) {
+              console.log(`[Test] ${currentTask.name}: ${result.message}`);
+            }
+            
+            if (typeof window !== 'undefined' && (window as any).humanEvalTracker) {
+              (window as any).humanEvalTracker.recordTestResult(result.success, result.message || '');
+            }
           }
         }
+      }
+      // Handle new dynamic test function loading
+      else if (currentTask.testFn) {
+        loadTestFunction(currentTask.testFn).then(testFn => {
+          if (testFn) {
+            const result = testFn();
+            if (result && typeof result.success === 'boolean') {
+              const currentMessage = result.message || null;
+              if (lastSuccessRef.current !== result.success || lastMessageRef.current !== currentMessage) {
+                lastSuccessRef.current = result.success;
+                lastMessageRef.current = currentMessage;
+                setTestResult(result);
+                if (result.message) {
+                  console.log(`[Test] ${currentTask.name}: ${result.message}`);
+                }
+                
+                if (typeof window !== 'undefined' && (window as any).humanEvalTracker) {
+                  (window as any).humanEvalTracker.recordTestResult(result.success, result.message || '');
+                }
+              }
+            }
+          }
+        });
       }
     } catch (err) {
       if (lastSuccessRef.current !== false || lastMessageRef.current !== 'Test execution error') {
@@ -197,10 +253,11 @@ const TaskWrapper: React.FC<TaskWrapperProps> = ({ tasks, appName, appPath }) =>
         console.log(`[Test] ${currentTask.name}: ${errorResult.message}`);
       }
     }
-  }, [currentTask]);
+  }, [currentTask, appPath]);
 
   useEffect(() => {
-    if (!currentTask?.test) {
+    const hasTest = currentTask?.test || currentTask?.testFn;
+    if (!hasTest) {
       setTestResult(null);
       lastSuccessRef.current = null;
       lastMessageRef.current = null;
@@ -222,7 +279,7 @@ const TaskWrapper: React.FC<TaskWrapperProps> = ({ tasks, appName, appPath }) =>
       <div className="min-h-screen bg-gray-50 py-6 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="mb-6 flex items-center justify-between bg-white border rounded shadow-sm px-5 py-3">
-            <Link to="/" id="back-to-apps" className="text-gray-600 hover:text-gray-800 whitespace-nowrap">← Back to Apps</Link>
+            <Link to={preserveSearchParams("/")} id="back-to-apps" className="text-gray-600 hover:text-gray-800 whitespace-nowrap">← Back to Apps</Link>
             <div className="text-base font-semibold text-gray-900 truncate max-w-[60vw]">{appName}</div>
             <div className="w-20" />
           </div>
@@ -233,7 +290,7 @@ const TaskWrapper: React.FC<TaskWrapperProps> = ({ tasks, appName, appPath }) =>
                 return (
                   <Link
                     key={id}
-                    to={`${appPath}/${id}`}
+                    to={preserveSearchParams(`${appPath}/${id}`)}
                     className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow cursor-pointer block relative"
                   >
                     <TaskStatusDot status={executionStatus} />
@@ -252,7 +309,7 @@ const TaskWrapper: React.FC<TaskWrapperProps> = ({ tasks, appName, appPath }) =>
 
   // Individual task view
   if (!currentTask) {
-    return <Navigate to={appPath} replace />;
+    return <Navigate to={preserveSearchParams(appPath)} replace />;
   }
 
   const currentIndex = tasks.findIndex((t) => t.id === (taskIdNum as number));
@@ -272,7 +329,7 @@ const TaskWrapper: React.FC<TaskWrapperProps> = ({ tasks, appName, appPath }) =>
       <div className="min-h-screen bg-gray-50 pt-8 px-4">
         <div className={outerContainerClass}>
           <div className="mb-2 flex items-center justify-between">
-            {currentTask.test && (
+            {(currentTask.test || currentTask.testFn) && (
               <div className="font-mono text-sm text-gray-600 hidden">{testResult?.success ? 'code#1' : 'code#0'}</div>
             )}
             {currentTask?.requireResultSubmission && (
@@ -327,7 +384,7 @@ const TaskWrapper: React.FC<TaskWrapperProps> = ({ tasks, appName, appPath }) =>
         {/* Compact toolbar */}
         <div className="mb-5 flex items-start justify-between bg-white border rounded shadow-sm px-4 py-3">
           <div className="flex items-start gap-4 min-w-0 flex-1">
-            <Link to={appPath.replace('/:taskId?', '')} id="back-to-tasks" className="text-gray-600 hover:text-gray-800 whitespace-nowrap pt-0.5">
+            <Link to={preserveSearchParams(appPath.replace('/:taskId?', ''))} id="back-to-tasks" className="text-gray-600 hover:text-gray-800 whitespace-nowrap pt-0.5">
               ← Back to Tasks
             </Link>
             <div className="min-w-0 flex-1">
@@ -342,7 +399,7 @@ const TaskWrapper: React.FC<TaskWrapperProps> = ({ tasks, appName, appPath }) =>
             </div>
           </div>
           <div className="flex items-start gap-3 whitespace-nowrap flex-shrink-0 pt-0.5">
-            {currentTask.test && (
+            {(currentTask.test || currentTask.testFn) && (
               <span className="font-mono text-sm text-gray-700 hidden">{testResult?.success ? 'code#1' : 'code#0'}</span>
             )}
             {currentTask.requireResultSubmission && (
