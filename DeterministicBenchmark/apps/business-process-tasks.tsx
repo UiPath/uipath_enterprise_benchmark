@@ -140,7 +140,7 @@ const uiBenchTasks: UiBenchTask[] = [
         
         return { 
           success: false, 
-          message: `Only ${normalizedInvoices.length} of 20 invoices normalized. Complete all invoice processing.` 
+          message: `Only ${normalizedInvoices.length} of 12 invoices normalized. Complete all invoice processing.` 
         };
       }
       
@@ -192,13 +192,13 @@ const uiBenchTasks: UiBenchTask[] = [
       if (!allNormalized) {
         return { 
           success: false, 
-          message: 'Not all invoices have been normalized. Complete processing for all 20 invoices.' 
+          message: 'Not all invoices have been normalized. Complete processing for all 12 invoices.' 
         };
       }
       
       return { 
         success: true, 
-        message: `Successfully normalized all 20 invoices to standard "1,234.56" decimal format with no data loss.` 
+        message: `Successfully normalized all 12 invoices to standard "1,234.56" decimal format with no data loss.` 
       };
     },
   },
@@ -359,8 +359,8 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'customer-record-anonymization',
-    instructions: 'Review 30 customer records, identify and redact all PII (SSN, phone, email, addresses) before data export. Scan records for PII patterns, select sensitive fields, apply redaction (XXX-XX-1234), and validate anonymization completeness. All PII must be correctly identified and redacted, export table must contain no sensitive information while preserving business data.',
-    ux: 'Scan records for PII patterns, select sensitive fields, apply redaction (XXX-XX-1234), validate anonymization completeness',
+    instructions: 'Review 5 email records with mixed personal and business content. Classify each highlighted item as either PII (personal information to redact) or Not-PII (business information to preserve). Click the ✓ Not-PII or ✗ PII buttons for each item. All highlighted items must be correctly classified with acceptable accuracy (8-15 PII items and 12-20 business items expected).',
+    ux: 'Read email content, identify highlighted items, click ✓ Not-PII or ✗ PII buttons for each item, classify all items',
     test: () => {
       const appState = (window as any).app_state;
       if (!appState) {
@@ -487,7 +487,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'student-transcript-validation',
-    instructions: 'Review 5 graduate school applications by tagging criteria demonstrated in academic records, interview notes, and faculty recommendations. For each student: 1) Academic Performance: Tag which prerequisites are met (CS101 ≥B+, MATH201 ≥C+, CS201 ≥B) and if GPA ≥3.0, 2) Interview Assessment: Identify demonstrated soft skills (Leadership, Communication, Problem-solving, Teamwork, Professionalism, Preparation, Enthusiasm), 3) Faculty Recommendation: Identify faculty endorsements (Exceptional Student, Strong Analytical Skills, Creative Thinking, Natural Leader, Top Performer, Reliable, Innovative). Read carefully and select only criteria with clear evidence in the text.',
+    instructions: 'Review 5 graduate school applications by tagging criteria demonstrated in academic records, interview notes, and faculty recommendations. For each student: 1) Academic Performance: Tag which prerequisites are met (CS101 ≥B+, MATH201 ≥C+, CS201 ≥B) and if GPA ≥3.0, 2) Interview Assessment: Identify demonstrated soft skills (Leadership, Communication, Problem-solving, Teamwork, Professionalism, Preparation, Enthusiasm), 3) Faculty Recommendation: Identify faculty endorsements (Exceptional Student, Strong Analytical Skills, Creative Thinking, Natural Leader, Top Performer, Reliable, Innovative). Read carefully and select only criteria with clear evidence in the text. Absence of tags indicates criteria were not met.',
     ux: 'Tag criteria from dropdowns based on evidence found in academic records, interview notes, and recommendation letters',
     test: () => {
       const appState = (window as any).app_state;

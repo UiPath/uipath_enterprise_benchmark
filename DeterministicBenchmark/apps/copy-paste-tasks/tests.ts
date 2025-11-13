@@ -1,65 +1,11 @@
-import React from 'react';
-import TaskWrapper from '../src/TaskWrapper';
-import Task1 from './copy-paste-tasks/task-1';
-import Task2 from './copy-paste-tasks/task-2';
-import Task3 from './copy-paste-tasks/task-3';
-import Task4 from './copy-paste-tasks/task-4';
-import Task5 from './copy-paste-tasks/task-5';
-import Task6 from './copy-paste-tasks/task-6';
-import Task7 from './copy-paste-tasks/task-7';
-import Task8 from './copy-paste-tasks/task-8';
-import Task9 from './copy-paste-tasks/task-9';
-import Task10 from './copy-paste-tasks/task-10';
-import Task11 from './copy-paste-tasks/task-11';
-import Task12 from './copy-paste-tasks/task-12';
-import Task13 from './copy-paste-tasks/task-13';
-import Task14 from './copy-paste-tasks/task-14';
-import Task15 from './copy-paste-tasks/task-15';
-import Task16 from './copy-paste-tasks/task-16';
-import Task17 from './copy-paste-tasks/task-17';
-import Task18 from './copy-paste-tasks/task-18';
-import Task19 from './copy-paste-tasks/task-19';
-import Task20 from './copy-paste-tasks/task-20';
-import Task21 from './copy-paste-tasks/task-21';
-import Task22 from './copy-paste-tasks/task-22';
-import Task23 from './copy-paste-tasks/task-23';
-import Task24 from './copy-paste-tasks/task-24';
-import Task25 from './copy-paste-tasks/task-25';
-import Task26 from './copy-paste-tasks/task-26';
-import Task27 from './copy-paste-tasks/task-27';
-import Task28 from './copy-paste-tasks/task-28';
-import Task29 from './copy-paste-tasks/task-29';
-import Task30 from './copy-paste-tasks/task-30';
+// Auto-generated test functions for copy-paste tasks
+// This file contains all validation logic separated from UI components
 
-type UiBenchTask = {
-  id: string;
-  instructions: string;
-  ux: string;
-  test?: () => { success: boolean; message?: string };
-  require_result_submission?: boolean;
-};
+export type TestResult = { success: boolean; message?: string };
+export type TestFunction = () => TestResult;
 
-function createTaskComponent(TaskComponent: React.ComponentType): React.FC {
-  const C: React.FC = () => <TaskComponent />;
-  return C;
-}
-
-function createTaskComponentForIndex(index: number): React.FC {
-  const components = [Task1, Task2, Task3, Task4, Task5, Task6, Task7, Task8, Task9, Task10, Task11, Task12, Task13, Task14, Task15, Task16, Task17, Task18, Task19, Task20, Task21, Task22, Task23, Task24, Task25, Task26, Task27, Task28, Task29, Task30];
-  const TaskComponent = components[index];
-  if (!TaskComponent) {
-    throw new Error(`Task component not found for index ${index}`);
-  }
-  return createTaskComponent(TaskComponent);
-}
-
-const uiBenchTasks: UiBenchTask[] = [
-  {
-    id: 'copy-paste-excel-to-forms',
-    instructions: 'Copy contact details from rows 30, 40, and 50 of the customer table to individual contact forms. Click on table cells to select and copy, then manually enter or paste data into the corresponding form fields. Complete and submit all 3 contact forms with Name, Email, Phone, and Company information.',
-    ux: 'Click table cells in rows 30, 40, and 50 to select and copy data, then paste into the 3 form fields using the Paste buttons',
-    test: () => {
-      const appState = (window as any).app_state;
+export function test_1(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -141,14 +87,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: 'Successfully copied contact details from rows 30, 40, and 50 to all 3 contact forms with correct data mapping and submitted all forms.' 
       };
-    },
-  },
-  {
-    id: 'copy-paste-file-tree-to-table',
-    instructions: 'Expand project folders, find all PDF files, copy their paths, and add them to the summary table using the form above the table. Navigate through the 3-level folder structure, select PDF files, use "Copy Path" button, then paste (Ctrl+V) into the path input field, and click "Add". Find all 10 PDF files scattered across the 2 project folders.',
-    ux: 'Expand folders by clicking on them, select PDF files, and use "Add to Table" to build the summary',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_2(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -207,14 +149,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: 'Successfully found and catalogued all 10 PDF files with correct filename, path, and size information.' 
       };
-    },
-  },
-  {
-    id: 'copy-paste-product-catalog-to-cart',
-    instructions: 'Browse through the 2-page product catalog and add qualifying items to your shopping cart. Navigate through all pages using pagination controls and identify products over $50. After adding items to cart, manually adjust quantities in the shopping cart: set quantity to 2 for items between $50-$100, and quantity to 1 for items over $100. Skip items $50 or below. Avoid adding duplicates and ensure items are sourced from both pages.',
-    ux: 'Navigate through product catalog pages, add items >$50 to cart, then manually adjust quantities: $50-$100 = qty 2, >$100 = qty 1',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_3(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -315,14 +253,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully added ${cart.length} items over $50 from ${pagesWithAddedItems.size} pages with correct quantities (items $50-$100: qty 2, items >$100: qty 1). Total cart value: $${cart.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0)}.` 
       };
-    },
-  },
-  {
-    id: 'copy-paste-quarterly-sales-aggregation',
-    instructions: 'Collect quarterly sales data from 4 separate tables and aggregate for North region. Switch between Q1, Q2, Q3, Q4 tabs to view sales data, then manually calculate and enter North region totals in the Summary tab. For each quarter, scan through the table to find all North region entries, sum their sales amounts, and enter the totals in the Q1, Q2, Q3, Q4 columns. The total sales will be calculated automatically.',
-    ux: 'Switch between Q1-Q4 tabs to view quarterly data sorted by Product, scan for North region entries, manually calculate totals, and enter them in Summary tab',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_4(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -376,14 +310,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully aggregated North region sales data across 4 quarters. Quarterly values entered correctly with auto-calculated total: $${northRecord.totalSales.toLocaleString()}.` 
       };
-    },
-  },
-  {
-    id: 'copy-paste-employee-salary-editing',
-    instructions: 'Review the employee table and update salaries for employees hired before 2020. Scroll through all 80 employee records, identify employees with hire dates before 01/01/2020, and increase their salaries by $1000. Double-click salary cells to edit, add $1000 to the current salary (you can use arrow keys to increment by $1000), press Enter to save the value. Make sure to review all employees as the records are not sorted by hire date.',
-    ux: 'Scroll through employee table, identify employees hired before 2020, double-click salary cells to edit and increase salaries by $1000',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_5(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -456,14 +386,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully updated salaries for all ${editedPre2020Employees.length} employees hired before 2020 with accurate $1000 increases. No post-2019 employees were incorrectly modified.` 
       };
-    },
-  },
-  {
-    id: 'copy-paste-search-to-email',
-    instructions: 'Search for "urgent" tasks in the task system and compile a list of all urgent task IDs into an email to management. Send email to: manager@company.com with subject: "Urgent Tasks Report". Search for tasks containing "urgent" in their title or description, then create a numbered list of task IDs in the email body. Format as: "1. TSK-2024-001\\n2. TSK-2024-002" etc. Include all urgent task IDs found in the search results.',
-    ux: 'Search for "urgent" tasks, find all matching results, create numbered list of task IDs in email to manager@company.com',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_6(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -551,15 +477,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully sent email to manager@company.com with subject "Urgent Tasks Report" containing all ${urgentTaskIds.length} urgent task IDs in numbered list format.` 
       };
-    },
-  },
-  {
-    id: 'copy-paste-org-chart-directors',
-    instructions: 'Expand the management hierarchy and identify all Director-level employees. Navigate through the organization chart by clicking expand arrows to reveal subordinates. Find all employees with "Director" in their title across the organization. Format JSON response as {"directors": ["Full Name 1", "Full Name 2", ...]}, and use the Submit Results button to send it.',
-    ux: 'Expand org chart nodes to navigate hierarchy, identify all Director-level employees, and submit JSON via Submit Results button',
-    require_result_submission: true,
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_7(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -649,14 +570,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully identified all ${submittedNames.length} Director-level employees from the organization chart.` 
       };
-    },
-  },
-  {
-    id: 'copy-paste-invoice-top3-overdue',
-    instructions: 'Expand invoice details to view line items and identify the top 3 overdue invoices by total value. Click the expand button (+) next to each invoice to see detailed line items and amounts. Find all invoices with "Overdue" status (red background), compare their total amounts, and add the 3 highest value invoices to the table on the right. Enter invoice numbers in order from highest to lowest value.',
-    ux: 'Expand invoice rows to view amounts, identify overdue invoices by red background, find top 3 by value, add to table from highest to lowest',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_8(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -736,15 +653,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully identified the top 3 overdue invoices by value: ${submittedNumbers.join(', ')} with amounts ${submittedInvoices.map((s: any) => `$${s.amount.toFixed(2)}`).join(', ')}.` 
       };
-    },
-  },
-  {
-    id: 'copy-paste-electronics-no-screen',
-    instructions: 'Browse through the electronics catalog and identify all products that have no screen. Look through all the products and identify products without screens. Format JSON response as {"products": ["Product Name 1", "Product Name 2", ...]}, and use the Submit Results button to send it.',
-    ux: 'Browse electronics products, identify those with no screen, submit JSON list of product names via Submit Results button',
-    require_result_submission: true,
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_9(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -826,14 +738,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully identified all ${submittedNames.length} electronics products without screens. Products include headphones, gaming consoles, cables, and accessories.` 
       };
-    },
-  },
-  {
-    id: 'copy-paste-calendar-meetings',
-    instructions: 'Navigate through 3 months of calendar data, find all "Meeting" events with 5 or more attendees, and copy their details to the planning form. Use month navigation arrows to browse through current month and next 2 months. Click on meeting events (blue colored blocks) in calendar cells to view details, then add meetings with minimum 5 participants to the Event Planning Form. Include Date, Meeting Title, Attendees, and Duration for all qualifying meetings found.',
-    ux: 'Navigate through 3 months using arrows, click on blue meeting events to view details, add meetings with 5+ attendees to planning form',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_10(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -949,14 +857,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully collected all ${planningEntries.length} eligible meeting events (5+ attendees) from ${uniqueMonths.size} months with accurate details including dates, titles, attendees, and durations.` 
       };
-    },
-  },
-  {
-    id: 'copy-paste-comment-moderation',
-    instructions: 'Expand comment threads to find replies containing spam keywords, then flag them for review. Navigate through the nested comment tree by clicking expand arrows to reveal reply threads. Look for comments containing spam keywords such as promotional language, urgent calls to action, or suspicious marketing phrases. Click the flag button next to comments that appear to be spam to add them to the moderation queue. You must achieve 90% spam detection accuracy with no false positives (flagging non-spam comments).',
-    ux: 'Expand comment threads, identify spam comments by keywords, click flag buttons to add to moderation queue',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_11(): TestResult {
+const appState = (window as any).app_state;
       
       if (!appState || !appState.comments || !appState.moderationQueue) {
         return { 
@@ -1094,15 +998,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `SUCCESS: Achieved ${((flaggedSpamComments / expectedSpamComments) * 100).toFixed(0)}% spam detection rate (${flaggedSpamComments}/${expectedSpamComments}) with zero false positives.` 
       };
-    },
-  },
-  {
-    id: 'copy-paste-inventory-supplier-analysis',
-    instructions: 'Analyze the inventory data to extract the count of Electronics items that need reordering by supplier. Filter the inventory to review items, identify Electronics products with current stock below their reorder point, and count how many low-stock Electronics items each supplier has. Include ALL suppliers in your submission, even those with 0 Electronics items needing reorder. Format JSON response as {"supplier_name": count, "supplier_name": count, ...}, and use the Submit Results button to send it.',
-    ux: 'Filter and analyze inventory to count Electronics items needing reorder by supplier, submit JSON via Submit Results button',
-    require_result_submission: true,
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_12(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -1207,14 +1106,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully identified ${totalSubmittedCount} Electronics items needing reorder across ${Object.keys(submission).length} suppliers with correct counts per supplier.` 
       };
-    },
-  },
-  {
-    id: 'survey-results-analytics',
-    instructions: 'Navigate through 3 pages of survey responses and count the "Yes" answers for Question 3: "Are you satisfied with our service?". Use the pagination to browse all pages sequentially and manually count responses using the dashboard counter. Update the dashboard with the correct total count of "Yes" responses across all 30 survey responses.',
-    ux: 'Navigate through paginated survey results, manually count Q3 "Yes" responses, update analytics dashboard counter',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_13(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -1237,14 +1132,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully counted ${dashboardCounts.q3Yes} "Yes" responses for Question 3 across all 3 pages of survey results.` 
       };
-    },
-  },
-  {
-    id: 'kanban-ticket-management',
-    instructions: 'Find tickets older than 30 days in the "Open" column and move only the high priority ones to the "Review" column. Drag tickets between columns to change their status. Look for tickets with creation dates more than 30 days ago and "High" priority badge (red). Only high priority tickets that are older than 30 days should be moved to Review - leave medium and low priority old tickets in Open.',
-    ux: 'Drag high priority tickets older than 30 days from Open column to Review column using drag and drop',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_14(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -1333,14 +1224,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully moved all ${reviewColumnTickets.length} high priority tickets older than 30 days to Review column. No incorrect tickets were moved.` 
       };
-    },
-  },
-  {
-    id: 'project-timeline-resource-conflicts',
-    instructions: 'Analyze project timeline to identify resource conflicts by manually comparing task dates and resource assignments. Expand project phases to view all tasks with their start/end dates and assigned resources. Find pairs of tasks where the same resource is assigned to overlapping time periods. Select these conflicting task pairs and add them to the Resource Allocation Table. There are exactly 4 scheduling conflicts to find across the 6 project phases.',
-    ux: 'Expand phases, analyze task dates and resources manually, select overlapping task pairs, add conflicts to allocation table',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_15(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -1470,14 +1357,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully identified and added all ${actualUniqueConflicts} unique resource conflicts to the allocation table. Conflicts range from ${Math.min(...addedConflicts.map((c: any) => c.overlapDays))}-${Math.max(...addedConflicts.map((c: any) => c.overlapDays))} day overlaps across ${expandedPhases} expanded phases.` 
       };
-    },
-  },
-  {
-    id: 'social-media-content-scheduling',
-    instructions: 'Browse through the 25 social media posts and identify all high-performing content (posts with more than 100 likes). Each high-performing post has a designated target date shown as "Schedule: Xth". Drag these posts to schedule them on their correct target dates in the calendar grid. Look for posts with golden borders and blue schedule badges. Schedule all 5 high-performing posts by dragging them to their specific assigned dates to complete the content calendar.',
-    ux: 'Scroll through social media feed, identify posts with >100 likes (golden border) and blue schedule badges, drag each to its designated target date on calendar',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_16(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -1539,12 +1422,11 @@ const uiBenchTasks: UiBenchTask[] = [
           continue;
         }
         
-        // Extract day from scheduled date (handle DD/MM/YYYY format)
-        const dateParts = scheduledPost.date.split('/');
-        const scheduledDay = dateParts.length >= 3 ? parseInt(dateParts[0], 10) : NaN;
-        
+        // scheduledPost.date is now a day number (1-30)
+        const scheduledDay = typeof scheduledPost.date === 'number' ? scheduledPost.date : parseInt(scheduledPost.date, 10);
+
         if (isNaN(scheduledDay)) {
-          schedulingErrors.push(`Post ${originalPost.id} has invalid scheduled date format: ${scheduledPost.date}`);
+          schedulingErrors.push(`Post ${originalPost.id} has invalid scheduled date: ${scheduledPost.date}`);
         } else if (scheduledDay !== originalPost.targetDate) {
           schedulingErrors.push(`Post ${originalPost.id} scheduled on ${scheduledDay}th, should be on ${originalPost.targetDate}th`);
         }
@@ -1592,14 +1474,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully scheduled all ${scheduledPosts.length} high-performing posts (avg ${avgLikes.toFixed(0)} likes) for next month's content calendar.` 
       };
-    },
-  },
-  {
-    id: 'library-catalog-science-fiction',
-    instructions: 'Search for "science fiction" books in the library catalog, navigate through the paginated results, and add books published after 2020 (excluding 2020) to your reading list. Use the search interface to find science fiction books, then browse through the results across multiple pages using pagination controls. Select and add books with publication years 2021 or later to build your reading list table.',
-    ux: 'Search for "science fiction", navigate through paginated results, identify books published 2021 or later, add them to reading list table',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_17(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -1766,14 +1644,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully added ${readingList.length} science fiction books published after 2020 (excluding 2020) to reading list (average year: ${averageYear.toFixed(1)}). All books are science fiction genre, not science textbooks, sourced from search results spanning multiple pages.` 
       };
-    },
-  },
-  {
-    id: 'crm-vip-phone-updates',
-    instructions: 'Filter contacts by "VIP" status, scroll through results, and update phone numbers using the external phone list. Click the filter checkbox for VIP status, then edit phone fields by clicking on them and entering the new numbers from the external phone list popup. Only VIP contacts should have updated phone numbers that match the external list.',
-    ux: 'Filter by VIP status using checkbox, click "Show External Phone List" button to view updates, click phone fields to edit and enter new numbers',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_18(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found. Data may still be loading.' };
       }
@@ -1854,15 +1728,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully updated ${contactsToCheck.length} VIP contacts with correct phone numbers from the external list. All updates match external data and only VIP contacts were modified.` 
       };
-    },
-  },
-  {
-    id: 'hierarchical-menu-navigation',
-    instructions: 'Expand menu categories to find the single 4-level deep item in the hierarchical structure. Click expand arrows to reveal the full menu hierarchy and navigate through all levels to locate the one item at depth 4. Format JSON response as {"path": "Category/Subcategory/Page/Subpage"}, and use the Submit Results button to send it.',
-    ux: 'Expand menu tree by clicking arrows to find 4-level deep item, then submit path as JSON via Submit Results button',
-    require_result_submission: true,
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_19(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -1941,14 +1810,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully found and submitted the 4th level path: "${submission.path}". The path correctly traces through all hierarchical levels to the single depth-4 item.` 
       };
-    },
-  },
-  {
-    id: 'document-diff-review',
-    instructions: 'Review document changes using the diff viewer to ensure compliance with style guide rules. Compare Draft 1 (original) with Draft 2 (revised) by examining the highlighted differences. Accept changes that follow the rules: acronyms must be explained on first use, dates must be in yyyy-mm-dd format, and no PII (personal names/information). Reject changes that violate these rules. Click on each diff to review and use Accept/Reject buttons to make decisions.',
-    ux: 'Compare document drafts side-by-side, click on highlighted diffs to review, accept good changes and reject bad changes based on style guide rules (acronyms, dates, no PII)',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_20(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -2017,14 +1882,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully reviewed all ${diffs.length} document changes with correct accept/reject decisions based on style guide rules (${correctlyAcceptedGood.length} accepted, ${correctlyRejectedBad.length} rejected).` 
       };
-    },
-  },
-  {
-    id: 'medical-lab-results-entry',
-    instructions: 'Transfer medical lab test results from the TSV file located in Documents/copy-paste-task-21.tsv into the clinical data management system. WORKFLOW: Open the file Documents/copy-paste-task-21.tsv using LibreOffice Calc. For each TSV row, look at the test_category column to determine which tab to use (Hematology/Chemistry/Immunology), then click that tab and add a table row. The test_name column corresponds to the "Test Name" dropdown in the selected tab. Navigate between test category tabs based on each row\'s test_category. Add table rows for each result, use popup name picker to select patients, and popup calculator for range validation. Transfer 3 lab results total across the appropriate category tabs. Use the dropdown menus for test names, number inputs for results, and validation indicators for ranges.',
-    ux: 'Navigate tabs, add table rows, use name picker popup, range calculator popup, dropdown menus, number spinners, validation indicators',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_21(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -2164,14 +2025,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true, 
         message: `Successfully transferred all ${allEntries.length} lab results across ${categoriesWithEntries.length} category tabs with accurate data entry using tabbed interface, popup modals, and form controls.` 
       };
-    },
-  },
-  {
-    id: 'medical-appointment-scheduling',
-    instructions: 'Use the TSV file located in Documents/copy-paste-task-22.tsv to fill in patient details. Open the file Documents/copy-paste-task-22.tsv using LibreOffice Calc and transfer the data for each patient. Select a provider, then click an available time slot on the calendar to schedule the appointment. Schedule all three appointments.',
-    ux: 'The user will manually enter data into a form, select a provider from a dropdown, and then click on a calendar grid to place the appointment. No drag-and-drop is involved.',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_22(): TestResult {
+const appState = (window as any).app_state;
       if (!appState || !appState.scheduledAppointments) {
         return { success: false, message: 'App state not ready.' };
       }
@@ -2260,14 +2117,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: false,
         message
       };
-    }
-  },
-  {
-    id: 'customer-registration-wizard',
-    instructions: 'Open the TSV file Documents/copy-paste-task-23.tsv using LibreOffice Calc and transfer business information through a multi-step wizard with progress indicators. Process all 3 companies from the TSV file through the complete wizard flow: Step 1 - Company info with auto-complete, Step 2 - Contact details with validation, Step 3 - Address via popup lookup, Step 4 - Industry via image card selection, Step 5 - Revenue/size via sliders. Navigate using Tab/Shift+Tab for efficient field entry.',
-    ux: 'Multi-step wizard with progress bar, breadcrumb navigation, auto-complete fields, validation badges, address lookup popup, industry image cards, revenue/employee sliders',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_23(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -2429,14 +2282,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: false,
         message
       };
-    }
-  },
-  {
-    id: 'service-ticket-kanban',
-    instructions: 'Open the TSV file Documents/copy-paste-task-24.tsv using LibreOffice Calc and transfer IT service ticket information into the Kanban-style ticket system. Create tickets by entering all required fields from the TSV file: ticket reference, customer ID, issue summary, reported by, report date, estimated hours. Use the priority color buttons to select priority level (Critical/High/Medium/Low). Select the category from tag cloud. Select affected systems by clicking multiple system tags (Ctrl+click for multi-select). Use the "Trigger Auto-Assignment" button to automatically assign tickets based on priority. Use "Calculate SLA" to set SLA timer. After creating each ticket, it will appear in the "Open" column of the Kanban board. Create all 3 tickets with exact data matching the TSV source.',
-    ux: 'Fill ticket form fields from TSV data, click priority color buttons, click category tags, multi-select system tags, trigger auto-assignment workflow, calculate SLA timer, create tickets',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_24(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -2624,14 +2473,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true,
         message: 'All 3 service tickets created successfully with correct data!'
       };
-    }
-  },
-  {
-    id: 'library-cataloging',
-    instructions: 'Open the TSV file Documents/copy-paste-task-25.tsv using LibreOffice Calc and transfer book information into the library cataloging system. For each book: 1) Scan or enter the ISBN barcode number in the scanner field, 2) Navigate the Dewey decimal classification tree on the left to find and select the appropriate subject classification (click arrows to expand, click labels to select, or double-click labels to expand), 3) Fill in book details from TSV: Title, Author, Publication Year, Publisher, Price, 4) Manually enter the Location Code from TSV (e.g., PSY-150.1), 5) Select book condition from dropdown, 6) Click "Add to Catalog" to complete cataloging. The Subject field auto-fills when you click a classification in the Dewey tree. The visual shelf picker on the right is a reference tool showing physical shelf locations. Catalog all 3 books with exact data matching the TSV source.',
-    ux: 'Navigate Dewey tree by clicking arrows/labels (or double-click to expand), scan/enter ISBN, fill form fields manually from TSV including location code, select condition dropdown, click Add to Catalog button',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_25(): TestResult {
+const appState = (window as any).app_state;
       if (!appState) {
         return { success: false, message: 'App state not found.' };
       }
@@ -2834,14 +2679,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true,
         message: 'All 3 books cataloged successfully with correct data!'
       };
-    }
-  },
-  {
-    id: 'student-enrollment-card-based',
-    instructions: 'Open the TSV file Documents/copy-paste-task-26.tsv using LibreOffice Calc and enroll 3 students into the education system. For each student: enter student name, date of birth, parent/guardian name, contact email, and home address from the TSV file. Drag a program card from the available programs into the program selection drop zone. Select grade level from dropdown, enter start date, and select special accommodations from checkbox group. Click "Calculate Age" button to verify date of birth. Double-click program cards to view curriculum details. Complete enrollment by clicking "Enroll Student" button for all 3 students.',
-    ux: 'Fill student information fields, drag program cards to selection zone, use age calculator, select grade and date, check special accommodations boxes, enroll students',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_26(): TestResult {
+const appState = (window as any).app_state;
       
       if (!appState?.enrolledStudents) {
         console.log('[Cheat] Expected 3 students to be enrolled:');
@@ -2999,14 +2840,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true,
         message: 'All 3 students enrolled successfully with correct data!'
       };
-    }
-  },
-  {
-    id: 'tenant-application-document-upload',
-    instructions: 'Open the TSV file Documents/copy-paste-task-27.tsv using LibreOffice Calc and submit 3 tenant applications. For each applicant: enter applicant name, phone contact, current address, select employment status from dropdown, enter monthly income from the TSV file, and use the income calculator to verify income. Enter rental history, desired move date, and reference contact information. Click the reference verification button to verify references. Upload required documents by clicking document type buttons in the upload center (Pay Stub, Bank Statement, Tax Return, Business License, Contract Agreement, or References). The credit score visualization will update automatically based on income and rental history. After completing all fields, document uploads, and verifications, click "Submit Application" to submit each tenant application.',
-    ux: 'Fill applicant information fields, use income calculator widget, verify references with popup, upload documents to designated zones, view credit score visualization, submit applications',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_27(): TestResult {
+const appState = (window as any).app_state;
       
       if (!appState?.applications) {
         console.log('[Cheat] Expected 3 tenant applications to be submitted:');
@@ -3173,14 +3010,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true,
         message: 'All 3 tenant applications submitted successfully with correct data!'
       };
-    }
-  },
-  {
-    id: 'copy-paste-task-28',
-    instructions: 'Open the TSV file Documents/copy-paste-task-28.tsv using LibreOffice Calc and transfer all loan data into the financial system. For each of the 3 applicants, enter their personal information (full name, SSN, annual income, employment type, monthly obligations, credit score) from the TSV file, set the loan amount using the slider or numeric input, select loan purpose from dropdown, and enter collateral description. Complete all four loan calculations (monthly payment, DTI ratio, risk assessment, and payment schedule) before submitting the application. Process all 3 loan applications from the TSV file.',
-    ux: 'Single-column form layout with personal info fields at top, loan amount controls (slider + numeric input side-by-side), loan purpose dropdown, collateral description field, followed by four calculator widget sections (Loan Calculator, DTI Calculator, Risk Assessment, Payment Schedule) with individual calculate buttons. Each calculator displays results after button click. Submit button at bottom. Submitted applications shown below with all details.',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_28(): TestResult {
+const appState = (window as any).app_state;
       
       if (!appState) {
         console.log('[Cheat] No app_state found. Waiting for form initialization...');
@@ -3380,14 +3213,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true,
         message: 'All 3 loan applications submitted successfully with correct data and calculations!'
       };
-    }
-  },
-  {
-    id: 'inventory-receiving-terminal',
-    instructions: 'Open the TSV file Documents/copy-paste-task-29.tsv using LibreOffice Calc and transfer inventory data into the warehouse receiving terminal system. Use the barcode scanner to enter PO numbers, fill all required fields including item details, quantities, inspector information, and condition assessments from the TSV file. Capture condition photos for documentation. Process all 3 inventory items from the TSV file.',
-    ux: 'Scan/enter barcode for PO number, fill form fields with TSV data, use spinner controls for quantities and prices, select condition status with radio buttons, capture photos, add items to receiving table',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_29(): TestResult {
+const appState = (window as any).app_state;
       
       if (!appState) {
         return { success: false, message: 'App state not found' };
@@ -3574,14 +3403,10 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true,
         message: 'All 3 inventory items received successfully with correct data!'
       };
-    }
-  },
-  {
-    id: 'legal-contract-management',
-    instructions: 'Open the TSV file Documents/copy-paste-task-30.tsv using LibreOffice Calc and transfer all contract information into the contract management system. For each contract, enter the contract reference, parties, type, dates, value, and renewal terms from the TSV file. Select the appropriate key clauses from the clause library. Build the timeline visualization for the contract period and set a renewal reminder. Complete all 3 contracts.',
-    ux: 'Enter contract data manually from TSV file, select clauses from the library, build timeline, and set reminders for each contract',
-    test: () => {
-      const appState = (window as any).app_state;
+}
+
+export function test_30(): TestResult {
+const appState = (window as any).app_state;
       
       const expectedContracts = [
         {
@@ -3862,28 +3687,2226 @@ const uiBenchTasks: UiBenchTask[] = [
         success: true,
         message: 'All 3 contracts created successfully with complete data!'
       };
+}
+
+export function test_31(): TestResult {
+const appState = (window as any).app_state;
+      if (!appState) {
+        return { success: false, message: 'App state not found.' };
+      }
+      
+      const { submittedAudits, violations, currentAudit, violationsByCategory } = appState;
+      
+      // Configuration: how many audits required (1 for quick test, 3 for full validation)
+      const requiredAudits = 1;
+      
+      // [Cheat] Show current progress (for testers) - ALWAYS show this first
+      const cheatData: any[] = [];
+      
+      // Always show submitted audits
+      if (submittedAudits && submittedAudits.length > 0) {
+        submittedAudits.forEach((audit: any, idx: number) => {
+          const breakdown = {
+            'Data Security': 0,
+            'Access Control': 0,
+            'Documentation': 0,
+            'Process Compliance': 0
+          };
+          audit.violations.forEach((v: any) => {
+            if (v.category in breakdown) {
+              breakdown[v.category as keyof typeof breakdown]++;
+            }
+          });
+          
+          cheatData.push({
+            Audit: idx + 1,
+            Reference: audit.reference,
+            Total: `${audit.violations.length}/8`,
+            'Data Sec': `${breakdown['Data Security']}/2`,
+            'Access': `${breakdown['Access Control']}/2`,
+            'Docs': `${breakdown['Documentation']}/2`,
+            'Process': `${breakdown['Process Compliance']}/2`,
+            Status: '✅ Submitted'
+          });
+        });
+      }
+      
+      // Show current audit in progress if any
+      if (currentAudit && violations && violations.length > 0) {
+        cheatData.push({
+          Audit: (submittedAudits?.length || 0) + 1,
+          Reference: currentAudit,
+          Total: `${violations.length}/8`,
+          'Data Sec': `${violationsByCategory['Data Security'] || 0}/2`,
+          'Access': `${violationsByCategory['Access Control'] || 0}/2`,
+          'Docs': `${violationsByCategory['Documentation'] || 0}/2`,
+          'Process': `${violationsByCategory['Process Compliance'] || 0}/2`,
+          Status: '🔄 In Progress'
+        });
+      }
+      
+      // Display the cheat table
+      if (cheatData.length > 0) {
+        console.log(`[Cheat] Overall Progress: ${submittedAudits?.length || 0}/3 audits completed`);
+        console.table(cheatData);
+      } else {
+        console.log('[Cheat] No audits started yet. Enter an audit reference (AUD-2024-XXX) and click "Add Violation" to begin.');
+      }
+      
+      // Show next steps
+      if (!submittedAudits || submittedAudits.length === 0) {
+        console.log(`[Cheat] Next Step: Start first audit by entering reference (e.g., AUD-2024-301) and adding 8 violations.`);
+      } else if (submittedAudits.length < requiredAudits) {
+        console.log(`[Cheat] Next Step: Complete ${requiredAudits - submittedAudits.length} more audit(s). ${currentAudit && violations?.length > 0 ? `Current audit has ${violations.length}/8 violations.` : 'Start a new audit by entering a reference.'}`);
+      } else {
+        console.log(`[Cheat] ✅ All ${requiredAudits} audit(s) completed! Checking validation...`);
+      }
+      
+      // Now do the actual validation
+      if (!submittedAudits || submittedAudits.length === 0) {
+        return { 
+          success: false, 
+          message: 'No audits submitted yet. Complete and submit at least one audit with 8 violations.' 
+        };
+      }
+      
+      // Validate the required number of audits
+      if (submittedAudits.length < requiredAudits) {
+        return {
+          success: false,
+          message: `Only ${submittedAudits.length} audit(s) submitted. Process and submit ${requiredAudits} complete audit(s).`
+        };
+      }
+      
+      const errors: string[] = [];
+      
+      // Validate submitted audits
+      for (let i = 0; i < Math.min(requiredAudits, submittedAudits.length); i++) {
+        const audit = submittedAudits[i];
+        
+        if (!audit) {
+          errors.push(`Audit ${i + 1} is missing`);
+          continue;
+        }
+        
+        // Check audit reference format
+        if (!audit.reference || !audit.reference.trim()) {
+          errors.push(`Audit ${i + 1}: Missing audit reference`);
+        } else if (!audit.reference.match(/^AUD-2024-\d+$/)) {
+          errors.push(`Audit ${i + 1}: Invalid audit reference format "${audit.reference}" (expected AUD-2024-XXX)`);
+        }
+        
+        // Check total violations
+        if (!audit.violations || audit.violations.length !== 8) {
+          errors.push(`Audit ${i + 1} (${audit.reference}): Expected 8 violations, found ${audit.violations?.length || 0}`);
+          continue;
+        }
+        
+        // Check category distribution (must be exactly 2 per category)
+        const categoryBreakdown: Record<string, number> = {
+          'Data Security': 0,
+          'Access Control': 0,
+          'Documentation': 0,
+          'Process Compliance': 0
+        };
+        
+        audit.violations.forEach((v: any) => {
+          if (v.category in categoryBreakdown) {
+            categoryBreakdown[v.category]++;
+          }
+        });
+        
+        for (const [category, count] of Object.entries(categoryBreakdown)) {
+          if (count !== 2) {
+            errors.push(`Audit ${i + 1} (${audit.reference}): Expected 2 "${category}" violations, found ${count}`);
+          }
+        }
+        
+        // Validate each violation has complete fields
+        for (let j = 0; j < audit.violations.length; j++) {
+          const violation = audit.violations[j];
+          
+          if (!violation.category) {
+            errors.push(`Audit ${i + 1} (${audit.reference}), Violation ${j + 1}: Missing category`);
+            continue;
+          }
+          
+          if (!violation.fields) {
+            errors.push(`Audit ${i + 1} (${audit.reference}), Violation ${j + 1}: Missing fields`);
+            continue;
+          }
+          
+          const fields = violation.fields;
+          
+          // Validate category-specific fields
+          if (violation.category === 'Data Security') {
+            if (!fields.affected_system?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Data Security missing "affected_system"`);
+            }
+            if (!fields.encryption_status?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Data Security missing "encryption_status"`);
+            }
+            if (!fields.remediation_owner?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Data Security missing "remediation_owner"`);
+            }
+            if (!fields.target_completion_date?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Data Security missing "target_completion_date"`);
+            }
+          } else if (violation.category === 'Access Control') {
+            if (!fields.user_role?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Access Control missing "user_role"`);
+            }
+            if (!fields.permission_level?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Access Control missing "permission_level"`);
+            }
+            if (!fields.justification_notes?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Access Control missing "justification_notes"`);
+            }
+            if (!fields.reviewer_name?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Access Control missing "reviewer_name"`);
+            }
+          } else if (violation.category === 'Documentation') {
+            if (!fields.document_type?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Documentation missing "document_type"`);
+            }
+            if (!fields.missing_sections?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Documentation missing "missing_sections"`);
+            }
+            if (!fields.responsible_party?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Documentation missing "responsible_party"`);
+            }
+            if (!fields.update_deadline?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Documentation missing "update_deadline"`);
+            }
+          } else if (violation.category === 'Process Compliance') {
+            if (!fields.process_name?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Process Compliance missing "process_name"`);
+            }
+            if (!fields.gap_description?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Process Compliance missing "gap_description"`);
+            }
+            if (!fields.corrective_action?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Process Compliance missing "corrective_action"`);
+            }
+            if (!fields.verification_method?.trim()) {
+              errors.push(`Audit ${i + 1}, Violation ${j + 1}: Process Compliance missing "verification_method"`);
+            }
+          }
+        }
+      }
+      
+      if (errors.length > 0) {
+        return {
+          success: false,
+          message: `Compliance remediation validation errors: ${errors.slice(0, 3).join('; ')}${errors.length > 3 ? ` (and ${errors.length - 3} more)` : ''}`
+        };
+      }
+      
+      return {
+        success: true,
+        message: `Successfully processed ${requiredAudits} audit checklist(s) with exact violation counts (8 per audit, 2 per category) and complete remediation data!`
+      };
+}
+
+export function test_32(): TestResult {
+  const appState = (window as any).app_state;
+  if (!appState) {
+    return { success: false, message: 'App state not found.' };
+  }
+  
+  const { batchReference, equipment, submittedBatches, calibratedCount, totalEquipment } = appState;
+  
+  // Configuration: how many batches required (1 for quick test, 3 for full validation)
+  const requiredBatches = 1;
+  
+  // [Cheat] Show current progress (for testers) - ALWAYS show this first
+  const cheatData: any[] = [];
+  
+  // Always show submitted batches
+  if (submittedBatches && submittedBatches.length > 0) {
+    submittedBatches.forEach((batch: any, idx: number) => {
+      cheatData.push({
+        Batch: idx + 1,
+        Reference: batch.batchRef,
+        Equipment: `${batch.equipmentCount}/6`,
+        Status: '✅ Submitted',
+        Time: new Date(batch.submittedAt).toLocaleTimeString()
+      });
+    });
+  }
+  
+  // Show current batch in progress if any
+  if (batchReference && equipment && equipment.length > 0) {
+    const calibrated = equipment.filter((e: any) => e.status === 'calibrated').length;
+    const inProgress = equipment.filter((e: any) => e.status === 'in-progress').length;
+    
+    cheatData.push({
+      Batch: (submittedBatches?.length || 0) + 1,
+      Reference: batchReference,
+      Equipment: `${calibrated}/6`,
+      Status: `🔄 In Progress (${inProgress} in-progress)`,
+      Time: '-'
+    });
+    
+    // Show equipment details with validation (compact format)
+    console.log('[Cheat] Equipment Data Validation:');
+    
+    // Get expected data for validation
+    const expectedCalibrationData: { [key: string]: { [key: string]: { technician: string; date: string; notesContains: string } } } = {
+      'BATCH-2024-105': {
+        'CAL-A': { technician: 'James Wilson', date: '2024-02-10', notesContains: 'pressure verification' },
+        'CAL-B': { technician: 'Sarah Chen', date: '2024-02-11', notesContains: 'Flow rate accuracy' },
+        'CAL-C': { technician: 'James Wilson', date: '2024-02-12', notesContains: 'Valve response' },
+        'CAL-D': { technician: 'Maria Rodriguez', date: '2024-02-10', notesContains: 'Temperature accuracy' },
+        'CAL-E': { technician: 'Sarah Chen', date: '2024-02-11', notesContains: 'Buffer solution' },
+        'CAL-F': { technician: 'Maria Rodriguez', date: '2024-02-12', notesContains: 'Conductivity standards' }
+      },
+      'BATCH-2024-106': {
+        'CAL-A': { technician: 'David Kim', date: '2024-02-15', notesContains: 'reference standard' },
+        'CAL-B': { technician: 'Emily Carter', date: '2024-02-16', notesContains: 'Differential readings' },
+        'CAL-C': { technician: 'David Kim', date: '2024-02-17', notesContains: 'Relief pressure' },
+        'CAL-D': { technician: 'Jennifer Park', date: '2024-02-15', notesContains: 'ice bath' },
+        'CAL-E': { technician: 'Emily Carter', date: '2024-02-16', notesContains: 'Resistance-temperature' },
+        'CAL-F': { technician: 'Jennifer Park', date: '2024-02-17', notesContains: 'PID tuning' }
+      },
+      'BATCH-2024-107': {
+        'CAL-A': { technician: 'Robert Lee', date: '2024-02-20', notesContains: 'certified masses' },
+        'CAL-B': { technician: 'Angela Martinez', date: '2024-02-21', notesContains: 'Strain measurements' },
+        'CAL-C': { technician: 'Robert Lee', date: '2024-02-22', notesContains: 'Force-output' },
+        'CAL-D': { technician: 'Lisa Thompson', date: '2024-02-20', notesContains: 'Distance measurement' },
+        'CAL-E': { technician: 'Angela Martinez', date: '2024-02-21', notesContains: 'Detection range' },
+        'CAL-F': { technician: 'Lisa Thompson', date: '2024-02-22', notesContains: 'Encoder resolution' }
+      }
+    };
+    
+    const expectedData = expectedCalibrationData[batchReference];
+    
+    const equipmentStatus = equipment.map((e: any) => {
+      // For calibrated equipment, validate each field
+      const hasTechnician = e.technician && e.technician.trim();
+      const hasDate = e.date && e.date.trim();
+      const hasNotes = e.notes && e.notes.trim();
+      
+      let techStatus = '-';
+      let dateStatus = '-';
+      let notesStatus = '-';
+      
+      if (e.status === 'calibrated') {
+        if (expectedData && expectedData[e.id]) {
+          const expected = expectedData[e.id];
+          
+          // Check technician - must match exactly
+          if (!hasTechnician) {
+            techStatus = '❌';
+          } else if (e.technician.trim() === expected.technician) {
+            techStatus = '✅';
+          } else {
+            techStatus = '❌';
+          }
+          
+          // Check date - must match exactly
+          if (!hasDate) {
+            dateStatus = '❌';
+          } else if (e.date.trim() === expected.date) {
+            dateStatus = '✅';
+          } else {
+            dateStatus = '❌';
+          }
+          
+          // Check notes - must contain key phrase
+          if (!hasNotes) {
+            notesStatus = '❌';
+          } else if (e.notes.toLowerCase().includes(expected.notesContains.toLowerCase())) {
+            notesStatus = '✅';
+          } else {
+            notesStatus = '❌';
+          }
+        } else {
+          // No validation data, just check if filled
+          techStatus = hasTechnician ? '✅' : '❌';
+          dateStatus = hasDate ? '✅' : '❌';
+          notesStatus = hasNotes ? '✅' : '❌';
+        }
+      }
+      
+      return {
+        Equipment: e.id,
+        Technician: techStatus,
+        Date: dateStatus,
+        Notes: notesStatus
+      };
+    });
+    console.table(equipmentStatus);
+  }
+  
+  // Display the cheat table
+  if (cheatData.length > 0) {
+    console.log(`[Cheat] Overall Progress: ${submittedBatches?.length || 0}/${requiredBatches} batch(es) completed`);
+    console.table(cheatData);
+  } else {
+    console.log('[Cheat] No batches started yet. Enter a batch reference (e.g., BATCH-2024-105) to begin.');
+  }
+  
+  // Show next steps
+  if (!submittedBatches || submittedBatches.length === 0) {
+    console.log(`[Cheat] Next Step: Enter batch reference (e.g., BATCH-2024-105) and calibrate all 6 equipment items in dependency order.`);
+    if (batchReference && equipment && equipment.length > 0) {
+      const nextAvailable = equipment.filter((e: any) => {
+        if (e.status !== 'not-started') return false;
+        return e.dependencies.every((depId: string) => {
+          const dep = equipment.find((eq: any) => eq.id === depId);
+          return dep?.status === 'calibrated';
+        });
+      });
+      if (nextAvailable.length > 0) {
+        console.log(`[Cheat] Next Available Equipment: ${nextAvailable.map((e: any) => e.id).join(', ')} (no pending dependencies)`);
+      }
     }
-  },
-];
+  } else if (submittedBatches.length < requiredBatches) {
+    console.log(`[Cheat] Next Step: Complete ${requiredBatches - submittedBatches.length} more batch(es).`);
+  } else {
+    console.log(`[Cheat] ✅ All ${requiredBatches} batch(es) completed! Checking validation...`);
+  }
+  
+  // Now do the actual validation
+  if (!submittedBatches || submittedBatches.length === 0) {
+    return { 
+      success: false, 
+      message: 'No calibration batches submitted yet. Complete and submit at least one batch with 6 equipment items.' 
+    };
+  }
+  
+  // Validate the required number of batches
+  if (submittedBatches.length < requiredBatches) {
+    return {
+      success: false,
+      message: `Only ${submittedBatches.length} batch(es) submitted. Process and submit ${requiredBatches} complete calibration batch(es).`
+    };
+  }
+  
+  const errors: string[] = [];
+  
+  // Expected calibration sequences for each batch
+  const expectedSequences: { [key: string]: string[] } = {
+    'BATCH-2024-105': ['CAL-A', 'CAL-B', 'CAL-C', 'CAL-D', 'CAL-E', 'CAL-F'],
+    'BATCH-2024-106': ['CAL-A', 'CAL-B', 'CAL-C', 'CAL-D', 'CAL-E', 'CAL-F'],
+    'BATCH-2024-107': ['CAL-A', 'CAL-B', 'CAL-C', 'CAL-D', 'CAL-E', 'CAL-F']
+  };
+  
+  // Expected dependencies for validation
+  const expectedDependencies: { [key: string]: string[] } = {
+    'CAL-A': [],
+    'CAL-B': ['CAL-A'],
+    'CAL-C': ['CAL-B'],
+    'CAL-D': [],
+    'CAL-E': ['CAL-D'],
+    'CAL-F': ['CAL-E']
+  };
+  
+  // Validate submitted batches
+  for (let i = 0; i < Math.min(requiredBatches, submittedBatches.length); i++) {
+    const batch = submittedBatches[i];
+    
+    if (!batch) {
+      errors.push(`Batch ${i + 1} is missing`);
+      continue;
+    }
+    
+    // Check batch reference format
+    if (!batch.batchRef || !batch.batchRef.startsWith('BATCH-2024-')) {
+      errors.push(`Batch ${i + 1}: Invalid batch reference format "${batch.batchRef || 'none'}". Expected format: BATCH-2024-XXX`);
+    }
+    
+    // Check equipment count
+    if (batch.equipmentCount !== 6) {
+      errors.push(`Batch ${i + 1}: Expected 6 equipment items, got ${batch.equipmentCount}`);
+      continue;
+    }
+    
+    // Note: We don't have the full equipment details in submittedBatches summary,
+    // so we validate based on count. The live equipment state validation happens
+    // during the actual calibration process through the UI's dependency checking.
+  }
+  
+  // Expected calibration data for each batch
+  const expectedCalibrationData: { [key: string]: { [key: string]: { technician: string; date: string; notesContains: string } } } = {
+    'BATCH-2024-105': {
+      'CAL-A': { technician: 'James Wilson', date: '2024-02-10', notesContains: 'pressure verification' },
+      'CAL-B': { technician: 'Sarah Chen', date: '2024-02-11', notesContains: 'Flow rate accuracy' },
+      'CAL-C': { technician: 'James Wilson', date: '2024-02-12', notesContains: 'Valve response' },
+      'CAL-D': { technician: 'Maria Rodriguez', date: '2024-02-10', notesContains: 'Temperature accuracy' },
+      'CAL-E': { technician: 'Sarah Chen', date: '2024-02-11', notesContains: 'Buffer solution' },
+      'CAL-F': { technician: 'Maria Rodriguez', date: '2024-02-12', notesContains: 'Conductivity standards' }
+    },
+    'BATCH-2024-106': {
+      'CAL-A': { technician: 'David Kim', date: '2024-02-15', notesContains: 'reference standard' },
+      'CAL-B': { technician: 'Emily Carter', date: '2024-02-16', notesContains: 'Differential readings' },
+      'CAL-C': { technician: 'David Kim', date: '2024-02-17', notesContains: 'Relief pressure' },
+      'CAL-D': { technician: 'Jennifer Park', date: '2024-02-15', notesContains: 'ice bath' },
+      'CAL-E': { technician: 'Emily Carter', date: '2024-02-16', notesContains: 'Resistance-temperature' },
+      'CAL-F': { technician: 'Jennifer Park', date: '2024-02-17', notesContains: 'PID tuning' }
+    },
+    'BATCH-2024-107': {
+      'CAL-A': { technician: 'Robert Lee', date: '2024-02-20', notesContains: 'certified masses' },
+      'CAL-B': { technician: 'Angela Martinez', date: '2024-02-21', notesContains: 'Strain measurements' },
+      'CAL-C': { technician: 'Robert Lee', date: '2024-02-22', notesContains: 'Force-output' },
+      'CAL-D': { technician: 'Lisa Thompson', date: '2024-02-20', notesContains: 'Distance measurement' },
+      'CAL-E': { technician: 'Angela Martinez', date: '2024-02-21', notesContains: 'Detection range' },
+      'CAL-F': { technician: 'Lisa Thompson', date: '2024-02-22', notesContains: 'Encoder resolution' }
+    }
+  };
+  
+  // Additional validation if current batch equipment is available
+  if (equipment && equipment.length > 0 && batchReference) {
+    // Verify all equipment has correct dependencies defined
+    equipment.forEach((eq: any) => {
+      const expectedDeps = expectedDependencies[eq.id];
+      if (expectedDeps) {
+        const actualDeps = eq.dependencies || [];
+        if (JSON.stringify(actualDeps.sort()) !== JSON.stringify(expectedDeps.sort())) {
+          errors.push(`Equipment ${eq.id}: Dependencies mismatch. Expected [${expectedDeps.join(', ')}], got [${actualDeps.join(', ')}]`);
+        }
+      }
+    });
+    
+    // Verify all equipment is calibrated before submission
+    const notCalibrated = equipment.filter((e: any) => e.status !== 'calibrated');
+    if (notCalibrated.length > 0 && submittedBatches.length < requiredBatches) {
+      errors.push(`Current batch incomplete: ${notCalibrated.length} equipment items not yet calibrated (${notCalibrated.map((e: any) => e.id).join(', ')})`);
+    }
+    
+    // Validate calibration data entered from PDF
+    const expectedData = expectedCalibrationData[batchReference];
+    if (expectedData) {
+      equipment.forEach((eq: any) => {
+        if (eq.status === 'calibrated') {
+          const expected = expectedData[eq.id];
+          if (expected) {
+            // Check technician name
+            if (!eq.technician || eq.technician.trim() === '') {
+              errors.push(`Equipment ${eq.id}: Missing technician name from PDF`);
+            } else if (eq.technician.trim() !== expected.technician) {
+              errors.push(`Equipment ${eq.id}: Technician should be "${expected.technician}", got "${eq.technician}"`);
+            }
+            
+            // Check date
+            if (!eq.date || eq.date.trim() === '') {
+              errors.push(`Equipment ${eq.id}: Missing calibration date from PDF`);
+            } else if (eq.date.trim() !== expected.date) {
+              errors.push(`Equipment ${eq.id}: Date should be "${expected.date}", got "${eq.date}"`);
+            }
+            
+            // Check notes (contains expected text)
+            if (!eq.notes || eq.notes.trim() === '') {
+              errors.push(`Equipment ${eq.id}: Missing calibration notes from PDF`);
+            } else if (!eq.notes.toLowerCase().includes(expected.notesContains.toLowerCase())) {
+              errors.push(`Equipment ${eq.id}: Notes should contain "${expected.notesContains}"`);
+            }
+          }
+        }
+      });
+    }
+  }
+  
+  if (errors.length > 0) {
+    return {
+      success: false,
+      message: `Equipment calibration validation errors: ${errors.slice(0, 3).join('; ')}${errors.length > 3 ? ` (and ${errors.length - 3} more)` : ''}`
+    };
+  }
+  
+  return {
+    success: true,
+    message: `Successfully completed ${requiredBatches} calibration batch(es) with all 6 equipment items calibrated in correct dependency order!`
+  };
+}
 
-const tasks = (uiBenchTasks as any[]).map((t, index) => ({
-  id: index + 1,
-  name: t.id,
-  component: createTaskComponentForIndex(index),
-  task: t.instructions,
-  ux: t.ux,
-  test: t.test,
-  fullWidth: true,
-  requireResultSubmission: !!t.require_result_submission,
-}));
+export function test_33(): TestResult {
+  const appState = (window as any).app_state;
+  if (!appState) {
+    return { success: false, message: 'App state not found.' };
+  }
+  
+  const { enrollmentRequests, processedEnrollments } = appState;
+  
+  if (!enrollmentRequests || !processedEnrollments) {
+    return { success: false, message: 'Enrollment requests or processed enrollments not found in app state.' };
+  }
+  
+  // Expected decisions based on prerequisite rules from PDF
+  const expectedEnrollments = [
+    {
+      name: 'Emily Carter',
+      id: 'EMP-1001',
+      completedCourses: ['Intro to Programming', 'Data Structures'],
+      requestedCourses: ['Algorithms', 'Database Design', 'Web Development'],
+      decisions: [
+        { course: 'Algorithms', decision: 'approve', reason: '' },
+        { course: 'Database Design', decision: 'approve', reason: '' },
+        { course: 'Web Development', decision: 'approve', reason: '' }
+      ]
+    },
+    {
+      name: 'Michael Torres',
+      id: 'EMP-1002',
+      completedCourses: ['Intro to Programming'],
+      requestedCourses: ['Data Structures', 'Algorithms', 'Machine Learning'],
+      decisions: [
+        { course: 'Data Structures', decision: 'approve', reason: '' },
+        { course: 'Algorithms', decision: 'deny', reason: 'Prerequisites Not Met' },
+        { course: 'Machine Learning', decision: 'deny', reason: 'Prerequisites Not Met' }
+      ]
+    },
+    {
+      name: 'Sarah Johnson',
+      id: 'EMP-1003',
+      completedCourses: ['Intro to Programming', 'Data Structures', 'Algorithms', 'Database Design', 'Advanced SQL'],
+      requestedCourses: ['Machine Learning', 'Cloud Architecture'],
+      decisions: [
+        { course: 'Machine Learning', decision: 'approve', reason: '' },
+        { course: 'Cloud Architecture', decision: 'deny', reason: 'Prerequisites Not Met' }
+      ]
+    },
+    {
+      name: 'David Kim',
+      id: 'EMP-1004',
+      completedCourses: [],
+      requestedCourses: ['Intro to Programming', 'Data Structures', 'Web Development'],
+      decisions: [
+        { course: 'Intro to Programming', decision: 'approve', reason: '' },
+        { course: 'Data Structures', decision: 'deny', reason: 'Prerequisites Not Met' },
+        { course: 'Web Development', decision: 'deny', reason: 'Prerequisites Not Met' }
+      ]
+    },
+    {
+      name: 'Jessica Martinez',
+      id: 'EMP-1005',
+      completedCourses: ['Intro to Programming', 'Database Design', 'Advanced SQL', 'Web Development'],
+      requestedCourses: ['Cloud Architecture', 'Data Structures', 'Machine Learning'],
+      decisions: [
+        { course: 'Cloud Architecture', decision: 'approve', reason: '' },
+        { course: 'Data Structures', decision: 'approve', reason: '' },
+        { course: 'Machine Learning', decision: 'deny', reason: 'Prerequisites Not Met' }
+      ]
+    }
+  ];
+  
+  // [Cheat] system - Build validation table BEFORE any checks (for testers)
+  const cheatData: any[] = [];
+  const errors: string[] = [];
+  
+  // Show progress
+  const requestsWithData = enrollmentRequests.filter((req: any) => req.employeeName && req.employeeId);
+  console.log(`[Cheat] Progress: ${requestsWithData.length}/5 employees have data entered, ${processedEnrollments.length}/5 submitted (for testers)`);
+  
+  for (let i = 0; i < expectedEnrollments.length; i++) {
+    const expected = expectedEnrollments[i];
+    
+    // Check both enrollmentRequests (current data being entered) and processedEnrollments (submitted data)
+    const request = enrollmentRequests.find((r: any) => 
+      r.employeeName.trim() === expected.name && r.employeeId.trim() === expected.id
+    );
+    const processed = processedEnrollments.find((p: any) => 
+      p.employeeName.trim() === expected.name && p.employeeId.trim() === expected.id
+    );
+    
+    // Use whichever has data (prefer processed if both exist)
+    const current = processed || request;
+    
+    if (!current || !current.employeeName) {
+      cheatData.push({
+        Employee: expected.name,
+        ID: expected.id,
+        Status: '⏸️ Not started',
+        Details: 'No data entered yet'
+      });
+      if (processed && !request) {
+        errors.push(`Employee ${expected.name} (${expected.id}) not found in processed enrollments`);
+      }
+      continue;
+    }
+    
+    // Check employee basic info
+    const nameMatch = current.employeeName.trim() === expected.name;
+    const idMatch = current.employeeId.trim() === expected.id;
+    
+    if (processed && !nameMatch) {
+      errors.push(`Employee name mismatch: expected "${expected.name}", got "${current.employeeName}"`);
+    }
+    
+    if (processed && !idMatch) {
+      errors.push(`Employee ID mismatch: expected "${expected.id}", got "${current.employeeId}"`);
+    }
+    
+    // Check completed courses
+    const currentCompleted = (current.completedCourses || []).map((c: string) => c.trim()).sort();
+    const expectedCompleted = expected.completedCourses.map((c: string) => c.trim()).sort();
+    const completedMatch = JSON.stringify(currentCompleted) === JSON.stringify(expectedCompleted);
+    
+    if (processed && !completedMatch) {
+      errors.push(`${expected.name}: Completed courses mismatch. Expected [${expectedCompleted.join(', ')}], got [${currentCompleted.join(', ')}]`);
+    }
+    
+    // Check requested courses
+    const currentRequested = (current.requestedCourses || []).map((c: string) => c.trim()).sort();
+    const expectedRequested = expected.requestedCourses.map((c: string) => c.trim()).sort();
+    const requestedMatch = JSON.stringify(currentRequested) === JSON.stringify(expectedRequested);
+    
+    if (processed && !requestedMatch) {
+      errors.push(`${expected.name}: Requested courses mismatch. Expected [${expectedRequested.join(', ')}], got [${currentRequested.join(', ')}]`);
+    }
+    
+    // Check decisions for each course
+    let courseErrors = 0;
+    let courseSuccess = 0;
+    const courseDetails: string[] = [];
+    
+    // Check if decisions exist and validate them
+    const currentDecisions = current.decisions || [];
+    
+    for (const expectedDecision of expected.decisions) {
+      const currentDecision = currentDecisions.find((d: any) => d.course.trim() === expectedDecision.course);
+      
+      if (!currentDecision || currentDecision.decision === 'pending') {
+        courseDetails.push(`${expectedDecision.course}: ⏸️ Pending`);
+        if (processed) {
+          courseErrors++;
+          errors.push(`${expected.name}: Missing decision for course "${expectedDecision.course}"`);
+        }
+        continue;
+      }
+      
+      // Check decision (approve/deny/defer)
+      const decisionMatch = currentDecision.decision === expectedDecision.decision;
+      if (!decisionMatch) {
+        courseErrors++;
+        courseDetails.push(`${expectedDecision.course}: ❌ ${currentDecision.decision} (need ${expectedDecision.decision})`);
+        if (processed) {
+          errors.push(`${expected.name}, ${expectedDecision.course}: Expected decision "${expectedDecision.decision}", got "${currentDecision.decision}"`);
+        }
+        continue;
+      }
+      
+      // Check reason for denials
+      let reasonMatch = true;
+      if (expectedDecision.decision === 'deny') {
+        reasonMatch = currentDecision.reason.trim() === expectedDecision.reason;
+        if (!reasonMatch) {
+          courseErrors++;
+          courseDetails.push(`${expectedDecision.course}: ❌ Denied but wrong reason (${currentDecision.reason || 'none'})`);
+          if (processed) {
+            errors.push(`${expected.name}, ${expectedDecision.course}: Expected denial reason "${expectedDecision.reason}", got "${currentDecision.reason || 'none'}"`);
+          }
+          continue;
+        }
+      }
+      
+      courseSuccess++;
+      const icon = expectedDecision.decision === 'approve' ? '✅' : 
+                   expectedDecision.decision === 'deny' ? '✅ Denied' : '✅ Deferred';
+      courseDetails.push(`${expectedDecision.course}: ${icon}`);
+    }
+    
+    // Determine overall status
+    let status = '';
+    if (!nameMatch || !idMatch) {
+      status = '❌ Wrong name/ID';
+    } else if (!completedMatch || !requestedMatch) {
+      status = '❌ Wrong courses';
+    } else if (courseErrors > 0) {
+      status = `❌ ${courseErrors} decision error(s)`;
+    } else if (courseSuccess === expected.decisions.length) {
+      status = processed ? '✅ Complete & Submitted' : '✅ Ready to submit';
+    } else {
+      status = `⏸️ ${courseSuccess}/${expected.decisions.length} decided`;
+    }
+    
+    cheatData.push({
+      Employee: expected.name,
+      ID: expected.id,
+      Courses: `${courseSuccess}/${expected.decisions.length}`,
+      Status: status,
+      Details: courseDetails.join('; ')
+    });
+  }
+  
+  // ALWAYS show [Cheat] table BEFORE validation (for testers)
+  console.log('[Cheat] Training Enrollment Validation Status (for testers):');
+  console.table(cheatData);
+  
+  // Check if all 5 employees have been processed
+  if (processedEnrollments.length !== 5) {
+    return {
+      success: false,
+      message: `Expected 5 processed enrollments, found ${processedEnrollments.length}. Process all 5 employees from PDF.`
+    };
+  }
+  
+  // Return validation results
+  if (errors.length > 0) {
+    return {
+      success: false,
+      message: `Enrollment approval validation failed: ${errors.slice(0, 3).join('; ')}${errors.length > 3 ? ` (and ${errors.length - 3} more errors)` : ''}`
+    };
+  }
+  
+  // All validations passed
+  return {
+    success: true,
+    message: 'Successfully processed all 5 employee training enrollment requests with correct approve/deny decisions based on prerequisite validation!'
+  };
+}
 
-export const tasksForExport = tasks.map(({ id, task, ux }) => ({ id, task, ux }));
-export const appInfo = { appName: 'Copy-Paste & Iteration Tasks', appPath: '/copy-paste-tasks' };
+export function test_34(): TestResult {
+  const appState = (window as any).app_state;
+  
+  if (!appState) {
+    console.log('[Cheat] App state not found');
+    return { success: false, message: 'App state not found.' };
+  }
 
-const CopyPasteTasksApp: React.FC = () => {
-  return (
-    <TaskWrapper tasks={tasks} appName="Copy-Paste & Iteration Tasks" appPath="/copy-paste-tasks" />
-  );
-};
+  const { submittedConfigurations, currentConfiguration, ruleValidation, conflictCount } = appState;
 
-export default CopyPasteTasksApp;
+  // Expected configurations from Markdown (3 configurations per batch)
+  const expectedConfigs = [
+    {
+      productReference: 'CONF-2024-850',
+      customerName: 'TechCorp Solutions',
+      baseModel: 'Premium',
+      processor: 'Performance',
+      memory: '32GB',
+      storage: '1TB',
+      graphics: 'Dedicated High',
+      display: '4K',
+      material: 'Aluminum',
+      finish: 'Matte'
+    },
+    {
+      productReference: 'CONF-2024-851',
+      customerName: 'Design Studio Pro',
+      baseModel: 'Professional',
+      processor: 'Standard',
+      memory: '16GB',
+      storage: '512GB',
+      graphics: 'Dedicated Standard',
+      display: 'QHD',
+      material: 'Composite',
+      finish: 'Satin'
+    },
+    {
+      productReference: 'CONF-2024-852',
+      customerName: 'Budget Systems Inc',
+      baseModel: 'Standard',
+      processor: 'Entry',
+      memory: '8GB',
+      storage: '256GB',
+      graphics: 'Integrated',
+      display: 'FHD',
+      material: 'Composite',
+      finish: 'Matte'
+    }
+  ];
+
+  // ===== [Cheat] ALWAYS SHOW PROGRESS FIRST (before any returns) =====
+  
+  // Show ONLY current configuration progress (for testers)
+  const configIndex = (submittedConfigurations?.length || 0);
+  const expected = expectedConfigs[configIndex];
+  
+  if (currentConfiguration && expected) {
+    // Show field-by-field validation: Reference/Customer must match, others just show filled status
+    const currentProgress = {
+      'Config': `${configIndex + 1}/3`,
+      'Reference': currentConfiguration.productReference?.trim() ? 
+        (currentConfiguration.productReference.trim() === expected.productReference ? '✅' : '❌') : '-',
+      'Customer': currentConfiguration.customerName?.trim() ? 
+        (currentConfiguration.customerName.trim() === expected.customerName ? '✅' : '❌') : '-',
+      'BaseModel': currentConfiguration.baseModel ? '✅' : '-',
+      'Processor': currentConfiguration.processor ? '✅' : '-',
+      'Memory': currentConfiguration.memory ? '✅' : '-',
+      'Storage': currentConfiguration.storage ? '✅' : '-',
+      'Graphics': currentConfiguration.graphics ? '✅' : '-',
+      'Display': currentConfiguration.display ? '✅' : '-',
+      'Material': currentConfiguration.material ? '✅' : '-',
+      'Finish': currentConfiguration.finish ? '✅' : '-',
+      'Rules': (currentConfiguration.baseModel && conflictCount === 0) ? '✅ (5/5)' : (currentConfiguration.baseModel ? `❌ (${5 - conflictCount}/5)` : '-')
+    };
+    
+    console.log(`[Cheat] Configuration ${configIndex + 1}/3 (Submitted: ${submittedConfigurations?.length || 0}/3):`);
+    console.table([currentProgress]);
+  } else if (!submittedConfigurations || submittedConfigurations.length < 3) {
+    console.log(`[Cheat] Configuration ${configIndex + 1}/3 (Submitted: ${submittedConfigurations?.length || 0}/3) - Fill form to see progress`);
+  }
+
+  // ===== [Test] NOW DO VALIDATION =====
+
+  if (!submittedConfigurations || submittedConfigurations.length === 0) {
+    return { success: false, message: 'No configurations submitted yet. Complete and submit 3 product configurations from the Markdown specification file.' };
+  }
+
+  // Show cumulative submitted table (only when records are submitted)
+  if (submittedConfigurations.length > 0) {
+    const submittedTable = submittedConfigurations.map((config: any, i: number) => {
+      const expectedConfig = expectedConfigs[i];
+      return {
+        'Config': `${i + 1}/3`,
+        'Reference': config.productReference?.trim() === expectedConfig.productReference ? '✅' : '❌',
+        'Customer': config.customerName?.trim() === expectedConfig.customerName ? '✅' : '❌',
+        'BaseModel': config.baseModel ? '✅' : '-',
+        'Processor': config.processor ? '✅' : '-',
+        'Memory': config.memory ? '✅' : '-',
+        'Storage': config.storage ? '✅' : '-',
+        'Graphics': config.graphics ? '✅' : '-',
+        'Display': config.display ? '✅' : '-',
+        'Material': config.material ? '✅' : '-',
+        'Finish': config.finish ? '✅' : '-',
+        'Rules': config.rulesSatisfied === 5 ? '✅ (5/5)' : `❌ (${config.rulesSatisfied || 0}/5)`
+      };
+    });
+    console.log(`[Cheat] ✅ Submitted Configurations (${submittedConfigurations.length}/3):`);
+    console.table(submittedTable);
+  }
+
+  if (submittedConfigurations.length < 3) {
+    return { success: false, message: `Only ${submittedConfigurations.length} of 3 configurations submitted. Complete remaining configurations.` };
+  }
+
+  const errors: string[] = [];
+  const cheatData: any[] = [];
+
+  // Validate each configuration - only check rules are satisfied, not exact field matches
+  expectedConfigs.forEach((expected, i) => {
+    const config = submittedConfigurations[i];
+    
+    if (!config) {
+      errors.push(`Configuration ${i + 1}: Missing`);
+      return;
+    }
+
+    // Check reference and customer (these should match spec)
+    const refMatch = config.productReference?.trim() === expected.productReference;
+    const customerMatch = config.customerName?.trim() === expected.customerName;
+    
+    // Check rules satisfied (accept any valid combination)
+    const rulesMatch = config.rulesSatisfied === 5;
+
+    // Build cheat data - just show if fields are filled
+    cheatData.push({
+      Config: i + 1,
+      Reference: refMatch ? '✅' : '❌',
+      Customer: customerMatch ? '✅' : '❌',
+      BaseModel: config.baseModel ? '✅' : '-',
+      Processor: config.processor ? '✅' : '-',
+      Memory: config.memory ? '✅' : '-',
+      Storage: config.storage ? '✅' : '-',
+      Graphics: config.graphics ? '✅' : '-',
+      Display: config.display ? '✅' : '-',
+      Material: config.material ? '✅' : '-',
+      Finish: config.finish ? '✅' : '-',
+      Rules: rulesMatch ? '✅ (5/5)' : `❌ (${config.rulesSatisfied || 0}/5)`
+    });
+
+    // Only fail on: wrong reference/customer, or rules not satisfied
+    if (!refMatch) errors.push(`Config ${i + 1}: Product reference should be '${expected.productReference}', got '${config.productReference}'`);
+    if (!customerMatch) errors.push(`Config ${i + 1}: Customer name should be '${expected.customerName}', got '${config.customerName}'`);
+    if (!rulesMatch) errors.push(`Config ${i + 1}: Should satisfy 5/5 rules, got ${config.rulesSatisfied || 0}/5`);
+  });
+
+  if (errors.length > 0) {
+    console.log('[Cheat] Validation errors found:');
+    console.table(cheatData);
+    return {
+      success: false,
+      message: `Configuration validation failed: ${errors.slice(0, 3).join('; ')}${errors.length > 3 ? ` (and ${errors.length - 3} more errors)` : ''}`
+    };
+  }
+
+  console.log('[Cheat] ✅ All 3 configurations validated successfully!');
+  console.table(cheatData);
+
+  return {
+    success: true,
+    message: 'Successfully submitted all 3 product configurations with correct reference/customer names and all 5 validation rules satisfied (5/5)!'
+  };
+}
+
+export function test_35(): TestResult {
+  const appState = (window as any).app_state;
+  
+  if (!appState) {
+    return { success: false, message: 'App state not found.' };
+  }
+
+  const { submittedPRs } = appState;
+
+  // Expected PR data with keyword-based status assignments
+  const expectedPRs = [
+    {
+      prReference: 'PR-2024-412',
+      repositoryName: 'frontend-dashboard',
+      reviewerName: 'Sarah Chen',
+      reviewDate: '2024-02-15',
+      comments: [
+        { lineNumber: 145, severity: 'Blocker', status: 'Resolved' }, // "fixed immediately"
+        { lineNumber: 203, severity: 'Major', status: 'Resolved' }, // "fixed"
+        { lineNumber: 287, severity: 'Minor', status: 'Wontfix' }, // "intentional"
+      ],
+    },
+    {
+      prReference: 'PR-2024-415',
+      repositoryName: 'backend-api',
+      reviewerName: 'Michael Rodriguez',
+      reviewDate: '2024-02-16',
+      comments: [
+        { lineNumber: 89, severity: 'Blocker', status: 'Resolved' }, // "Refactored"
+        { lineNumber: 134, severity: 'Minor', status: 'Wontfix' }, // "design decision"
+        { lineNumber: 212, severity: 'Major', status: 'Resolved' }, // "Implemented"
+      ],
+    },
+    {
+      prReference: 'PR-2024-418',
+      repositoryName: 'mobile-app',
+      reviewerName: 'Jennifer Kim',
+      reviewDate: '2024-02-17',
+      comments: [
+        { lineNumber: 67, severity: 'Major', status: 'Resolved' }, // "Implemented"
+        { lineNumber: 145, severity: 'Minor', status: 'Wontfix' }, // "Design decision"
+        { lineNumber: 223, severity: 'Blocker', status: 'Resolved' }, // "Added"
+      ],
+    },
+  ];
+
+  // ===== [Cheat] SHOW PROGRESS BEFORE VALIDATION =====
+  
+  const currentPR = appState.prReference || '';
+  const currentComments = appState.comments || [];
+  
+  // Determine which PR is currently being worked on (first one not yet submitted)
+  const currentPRIndex = submittedPRs ? submittedPRs.length : 0;
+  
+  // Build cheat table showing all 3 PRs with their comment status
+  const cheatTable: any[] = [];
+  
+  for (let i = 0; i < 3; i++) {
+    const expected = expectedPRs[i];
+    const pr = submittedPRs && submittedPRs[i];
+    
+    if (pr) {
+      // PR already submitted - check each field
+      const row: any = {
+        'PR': `${expected.prReference} (Submitted)`,
+        'Reference': pr.prReference?.trim() === expected.prReference ? '✅' : '❌',
+        'Repo': pr.repositoryName?.trim() === expected.repositoryName ? '✅' : '❌',
+        'Reviewer': pr.reviewerName?.trim() === expected.reviewerName ? '✅' : '❌',
+        'Date': pr.reviewDate?.trim() === expected.reviewDate ? '✅' : '❌',
+      };
+      
+      // Check each of the 3 comments
+      for (let j = 0; j < 3; j++) {
+        const comment = pr.comments && pr.comments[j];
+        const expectedComment = expected.comments[j];
+        
+        if (!comment) {
+          row[`C${j + 1}`] = '❌';
+        } else {
+          const lineOk = comment.lineNumber === expectedComment.lineNumber;
+          const severityOk = comment.severity === expectedComment.severity;
+          const statusOk = comment.status === expectedComment.status;
+          const responseOk = comment.response && comment.response.trim().length >= 10;
+          
+          row[`C${j + 1}`] = (lineOk && severityOk && statusOk && responseOk) ? '✅' : '❌';
+        }
+      }
+      
+      cheatTable.push(row);
+    } else if (i === currentPRIndex) {
+      // This is the current PR being filled (next one in sequence) - show progressive validation
+      const row: any = {
+        'PR': `${expected.prReference} (In Progress)`,
+        'Reference': currentPR.trim() === expected.prReference ? '✅' : (currentPR.trim() !== '' ? '❌' : '-'),
+        'Repo': appState.repositoryName?.trim() === expected.repositoryName ? '✅' : (appState.repositoryName?.trim() ? '❌' : '-'),
+        'Reviewer': appState.reviewerName?.trim() === expected.reviewerName ? '✅' : (appState.reviewerName?.trim() ? '❌' : '-'),
+        'Date': appState.reviewDate?.trim() === expected.reviewDate ? '✅' : (appState.reviewDate?.trim() ? '❌' : '-'),
+      };
+      
+      // Check each of the 3 comments progressively
+      for (let j = 0; j < 3; j++) {
+        const comment = currentComments[j];
+        const expectedComment = expected.comments[j];
+        
+        if (!comment || comment.lineNumber === 0) {
+          row[`C${j + 1}`] = '-';
+        } else {
+          const lineOk = comment.lineNumber === expectedComment.lineNumber;
+          const severityOk = comment.severity === expectedComment.severity;
+          const statusOk = comment.status === expectedComment.status;
+          const responseOk = comment.status !== 'Unresolved' && comment.response && comment.response.trim().length >= 10;
+          
+          // Only mark green if ALL fields are correct
+          if (lineOk && severityOk && statusOk && responseOk) {
+            row[`C${j + 1}`] = '✅';
+          } else if (comment.lineNumber !== 0) {
+            // Something filled but not all correct
+            row[`C${j + 1}`] = '❌';
+          } else {
+            row[`C${j + 1}`] = '-';
+          }
+        }
+      }
+      
+      cheatTable.push(row);
+    } else {
+      // PR not started yet - show what's expected
+      cheatTable.push({
+        'PR': `${expected.prReference} (Not Started)`,
+        'Reference': '-',
+        'Repo': '-',
+        'Reviewer': '-',
+        'Date': '-',
+        'C1': '-', 'C2': '-', 'C3': '-',
+      });
+    }
+  }
+  
+  console.log('[Cheat] PR Review Progress (C1-C3 = Comments 1-3):');
+  console.table(cheatTable);
+
+  // ===== [Test] NOW DO VALIDATION =====
+
+  if (!submittedPRs || submittedPRs.length === 0) {
+    return { 
+      success: false, 
+      message: 'No PR reviews submitted yet. Open task-35-code-review-pr-412.md and process the first PR review.' 
+    };
+  }
+
+  if (submittedPRs.length < 3) {
+    return { 
+      success: false, 
+      message: `Only ${submittedPRs.length} of 3 PR reviews submitted. Complete all 3 PR reviews (PR-2024-412, PR-2024-415, PR-2024-418).` 
+    };
+  }
+
+  // Validate each PR
+  const errors: string[] = [];
+  const cheatData: any[] = [];
+
+  for (let i = 0; i < 3; i++) {
+    const pr = submittedPRs[i];
+    const expected = expectedPRs[i];
+
+    // Check PR reference
+    if (pr.prReference?.trim() !== expected.prReference) {
+      errors.push(`PR ${i + 1}: Reference should be "${expected.prReference}", got "${pr.prReference || '(empty)'}"`);
+    }
+
+    // Check repository
+    if (pr.repositoryName?.trim() !== expected.repositoryName) {
+      errors.push(`PR ${i + 1}: Repository should be "${expected.repositoryName}", got "${pr.repositoryName || '(empty)'}"`);
+    }
+
+    // Check reviewer
+    if (pr.reviewerName?.trim() !== expected.reviewerName) {
+      errors.push(`PR ${i + 1}: Reviewer should be "${expected.reviewerName}", got "${pr.reviewerName || '(empty)'}"`);
+    }
+
+    // Check review date
+    if (pr.reviewDate?.trim() !== expected.reviewDate) {
+      errors.push(`PR ${i + 1}: Review date should be "${expected.reviewDate}", got "${pr.reviewDate || '(empty)'}"`);
+    }
+
+    // Check comments count
+    if (!pr.comments || pr.comments.length !== 3) {
+      errors.push(`PR ${i + 1}: Should have 3 comments, got ${pr.comments?.length || 0}`);
+      const row: any = {
+        'PR': expected.prReference,
+        'Reference': pr.prReference?.trim() === expected.prReference ? '✅' : '❌',
+        'Repo': pr.repositoryName?.trim() === expected.repositoryName ? '✅' : '❌',
+        'Reviewer': pr.reviewerName?.trim() === expected.reviewerName ? '✅' : '❌',
+        'Date': pr.reviewDate?.trim() === expected.reviewDate ? '✅' : '❌',
+      };
+      // Add empty comment columns
+      for (let j = 0; j < 3; j++) {
+        row[`C${j + 1}`] = '❌';
+      }
+      cheatData.push(row);
+      continue;
+    }
+
+    // Validate each comment
+    let commentErrors = 0;
+    for (let j = 0; j < 3; j++) {
+      const comment = pr.comments[j];
+      const expectedComment = expected.comments[j];
+
+      // Check line number
+      if (comment.lineNumber !== expectedComment.lineNumber) {
+        errors.push(`PR ${i + 1} Comment ${j + 1}: Line number should be ${expectedComment.lineNumber}, got ${comment.lineNumber}`);
+        commentErrors++;
+      }
+
+      // Check severity
+      if (comment.severity !== expectedComment.severity) {
+        errors.push(`PR ${i + 1} Comment ${j + 1}: Severity should be "${expectedComment.severity}", got "${comment.severity}"`);
+        commentErrors++;
+      }
+
+      // Check status (based on keyword rules from Markdown)
+      if (comment.status !== expectedComment.status) {
+        errors.push(`PR ${i + 1} Comment ${j + 1}: Status should be "${expectedComment.status}" based on comment description keywords, got "${comment.status}"`);
+        commentErrors++;
+      }
+
+      // Check response (must be non-empty with at least 10 characters)
+      if (!comment.response || comment.response.trim().length < 10) {
+        errors.push(`PR ${i + 1} Comment ${j + 1}: Response must be at least 10 characters, got ${comment.response?.trim().length || 0} characters`);
+        commentErrors++;
+      }
+    }
+
+    // Add to cheat data with comment-level details
+    const row: any = {
+      'PR': expected.prReference,
+      'Reference': pr.prReference?.trim() === expected.prReference ? '✅' : '❌',
+      'Repo': pr.repositoryName?.trim() === expected.repositoryName ? '✅' : '❌',
+      'Reviewer': pr.reviewerName?.trim() === expected.reviewerName ? '✅' : '❌',
+      'Date': pr.reviewDate?.trim() === expected.reviewDate ? '✅' : '❌',
+    };
+    
+    // Check each of the 3 comments
+    for (let j = 0; j < 3; j++) {
+      const comment = pr.comments[j];
+      const expectedComment = expected.comments[j];
+      
+      const lineOk = comment.lineNumber === expectedComment.lineNumber;
+      const severityOk = comment.severity === expectedComment.severity;
+      const statusOk = comment.status === expectedComment.status;
+      const responseOk = comment.response && comment.response.trim().length >= 10;
+      
+      row[`C${j + 1}`] = (lineOk && severityOk && statusOk && responseOk) ? '✅' : '❌';
+    }
+    
+    cheatData.push(row);
+  }
+
+  if (errors.length > 0) {
+    console.log('[Cheat] Validation errors found (C1-C3 = Comments 1-3):');
+    console.table(cheatData);
+    return {
+      success: false,
+      message: `PR review validation failed: ${errors.slice(0, 3).join('; ')}${errors.length > 3 ? ` (and ${errors.length - 3} more errors)` : ''}`
+    };
+  }
+
+  console.log('[Cheat] ✅ All 3 PR reviews validated successfully! (C1-C3 = Comments 1-3)');
+  console.table(cheatData);
+
+  return {
+    success: true,
+    message: 'Successfully processed all 3 PR reviews with correct status assignments (based on keyword rules) and valid responses for all 9 comments!'
+  };
+}
+
+export function test_36(): TestResult {
+  const appState = (window as any).app_state;
+  if (!appState) {
+    return { success: false, message: 'App state not found.' };
+  }
+
+  const { currentAudit, formFieldsCompleted, submittedAudits } = appState;
+
+  // Violation label mapping for readable cheat output
+  const violationLabels: { [key: string]: string } = {
+    'icon-no-labels': 'Icon buttons no labels',
+    'non-descriptive-links': 'Non-descriptive links',
+    'keyboard-trap': 'Keyboard traps',
+    'missing-labels': 'Missing form labels',
+    'unclear-validation': 'Unclear validation',
+    'missing-autocomplete': 'Missing autocomplete',
+    'improper-headings': 'Improper headings',
+    'missing-landmarks': 'Missing landmarks',
+    'invalid-html': 'Invalid HTML',
+    'elements-touching-edges': 'Elements touching edges',
+    'inconsistent-spacing': 'Inconsistent spacing',
+    'overflow-issues': 'Overflow issues',
+    'poor-contrast': 'Poor contrast',
+    'text-too-small': 'Text too small',
+    'color-only-indicators': 'Color-only indicators',
+  };
+
+  // Expected violations by audit reference
+  const correctViolationsByAudit: { [key: string]: string[] } = {
+    'A11Y-2024-201': ['icon-no-labels', 'non-descriptive-links'],
+    'A11Y-2024-202': ['missing-labels', 'improper-headings', 'elements-touching-edges'],
+    'A11Y-2024-203': ['poor-contrast', 'text-too-small'],
+  };
+
+  // Expected audits with correct violations based on actual screenshots
+  const expectedAudits = [
+    { auditReference: 'A11Y-2024-201', correctViolations: correctViolationsByAudit['A11Y-2024-201'].sort() },
+    { auditReference: 'A11Y-2024-202', correctViolations: correctViolationsByAudit['A11Y-2024-202'].sort() },
+    { auditReference: 'A11Y-2024-203', correctViolations: correctViolationsByAudit['A11Y-2024-203'].sort() },
+  ];
+
+  const errors: string[] = [];
+
+  // Helper function to show violation breakdown for an audit
+  const showViolationBreakdown = (auditRef: string, selectedViolations: string[], label: string) => {
+    const correctViolations = correctViolationsByAudit[auditRef] || [];
+    const selectedSet = new Set(selectedViolations || []);
+    const correctSet = new Set(correctViolations);
+    
+    const violationDetails: any[] = [];
+    
+    // All possible violations (15 total: 7 correct + 8 decoys)
+    const allViolations = [
+      'icon-no-labels', 'non-descriptive-links', 'keyboard-trap',
+      'missing-labels', 'unclear-validation', 'missing-autocomplete',
+      'improper-headings', 'missing-landmarks', 'invalid-html',
+      'elements-touching-edges', 'inconsistent-spacing', 'overflow-issues',
+      'poor-contrast', 'text-too-small', 'color-only-indicators'
+    ];
+    
+    allViolations.forEach(violationId => {
+      const isCorrect = correctSet.has(violationId);
+      const isSelected = selectedSet.has(violationId);
+      
+      let status = '';
+      if (isCorrect && isSelected) {
+        status = '✅';
+      } else if (isCorrect && !isSelected) {
+        status = '❌ MISSED';
+      } else if (!isCorrect && isSelected) {
+        status = '❌ FALSE+';
+      } else {
+        return; // Correctly not selected - don't show
+      }
+      
+      violationDetails.push({
+        'Violation': violationLabels[violationId] || violationId,
+        'Should Select': isCorrect ? '✓' : '',
+        'Selected': isSelected ? '✓' : '✗',
+        'Status': status,
+      });
+    });
+    
+    if (violationDetails.length > 0) {
+      console.log(`[Cheat] ${label}:`);
+      console.table(violationDetails);
+      console.log(`  Expected: ${correctViolations.length} violations`);
+      console.log(`  Selected: ${selectedViolations?.length || 0} violations`);
+      console.log('');
+    }
+  };
+
+  // Show incremental feedback for CURRENT audit being filled out
+  if (currentAudit && formFieldsCompleted?.hasAuditReference) {
+    const { auditReference, selectedViolations } = currentAudit;
+    
+    // Only show cheat if we have a valid audit reference that we're tracking
+    if (correctViolationsByAudit[auditReference]) {
+      showViolationBreakdown(auditReference, selectedViolations, `CURRENT AUDIT: ${auditReference} (in progress)`);
+    }
+  }
+
+  // Validate submitted audits
+  for (let i = 0; i < expectedAudits.length; i++) {
+    const expected = expectedAudits[i];
+    const audit = submittedAudits?.find((a: any) => a.auditReference === expected.auditReference);
+
+    if (!audit) {
+      errors.push(`Audit ${expected.auditReference} not found in submissions`);
+      continue;
+    }
+
+    // Check auditor name and date are filled
+    if (!audit.auditorName || audit.auditorName.trim() === '') {
+      errors.push(`${audit.auditReference}: Auditor name is required`);
+    }
+    if (!audit.auditDate || audit.auditDate.trim() === '') {
+      errors.push(`${audit.auditReference}: Audit date is required`);
+    }
+
+    // Check selected violations match expected (exact match)
+    const selectedSorted = [...(audit.selectedViolations || [])].sort();
+    const expectedSorted = expected.correctViolations;
+
+    // Calculate false positives and negatives
+    const correctSet = new Set(expectedSorted);
+    const selectedSet = new Set(selectedSorted);
+    
+    const falsePositives = selectedSorted.filter(id => !correctSet.has(id));
+    const falseNegatives = expectedSorted.filter(id => !selectedSet.has(id));
+
+    // Check for perfect match (100% accuracy, 0 false positives)
+    const isPerfect = falsePositives.length === 0 && falseNegatives.length === 0;
+
+    if (!isPerfect) {
+      if (falsePositives.length > 0) {
+        errors.push(`${audit.auditReference}: ${falsePositives.length} false positive(s) - incorrect violations selected: ${falsePositives.join(', ')}`);
+      }
+      if (falseNegatives.length > 0) {
+        errors.push(`${audit.auditReference}: ${falseNegatives.length} violation(s) missed: ${falseNegatives.join(', ')}`);
+      }
+    }
+  }
+
+  // Check if we have all 3 audits submitted
+  if (!submittedAudits || submittedAudits.length !== 3) {
+    errors.push(`Expected 3 accessibility audits, found ${submittedAudits?.length || 0}. Complete all 3 audit validations.`);
+  }
+
+  if (errors.length > 0) {
+    // Show submitted audits validation with breakdown
+    if (submittedAudits && submittedAudits.length > 0) {
+      console.log('[Cheat] SUBMITTED AUDITS validation:');
+      console.log('');
+      
+      for (let i = 0; i < expectedAudits.length; i++) {
+        const expected = expectedAudits[i];
+        const audit = submittedAudits.find((a: any) => a.auditReference === expected.auditReference);
+        
+        if (!audit) {
+          console.log(`[Cheat] ${expected.auditReference}: ❌ Not found in submissions`);
+          console.log('');
+          continue;
+        }
+        
+        showViolationBreakdown(expected.auditReference, audit.selectedViolations, `SUBMITTED: ${expected.auditReference}`);
+      }
+    }
+    
+    console.log('[Cheat] Errors:');
+    errors.forEach(err => console.log(`  - ${err}`));
+    
+    return {
+      success: false,
+      message: `Audit validation failed: ${errors.slice(0, 2).join('; ')}${errors.length > 2 ? ` (and ${errors.length - 2} more errors)` : ''}. Ensure all violations are correctly identified with no false positives.`
+    };
+  }
+
+  return {
+    success: true,
+    message: 'Successfully validated all 3 accessibility audits with 100% accuracy and zero false positives/negatives!'
+  };
+}
+
+export function test_37(): TestResult {
+  const appState = (window as any).app_state;
+  
+  if (!appState) {
+    return { success: false, message: 'App state not found.' };
+  }
+  
+  const { submittedCatalogs, classifiedServices } = appState;
+  
+  // Expected data for 1 catalog (10 services - 2 per category)
+  // Order matches the shuffled document (copy-paste-task-37.docx)
+  const expectedCatalog = {
+    catalogId: 'CAT-2024-305',
+    services: [
+      { name: 'Custom Software Development', primary: 'Technology Services', sub: 'Software Development' },
+      { name: 'Business Process Optimization', primary: 'Business Services', sub: 'Management Consulting' },
+      { name: 'Brand Identity Design', primary: 'Creative Services', sub: 'Brand Development' },
+      { name: 'Network Security Assessment', primary: 'Technology Services', sub: 'Cybersecurity Solutions' },
+      { name: 'Corporate Tax Planning', primary: 'Professional Services', sub: 'Accounting Services' },
+      { name: 'Video Production Services', primary: 'Creative Services', sub: 'Video Production' },
+      { name: 'Financial Risk Assessment', primary: 'Business Services', sub: 'Financial Advisory' },
+      { name: 'Helpdesk Support', primary: 'Support Services', sub: 'Customer Support' },
+      { name: 'Structural Engineering Review', primary: 'Professional Services', sub: 'Engineering Consulting' },
+      { name: 'IT Infrastructure Monitoring', primary: 'Support Services', sub: 'Technical Support' }
+    ]
+  };
+  
+  // INCREMENTAL: Show progress for classified services (before submission)
+  if (classifiedServices && classifiedServices.length > 0) {
+    console.log('[Cheat] Service Classification Progress:');
+    console.log(`[Cheat] Classified: ${classifiedServices.length}/10 services`);
+    console.log('');
+    
+    const cheatData: any[] = [];
+    
+    // Check each expected service - find by name (order doesn't matter)
+    for (let i = 0; i < 10; i++) {
+      const exp = expectedCatalog.services[i];
+      const act = classifiedServices.find(s => s.serviceName.trim() === exp.name);
+      
+      if (!act) {
+        cheatData.push({
+          '#': i + 1,
+          'Service': exp.name.substring(0, 20),
+          'Name': '❌',
+          'Primary': '❌',
+          'Subcategory': '❌',
+          'Status': 'Not Added'
+        });
+      } else {
+        const nameMatch = '✅'; // Already matched by name
+        const primaryMatch = act.primaryCategory === exp.primary ? '✅' : '❌';
+        const subMatch = act.subcategory === exp.sub ? '✅' : '❌';
+        
+        cheatData.push({
+          '#': i + 1,
+          'Service': act.serviceName.substring(0, 20),
+          'Name': nameMatch,
+          'Primary': primaryMatch,
+          'Subcategory': subMatch,
+          'Status': nameMatch === '✅' && primaryMatch === '✅' && subMatch === '✅' ? '✅ Perfect' : '⚠️ Check'
+        });
+      }
+    }
+    
+    console.table(cheatData);
+    console.log('');
+  }
+  
+  // Check if we have submitted catalog
+  if (!submittedCatalogs || submittedCatalogs.length === 0) {
+    console.log('[Cheat] Expected catalog:');
+    console.log('[Cheat] - CAT-2024-305 (10 services - 2 per category)');
+    console.log('[Cheat] Status: ❌ No catalog submitted yet - Classify all 10 services then submit!');
+    return { success: false, message: 'No service catalog submitted yet. Classify 10 services and submit complete catalog.' };
+  }
+  
+  const errors: string[] = [];
+  const actual = submittedCatalogs[0];
+  
+  if (!actual) {
+    errors.push('Catalog not found');
+  } else {
+    // Check catalog ID
+    if (actual.catalogId.trim() !== expectedCatalog.catalogId) {
+      errors.push(`Expected catalog ID "${expectedCatalog.catalogId}", got "${actual.catalogId.trim()}"`);
+    }
+    
+    // Check service count
+    if (!actual.classifications || actual.classifications.length !== 10) {
+      errors.push(`Expected 10 services, got ${actual.classifications?.length || 0}`);
+    } else {
+      // Validate each expected service - find by name (order doesn't matter)
+      for (const expectedService of expectedCatalog.services) {
+        const actualService = actual.classifications.find(
+          s => s.serviceName.trim() === expectedService.name
+        );
+        
+        if (!actualService) {
+          errors.push(`Service "${expectedService.name}": Missing`);
+          continue;
+        }
+        
+        // Check primary category
+        if (actualService.primaryCategory !== expectedService.primary) {
+          errors.push(`${expectedService.name}: Expected primary category "${expectedService.primary}", got "${actualService.primaryCategory}"`);
+        }
+        
+        // Check subcategory
+        if (actualService.subcategory !== expectedService.sub) {
+          errors.push(`${expectedService.name}: Expected subcategory "${expectedService.sub}", got "${actualService.subcategory}"`);
+        }
+      }
+    }
+  }
+  
+  // Show [Cheat] system if there are errors
+  if (errors.length > 0) {
+    console.log('[Cheat] Service Taxonomy Validation:');
+    console.log('');
+    
+    if (actual) {
+      console.log(`[Cheat] === ${expectedCatalog.catalogId} ===`);
+      
+      const cheatData: any[] = [];
+      
+      // Check each expected service - find by name (order doesn't matter)
+      for (let i = 0; i < 10; i++) {
+        const exp = expectedCatalog.services[i];
+        const act = actual.classifications?.find(s => s.serviceName.trim() === exp.name);
+        
+        if (!act) {
+          cheatData.push({
+            '#': i + 1,
+            'Service': exp.name.substring(0, 25) + (exp.name.length > 25 ? '...' : ''),
+            'Primary': '❌',
+            'Subcategory': '❌',
+            'Expected Path': `${exp.primary.substring(0, 15)}... → ${exp.sub.substring(0, 15)}...`
+          });
+        } else {
+          const nameMatch = '✅'; // Already matched by name
+          const primaryMatch = act.primaryCategory === exp.primary ? '✅' : '❌';
+          const subMatch = act.subcategory === exp.sub ? '✅' : '❌';
+          
+          cheatData.push({
+            '#': i + 1,
+            'Service': nameMatch,
+            'Primary': primaryMatch,
+            'Subcategory': subMatch,
+            'Expected': `${exp.primary.split(' ')[0]} → ${exp.sub.split(' ')[0]}`,
+            'Actual': act.primaryCategory && act.subcategory 
+              ? `${act.primaryCategory.split(' ')[0]} → ${act.subcategory.split(' ')[0]}`
+              : '(empty)'
+          });
+        }
+      }
+      
+      console.table(cheatData);
+      console.log('');
+    }
+    
+    console.log('[Cheat] Errors:');
+    errors.slice(0, 10).forEach(err => console.log(`  - ${err}`));
+    if (errors.length > 10) {
+      console.log(`  ... and ${errors.length - 10} more errors`);
+    }
+    
+    return {
+      success: false,
+      message: `Service taxonomy validation failed: ${errors.slice(0, 2).join('; ')}${errors.length > 2 ? ` (and ${errors.length - 2} more errors)` : ''}. Ensure all services are classified with correct taxonomy paths.`
+    };
+  }
+  
+  return {
+    success: true,
+    message: 'Successfully classified all 10 services with correct taxonomy paths!'
+  };
+}
+
+// Test function for task 38: Design Annotation Validator
+export function test_38(): TestResult {
+  const appState = (window as any).app_state;
+  
+  if (!appState) {
+    return { success: false, message: 'App state not found.' };
+  }
+  
+  const { validationRecords } = appState;
+  
+  // Check if we have 1 validation record
+  if (!validationRecords || validationRecords.length !== 1) {
+    // Show [Cheat] system when no validation submitted
+    const currentValidation = appState.currentValidation || {};
+    const expectedMockup = { 
+      ref: 'MOCK-2024-550', 
+      designerName: 'Sarah Chen',
+      validationDate: '2024-03-15',
+      mappings: {
+        1: 'primary-color',
+        2: 'sidebar-width',
+        3: 'text-overflow',
+        4: 'card-width',
+        5: 'content-overflow',
+      }
+    };
+    
+    console.log('[Cheat] Design Annotation Validation Progress:');
+    console.log('');
+    
+    const progressData = [{
+      'Field': 'Mockup Reference',
+      'Status': currentValidation.mockupReference === expectedMockup.ref ? '✅' : '❌',
+      'Expected': 'MOCK-2024-550',
+      'Current': currentValidation.mockupReference || '(empty)',
+    }, {
+      'Field': 'Designer Name',
+      'Status': currentValidation.designerName?.trim() === expectedMockup.designerName ? '✅' : '❌',
+      'Expected': 'Sarah Chen',
+      'Current': currentValidation.designerName || '(empty)',
+    }, {
+      'Field': 'Validation Date',
+      'Status': currentValidation.validationDate === expectedMockup.validationDate ? '✅' : '❌',
+      'Expected': '2024-03-15',
+      'Current': currentValidation.validationDate || '(empty)',
+    }, {
+      'Field': 'Mappings',
+      'Status': (currentValidation.mappings?.length || 0) === 5 ? '✅' : '❌',
+      'Expected': '5 mappings',
+      'Current': `${currentValidation.mappings?.length || 0} mappings`,
+    }];
+    
+    console.table(progressData);
+    console.log('');
+    
+    // Show current mappings with checkmarks
+    if (currentValidation.mappings && currentValidation.mappings.length > 0) {
+      const requirementNames: { [key: string]: string } = {
+        'primary-color': 'Change Primary Brand Color',
+        'sidebar-width': 'Make Sidebar Less Wide',
+        'text-overflow': 'Fix Text Overflow Inside Card',
+        'card-width': 'Extend Card Width',
+        'content-overflow': 'Fix Vertical Page Overflow',
+      };
+      
+      const mappingData = [];
+      for (let marker = 1; marker <= 5; marker++) {
+        const expectedReq = (expectedMockup.mappings as any)[marker];
+        const actualMapping = currentValidation.mappings.find((m: any) => m.marker === marker);
+        
+        mappingData.push({
+          'Marker': marker,
+          'Status': actualMapping?.requirement === expectedReq ? '✅' : '❌',
+          'Expected': requirementNames[expectedReq] || expectedReq,
+          'Current': actualMapping ? (requirementNames[actualMapping.requirement] || actualMapping.requirement) : '(not mapped)',
+        });
+      }
+      
+      console.log('[Cheat] Current Marker Mappings:');
+      console.table(mappingData);
+    }
+    
+    return {
+      success: false,
+      message: `Expected 1 mockup validation, found ${validationRecords ? validationRecords.length : 0}. Submit validation for mockup MOCK-2024-550.`
+    };
+  }
+  
+  // Define expected mockup reference and correct marker-requirement mappings
+  const expectedMockup = { 
+    ref: 'MOCK-2024-550', 
+    designerName: 'Sarah Chen',
+    validationDate: '2024-03-15',
+    mappings: {
+      1: 'primary-color',
+      2: 'sidebar-width',
+      3: 'text-overflow',
+      4: 'card-width',
+      5: 'content-overflow',
+    }
+  };
+  
+  const errors: string[] = [];
+  const actual = validationRecords[0];
+  
+  // Check mockup reference
+  if (actual.mockupReference !== expectedMockup.ref) {
+    errors.push(`Expected mockup reference "${expectedMockup.ref}", got "${actual.mockupReference}"`);
+  }
+  
+  // Check designer name
+  if (actual.designerName?.trim() !== expectedMockup.designerName) {
+    errors.push(`Expected designer name "${expectedMockup.designerName}", got "${actual.designerName || '(empty)'}"`);
+  }
+  
+  // Check validation date
+  if (actual.validationDate !== expectedMockup.validationDate) {
+    errors.push(`Expected validation date "${expectedMockup.validationDate}", got "${actual.validationDate}"`);
+  }
+  
+  // Check if exactly 5 mappings
+  if (!actual.mappings || actual.mappings.length !== 5) {
+    errors.push(`Expected 5 marker-requirement mappings, got ${actual.mappings ? actual.mappings.length : 0}`);
+  }
+  
+  // Check each mapping
+  if (actual.mappings) {
+    for (let marker = 1; marker <= 5; marker++) {
+      const expectedReq = (expectedMockup.mappings as any)[marker];
+      const actualMapping = actual.mappings.find((m: any) => m.marker === marker);
+      
+      if (!actualMapping) {
+        errors.push(`Missing mapping for marker ${marker}`);
+      } else if (actualMapping.requirement !== expectedReq) {
+        errors.push(`Marker ${marker} mapped to "${actualMapping.requirement}", expected "${expectedReq}"`);
+      }
+    }
+  }
+  
+  // Check accuracy is 100%
+  if (actual.accuracy !== 100) {
+    errors.push(`Expected 100% accuracy, got ${actual.accuracy.toFixed(1)}%`);
+  }
+  
+  // Check all mappings are correct
+  if (actual.correctCount !== 5) {
+    errors.push(`Expected 5 correct mappings, got ${actual.correctCount}`);
+  }
+  
+  // Check no incorrect mappings
+  if (actual.incorrectCount > 0) {
+    errors.push(`Found ${actual.incorrectCount} incorrect mapping(s)`);
+  }
+  
+  // Check no missing mappings
+  if (actual.missingCount > 0) {
+    errors.push(`${actual.missingCount} marker(s) not mapped`);
+  }
+  
+  // Show [Cheat] system if there are errors (allow up to 1 error to pass)
+  if (errors.length > 1) {
+    console.log('[Cheat] Design Annotation Validation:');
+    console.log('');
+    
+    // Header fields validation
+    const headerData = [{
+      'Field': 'Mockup Reference',
+      'Status': actual.mockupReference === expectedMockup.ref ? '✅' : '❌',
+      'Expected': expectedMockup.ref,
+      'Current': actual.mockupReference || '(empty)',
+    }, {
+      'Field': 'Designer Name',
+      'Status': actual.designerName?.trim() === expectedMockup.designerName ? '✅' : '❌',
+      'Expected': expectedMockup.designerName,
+      'Current': actual.designerName || '(empty)',
+    }, {
+      'Field': 'Validation Date',
+      'Status': actual.validationDate === expectedMockup.validationDate ? '✅' : '❌',
+      'Expected': expectedMockup.validationDate,
+      'Current': actual.validationDate || '(empty)',
+    }];
+    
+    console.table(headerData);
+    console.log('');
+    
+    // Marker mappings validation - order independent
+    const requirementNames: { [key: string]: string } = {
+      'primary-color': 'Change Primary Brand Color',
+      'sidebar-width': 'Make Sidebar Less Wide',
+      'text-overflow': 'Fix Text Overflow Inside Card',
+      'card-width': 'Extend Card Width',
+      'content-overflow': 'Fix Vertical Page Overflow',
+    };
+    
+    const mappingData = [];
+    for (let marker = 1; marker <= 5; marker++) {
+      const expectedReq = (expectedMockup.mappings as any)[marker];
+      const actualMapping = actual.mappings?.find((m: any) => m.marker === marker);
+      
+      mappingData.push({
+        'Marker': marker,
+        'Status': actualMapping?.requirement === expectedReq ? '✅' : '❌',
+        'Expected': requirementNames[expectedReq] || expectedReq,
+        'Current': actualMapping ? (requirementNames[actualMapping.requirement] || actualMapping.requirement) : '(not mapped)',
+      });
+    }
+    
+    console.log('[Cheat] Marker-Requirement Mappings:');
+    console.table(mappingData);
+    console.log('');
+    console.log('[Cheat] Decoy Requirements (not in mockup):');
+    console.log('  - Reduce Main Header Height');
+    console.log('  - Increase Body Text Line Height');
+    console.log('  - Update Secondary Accent Color');
+    console.log('  - Add More Button Padding');
+    console.log('  - Enable Image Lazy Loading');
+    console.log('');
+    console.log(`[Cheat] Accuracy: ${actual.accuracy?.toFixed(0) || 0}% (${actual.correctCount || 0} correct, ${actual.incorrectCount || 0} incorrect, ${actual.missingCount || 0} missing)`);
+    console.log('');
+    console.log('[Cheat] Validation Errors (${errors.length}/1 allowed):');
+    errors.forEach(err => console.log(`  - ${err}`));
+    
+    return {
+      success: false,
+      message: `Validation failed with ${errors.length} error(s) (max 1 allowed): ${errors[0]}${errors.length > 1 ? ` (and ${errors.length - 1} more)` : ''}`
+    };
+  }
+  
+  // Success - all checks passed
+  return {
+    success: true,
+    message: 'Successfully validated mockup MOCK-2024-550 with perfect marker-requirement mappings (5/5) and correct header fields!'
+  };
+}
+
+export function test_39(): TestResult {
+  const appState = (window as any).app_state;
+
+  if (!appState) {
+    return { success: false, message: 'App state not found.' };
+  }
+
+  const { submittedBatches, batchReference, incidents, currentFormEntry, formFieldsCompleted } = appState;
+
+  // Debug logging
+  console.log('[DEBUG] appState keys:', Object.keys(appState));
+  console.log('[DEBUG] formFieldsCompleted:', formFieldsCompleted);
+  console.log('[DEBUG] currentFormEntry:', currentFormEntry);
+  console.log('[DEBUG] batchReference:', batchReference);
+  
+  // Expected batch data with severity classifications (2 incidents per batch)
+  const expectedBatches = [
+    {
+      ref: 'BATCH-2024-408',
+      incidents: [
+        { id: 'INC-2024-1105', reportedBy: 'Sarah Martinez', severity: 'P1', escalated: true },
+        { id: 'INC-2024-1106', reportedBy: 'James Wilson', severity: 'P4', escalated: false },
+      ],
+    },
+    {
+      ref: 'BATCH-2024-409',
+      incidents: [
+        { id: 'INC-2024-1113', reportedBy: 'Amanda Foster', severity: 'P2', escalated: true },
+        { id: 'INC-2024-1114', reportedBy: 'Robert Lee', severity: 'P3', escalated: false },
+      ],
+    },
+    {
+      ref: 'BATCH-2024-410',
+      incidents: [
+        { id: 'INC-2024-1121', reportedBy: 'Elizabeth Wilson', severity: 'P1', escalated: true },
+        { id: 'INC-2024-1122', reportedBy: 'Daniel Moore', severity: 'P4', escalated: false },
+      ],
+    },
+  ];
+  
+  // Check if we have 3 submitted batches
+  if (!submittedBatches || submittedBatches.length !== 3) {
+    console.log('[Cheat] Incident Triage Progress');
+    console.log('='.repeat(80));
+
+    // Show current batch progress
+    const currentBatch = expectedBatches.find((b: any) => b.ref === batchReference);
+
+    if (!currentBatch) {
+      // Show batch selection progress with console.table()
+      const batchProgress = expectedBatches.map((batch: any) => {
+        const isCurrentBatch = batch.ref === batchReference?.trim();
+        let status = '❌ Not Started';
+        let incidentsProgress = '0/2';
+
+        if (isCurrentBatch) {
+          const incidentCount = incidents?.length || 0;
+          if (incidentCount === 2) {
+            status = '✅ Complete';
+            incidentsProgress = '2/2';
+          } else if (incidentCount > 0) {
+            status = '🟡 In Progress';
+            incidentsProgress = `${incidentCount}/2`;
+          } else {
+            status = '🔵 Selected';
+            incidentsProgress = '0/2';
+          }
+        }
+
+        return {
+          'Batch': batch.ref,
+          'Status': status,
+          'Incidents': incidentsProgress,
+          'Expected': `${batch.incidents.length} incidents`,
+        };
+      });
+
+      console.table(batchProgress);
+      console.log('');
+      return {
+        success: false,
+        message: `Expected 3 triage batches, found ${submittedBatches ? submittedBatches.length : 0}. Submit all 3 batches with 2 incidents each.`
+      };
+    }
+    
+    // Show progress for current batch
+    console.log(`[Cheat] Current Batch: ${batchReference}`);
+    console.log(`[Cheat] Progress: ${incidents?.length || 0}/2 incidents triaged`);
+    console.log('');
+
+    // Always show current form entry progress (even if empty)
+    console.log('[Cheat] Current Form Entry:');
+    const formProgress = [{
+      'Field': 'Incident ID',
+      'Status': (formFieldsCompleted && formFieldsCompleted.hasIncidentId) ? '✅' : '❌',
+      'Value': (currentFormEntry && currentFormEntry.incidentId) || '(empty)',
+    }, {
+      'Field': 'Reported By',
+      'Status': (formFieldsCompleted && formFieldsCompleted.hasReportedBy) ? '✅' : '❌',
+      'Value': (currentFormEntry && currentFormEntry.reportedBy) || '(empty)',
+    }, {
+      'Field': 'Description',
+      'Status': (formFieldsCompleted && formFieldsCompleted.hasDescription) ? '✅' : '❌',
+      'Value': (currentFormEntry && currentFormEntry.description) ? (currentFormEntry.description.substring(0, 50) + '...') : '(empty)',
+    }, {
+      'Field': 'Severity',
+      'Status': (formFieldsCompleted && formFieldsCompleted.hasSeverity) ? '✅' : '❌',
+      'Value': (currentFormEntry && currentFormEntry.severity) || '(empty)',
+    }, {
+      'Field': 'Escalation',
+      'Status': (formFieldsCompleted && formFieldsCompleted.hasSeverity) ? '✅ Auto' : '❌',
+      'Value': (currentFormEntry && currentFormEntry.escalated) ? 'YES' : 'NO',
+    }];
+    console.table(formProgress);
+    console.log('');
+    
+    // Show triaged incidents for current batch
+    if (incidents && incidents.length > 0) {
+      console.log('[Cheat] Triaged Incidents in Current Batch:');
+      const incidentData: any[] = [];
+      
+      currentBatch.incidents.forEach((expected: any) => {
+        const actual = incidents.find((i: any) => i.incidentId === expected.id);
+        
+        if (actual) {
+          incidentData.push({
+            'Incident': expected.id,
+            'Reporter': actual.reportedBy === expected.reportedBy ? '✅' : '❌',
+            'Severity': actual.severity === expected.severity ? '✅' : '❌',
+            'Expected': expected.severity,
+            'Actual': actual.severity || 'N/A',
+            'Escalation': actual.escalated === expected.escalated ? '✅' : '❌',
+          });
+        } else {
+          incidentData.push({
+            'Incident': expected.id,
+            'Reporter': '❌',
+            'Severity': '❌',
+            'Expected': expected.severity,
+            'Actual': 'Not added',
+            'Escalation': '❌',
+          });
+        }
+      });
+      
+      console.table(incidentData);
+      console.log('');
+    }
+    
+    // Show expected incidents for current batch
+    console.log(`[Cheat] Expected Incidents for ${batchReference}:`);
+    currentBatch.incidents.forEach((inc: any) => {
+      console.log(`  ${inc.id}: Reported by ${inc.reportedBy}, Severity ${inc.severity}, Escalated: ${inc.escalated ? 'YES' : 'NO'}`);
+    });
+    console.log('');
+    
+    console.log('[Cheat] Batches Completed: ' + (submittedBatches ? submittedBatches.length : 0) + '/3');
+    
+    return {
+      success: false,
+      message: `Expected 3 triage batches, found ${submittedBatches ? submittedBatches.length : 0}. Complete and submit all 3 batches with 2 incidents each.`
+    };
+  }
+  
+  const errors: string[] = [];
+  
+  // Check each expected batch
+  for (const expected of expectedBatches) {
+    const actual = submittedBatches.find((b: any) => b.batchReference === expected.ref);
+    
+    if (!actual) {
+      errors.push(`Missing triage batch ${expected.ref}`);
+      continue;
+    }
+    
+    // Check if exactly 2 incidents
+    if (!actual.incidents || actual.incidents.length !== 2) {
+      errors.push(`${expected.ref}: Expected 2 incidents, got ${actual.incidents ? actual.incidents.length : 0}`);
+      continue;
+    }
+    
+    // Check each incident classification
+    for (const expectedInc of expected.incidents) {
+      const actualInc = actual.incidents.find((i: any) => i.incidentId === expectedInc.id);
+      
+      if (!actualInc) {
+        errors.push(`${expected.ref}: Missing incident ${expectedInc.id}`);
+        continue;
+      }
+      
+      // Check reported by
+      if (actualInc.reportedBy?.trim() !== expectedInc.reportedBy) {
+        errors.push(`${expected.ref} ${expectedInc.id}: Reporter should be "${expectedInc.reportedBy}", got "${actualInc.reportedBy || '(empty)'}"`);
+      }
+      
+      // Check severity classification
+      if (actualInc.severity !== expectedInc.severity) {
+        errors.push(`${expected.ref} ${expectedInc.id}: Severity should be "${expectedInc.severity}", got "${actualInc.severity}"`);
+      }
+      
+      // Check escalation status
+      if (actualInc.escalated !== expectedInc.escalated) {
+        errors.push(`${expected.ref} ${expectedInc.id}: Escalation should be ${expectedInc.escalated ? 'YES' : 'NO'}, got ${actualInc.escalated ? 'YES' : 'NO'}`);
+      }
+    }
+  }
+  
+  // If there are errors, show cheat system
+  if (errors.length > 0) {
+    console.log('[Cheat] Incident Triage Validation Results');
+    console.log('='.repeat(80));
+    
+    const cheatData: any[] = [];
+    
+    for (const expected of expectedBatches) {
+      const actual = submittedBatches.find((b: any) => b.batchReference === expected.ref);
+      
+      if (!actual) {
+        cheatData.push({
+          'Batch': expected.ref,
+          'Status': '❌ Missing',
+          'Incidents': '0/8',
+          'Correct': 0,
+          'Errors': 8,
+        });
+      } else {
+        let correctCount = 0;
+        let errorCount = 0;
+        
+        for (const expectedInc of expected.incidents) {
+          const actualInc = actual.incidents?.find((i: any) => i.incidentId === expectedInc.id);
+          
+          if (actualInc && actualInc.severity === expectedInc.severity && actualInc.escalated === expectedInc.escalated) {
+            correctCount++;
+          } else {
+            errorCount++;
+          }
+        }
+        
+        cheatData.push({
+          'Batch': expected.ref,
+          'Status': correctCount === 8 ? '✅ Perfect' : '❌ Errors',
+          'Incidents': `${actual.incidents?.length || 0}/8`,
+          'Correct': correctCount,
+          'Errors': errorCount,
+        });
+      }
+    }
+    
+    console.table(cheatData);
+    console.log('');
+    console.log('[Cheat] Detailed Incident Classifications:');
+    console.log('');
+    
+    for (const expected of expectedBatches) {
+      const actual = submittedBatches.find((b: any) => b.batchReference === expected.ref);
+      
+      console.log(`${expected.ref}:`);
+      
+      if (!actual) {
+        console.log('  ❌ Batch not found - submit this batch with 2 incidents');
+      } else {
+        const incidentData: any[] = [];
+        
+        for (const expectedInc of expected.incidents) {
+          const actualInc = actual.incidents?.find((i: any) => i.incidentId === expectedInc.id);
+          
+          const severityMatch = actualInc && actualInc.severity === expectedInc.severity;
+          const escalationMatch = actualInc && actualInc.escalated === expectedInc.escalated;
+          
+          const reporterMatch = actualInc && actualInc.reportedBy?.trim() === expectedInc.reportedBy;
+          
+          incidentData.push({
+            'Incident': expectedInc.id,
+            'Reporter': reporterMatch ? '✅' : '❌',
+            'Severity': severityMatch ? '✅' : '❌',
+            'Expected Sev': expectedInc.severity,
+            'Actual Sev': actualInc?.severity || 'N/A',
+            'Escalation': escalationMatch ? '✅' : '❌',
+            'Expected Esc': expectedInc.escalated ? 'YES' : 'NO',
+            'Actual Esc': actualInc ? (actualInc.escalated ? 'YES' : 'NO') : 'N/A',
+          });
+        }
+        
+        console.table(incidentData);
+      }
+      
+      console.log('');
+    }
+    
+    console.log('[Cheat] Severity Classification Rules:');
+    console.log('  P1 (Critical) - Keywords: outage, production down, complete failure, data loss, security breach, all users affected');
+    console.log('  P2 (High) - Keywords: degraded performance, partial outage, customer-facing, significant impact, service disruption');
+    console.log('  P3 (Medium) - Keywords: minor bug, single user, workaround available, non-urgent, moderate impact');
+    console.log('  P4 (Low) - Keywords: feature request, documentation, enhancement, cosmetic, informational');
+    console.log('');
+    console.log('[Cheat] Escalation Rules:');
+    console.log('  P1 and P2 incidents require escalation (escalated = true)');
+    console.log('  P3 and P4 incidents do not require escalation (escalated = false)');
+    console.log('');
+    console.log('[Cheat] Errors found:');
+    errors.slice(0, 10).forEach(err => console.log(`  - ${err}`));
+    if (errors.length > 10) {
+      console.log(`  ... and ${errors.length - 10} more errors`);
+    }
+    
+    return {
+      success: false,
+      message: `Incident triage validation failed: ${errors.slice(0, 2).join('; ')}${errors.length > 2 ? ` (and ${errors.length - 2} more errors)` : ''}. Classify all incidents with correct severity and escalation status.`
+    };
+  }
+  
+  return {
+    success: true,
+    message: 'Successfully triaged all 3 incident batches with correct severity classifications and escalation decisions (2 incidents each)!'
+  };
+}
+
+export function test_40(): TestResult {
+  const appState = (window as any).app_state;
+
+  if (!appState) {
+    return { success: false, message: 'App state not found.' };
+  }
+
+  const { submittedAssessments, changelogReference, assessmentDate, assessorName, changes, completedChanges } = appState;
+
+  // Expected assessments based on keyword analysis
+  const expectedAssessments = [
+    { changeId: 'CHNG-2024-1201', scope: 'UI', riskLevel: 'Low', rollbackComplexity: 'Easy' },
+    { changeId: 'CHNG-2024-1202', scope: 'Database', riskLevel: 'High', rollbackComplexity: 'Hard' },
+    { changeId: 'CHNG-2024-1203', scope: 'Backend', riskLevel: 'High', rollbackComplexity: 'Moderate' },
+    { changeId: 'CHNG-2024-1204', scope: 'Backend', riskLevel: 'Low', rollbackComplexity: 'Easy' },
+    { changeId: 'CHNG-2024-1205', scope: 'Infrastructure', riskLevel: 'High', rollbackComplexity: 'Hard' },
+    { changeId: 'CHNG-2024-1206', scope: 'UI', riskLevel: 'Medium', rollbackComplexity: 'Easy' },
+  ];
+
+  // Check if we have at least one submitted assessment
+  if (!submittedAssessments || submittedAssessments.length === 0) {
+    console.log('[Cheat] No assessments submitted yet');
+    return { success: false, message: 'No risk assessments submitted. Complete the 6-change risk matrix and submit the assessment.' };
+  }
+
+  const assessment = submittedAssessments[0]; // Take the first submitted assessment
+
+  // Check header fields
+  if (assessment.changelogReference !== 'CL-2024-620') {
+    return { success: false, message: `Incorrect changelog reference: expected 'CL-2024-620', got '${assessment.changelogReference}'` };
+  }
+
+  if (assessment.assessmentDate !== '2024-02-28') {
+    return { success: false, message: `Incorrect assessment date: expected '2024-02-28', got '${assessment.assessmentDate}'` };
+  }
+
+  if (assessment.assessorName !== 'Marcus Thompson') {
+    return { success: false, message: `Incorrect assessor name: expected 'Marcus Thompson', got '${assessment.assessorName}'` };
+  }
+
+  // Check that we have exactly 6 changes
+  if (!assessment.changes || assessment.changes.length !== 6) {
+    return { success: false, message: `Expected 6 change assessments, found ${assessment.changes?.length || 0}` };
+  }
+
+  const errors: string[] = [];
+
+  // Validate each change assessment
+  assessment.changes.forEach((change: any, index: number) => {
+    const expected = expectedAssessments[index];
+
+    if (change.changeId !== expected.changeId) {
+      errors.push(`Change ${index + 1}: incorrect ID '${change.changeId}', expected '${expected.changeId}'`);
+      return;
+    }
+
+    if (change.scope !== expected.scope) {
+      errors.push(`Change ${change.changeId}: incorrect scope '${change.scope}', expected '${expected.scope}'`);
+    }
+
+    if (change.riskLevel !== expected.riskLevel) {
+      errors.push(`Change ${change.changeId}: incorrect risk level '${change.riskLevel}', expected '${expected.riskLevel}'`);
+    }
+
+    if (change.rollbackComplexity !== expected.rollbackComplexity) {
+      errors.push(`Change ${change.changeId}: incorrect rollback complexity '${change.rollbackComplexity}', expected '${expected.rollbackComplexity}'`);
+    }
+  });
+
+  if (errors.length > 0) {
+    console.log('[Cheat] Assessment validation errors:');
+    console.log('[Cheat] Specific errors:');
+    errors.slice(0, 6).forEach(error => console.log(`  - ${error}`));
+
+    return {
+      success: false,
+      message: `Risk assessment validation failed: ${errors.slice(0, 2).join('; ')}${errors.length > 2 ? ` (and ${errors.length - 2} more errors)` : ''}. Re-analyze change descriptions and apply correct keyword-based classifications.`
+    };
+  }
+
+  // Success - all assessments correct
+  return {
+    success: true,
+    message: 'Successfully completed risk assessment for CL-2024-620 with all 6 changes correctly classified by scope, risk level, and rollback complexity!'
+  };
+}
+

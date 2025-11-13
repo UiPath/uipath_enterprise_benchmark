@@ -975,7 +975,7 @@
   {
     "web_name": "kanban-board",
     "id": "kanban-board--4",
-    "ques": "What is the task least recently updated? Format JSON response as {\"key\": str, \"summary\": str, \"assignee\": str, \"updated\": str}, and use the Submit Results button to send it.",
+    "ques": "What is the task least recently updated? Switch to table mode and sort by Updated column to easily find the least recently updated task. Format JSON response as {\"key\": str, \"summary\": str, \"assignee\": str, \"updated\": str}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/kanban-board/4?mode=test"
   },
@@ -1031,7 +1031,7 @@
   {
     "web_name": "workday",
     "id": "workday--4",
-    "ques": "Find out how many PTO days I used in 2025. Format JSON response as {\"pto_days_count\": int}, and use the Submit Results button to send it.",
+    "ques": "Find out how many PTO days I used in 2025. Go to Correct my Absence and use the information displayed there to prepare the response. Format JSON response as {\"pto_days_count\": int}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/workday/4?mode=test"
   },
@@ -1059,63 +1059,63 @@
   {
     "web_name": "workday",
     "id": "workday--8",
-    "ques": "Open 'Absence' > 'Request Absence' and look up in the calendar November and December, and report all holidays or special days. Holidays are marked on the calendar. Format JSON response as {\"<holiday-name>\": \"mm/dd\"}, and use the Submit Results button to send it.",
+    "ques": "Open 'Absence' > 'Request Absence' and look up in the calendar November and December, and report all holidays or special days. Holidays are marked on the calendar. Format JSON response as {\"<holiday-name>\": \"mm/dd\"}, using a month/day date format, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/workday/8?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--1",
-    "ques": "What is the company that has material 1287 in vendor consignment, and the quantity. Format JSON response as {\"company\": str, \"quantity\": float}, and use the Submit Results button to send it.",
+    "ques": "What is the company that has material 1287 in vendor consignment, and what is the quantity? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type \"MMBE\" shortcut in Enter Transaction input and then hit Enter. Enter material \"1287\" in the Material field and click the green checkmark button in the toolbar to search for it. On the results page expand the tree view to find a plant that has \"Vendor Consignment\" in the batch/special stock section. You can get quantity from \"Unrestricted use\" column. Format JSON response as {\"company\": str, \"quantity\": float}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/1?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--2",
-    "ques": "What are the names of the plants that have material 100-210 in stock. Format JSON response as {\"plants\": list[str]}, and use the Submit Results button to send it.",
+    "ques": "What are the names of the plants that have material 100-210 in stock? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type \"MMBE\" shortcut in Enter Transaction input and then hit Enter. Enter material \"100-210\" in the Material field and click the green checkmark button in the toolbar to search for it. On the results page expand the tree view to find the plants that have it in stock. Format JSON response as {\"plants\": list[str]}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/2?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--3",
-    "ques": "For each material on this list [\"1287\",\"100-210\",\"200000054\",\"300-400\"] report the number of companies that have it in stock. Format JSON response as {\"<material-id>\": <count:int>}, and use the Submit Results button to send it.",
+    "ques": "How many companies have each of these materials in stock: [\"1287\",\"100-210\",\"200000054\",\"300-400\"]? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type \"MMBE\" shortcut in Enter Transaction input and then hit Enter. For each material, enter it in the Material field and click the green checkmark button in the toolbar to search, then count the companies in the results. Format JSON response as {\"<material-id>\": <count:int>}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/3?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--4",
-    "ques": "Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find out how many materials contain the string \"fan\". Format JSON response as {\"count\": <count:int>}, and use the Submit Results button to send it.",
+    "ques": "How many materials contain the string \"fan\"? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type \"MMBE\" shortcut in Enter Transaction input and then hit Enter. Use Search for material (\"==\" symbol icon next to material input) to open the Material Number modal. From there use the filters to find out how many materials contain the string \"fan\". Format JSON response as {\"count\": <count:int>}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/4?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--5",
-    "ques": "Open the Stock Overview (MMBE) form (Logistics -> Materials Management -> Inventory Management). Use the \"Search for material\" button (the icon next to the material input) to open the Material Number modal. In the modal, use the filters to find materials where the material description is between B and G (alphabetically) AND the Material Number contains \"FG\". Format JSON response as {\"materials\": [list of material codes]}, and use the Submit Results button to send it.",
+    "ques": "Which materials have a description between B and G (alphabetically, inclusive) AND a Material Number containing \"FG\"? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type \"MMBE\" shortcut in Enter Transaction input and then hit Enter. Use the \"Search for material\" button (the \"==\" symbol icon next to the material input) to open the Material Number modal. In the modal, use the filters to find materials matching these criteria. Format JSON response as {\"materials\": [list of material codes]}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/5?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--6",
-    "ques": "Use MMBE (Inventory Stock Overview) form to find out which plant has the highest reserved stock of SG011. Format JSON response as {\"plant\": \"plant_name\"}, and use the Submit Results button to send it.",
+    "ques": "Which plant has the highest reserved stock of SG011? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type \"MMBE\" shortcut in Enter Transaction input and then hit Enter. Enter material \"SG011\" in the Material field and click the green checkmark button in the toolbar to search for it. Find out which plant has the highest reserved stock. Format JSON response as {\"plant\": \"plant_name\"}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/6?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--7",
-    "ques": "Look up material FG1_CP to see its full description and plants where this material is in stock. Format JSON response as {\"description\": str, \"plants\": list[str]}, and use the Submit Results button to send it. You need to use both the stock search and the Search for Materials view.",
+    "ques": "What is the full description of material FG1_CP, and which plants have it in stock? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type \"MMBE\" shortcut in Enter Transaction input and then hit Enter. Enter material \"FG1_CP\" in the Material field and click the green checkmark button in the toolbar to search for it to find the plants where this material is in stock. To get the full description, use the \"Search for material\" button (the \"==\" symbol icon) to open the Material Number modal and look up FG1_CP there. Format JSON response as {\"description\": str, \"plants\": list[str]}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/7?mode=test"
   },
   {
     "web_name": "sap-stock",
     "id": "sap-stock--8",
-    "ques": "Find the list of storage locations for material FG1_CP and plant PLANT JAMSHEDPUR. Format JSON response as {\"storage_locations\": [list of storage location names]}, and use the Submit Results button to send it.",
+    "ques": "What are the storage locations for material FG1_CP at plant \"PLANT JAMSHEDPUR\"? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type \"MMBE\" shortcut in Enter Transaction input and then hit Enter. Enter material \"FG1_CP\" in the Material field, optionally enter plant \"PLANT JAMSHEDPUR\" in the Plant field to narrow results, and click the green checkmark button in the toolbar to search. Find the list of storage locations for this material at PLANT JAMSHEDPUR by expanding the tree view. Format JSON response as {\"storage_locations\": [list of storage location names]}, and use the Submit Results button to send it.",
     "ux_hint": "Submit the requested JSON via the Submit Results button",
     "web": "http://74.234.189.120:3001/sap-stock/8?mode=test"
   },
@@ -1129,21 +1129,21 @@
   {
     "web_name": "concur",
     "id": "concur--2",
-    "ques": "What is the vendor zip code for the Target expense? Format JSON response as { \"vendor_zip\": number}, and use the Submit Results button to send it.",
+    "ques": "What is the vendor zip code for the Target expense? Use the \"Available Expenses\" panel, click \"See All\" and read the vendor zip code from the \"Vendor Details\" column on the specific row. Format JSON response as { \"vendor_zip\": number}, and use the Submit Results button to send it.",
     "ux_hint": "In \"Available Expenses\" click \"See All\" and read from the \"Vendor Details\" column on the specific row",
     "web": "http://74.234.189.120:3001/concur/2?mode=test"
   },
   {
     "web_name": "concur",
     "id": "concur--3",
-    "ques": "What is the largest available expense? Format JSON response as {\"vendor_name\": str, \"date\": str, \"total\": number}, and use the Submit Results button to send it.",
+    "ques": "What is the largest available expense? Use the \"Available Expenses\" panel, click \"See All\" and read the largest expense from the \"Vendor Details\" and \"Amount\" columns on the specific row. Format JSON response as {\"vendor_name\": str, \"date\": str, \"total\": number}, and use the Submit Results button to send it.",
     "ux_hint": "In \"Available Expenses\" click \"See All\" and read from the \"Vendor Details\" table the task result",
     "web": "http://74.234.189.120:3001/concur/3?mode=test"
   },
   {
     "web_name": "concur",
     "id": "concur--4",
-    "ques": "Create an expense report that includes all the AI related expenses, call it \"AI expenses\"",
+    "ques": "Create an expense report that includes all the AI related expenses, call it \"AI expenses\", set it not travel related.",
     "ux_hint": "Go to Create > Start a report > fill the fields > click Create Report > click Add Expense > add AI expenses > click Attach Receipt for each expense > find the correct receipt and assign it > then Submit Report",
     "web": "http://74.234.189.120:3001/concur/4?mode=test"
   },
@@ -1178,56 +1178,56 @@
   {
     "web_name": "salesforce",
     "id": "salesforce--1",
-    "ques": "Add a new lead with the following details: First Name: \"John\", Last Name: \"Smith\", Company: \"TechCorp Solutions\", Title: \"VP of Operations\", Phone: \"(555) 123-4567\", Email: \"john.smith@techcorp.com\"",
+    "ques": "Navigate to the Leads section and add a new lead with the following details: First Name: \"John\", Last Name: \"Smith\", Company: \"TechCorp Solutions\", Title: \"VP of Operations\", Phone: \"(555) 123-4567\", Email: \"john.smith@techcorp.com\"",
     "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
     "web": "http://74.234.189.120:3001/salesforce/1?mode=test"
   },
   {
     "web_name": "salesforce",
     "id": "salesforce--2",
-    "ques": "Several leads are missing mobile phone numbers. Please assign the following mobile phone numbers to these specific leads: Andy Young: (620) 555-9001, David Martinez: (512) 555-9002, James Thompson: (212) 555-9003, Michael Brown: (858) 555-9004, Parvathi Sreenivasan: (886) 555-9005, Robert Wilson: (503) 555-9006. After editing each lead, make sure to navigate away from the edit view (e.g., go to the home page or leads list) to trigger saving the changes.",
+    "ques": "Navigate to the Leads section. Several leads are missing mobile phone numbers. Please assign the following mobile phone numbers to these specific leads: Andy Young: (620) 555-9001, David Martinez: (512) 555-9002, James Thompson: (212) 555-9003, Michael Brown: (858) 555-9004, Parvathi Sreenivasan: (886) 555-9005, Robert Wilson: (503) 555-9006. After editing each lead, make sure to navigate away from the edit view (e.g., go to the home page or leads list) to trigger saving the changes.",
     "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
     "web": "http://74.234.189.120:3001/salesforce/2?mode=test"
   },
   {
     "web_name": "salesforce",
     "id": "salesforce--3",
-    "ques": "Create an \"Initial outreach\" call for each lead who currently has no call activities associated with them. For each such lead, create a call with the subject \"Initial outreach\" and comments \"First contact, getting to know each other\". Make sure to set the Name field to the lead and assign the call to an appropriate user.",
+    "ques": "Navigate to the Leads section first. Create an \"Initial outreach\" call for each lead who currently has no call activities associated with them. For each such lead, create a call with the subject \"Initial outreach\" and comments \"First contact, getting to know each other\". Make sure to set the Name field to the lead and assign the call to an appropriate user.",
     "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
     "web": "http://74.234.189.120:3001/salesforce/3?mode=test"
   },
   {
     "web_name": "salesforce",
     "id": "salesforce--4",
-    "ques": "Move all activities (tasks, calls, events, emails) that are currently associated with lead \"Parvathi Sreenivasan\" to lead \"Andy Young\". For all activity types: change the \"Name\" field from \"Parvathi Sreenivasan\" to \"Andy Young\". This will move the activities to Andy's activity feed.",
+    "ques": "Navigate to the Leads section first. Move all activities (tasks, calls, events, emails) that are currently associated with lead \"Parvathi Sreenivasan\" to lead \"Andy Young\". For all activity types: change the \"Name\" field from \"Parvathi Sreenivasan\" to \"Andy Young\". This will move the activities to Andy's activity feed.",
     "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
     "web": "http://74.234.189.120:3001/salesforce/4?mode=test"
   },
   {
     "web_name": "salesforce",
     "id": "salesforce--5",
-    "ques": "Find the task \"Send RPA implementation proposal\" assigned to Parvathi Sreenivasan and modify it by: 1) Adding \"today\" to the Subject and 2) Changing the Status from \"Not Started\" to \"In Progress\".",
+    "ques": "Navigate to the Leads section first. Find the task \"Send RPA implementation proposal\" assigned to Parvathi Sreenivasan and modify it by: 1) Adding \"today\" to the Subject and 2) Changing the Status from \"Not Started\" to \"In Progress\".",
     "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
     "web": "http://74.234.189.120:3001/salesforce/5?mode=test"
   },
   {
     "web_name": "salesforce",
     "id": "salesforce--6",
-    "ques": "Update the \"Number of Employees\" field for the following companies to these specific values: RetailMax Corporation → 1000-5000, EduTech Solutions → 200-500, HealthTech Innovations → 500-1000, BioResearch Labs → 500-1000. Find each lead by their company name and change their numberOfEmployees field to the exact value specified.",
+    "ques": "Navigate to the Leads section, and look up leads by company name. Open the lead page and select Detail tab. Update the \"Number of Employees\" field for the following companies to these specific values: RetailMax Corporation → 1000-5000, EduTech Solutions → 200-500, HealthTech Innovations → 500-1000, BioResearch Labs → 500-1000. Find each lead by their company name and change their numberOfEmployees field to the exact value specified.",
     "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
     "web": "http://74.234.189.120:3001/salesforce/6?mode=test"
   },
   {
     "web_name": "salesforce",
     "id": "salesforce--7",
-    "ques": "Use the bulk status change feature to update multiple leads at once. First, select all leads with \"Open - Not Contacted\" status by checking their checkboxes. Then use the \"Change Status\" button to change all selected leads to \"Working - Contacted\" status.",
+    "ques": "Navigate to the Leads section first. Use the bulk status change feature to update multiple leads at once. First, select all leads with \"Open - Not Contacted\" status by checking their checkboxes. Then use the \"Change Status\" button to change all selected leads to \"Working - Contacted\" status.",
     "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
     "web": "http://74.234.189.120:3001/salesforce/7?mode=test"
   },
   {
     "web_name": "salesforce",
     "id": "salesforce--8",
-    "ques": "Use the search and sorting tools to find the lead that is first in alphabetical order among leads that have \"555\" in their phone number. First, search for \"555\" to filter the leads. Then sort by Name column to find the alphabetically first lead. Finally, navigate to that lead's detail page and create an event with subject \"Say hello\" for that lead.",
+    "ques": "Navigate to the Leads section first. Use the search and sorting tools to find the lead that is first in alphabetical order among leads that have \"555\" in their phone number. First, search for \"555\" to filter the leads. Then sort by Name column to find the alphabetically first lead. Finally, navigate to that lead's detail page and create an event with subject \"Say hello\" for that lead.",
     "ux_hint": "Complete the Salesforce interaction to satisfy the instructions",
     "web": "http://74.234.189.120:3001/salesforce/8?mode=test"
   },
@@ -1374,72 +1374,142 @@
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--21",
-    "ques": "Transfer medical lab test results from the TSV file located in Documents/copy-paste-task-21.tsv into the clinical data management system. WORKFLOW: Open the file Documents/copy-paste-task-21.tsv using LibreOffice Calc. For each TSV row, look at the test_category column to determine which tab to use (Hematology/Chemistry/Immunology), then click that tab and add a table row. The test_name column corresponds to the \"Test Name\" dropdown in the selected tab. Navigate between test category tabs based on each row's test_category. Add table rows for each result, use popup name picker to select patients, and popup calculator for range validation. Transfer 3 lab results total across the appropriate category tabs. Use the dropdown menus for test names, number inputs for results, and validation indicators for ranges.",
+    "ques": "Transfer medical lab test results from external Excel files into the clinical data management system. Open the file \"copy-paste-task-21.xlsx\" from the Documents folder. For each Excel row, look at the test_category column to determine which tab to use (Hematology/Chemistry/Immunology), then click that tab and add a table row. The test_name column corresponds to the \"Test Name\" dropdown in the selected tab. Navigate between test category tabs based on each row's test_category. Add table rows for each result, use popup name picker to select patients, and popup calculator for range validation. Transfer 3 lab results total across the appropriate category tabs. Use the dropdown menus for test names, number inputs for results, and validation indicators for ranges. Excel files are provided externally - you must operate between Excel application and the web interface.",
     "ux_hint": "Navigate tabs, add table rows, use name picker popup, range calculator popup, dropdown menus, number spinners, validation indicators",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/21?mode=test"
   },
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--22",
-    "ques": "Use the TSV file located in Documents/copy-paste-task-22.tsv to fill in patient details. Open the file Documents/copy-paste-task-22.tsv using LibreOffice Calc and transfer the data for each patient. Select a provider, then click an available time slot on the calendar to schedule the appointment. Schedule all three appointments.",
+    "ques": "Use the provided Excel file to fill in patient details. Open the file \"copy-paste-task-22.xlsx\" from the Documents folder. Select a provider, then click an available time slot on the calendar to schedule the appointment. Schedule all three appointments.",
     "ux_hint": "The user will manually enter data into a form, select a provider from a dropdown, and then click on a calendar grid to place the appointment. No drag-and-drop is involved.",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/22?mode=test"
   },
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--23",
-    "ques": "Open the TSV file Documents/copy-paste-task-23.tsv using LibreOffice Calc and transfer business information through a multi-step wizard with progress indicators. Process all 3 companies from the TSV file through the complete wizard flow: Step 1 - Company info with auto-complete, Step 2 - Contact details with validation, Step 3 - Address via popup lookup, Step 4 - Industry via image card selection, Step 5 - Revenue/size via sliders. Navigate using Tab/Shift+Tab for efficient field entry.",
+    "ques": "Open external Excel customer data files and transfer business information through a multi-step wizard with progress indicators. Open the file \"copy-paste-task-23.xlsx\" from the Documents folder. Process all 3 companies through the complete wizard flow: Step 1 - Company info with auto-complete, Step 2 - Contact details with validation, Step 3 - Address via popup lookup, Step 4 - Industry via image card selection, Step 5 - Revenue/size via sliders. Navigate using Tab/Shift+Tab for efficient field entry.",
     "ux_hint": "Multi-step wizard with progress bar, breadcrumb navigation, auto-complete fields, validation badges, address lookup popup, industry image cards, revenue/employee sliders",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/23?mode=test"
   },
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--24",
-    "ques": "Open the TSV file Documents/copy-paste-task-24.tsv using LibreOffice Calc and transfer IT service ticket information into the Kanban-style ticket system. Create tickets by entering all required fields from the TSV file: ticket reference, customer ID, issue summary, reported by, report date, estimated hours. Use the priority color buttons to select priority level (Critical/High/Medium/Low). Select the category from tag cloud. Select affected systems by clicking multiple system tags (Ctrl+click for multi-select). Use the \"Trigger Auto-Assignment\" button to automatically assign tickets based on priority. Use \"Calculate SLA\" to set SLA timer. After creating each ticket, it will appear in the \"Open\" column of the Kanban board. Create all 3 tickets with exact data matching the TSV source.",
-    "ux_hint": "Fill ticket form fields from TSV data, click priority color buttons, click category tags, multi-select system tags, trigger auto-assignment workflow, calculate SLA timer, create tickets",
+    "ques": "Transfer IT service ticket information from the Excel file \"copy-paste-task-24.xlsx\" in the Documents folder into the Kanban-style ticket system. Create tickets by entering all required fields from Excel: ticket reference, customer ID, issue summary, reported by, report date, estimated hours. Use the priority color buttons to select priority level (Critical/High/Medium/Low). Select the category from tag cloud. Select affected systems by clicking multiple system tags (Ctrl+click for multi-select). Use the \"Trigger Auto-Assignment\" button to automatically assign tickets based on priority. Use \"Calculate SLA\" to set SLA timer. After creating each ticket, it will appear in the \"Open\" column of the Kanban board. Create all 3 tickets with exact data matching the Excel source.",
+    "ux_hint": "Fill ticket form fields from Excel data, click priority color buttons, click category tags, multi-select system tags, trigger auto-assignment workflow, calculate SLA timer, create tickets",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/24?mode=test"
   },
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--25",
-    "ques": "Open the TSV file Documents/copy-paste-task-25.tsv using LibreOffice Calc and transfer book information into the library cataloging system. For each book: 1) Scan or enter the ISBN barcode number in the scanner field, 2) Navigate the Dewey decimal classification tree on the left to find and select the appropriate subject classification (click arrows to expand, click labels to select, or double-click labels to expand), 3) Fill in book details from TSV: Title, Author, Publication Year, Publisher, Price, 4) Manually enter the Location Code from TSV (e.g., PSY-150.1), 5) Select book condition from dropdown, 6) Click \"Add to Catalog\" to complete cataloging. The Subject field auto-fills when you click a classification in the Dewey tree. The visual shelf picker on the right is a reference tool showing physical shelf locations. Catalog all 3 books with exact data matching the TSV source.",
-    "ux_hint": "Navigate Dewey tree by clicking arrows/labels (or double-click to expand), scan/enter ISBN, fill form fields manually from TSV including location code, select condition dropdown, click Add to Catalog button",
+    "ques": "Transfer book information from the Excel file \"copy-paste-task-25.xlsx\" in the Documents folder into the library cataloging system. For each book: 1) Scan or enter the ISBN barcode number in the scanner field, 2) Navigate the Dewey decimal classification tree on the left to find and select the appropriate subject classification (click arrows to expand, click labels to select, or double-click labels to expand), 3) Fill in book details from Excel: Title, Author, Publication Year, Publisher, Price, 4) Manually enter the Location Code from Excel (e.g., PSY-150.1), 5) Select book condition from dropdown, 6) Click \"Add to Catalog\" to complete cataloging. The Subject field auto-fills when you click a classification in the Dewey tree. The visual shelf picker on the right is a reference tool showing physical shelf locations. Catalog all 3 books with exact data matching the Excel source.",
+    "ux_hint": "Navigate Dewey tree by clicking arrows/labels (or double-click to expand), scan/enter ISBN, fill form fields manually from Excel including location code, select condition dropdown, click Add to Catalog button",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/25?mode=test"
   },
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--26",
-    "ques": "Open the TSV file Documents/copy-paste-task-26.tsv using LibreOffice Calc and enroll 3 students into the education system. For each student: enter student name, date of birth, parent/guardian name, contact email, and home address from the TSV file. Drag a program card from the available programs into the program selection drop zone. Select grade level from dropdown, enter start date, and select special accommodations from checkbox group. Click \"Calculate Age\" button to verify date of birth. Double-click program cards to view curriculum details. Complete enrollment by clicking \"Enroll Student\" button for all 3 students.",
+    "ques": "Open external Excel student data files and enroll 3 students into the education system. Open the file \"copy-paste-task-26.xlsx\" from the Documents folder. For each student: enter student name, date of birth, parent/guardian name, contact email, and home address. Drag a program card from the available programs into the program selection drop zone. Select grade level from dropdown, enter start date, and select special accommodations from checkbox group. Click \"Calculate Age\" button to verify date of birth. Double-click program cards to view curriculum details. Complete enrollment by clicking \"Enroll Student\" button for all 3 students.",
     "ux_hint": "Fill student information fields, drag program cards to selection zone, use age calculator, select grade and date, check special accommodations boxes, enroll students",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/26?mode=test"
   },
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--27",
-    "ques": "Open the TSV file Documents/copy-paste-task-27.tsv using LibreOffice Calc and submit 3 tenant applications. For each applicant: enter applicant name, phone contact, current address, select employment status from dropdown, enter monthly income from the TSV file, and use the income calculator to verify income. Enter rental history, desired move date, and reference contact information. Click the reference verification button to verify references. Upload required documents by clicking document type buttons in the upload center (Pay Stub, Bank Statement, Tax Return, Business License, Contract Agreement, or References). The credit score visualization will update automatically based on income and rental history. After completing all fields, document uploads, and verifications, click \"Submit Application\" to submit each tenant application.",
+    "ques": "Open external Excel tenant data files and submit 3 tenant applications. Open the file \"copy-paste-task-27.xlsx\" from the Documents folder. For each applicant: enter applicant name, phone contact, current address, select employment status from dropdown, enter monthly income, and use the income calculator to verify income. Enter rental history, desired move date, and reference contact information. Click the reference verification button to verify references. Upload required documents by clicking document type buttons in the upload center (Pay Stub, Bank Statement, Tax Return, Business License, Contract Agreement, or References). The credit score visualization will update automatically based on income and rental history. After completing all fields, document uploads, and verifications, click \"Submit Application\" to submit each tenant application.",
     "ux_hint": "Fill applicant information fields, use income calculator widget, verify references with popup, upload documents to designated zones, view credit score visualization, submit applications",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/27?mode=test"
   },
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--28",
-    "ques": "Open the TSV file Documents/copy-paste-task-28.tsv using LibreOffice Calc and transfer all loan data into the financial system. For each of the 3 applicants, enter their personal information (full name, SSN, annual income, employment type, monthly obligations, credit score) from the TSV file, set the loan amount using the slider or numeric input, select loan purpose from dropdown, and enter collateral description. Complete all four loan calculations (monthly payment, DTI ratio, risk assessment, and payment schedule) before submitting the application. Process all 3 loan applications from the TSV file.",
+    "ques": "Open the external Excel loan application files and transfer all loan data into the financial system. Open the file \"copy-paste-task-28.xlsx\" from the Documents folder. For each of the 3 applicants, enter their personal information (full name, SSN, annual income, employment type, monthly obligations, credit score), set the loan amount using the slider or numeric input, select loan purpose from dropdown, and enter collateral description. Complete all four loan calculations (monthly payment, DTI ratio, risk assessment, and payment schedule) before submitting the application. Process all 3 loan applications from the Excel files.",
     "ux_hint": "Single-column form layout with personal info fields at top, loan amount controls (slider + numeric input side-by-side), loan purpose dropdown, collateral description field, followed by four calculator widget sections (Loan Calculator, DTI Calculator, Risk Assessment, Payment Schedule) with individual calculate buttons. Each calculator displays results after button click. Submit button at bottom. Submitted applications shown below with all details.",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/28?mode=test"
   },
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--29",
-    "ques": "Open the TSV file Documents/copy-paste-task-29.tsv using LibreOffice Calc and transfer inventory data into the warehouse receiving terminal system. Use the barcode scanner to enter PO numbers, fill all required fields including item details, quantities, inspector information, and condition assessments from the TSV file. Capture condition photos for documentation. Process all 3 inventory items from the TSV file.",
-    "ux_hint": "Scan/enter barcode for PO number, fill form fields with TSV data, use spinner controls for quantities and prices, select condition status with radio buttons, capture photos, add items to receiving table",
+    "ques": "Transfer inventory data from external Excel files into the warehouse receiving terminal system. Open the file \"copy-paste-task-29.xlsx\" from the Documents folder. Use the barcode scanner to enter PO numbers, fill all required fields including item details, quantities, inspector information, and condition assessments. Capture condition photos for documentation. Process all 3 inventory items from the Excel files.",
+    "ux_hint": "Scan/enter barcode for PO number, fill form fields with Excel data, use spinner controls for quantities and prices, select condition status with radio buttons, capture photos, add items to receiving table",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/29?mode=test"
   },
   {
     "web_name": "copy-paste-tasks",
     "id": "copy-paste-tasks--30",
-    "ques": "Open the TSV file Documents/copy-paste-task-30.tsv using LibreOffice Calc and transfer all contract information into the contract management system. For each contract, enter the contract reference, parties, type, dates, value, and renewal terms from the TSV file. Select the appropriate key clauses from the clause library. Build the timeline visualization for the contract period and set a renewal reminder. Complete all 3 contracts.",
-    "ux_hint": "Enter contract data manually from TSV file, select clauses from the library, build timeline, and set reminders for each contract",
+    "ques": "Open the Excel contract files and transfer all contract information into the contract management system. Open the file \"copy-paste-task-30.xlsx\" from the Documents folder. For each contract, enter the contract reference, parties, type, dates, value, and renewal terms. Select the appropriate key clauses from the clause library. Build the timeline visualization for the contract period and set a renewal reminder. Complete all 3 contracts.",
+    "ux_hint": "Enter contract data manually from Excel files, select clauses from the library, build timeline, and set reminders for each contract",
     "web": "http://74.234.189.120:3001/copy-paste-tasks/30?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--31",
+    "ques": "Process audit violation data from the external PDF audit checklist. Open the file \"copy-paste-task-31.docx\" from the Documents folder. The checklist contains 8 violations across 4 categories (Data Security, Access Control, Documentation, Process Compliance). Enter audit reference AUD-2024-301, then add all 8 violations using the Add Violation button. Select the appropriate category which will reveal category-specific form fields. Complete all fields for each violation and track progress. Submit the complete audit when all 8 violations are processed with exactly 2 violations per category.",
+    "ux_hint": "Review external PDF audit checklist file, add violations one by one through modal form, select category to reveal conditional fields, track progress with circular chart (0/8 → 8/8), submit when complete",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/31?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--32",
+    "ques": "Process equipment calibration from the external calibration manual. Open the file \"copy-paste-task-32.docx\" from the Documents folder. Enter batch reference BATCH-2024-105, which contains 6 equipment items in 2 dependency chains (Chain 1: CAL-A → CAL-B → CAL-C, Chain 2: CAL-D → CAL-E → CAL-F). Equipment must be calibrated in dependency order - prerequisites must be completed before dependent equipment can be started. Click \"Begin Calibration\" for equipment with satisfied dependencies (initially CAL-A and CAL-D have no dependencies), then enter calibration data from the PDF: Technician name, Calibration date (YYYY-MM-DD), and Calibration notes. The system highlights next available equipment in blue. Complete all 6 calibrations with correct data from PDF and submit the batch.",
+    "ux_hint": "Enter batch reference, follow dependency chains, click Begin Calibration, manually enter technician/date/notes from PDF for each equipment, next available highlighted in blue, complete all 6",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/32?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--33",
+    "ques": "Review 5 employee training course requests from external PDF course catalog and approve or deny each course based on prerequisite validation. Open the file \"copy-paste-task-33.docx\" from the Documents folder. Open PDF showing employee completed courses and requested courses (3-4 per employee). Click \"Review Request\" for each employee, enter their employee name, ID, completed courses, and requested courses from PDF. System validates prerequisites automatically. For each requested course, select decision: Approve (if prerequisites met), Deny (if prerequisites not met), or Defer. When denying, select reason \"Prerequisites Not Met\" if prerequisites are not satisfied. Process all 5 employees and submit all approvals.",
+    "ux_hint": "Review PDF employee course requests, click Review Request, enter employee data and courses, system checks prerequisites with ✓/✗ indicators, select Approve/Deny/Defer per course, choose denial reasons, process 5 employees",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/33?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--34",
+    "ques": "Complete 3 product configurations from external Markdown file by finding valid combinations that satisfy 5 validation rules. Open the file \"copy-paste-task-34.docx\" from the Documents folder. TASK: For each configuration, (1) Open Markdown to get Product Reference and Customer Name - enter these exactly, (2) Read the 5 validation rules carefully, (3) Select any combination from 8 dropdowns (Base Model, Processor, Memory, Storage, Graphics, Display, Material, Finish) that satisfies ALL 5 rules with zero conflicts. VALIDATION: System validates in real-time showing \"X/5 Rules Satisfied\". When rules are violated, you see only \"Rule N violated\" (where N=1-5) - consult Markdown to understand what Rule N requires. MULTIPLE SOLUTIONS: There are many valid combinations for each config - any combination that achieves 5/5 rules is correct. Adjust dropdowns until green \"5/5 Rules Satisfied\" appears, then submit. Complete all 3 configurations.",
+    "ux_hint": "Open Markdown spec, read 5 rules + 3 config names, enter Reference+Customer exactly, select dropdown combinations, watch live validation counter (X/5), see \"Rule N violated\" errors, adjust dropdowns to satisfy all rules, submit when 5/5 green, repeat for 3 configs",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/34?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--35",
+    "ques": "Process 3 code review PRs from a single external Markdown document containing 3 review comments each. Open the file \"copy-paste-task-35.docx\" from the Documents folder. For each PR: (1) Open the Markdown file to view PR reference, repository name, reviewer name, review date, and 3 comments with line numbers, severity levels, and descriptions. (2) Enter PR information in the header fields. (3) For each of the 3 comments, enter line number, select severity (Blocker/Major/Minor), enter comment description, assign status based on comment keywords: \"Resolved\" if description mentions (refactored, fixed, implemented, corrected, updated), \"Wontfix\" if mentions (out of scope, not applicable, design decision, intentional), \"Needs Discussion\" if mentions (clarify, uncertain, question, discuss, debate), and enter a resolution response (minimum 10 characters required for non-Unresolved statuses). (4) Submit the PR review when all 3 comments are addressed. Complete all 3 PR reviews.",
+    "ux_hint": "Open single Markdown PR review file, enter PR info, process 3 comments per PR with status dropdowns (Resolved/Wontfix/Needs Discussion) based on description keywords, enter responses (10+ chars), track progress (X/3 resolved), submit each PR, repeat for 3 PRs",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/35?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--36",
+    "ques": "Validate accessibility compliance for 3 audit sessions. Open the files \"copy-paste-task-36-sample-app-1.png\", \"copy-paste-task-36-sample-app-2.png\", and \"copy-paste-task-36-sample-app-3.png\" from the Documents folder. From the 15-item checklist (5 categories with 3 violations each), select ONLY violations you can clearly identify. Avoid false positives - not all violations are present. (1) Picture: copy-paste-task-36-sample-app-1.png, Reference: A11Y-2024-201, Auditor: Marcus Thompson, Date: 2024-02-20. (2) Picture: copy-paste-task-36-sample-app-2.png, Reference: A11Y-2024-202, Auditor: Sarah Chen, Date: 2024-02-21. (3) Pictures: copy-paste-task-36-sample-app-3.png, Reference: A11Y-2024-203, Auditor: David Kim, Date: 2024-02-22.",
+    "ux_hint": "Complete 3 audits (each with 1 different PNG screenshot + specific reference/auditor/date), select from 15-item checklist, avoid false positives, see accuracy metrics",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/36?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--37",
+    "ques": "Classify 10 services from an external PDF file into a hierarchical taxonomy system (2 services from each of 5 main categories). (1) Open the file \"copy-paste-task-37.docx\" from the Documents folder listing 10 service descriptions with classification guidelines, (2) Enter Catalog ID \"CAT-2024-305\" and classification date \"2024-03-01\", (3) For each of the 10 services, enter service name and description from PDF, then analyze keywords in the description to select the correct Primary Category (5 options: Technology Services, Business Services, Creative Services, Professional Services, Support Services) and Subcategory (4 options per primary category, dynamically filtered based on primary selection). Use the keyword-based classification rules provided in the PDF to guide your selections. (4) After classifying all 10 services with correct taxonomy paths, submit complete catalog.",
+    "ux_hint": "Open copy-paste-task-37.docx, enter catalog ID/date, classify 10 services using nested dropdowns (Primary → Subcategory), keyword-based classification using PDF guidelines, see distribution stats (2 per category), submit when 10/10 complete",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/37?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--38",
+    "ques": "Validate design annotations by mapping markers to requirements. Open the file \"copy-paste-task-38.png\" from the Documents folder showing 5 numbered annotation markers. (1) Enter Mockup Reference (MOCK-2024-550), Designer Name (Sarah Chen), and Validation Date (2024-03-15). (2) For each visible marker (1-5) in the mockup, enter the marker number and select the matching requirement from the dropdown. (3) Click Add to add the marker-requirement pair to the table. Submit validation once all 5 mappings are added.",
+    "ux_hint": "Open copy-paste-task-38.png, enter mockup info, use form to map each marker (1-5) to requirement dropdown, add to table, see accuracy metrics (correct/incorrect/missing)",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/38?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--39",
+    "ques": "Triage 3 incident batches by classifying severity and escalation requirements. Open the file \"copy-paste-task-39.docx\" from the Documents folder containing incident reports. For each batch: (1) Enter Batch Reference (BATCH-2024-408, BATCH-2024-409, or BATCH-2024-410). (2) For each of 2 incidents in the batch, copy incident data: Incident ID, Reported By, and Description. (3) Analyze the incident description to determine correct Severity Classification based on keywords: P1 Critical (outage, production down, complete failure, data loss, security breach, all users affected), P2 High (degraded performance, partial outage, customer-facing, significant impact, service disruption), P3 Medium (minor bug, single user, workaround available, non-urgent, moderate impact), P4 Low (feature request, documentation, enhancement, cosmetic, informational). (4) Select appropriate severity from dropdown. Escalation checkbox will automatically check for P1/P2 incidents and uncheck for P3/P4. (5) Click Add to add incident to triage queue. Repeat for both 2 incidents per batch. (6) Submit batch once both 2 incidents are classified. Complete all 3 batches with correct severity classifications matching keyword rules.",
+    "ux_hint": "Open copy-paste-task-39.docx with 2 incidents per batch, enter batch reference, fill incident form (ID/Reporter/Description), classify severity (P1/P2/P3/P4 dropdown), see auto-managed escalation checkbox (P1/P2=checked, P3/P4=unchecked), track progress (X/2 incidents), view severity distribution (P1/P2/P3/P4 counts), see progressive [Cheat] showing real-time form validation, submit batch when 2/2 complete, complete 3 batches total",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/39?mode=test"
+  },
+  {
+    "web_name": "copy-paste-tasks",
+    "id": "copy-paste-tasks--40",
+    "ques": "Complete a risk assessment for 6 software changes by analyzing descriptions from the changelog and classifying each change by Scope, Risk Level, and Rollback Complexity. Open the file \"copy-paste-task-40.docx\" from the Documents folder to view the complete change descriptions. Enter the Changelog Reference, Assessment Date, and Assessor Name. For each of the 6 changes, analyze the change description and select the appropriate classifications from the dropdowns: Scope (UI/Backend/Database/Infrastructure), Risk Level (Low/Medium/High), Rollback Complexity (Easy/Moderate/Hard). Use the assessment criteria provided in the instructions to understand the classification rules based on keywords in the change descriptions. Complete all 6 change assessments to enable submission.",
+    "ux_hint": "Open copy-paste-task-40.docx to read change descriptions, enter assessment header info, analyze each change description using keyword rules, select 3 dropdowns per change (18 total), see progress tracking and risk summary, submit when all 6 assessments complete",
+    "web": "http://74.234.189.120:3001/copy-paste-tasks/40?mode=test"
   },
   {
     "web_name": "business-process-tasks",
@@ -1472,14 +1542,14 @@
   {
     "web_name": "business-process-tasks",
     "id": "business-process-tasks--5",
-    "ques": "Review 30 customer records, identify and redact all PII (SSN, phone, email, addresses) before data export. Scan records for PII patterns, select sensitive fields, apply redaction (XXX-XX-1234), and validate anonymization completeness. All PII must be correctly identified and redacted, export table must contain no sensitive information while preserving business data.",
-    "ux_hint": "Scan records for PII patterns, select sensitive fields, apply redaction (XXX-XX-1234), validate anonymization completeness",
+    "ques": "Review 5 email records with mixed personal and business content. Classify each highlighted item as either PII (personal information to redact) or Not-PII (business information to preserve). Click the ✓ Not-PII or ✗ PII buttons for each item. All highlighted items must be correctly classified with acceptable accuracy (8-15 PII items and 12-20 business items expected).",
+    "ux_hint": "Read email content, identify highlighted items, click ✓ Not-PII or ✗ PII buttons for each item, classify all items",
     "web": "http://74.234.189.120:3001/business-process-tasks/5?mode=test"
   },
   {
     "web_name": "business-process-tasks",
     "id": "business-process-tasks--6",
-    "ques": "Review 5 graduate school applications by tagging criteria demonstrated in academic records, interview notes, and faculty recommendations. For each student: 1) Academic Performance: Tag which prerequisites are met (CS101 ≥B+, MATH201 ≥C+, CS201 ≥B) and if GPA ≥3.0, 2) Interview Assessment: Identify demonstrated soft skills (Leadership, Communication, Problem-solving, Teamwork, Professionalism, Preparation, Enthusiasm), 3) Faculty Recommendation: Identify faculty endorsements (Exceptional Student, Strong Analytical Skills, Creative Thinking, Natural Leader, Top Performer, Reliable, Innovative). Read carefully and select only criteria with clear evidence in the text.",
+    "ques": "Review 5 graduate school applications by tagging criteria demonstrated in academic records, interview notes, and faculty recommendations. For each student: 1) Academic Performance: Tag which prerequisites are met (CS101 ≥B+, MATH201 ≥C+, CS201 ≥B) and if GPA ≥3.0, 2) Interview Assessment: Identify demonstrated soft skills (Leadership, Communication, Problem-solving, Teamwork, Professionalism, Preparation, Enthusiasm), 3) Faculty Recommendation: Identify faculty endorsements (Exceptional Student, Strong Analytical Skills, Creative Thinking, Natural Leader, Top Performer, Reliable, Innovative). Read carefully and select only criteria with clear evidence in the text. Absence of tags indicates criteria were not met.",
     "ux_hint": "Tag criteria from dropdowns based on evidence found in academic records, interview notes, and recommendation letters",
     "web": "http://74.234.189.120:3001/business-process-tasks/6?mode=test"
   },
