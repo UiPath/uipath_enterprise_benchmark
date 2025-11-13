@@ -5101,7 +5101,7 @@ export function test_37(): TestResult {
   const { submittedCatalogs, classifiedServices } = appState;
   
   // Expected data for 1 catalog (10 services - 2 per category)
-  // Order matches the shuffled PDF (task-37-service-catalogs.md)
+  // Order matches the shuffled document (copy-paste-task-37.docx)
   const expectedCatalog = {
     catalogId: 'CAT-2024-305',
     services: [

@@ -160,7 +160,7 @@ export default function Task37() {
     };
     
     // Cheat function for testing - fill a complete service row
-    // Order matches the shuffled PDF (task-37-service-catalogs.md)
+    // Order matches the shuffled document (copy-paste-task-37.docx)
     (window as any).task_37_fill = (rowNumber: number) => {
       const services = [
         { name: 'Custom Software Development', desc: 'Full-stack web application development using modern frameworks, database design, API integration, and deployment automation', primary: 'Technology Services', sub: 'Software Development' },
