@@ -118,21 +118,21 @@ RUN mkdir -p /etc/chromium.d /var/tmp/chrome-profile && \
 # --- Make all launchers use the wrapper so flags apply ---
 # Desktop entry that calls the wrapper (not the raw binary)
 RUN mkdir -p /usr/share/applications && \
-    cat >/usr/share/applications/chromium.desktop <<'EOF'
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=Chromium
-GenericName=Web Browser
-Comment=Access the Internet
-Exec=/usr/bin/chromium %U
-Terminal=false
-Categories=Network;WebBrowser;
-MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
-StartupNotify=true
-StartupWMClass=Chromium
-Icon=web-browser
-EOF
+    printf '%s\n' \
+        '[Desktop Entry]' \
+        'Version=1.0' \
+        'Type=Application' \
+        'Name=Chromium' \
+        'GenericName=Web Browser' \
+        'Comment=Access the Internet' \
+        'Exec=/usr/bin/chromium %U' \
+        'Terminal=false' \
+        'Categories=Network;WebBrowser;' \
+        'MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;' \
+        'StartupNotify=true' \
+        'StartupWMClass=Chromium' \
+        'Icon=web-browser' \
+        > /usr/share/applications/chromium.desktop
 
 # Some panels were pinned to chromium-browser.desktop — provide that alias too
 RUN cp /usr/share/applications/chromium.desktop /usr/share/applications/chromium-browser.desktop
@@ -151,17 +151,7 @@ RUN xdg-settings set default-web-browser chromium.desktop || true && \
 # ---------- Setup UiPath extension for future ----------
 RUN mkdir -p /etc/chromium/policies/managed /etc/chromium-browser/policies \
  && ln -sf /etc/chromium/policies /etc/chromium-browser/policies
-RUN cat >/etc/chromium/policies/managed/extension-settings.json <<'JSON'
-{
-  "ExtensionSettings": {
-    "pgbnimfaaifjpebleldfhgcjdnaeafdi": {
-      "installation_mode": "force_installed",
-      "update_url": "https://clients2.google.com/service/update2/crx",
-      "toolbar_pin": "force_pinned"
-    }
-  }
-}
-JSON
+RUN echo '{"ExtensionSettings":{"pgbnimfaaifjpebleldfhgcjdnaeafdi":{"installation_mode":"force_installed","update_url":"https://clients2.google.com/service/update2/crx","toolbar_pin":"force_pinned"}}}' > /etc/chromium/policies/managed/extension-settings.json
 
 # Stub pm-is-supported to avoid xfce4-session warnings
 RUN printf '%s\n' '#!/bin/sh' 'exit 1' > /usr/bin/pm-is-supported && chmod +x /usr/bin/pm-is-supported
