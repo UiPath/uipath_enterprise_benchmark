@@ -143,7 +143,7 @@ const Task16: React.FC = () => {
     // Create new scheduled post
     const newScheduledPost = {
       postId: postId,
-      date: calendarDay.dateStr,
+      date: calendarDay.date,
       content: draggedPost.content,
       likes: draggedPost.likes,
       username: draggedPost.username
@@ -154,7 +154,7 @@ const Task16: React.FC = () => {
       // Remove the dragged post from any previous location
       let filtered = prev.filter(sp => sp.postId !== postId);
       // Remove any existing post on the target date
-      filtered = filtered.filter(sp => sp.date !== calendarDay.dateStr);
+      filtered = filtered.filter(sp => sp.date !== calendarDay.date);
       // Add the new scheduled post
       return [...filtered, newScheduledPost];
     });

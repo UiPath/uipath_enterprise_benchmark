@@ -114,7 +114,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'kanban-find-least-recently-updated',
-    instructions: 'What is the task least recently updated? Format JSON response as {"key": str, "summary": str, "assignee": str, "updated": str}, and use the Submit Results button to send it.',
+    instructions: 'What is the task least recently updated? Switch to table mode and sort by Updated column to easily find the least recently updated task. Format JSON response as {"key": str, "summary": str, "assignee": str, "updated": str}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;

@@ -22,7 +22,7 @@ function createTaskComponent(): React.FC {
 const uiBenchTasks: UiBenchTask[] = [
   {
     id: 'salesforce-create-lead',
-    instructions: 'Add a new lead with the following details: First Name: "John", Last Name: "Smith", Company: "TechCorp Solutions", Title: "VP of Operations", Phone: "(555) 123-4567", Email: "john.smith@techcorp.com"',
+    instructions: 'Navigate to the Leads section and add a new lead with the following details: First Name: "John", Last Name: "Smith", Company: "TechCorp Solutions", Title: "VP of Operations", Phone: "(555) 123-4567", Email: "john.smith@techcorp.com"',
     test: () => {
       const appState = (window as any).app_state;
       if (!appState || !appState.leads) {
@@ -86,7 +86,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'salesforce-assign-mobile-phones',
-    instructions: 'Several leads are missing mobile phone numbers. Please assign the following mobile phone numbers to these specific leads: Andy Young: (620) 555-9001, David Martinez: (512) 555-9002, James Thompson: (212) 555-9003, Michael Brown: (858) 555-9004, Parvathi Sreenivasan: (886) 555-9005, Robert Wilson: (503) 555-9006. After editing each lead, make sure to navigate away from the edit view (e.g., go to the home page or leads list) to trigger saving the changes.',
+    instructions: 'Navigate to the Leads section. Several leads are missing mobile phone numbers. Please assign the following mobile phone numbers to these specific leads: Andy Young: (620) 555-9001, David Martinez: (512) 555-9002, James Thompson: (212) 555-9003, Michael Brown: (858) 555-9004, Parvathi Sreenivasan: (886) 555-9005, Robert Wilson: (503) 555-9006. After editing each lead, make sure to navigate away from the edit view (e.g., go to the home page or leads list) to trigger saving the changes.',
     test: () => {
       const appState = (window as any).app_state;
       if (!appState || !appState.leads) {
@@ -237,7 +237,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'salesforce-create-initial-outreach-calls',
-    instructions: 'Create an "Initial outreach" call for each lead who currently has no call activities associated with them. For each such lead, create a call with the subject "Initial outreach" and comments "First contact, getting to know each other". Make sure to set the Name field to the lead and assign the call to an appropriate user.',
+    instructions: 'Navigate to the Leads section first. Create an "Initial outreach" call for each lead who currently has no call activities associated with them. For each such lead, create a call with the subject "Initial outreach" and comments "First contact, getting to know each other". Make sure to set the Name field to the lead and assign the call to an appropriate user.',
     test: () => {
       const appState = (window as any).app_state;
       if (!appState || !appState.leads || !appState.calls) {
@@ -374,7 +374,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'salesforce-move-activities-parvathi-to-andy',
-    instructions: 'Move all activities (tasks, calls, events, emails) that are currently associated with lead "Parvathi Sreenivasan" to lead "Andy Young". For all activity types: change the "Name" field from "Parvathi Sreenivasan" to "Andy Young". This will move the activities to Andy\'s activity feed.',
+    instructions: 'Navigate to the Leads section first. Move all activities (tasks, calls, events, emails) that are currently associated with lead "Parvathi Sreenivasan" to lead "Andy Young". For all activity types: change the "Name" field from "Parvathi Sreenivasan" to "Andy Young". This will move the activities to Andy\'s activity feed.',
     test: () => {
       const appState = (window as any).app_state;
       if (!appState || !appState.leads || !appState.tasks || !appState.calls || !appState.events || !appState.emails) {
@@ -565,7 +565,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'salesforce-change-parvathi-task',
-    instructions: 'Find the task "Send RPA implementation proposal" assigned to Parvathi Sreenivasan and modify it by: 1) Adding "today" to the Subject and 2) Changing the Status from "Not Started" to "In Progress".',
+    instructions: 'Navigate to the Leads section first. Find the task "Send RPA implementation proposal" assigned to Parvathi Sreenivasan and modify it by: 1) Adding "today" to the Subject and 2) Changing the Status from "Not Started" to "In Progress".',
     test: () => {
       const appState = (window as any).app_state;
       if (!appState || !appState.tasks || !appState.leads) {
@@ -688,7 +688,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'salesforce-update-employee-counts',
-    instructions: 'Update the "Number of Employees" field for the following companies to these specific values: RetailMax Corporation → 1000-5000, EduTech Solutions → 200-500, HealthTech Innovations → 500-1000, BioResearch Labs → 500-1000. Find each lead by their company name and change their numberOfEmployees field to the exact value specified.',
+    instructions: 'Navigate to the Leads section, and look up leads by company name. Open the lead page and select Detail tab. Update the "Number of Employees" field for the following companies to these specific values: RetailMax Corporation → 1000-5000, EduTech Solutions → 200-500, HealthTech Innovations → 500-1000, BioResearch Labs → 500-1000. Find each lead by their company name and change their numberOfEmployees field to the exact value specified.',
     test: () => {
       const appState = (window as any).app_state;
       if (!appState || !appState.leads) {
@@ -824,7 +824,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'salesforce-bulk-status-change',
-    instructions: 'Use the bulk status change feature to update multiple leads at once. First, select all leads with "Open - Not Contacted" status by checking their checkboxes. Then use the "Change Status" button to change all selected leads to "Working - Contacted" status.',
+    instructions: 'Navigate to the Leads section first. Use the bulk status change feature to update multiple leads at once. First, select all leads with "Open - Not Contacted" status by checking their checkboxes. Then use the "Change Status" button to change all selected leads to "Working - Contacted" status.',
     test: () => {
       const appState = (window as any).app_state;
       if (!appState || !appState.leads) {
@@ -985,7 +985,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'salesforce-search-sort-and-create-event',
-    instructions: 'Use the search and sorting tools to find the lead that is first in alphabetical order among leads that have "555" in their phone number. First, search for "555" to filter the leads. Then sort by Name column to find the alphabetically first lead. Finally, navigate to that lead\'s detail page and create an event with subject "Say hello" for that lead.',
+    instructions: 'Navigate to the Leads section first. Use the search and sorting tools to find the lead that is first in alphabetical order among leads that have "555" in their phone number. First, search for "555" to filter the leads. Then sort by Name column to find the alphabetically first lead. Finally, navigate to that lead\'s detail page and create an event with subject "Say hello" for that lead.',
     test: () => {
       const appState = (window as any).app_state;
       if (!appState || !appState.leads || !appState.events) {

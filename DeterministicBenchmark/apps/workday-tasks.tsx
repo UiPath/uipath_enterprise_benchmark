@@ -94,7 +94,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'workday-count-pto-days-2025',
-    instructions: "Find out how many PTO days I used in 2025. Format JSON response as {\"pto_days_count\": int}, and use the Submit Results button to send it.",
+    instructions: "Find out how many PTO days I used in 2025. Go to Correct my Absence and use the information displayed there to prepare the response. Format JSON response as {\"pto_days_count\": int}, and use the Submit Results button to send it.",
     ux: 'Submit the requested JSON via the Submit Results button',
     require_result_submission: true,
     test: () => {
@@ -286,7 +286,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'workday-lookup-holidays-nov-dec',
-    instructions: "Open 'Absence' > 'Request Absence' and look up in the calendar November and December, and report all holidays or special days. Holidays are marked on the calendar. Format JSON response as {\"<holiday-name>\": \"mm/dd\"}, and use the Submit Results button to send it.",
+    instructions: "Open 'Absence' > 'Request Absence' and look up in the calendar November and December, and report all holidays or special days. Holidays are marked on the calendar. Format JSON response as {\"<holiday-name>\": \"mm/dd\"}, using a month/day date format, and use the Submit Results button to send it.",
     require_result_submission: true,
     ux: 'Navigate to Absence > Request Absence, then navigate to November and December months to identify holidays marked on the calendar',
     test: () => {

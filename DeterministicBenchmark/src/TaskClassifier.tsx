@@ -8,22 +8,22 @@ interface TaskClassifierProps {
 
 const TaskClassifier: React.FC<TaskClassifierProps> = ({ taskIdNum, appPath }) => {
   // Only show when explicitly enabled via environment variable
-  const showClassifier = import.meta.env.VITE_SHOW_TASK_CLASSIFIER === 'true';
+  const showClassifier = import.meta.env.UI_CUBE_SHOW_TASK_CLASSIFIER === 'true';
   
   if (!showClassifier) {
     return null;
   }
 
   const controlTypes = [
-    'Buttons', 'Calendar', 'Checkbox', 'Color Picker', 'Command Interface', 'Date Input', 'Password', 'Radio Buttons', 'Range', 'Selection Controls', 'Slider', 'Spinner', 'Star Rating', 'Text Input', 'Text Link', 'Textarea', 'Token Input'
+    'Buttons', 'Calendar', 'Checkbox', 'Color Picker', 'Command Interface', 'Date Input', 'Icon', 'Password', 'Radio Buttons', 'Range', 'Selection Controls', 'Slider', 'Spinner', 'Star Rating', 'Text Input', 'Text Link', 'Textarea', 'Token Input'
   ];
   
   const actionTypes = [
-    'Cancel', 'Classify', 'Clear', 'Compare', 'Compute', 'Create', 'Delete', 'Double Click', 'Drag', 'Expand', 'Extract', 'Filter', 'Focus', 'Hover', 'Hotkey', 'Keyboard Navigation', 'Navigate', 'Open', 'Right Click', 'Scroll', 'Select', 'Sort', 'Toggle', 'Type', 'Update', 'Visual Search', 'Wait'
+    'Cancel', 'Classify', 'Clear', 'Compare', 'Compute', 'Create', 'Delete', 'Double Click', 'Drag', 'Expand', 'Extract', 'Filter', 'Focus', 'Hover', 'Hotkey', 'JSON Formatting', 'Keyboard Navigation', 'Navigate', 'Open', 'Right Click', 'Scroll', 'Select', 'Sort', 'Toggle', 'Type', 'Update', 'Visual Search', 'Wait'
   ];
   
   const structureTypes = [
-    'Accordion', 'Breadcrumbs', 'Card', 'Carousel', 'CLI', 'Custom Design', 'Date Range', 'Discrete Tokens', 'Error State', 'Feed', 'Form', 'Grid', 'Hierarchical', 'List', 'Menu', 'Mobile Design', 'Modal', 'Modals', 'Navigation', 'Pagination', 'Pre-filled', 'Search/Filter', 'Table', 'Tree', 'Wizard'
+    'Accordion', 'Breadcrumbs', 'Card', 'Carousel', 'CLI', 'Custom Design', 'Date Range', 'Discrete Tokens', 'Error State', 'Feed', 'Form', 'Grid', 'Kanban', 'Hierarchical', 'List', 'Menu', 'Mobile Design', 'Modal', 'Navigation', 'Pagination', 'Pre-filled', 'Search/Filter', 'Table', 'Tree', 'Wizard'
   ];
 
   // Storage key for current task

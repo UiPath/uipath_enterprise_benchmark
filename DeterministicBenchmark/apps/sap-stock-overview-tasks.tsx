@@ -22,7 +22,7 @@ type UiBenchTask = {
 const uiBenchTasks: UiBenchTask[] = [
   {
     id: 'sap-find-material-1287-company',
-    instructions: 'What is the company that has material 1287 in vendor consignment, and the quantity. Format JSON response as {"company": str, "quantity": float}, and use the Submit Results button to send it.',
+    instructions: 'What is the company that has material 1287 in vendor consignment, and what is the quantity? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type "MMBE" shortcut in Enter Transaction input and then hit Enter. Enter material "1287" in the Material field and click the green checkmark button in the toolbar to search for it. On the results page expand the tree view to find a plant that has "Vendor Consignment" in the batch/special stock section. You can get quantity from "Unrestricted use" column. Format JSON response as {"company": str, "quantity": float}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -48,7 +48,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-find-plants-material-100-210',
-    instructions: 'What are the names of the plants that have material 100-210 in stock. Format JSON response as {"plants": list[str]}, and use the Submit Results button to send it.',
+    instructions: 'What are the names of the plants that have material 100-210 in stock? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type "MMBE" shortcut in Enter Transaction input and then hit Enter. Enter material "100-210" in the Material field and click the green checkmark button in the toolbar to search for it. On the results page expand the tree view to find the plants that have it in stock. Format JSON response as {"plants": list[str]}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -72,7 +72,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-count-materials-per-company',
-    instructions: 'For each material on this list ["1287","100-210","200000054","300-400"] report the number of companies that have it in stock. Format JSON response as {"<material-id>": <count:int>}, and use the Submit Results button to send it.',
+    instructions: 'How many companies have each of these materials in stock: ["1287","100-210","200000054","300-400"]? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type "MMBE" shortcut in Enter Transaction input and then hit Enter. For each material, enter it in the Material field and click the green checkmark button in the toolbar to search, then count the companies in the results. Format JSON response as {"<material-id>": <count:int>}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -124,7 +124,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-filter-materials-containing-fan',
-    instructions: 'Open MMBE form and use Search for material (icon next to material input) to open the Material Number modal. From there use the filters to find out how many materials contain the string "fan". Format JSON response as {"count": <count:int>}, and use the Submit Results button to send it.',
+    instructions: 'How many materials contain the string "fan"? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type "MMBE" shortcut in Enter Transaction input and then hit Enter. Use Search for material ("==" symbol icon next to material input) to open the Material Number modal. From there use the filters to find out how many materials contain the string "fan". Format JSON response as {"count": <count:int>}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -149,7 +149,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-filter-materials-b-to-g-with-fg',
-    instructions: 'Open the Stock Overview (MMBE) form (Logistics -> Materials Management -> Inventory Management). Use the "Search for material" button (the icon next to the material input) to open the Material Number modal. In the modal, use the filters to find materials where the material description is between B and G (alphabetically) AND the Material Number contains "FG". Format JSON response as {"materials": [list of material codes]}, and use the Submit Results button to send it.',
+    instructions: 'Which materials have a description between B and G (alphabetically, inclusive) AND a Material Number containing "FG"? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type "MMBE" shortcut in Enter Transaction input and then hit Enter. Use the "Search for material" button (the "==" symbol icon next to the material input) to open the Material Number modal. In the modal, use the filters to find materials matching these criteria. Format JSON response as {"materials": [list of material codes]}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -179,7 +179,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-find-highest-reserved-stock-sg011',
-    instructions: 'Use MMBE (Inventory Stock Overview) form to find out which plant has the highest reserved stock of SG011. Format JSON response as {"plant": "plant_name"}, and use the Submit Results button to send it.',
+    instructions: 'Which plant has the highest reserved stock of SG011? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type "MMBE" shortcut in Enter Transaction input and then hit Enter. Enter material "SG011" in the Material field and click the green checkmark button in the toolbar to search for it. Find out which plant has the highest reserved stock. Format JSON response as {"plant": "plant_name"}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -204,7 +204,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-lookup-material-fg1-cp-description-plants',
-    instructions: 'Look up material FG1_CP to see its full description and plants where this material is in stock. Format JSON response as {"description": str, "plants": list[str]}, and use the Submit Results button to send it. You need to use both the stock search and the Search for Materials view.',
+    instructions: 'What is the full description of material FG1_CP, and which plants have it in stock? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type "MMBE" shortcut in Enter Transaction input and then hit Enter. Enter material "FG1_CP" in the Material field and click the green checkmark button in the toolbar to search for it to find the plants where this material is in stock. To get the full description, use the "Search for material" button (the "==" symbol icon) to open the Material Number modal and look up FG1_CP there. Format JSON response as {"description": str, "plants": list[str]}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;
@@ -236,7 +236,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'sap-find-storage-locations-fg1-cp-jamshedpur',
-    instructions: 'Find the list of storage locations for material FG1_CP and plant PLANT JAMSHEDPUR. Format JSON response as {"storage_locations": [list of storage location names]}, and use the Submit Results button to send it.',
+    instructions: 'What are the storage locations for material FG1_CP at plant "PLANT JAMSHEDPUR"? Go to Logistics / Materials Management / Inventory Management / Stock Overview or type "MMBE" shortcut in Enter Transaction input and then hit Enter. Enter material "FG1_CP" in the Material field, optionally enter plant "PLANT JAMSHEDPUR" in the Plant field to narrow results, and click the green checkmark button in the toolbar to search. Find the list of storage locations for this material at PLANT JAMSHEDPUR by expanding the tree view. Format JSON response as {"storage_locations": [list of storage location names]}, and use the Submit Results button to send it.',
     require_result_submission: true,
     test: () => {
       const submission = (window as any).app_state?.submission;

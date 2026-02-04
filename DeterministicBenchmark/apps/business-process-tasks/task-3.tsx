@@ -595,17 +595,6 @@ const Task3: React.FC = () => {
         </div>
       </div>
 
-      {/* Instructions */}
-      <div style={{ marginTop: '20px', padding: '15px', backgroundColor: '#fff3cd', borderRadius: '4px', border: '1px solid #ffeaa7' }}>
-        <h4>Instructions:</h4>
-        <ul>
-          <li>Navigate through the folder structure to find and access 5 protected files</li>
-          <li>When you encounter "Access Denied" errors, read the error messages carefully</li>
-          <li>Error messages contain hints about alternative paths where the same files can be found</li>
-          <li>Use the suggested paths to access the files through alternative routes</li>
-          <li>Successfully access all 5 target files to complete the task</li>
-        </ul>
-      </div>
     </div>
   );
 };

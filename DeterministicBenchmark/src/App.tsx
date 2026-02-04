@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useSearchParams } from 'react-router-dom';
 import { Search as ChevronDown, Calendar, Clock, Navigation as NavigationIcon, TreePine, MapPin, Type } from 'lucide-react';
 import { lazy, Suspense } from 'react';
 
@@ -72,49 +72,49 @@ const complexTasks = [
   {
     id: 'kanban-board',
     name: 'Kanban Board',
-    description: 'UiBench Kanban tasks grouped under the Kanban Board app',
+    description: '8 UiBench Kanban tasks grouped under the Kanban Board app',
     icon: Type,
     path: '/kanban-board',
   },
   {
     id: 'workday',
     name: 'Workday',
-    description: 'UiBench Workday tasks',
+    description: '8 UiBench Workday tasks',
     icon: Type,
     path: '/workday',
   },
   {
     id: 'sap-stock',
     name: 'SAP Stock Overview',
-    description: 'UiBench SAP stock queries',
+    description: '8 UiBench SAP stock queries',
     icon: Type,
     path: '/sap-stock',
   },
   {
     id: 'concur',
     name: 'Concur Expense Management',
-    description: 'UiBench Concur expense reporting and management tasks',
+    description: '8 UiBench Concur expense reporting and management tasks',
     icon: Type,
     path: '/concur',
   },
   {
     id: 'salesforce',
     name: 'Salesforce',
-    description: 'UiBench Salesforce tasks',
+    description: '8 UiBench Salesforce tasks',
     icon: Type,
     path: '/salesforce',
   },
   {
     id: 'copy-paste-tasks',
     name: 'Copy-Paste & Iteration Tasks',
-    description: 'UiBench copy-paste and iterative data manipulation tasks',
+    description: '40 UiBench copy-paste and iterative data manipulation tasks',
     icon: Type,
     path: '/copy-paste-tasks',
   },
   {
     id: 'business-process-tasks',
     name: 'Business Process Tasks',
-    description: 'UiBench business process workflows including batch processing, data validation, and compliance tasks',
+    description: '10 UiBench business process workflows including batch processing, data validation, and compliance tasks',
     icon: Type,
     path: '/business-process-tasks',
   },
@@ -133,12 +133,20 @@ const LazyWorkdayTasksApp = lazy(() => import('../apps/workday-tasks'));
 const LazySAPTasksApp = lazy(() => import('../apps/sap-stock-overview-tasks'));
 const LazyConcurTasksApp = lazy(() => import('../apps/concur-tasks'));
 const LazySalesforceTasksApp = lazy(() => import('../apps/salesforce-tasks'));
-const LazyCopyPasteTasksApp = lazy(() => import('../apps/copy-paste-tasks'));
+const LazyCopyPasteTasksApp = lazy(() => import('../apps/copy-paste-tasks/index'));
 const LazyBusinessProcessTasksApp = lazy(() => import('../apps/business-process-tasks'));
 
 // Clean implementation - all apps are now lazily loaded via route definitions
 
 function AppSelector() {
+  const [searchParams] = useSearchParams();
+  
+  // Helper to preserve search params in navigation
+  const preserveSearchParams = (url: string) => {
+    const params = searchParams.toString();
+    return params ? `${url}?${params}` : url;
+  };
+  
   const renderAppGrid = (apps: typeof simpleTasks) => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {apps.map((app) => {
@@ -146,7 +154,7 @@ function AppSelector() {
         return (
           <Link
             key={app.id}
-            to={app.path}
+            to={preserveSearchParams(app.path)}
             className="group bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer block"
           >
             <div className="flex items-center mb-4">
