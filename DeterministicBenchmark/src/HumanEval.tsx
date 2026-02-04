@@ -93,11 +93,11 @@ class HumanEvalTracker {
     
     // Check if HumanEval is enabled via environment variable
     this.isEnabled = typeof window !== 'undefined' && 
-      ((import.meta as any).env?.VITE_ENABLE_HUMAN_EVAL === 'true' || 
-       (window as any).__VITE_ENABLE_HUMAN_EVAL__ === 'true');
+      ((import.meta as any).env?.UI_CUBE_ENABLE_HUMAN_EVAL === 'true' || 
+       (window as any).__UI_CUBE_ENABLE_HUMAN_EVAL__ === 'true');
     
     if (!this.isEnabled) {
-      console.log('[HumanEval] System disabled - set VITE_ENABLE_HUMAN_EVAL=true to enable');
+      console.log('[HumanEval] System disabled - set UI_CUBE_ENABLE_HUMAN_EVAL=true to enable');
       return;
     }
     

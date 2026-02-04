@@ -430,7 +430,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'concur-find-target-zip-code',
-    instructions: 'What is the vendor zip code for the Target expense? Format JSON response as { "vendor_zip": number}, and use the Submit Results button to send it.',
+    instructions: 'What is the vendor zip code for the Target expense? Use the "Available Expenses" panel, click "See All" and read the vendor zip code from the "Vendor Details" column on the specific row. Format JSON response as { "vendor_zip": number}, and use the Submit Results button to send it.',
     ux: 'In "Available Expenses" click "See All" and read from the "Vendor Details" column on the specific row',
     require_result_submission: true,
     test: () => {
@@ -533,7 +533,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'concur-find-largest-expense',
-    instructions: 'What is the largest available expense? Format JSON response as {"vendor_name": str, "date": str, "total": number}, and use the Submit Results button to send it.',
+    instructions: 'What is the largest available expense? Use the "Available Expenses" panel, click "See All" and read the largest expense from the "Vendor Details" and "Amount" columns on the specific row. Format JSON response as {"vendor_name": str, "date": str, "total": number}, and use the Submit Results button to send it.',
     ux: 'In "Available Expenses" click "See All" and read from the "Vendor Details" table the task result',
     require_result_submission: true,
     test: () => {
@@ -677,7 +677,7 @@ const uiBenchTasks: UiBenchTask[] = [
   },
   {
     id: 'concur-create-ai-expense-report',
-    instructions: 'Create an expense report that includes all the AI related expenses, call it "AI expenses"',
+    instructions: 'Create an expense report that includes all the AI related expenses, call it "AI expenses", set it not travel related.',
     ux: 'Go to Create > Start a report > fill the fields > click Create Report > click Add Expense > add AI expenses > click Attach Receipt for each expense > find the correct receipt and assign it > then Submit Report',
     test: () => {
       const appState = (window as any).app_state;

@@ -187,89 +187,113 @@ const MaterialNumberModal: React.FC<MaterialNumberModalProps> = ({
         </div>
 
         {/* Filter Fields Section */}
-        <div className="border-b border-gray-300 p-4 space-y-3">
-          <div className="grid gap-4 text-sm font-medium text-gray-700" style={{gridTemplateColumns: "4fr 0.8fr 0.6fr 1.2fr 0.6fr 0.6fr"}}>
-            <div>Material Description:</div>
-            <div>Plant:</div>
-            <div>BOM Usage:</div>
-            <div>Material Number:</div>
-            <div>Alternative BOM:</div>
-            <div>Language:</div>
-          </div>
-          <div className="grid gap-4" style={{gridTemplateColumns: "4fr 0.8fr 0.6fr 1.2fr 0.6fr 0.6fr"}}>
-            <FilterInput
-              fieldName="Material Description"
-              value={materialDescriptionFilter && 
-                materialDescriptionFilter.length === 1 && 
-                materialDescriptionFilter[0].operator === 'equal to' ? 
-                materialDescriptionFilter[0].value : searchTerm}
-              onChange={(value) => {
-                setSearchTerm(value);
-                // If user types and there are complex filter conditions, clear them
-                // If user types and no filter exists, or has simple equal-to, keep search functionality
-                const hasEqualToOnly = materialDescriptionFilter && 
-                  materialDescriptionFilter.length === 1 && 
-                  materialDescriptionFilter[0].operator === 'equal to';
-                if (materialDescriptionFilter && !hasEqualToOnly) {
-                  setMaterialDescriptionFilter(null);
-                }
-              }}
-              onFilterChange={setMaterialDescriptionFilter}
-              placeholder="Search materials..."
-              className="w-full"
-            />
-            <input 
-              type="text" 
-              value={plantValue}
-              onChange={(e) => setPlantValue(e.target.value)}
-              className="border border-gray-400 px-2 py-1 text-sm bg-white" 
-            />
-            <input 
-              type="text" 
-              value={bomUsageValue}
-              onChange={(e) => setBomUsageValue(e.target.value)}
-              className="border border-gray-400 px-2 py-1 text-sm bg-white" 
-            />
-            <FilterInput
-              fieldName="Material Number"
-              value={materialFilter && 
-                materialFilter.length === 1 && 
-                materialFilter[0].operator === 'equal to' ? 
-                materialFilter[0].value : ''}
-              onChange={(value) => {
-                if (value) {
-                  // If user types, create or update an "equal to" filter
-                  setMaterialFilter([{ id: '1', operator: 'equal to', value }]);
-                } else {
-                  // If empty, clear the filter
-                  setMaterialFilter(null);
-                }
-              }}
-              onFilterChange={setMaterialFilter}
-              placeholder=""
-              className="w-full"
-            />
-            <FilterInput
-              fieldName="Alternative BOM"
-              value={alternativeBOMFilter && 
-                alternativeBOMFilter.length === 1 && 
-                alternativeBOMFilter[0].operator === 'equal to' ? 
-                alternativeBOMFilter[0].value : ''}
-              onChange={(value) => {
-                if (value) {
-                  // If user types, create or update an "equal to" filter
-                  setAlternativeBOMFilter([{ id: '1', operator: 'equal to', value }]);
-                } else {
-                  // If empty, clear the filter
-                  setAlternativeBOMFilter(null);
-                }
-              }}
-              onFilterChange={setAlternativeBOMFilter}
-              placeholder=""
-              className="w-full"
-            />
-            <input type="text" className="border border-gray-400 px-2 py-1 text-sm bg-white" />
-          </div>
+        <div className="border-b border-gray-300 p-4">
+          <table className="w-full" style={{tableLayout: "fixed"}}>
+            <colgroup>
+              <col style={{width: "32%"}} />
+              <col style={{width: "10%"}} />
+              <col style={{width: "8%"}} />
+              <col style={{width: "15%"}} />
+              <col style={{width: "13%"}} />
+              <col style={{width: "10%"}} />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td className="text-sm font-medium text-gray-700 pb-1">Material Description:</td>
+                <td className="text-sm font-medium text-gray-700 pb-1">Plant:</td>
+                <td className="text-sm font-medium text-gray-700 pb-1">BOM Usage:</td>
+                <td className="text-sm font-medium text-gray-700 pb-1">Material Number:</td>
+                <td className="text-sm font-medium text-gray-700 pb-1">Alternative BOM:</td>
+                <td className="text-sm font-medium text-gray-700 pb-1">Language:</td>
+              </tr>
+              <tr>
+                <td className="pr-2">
+                  <FilterInput
+                    fieldName="Material Description"
+                    value={materialDescriptionFilter && 
+                      materialDescriptionFilter.length === 1 && 
+                      materialDescriptionFilter[0].operator === 'equal to' ? 
+                      materialDescriptionFilter[0].value : searchTerm}
+                    onChange={(value) => {
+                      setSearchTerm(value);
+                      // If user types and there are complex filter conditions, clear them
+                      // If user types and no filter exists, or has simple equal-to, keep search functionality
+                      const hasEqualToOnly = materialDescriptionFilter && 
+                        materialDescriptionFilter.length === 1 && 
+                        materialDescriptionFilter[0].operator === 'equal to';
+                      if (materialDescriptionFilter && !hasEqualToOnly) {
+                        setMaterialDescriptionFilter(null);
+                      }
+                    }}
+                    onFilterChange={setMaterialDescriptionFilter}
+                    placeholder="Search materials..."
+                    className="w-full"
+                  />
+                </td>
+                <td className="pr-2">
+                  <input 
+                    type="text" 
+                    value={plantValue}
+                    onChange={(e) => setPlantValue(e.target.value)}
+                    className="border border-gray-400 px-2 py-1 text-sm bg-white w-full" 
+                  />
+                </td>
+                <td className="pr-2">
+                  <input 
+                    type="text" 
+                    value={bomUsageValue}
+                    onChange={(e) => setBomUsageValue(e.target.value)}
+                    className="border border-gray-400 px-2 py-1 text-sm bg-white w-full" 
+                  />
+                </td>
+                <td className="pr-2">
+                  <FilterInput
+                    fieldName="Material Number"
+                    value={materialFilter && 
+                      materialFilter.length === 1 && 
+                      materialFilter[0].operator === 'equal to' ? 
+                      materialFilter[0].value : ''}
+                    onChange={(value) => {
+                      if (value) {
+                        // If user types, create or update an "equal to" filter
+                        setMaterialFilter([{ id: '1', operator: 'equal to', value }]);
+                      } else {
+                        // If empty, clear the filter
+                        setMaterialFilter(null);
+                      }
+                    }}
+                    onFilterChange={setMaterialFilter}
+                    placeholder=""
+                    className="w-full"
+                  />
+                </td>
+                <td className="pr-2">
+                  <FilterInput
+                    fieldName="Alternative BOM"
+                    value={alternativeBOMFilter && 
+                      alternativeBOMFilter.length === 1 && 
+                      alternativeBOMFilter[0].operator === 'equal to' ? 
+                      alternativeBOMFilter[0].value : ''}
+                    onChange={(value) => {
+                      if (value) {
+                        // If user types, create or update an "equal to" filter
+                        setAlternativeBOMFilter([{ id: '1', operator: 'equal to', value }]);
+                      } else {
+                        // If empty, clear the filter
+                        setAlternativeBOMFilter(null);
+                      }
+                    }}
+                    onFilterChange={setAlternativeBOMFilter}
+                    placeholder=""
+                    className="w-full"
+                  />
+                </td>
+                <td>
+                  <input type="text" className="border border-gray-400 px-2 py-1 text-sm bg-white w-full" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
           
           {/* Language Key */}
           <div className="flex items-center space-x-2 pt-2">
@@ -305,7 +329,7 @@ const MaterialNumberModal: React.FC<MaterialNumberModalProps> = ({
 
           {/* Table Headers */}
           <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
-            <div className="grid gap-4 text-sm font-medium text-gray-700" style={{gridTemplateColumns: "4fr 0.8fr 0.6fr 1.2fr 0.6fr 0.6fr"}}>
+            <div className="grid gap-4 text-sm font-medium text-gray-700" style={{gridTemplateColumns: "3.2fr 1fr 0.8fr 1.5fr 1.3fr 1fr"}}>
               <div className="flex items-center space-x-1">
                 <span>Material Description</span>
                 <Menu className="w-3 h-3" />
@@ -323,13 +347,13 @@ const MaterialNumberModal: React.FC<MaterialNumberModalProps> = ({
 
           {/* Material List */}
           <div className="flex-1 overflow-y-auto">
-            {filteredMaterials.map((material, index) => (
+            {filteredMaterials.map((material) => (
               <div 
                 key={material.id}
                 className={`grid gap-4 px-4 py-1 hover:bg-blue-100 cursor-pointer border-b border-gray-200 text-sm ${
                   selectedMaterialId === material.id ? 'bg-blue-50' : 'bg-white'
                 }`}
-                style={{gridTemplateColumns: "4fr 0.8fr 0.6fr 1.2fr 0.6fr 0.6fr"}}
+                style={{gridTemplateColumns: "3.2fr 1fr 0.8fr 1.5fr 1.3fr 1fr"}}
                 onClick={() => handleMaterialClick(material.id)}
                 onDoubleClick={() => handleMaterialSelect(material.id)}
               >
