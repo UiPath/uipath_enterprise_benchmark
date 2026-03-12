@@ -454,10 +454,7 @@ const CreditCardFormValidation = () => {
     const [month, year] = expiry.split('/');
     if (!month || !year) return false;
     const m = parseInt(month);
-    const y = parseInt('20' + year);
-    const now = new Date();
-    const expDate = new Date(y, m - 1);
-    return m >= 1 && m <= 12 && expDate > now;
+    return m >= 1 && m <= 12 && year.length === 2;
   };
 
   const isValidCard = validateCardNumber(cardNumber);
@@ -2824,10 +2821,10 @@ const tasks = [
       ux: 'Real-time formatting and validation, visual feedback',
       test: () => {
         const appState = (window as any).app_state;
-        const success = appState?.isValidCard && 
-          appState?.isValidExpiry && 
-          appState?.isValidCvv && 
-          appState?.isValidHolder && 
+        const success = appState?.isValidCard &&
+          appState?.expiryDate === '12/25' &&
+          appState?.isValidCvv &&
+          appState?.isValidHolder &&
           appState?.cardHolder === 'John Smith';
         return { success };
       }

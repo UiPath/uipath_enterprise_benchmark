@@ -68,7 +68,7 @@ const MouseWheelZoom = () => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       const delta = e.deltaY > 0 ? -0.1 : 0.1;
-      setZoom(prev => Math.max(0.5, Math.min(3, prev + delta)));
+      setZoom(prev => Math.round(Math.max(0.5, Math.min(3, prev + delta)) * 10) / 10);
     };
 
     const element = document.getElementById('wheel-zoom-container');
@@ -93,8 +93,8 @@ const MouseWheelZoom = () => {
         </div>
       </div>
       <div className="mt-2 flex space-x-2">
-        <button onClick={() => setZoom(prev => Math.max(0.5, prev - 0.2))} className="px-2 py-1 bg-gray-200 rounded text-sm">-</button>
-        <button onClick={() => setZoom(prev => Math.min(3, prev + 0.2))} className="px-2 py-1 bg-gray-200 rounded text-sm">+</button>
+        <button onClick={() => setZoom(prev => Math.round(Math.max(0.5, prev - 0.2) * 10) / 10)} className="px-2 py-1 bg-gray-200 rounded text-sm">-</button>
+        <button onClick={() => setZoom(prev => Math.round(Math.min(3, prev + 0.2) * 10) / 10)} className="px-2 py-1 bg-gray-200 rounded text-sm">+</button>
       </div>
     </div>
   );
@@ -469,12 +469,22 @@ const CommandPalette = () => {
 const SingleKeyScroll = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [focused, setFocused] = useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const item9Ref = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    (window as any).app_state = { 
-      ...(window as any).app_state, 
+    let item9Visible = false;
+    if (containerRef.current && item9Ref.current) {
+      const container = containerRef.current.getBoundingClientRect();
+      const item = item9Ref.current.getBoundingClientRect();
+      const itemCenter = (item.top + item.bottom) / 2;
+      item9Visible = itemCenter >= container.top && itemCenter <= container.bottom;
+    }
+    (window as any).app_state = {
+      ...(window as any).app_state,
       scrollPosition,
-      focused
+      focused,
+      item9Visible
     };
   }, [scrollPosition, focused]);
 
@@ -489,6 +499,7 @@ const SingleKeyScroll = () => {
   return (
     <div>
       <div
+        ref={containerRef}
         tabIndex={0}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
@@ -500,13 +511,13 @@ const SingleKeyScroll = () => {
           {focused ? 'Press J (down) or K (up) to scroll' : 'Click here to focus, then use J/K'}
         </div>
         <div className="relative h-full">
-          <div 
+          <div
             className="absolute inset-0 bg-gradient-to-b from-blue-100 to-blue-300 rounded"
             style={{ transform: `translateY(-${scrollPosition}px)` }}
           >
             <div className="p-4 space-y-4">
               {Array.from({length: 20}, (_, i) => (
-                <div key={i} className="p-2 bg-white rounded text-sm">
+                <div key={i} ref={i === 8 ? item9Ref : undefined} className="p-2 bg-white rounded text-sm">
                   Content item {i + 1}
                 </div>
               ))}
@@ -1164,7 +1175,7 @@ const tasks = [
     ux: 'Single-key scroll accelerators (J/K)',
     test: () => {
       const appState = (window as any).app_state;
-      const success = (appState?.scrollPosition || 0) >= 400;
+      const success = appState?.item9Visible === true;
       return { success };
     }
   },
